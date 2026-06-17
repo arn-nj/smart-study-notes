@@ -1,4 +1,4 @@
-# Copilot Instructions — transcript-notes workspace
+# Copilot Instructions — smart-study-notes workspace
 
 ## Purpose
 This workspace converts raw course transcripts into study materials: GoodNotes notebooks, A4 PDFs, and XMind mindmaps.
@@ -9,7 +9,7 @@ This workspace converts raw course transcripts into study materials: GoodNotes n
 ## Folder Convention
 Every course lives in its own subfolder:
 ```
-transcript-notes/
+smart-study-notes/
 ├── <CourseName>/           ← one folder per course
 │   ├── <transcript>.txt    ← source transcript
 │   ├── <CourseName>_GoodNotes_detailed.md

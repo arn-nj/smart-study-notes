@@ -1,6 +1,6 @@
-# transcript-notes
+# smart-study-notes
 
-Convert raw course transcripts into study materials.
+ADHD-friendly study materials generator: convert transcripts, PDFs, and markdown into handwritten GoodNotes study notes with spaced repetition and XMind mindmaps.
 
 ## Outputs per course
 | File | Description |
@@ -10,11 +10,25 @@ Convert raw course transcripts into study materials.
 | `<Course>_course_videos_clean.mm` | Sanitised Freemind mindmap |
 | `<Course>_course_videos_fixed.xmind` | XMind-ready mindmap |
 
-## Workflow for a new transcript
+## Available Skills
 
-1. Place the transcript `.txt` in a new `<CourseName>/` folder
-2. Open GitHub Copilot chat and type `/transcript-to-notes` (or ask *"make notes from this transcript"*)
-3. Follow the skill steps — Copilot will generate the notebook, mindmap, PDF, and `.xmind`
+### 1. **transcript-to-notes** — Convert course transcripts
+Convert Udemy/online course transcripts into study materials.
+
+### 2. **pdf-to-notes** — Convert PDF books
+Transform PDF books or dense textbooks into ADHD-friendly study notes.
+
+### 3. **md-to-notes** — Convert markdown files
+Organize your markdown notes, documentation, or research into study materials.
+
+## Workflow
+
+1. Place your source file in a folder
+2. Open GitHub Copilot chat and ask one of:
+   - *"make notes from this transcript"* → uses `/transcript-to-notes`
+   - *"make notes from this PDF"* → uses `/pdf-to-notes`
+   - *"make study notes from this markdown"* → uses `/md-to-notes`
+3. Follow the skill steps — Copilot will generate notebooks, PDFs, mindmaps, and `.xmind` files
 
 Or run the scripts manually:
 
@@ -31,7 +45,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 ## Folder structure
 ```
-transcript-notes/
+smart-study-notes/
 ├── TOGAF/                          ← example course
 │   ├── udemy_transcript_5689314.txt
 │   ├── TOGAF_GoodNotes_detailed.md

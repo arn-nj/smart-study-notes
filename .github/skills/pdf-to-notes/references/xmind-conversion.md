@@ -73,7 +73,7 @@ if __name__ == '__main__':
 
 ### Usage
 ```bash
-cd /Users/arya/my-space/transcript-notes
+cd /Users/arya/my-space/smart-study-notes
 .venv/bin/python scripts/generate_valid_xmind.py \
   <BookName>/<file>_clean.mm \
   <BookName>/<file>_fixed.xmind

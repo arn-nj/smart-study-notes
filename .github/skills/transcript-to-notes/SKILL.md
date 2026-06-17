@@ -28,7 +28,7 @@ All outputs go into a `<CourseName>/` subfolder alongside the source transcript.
 ## Workspace Layout
 
 ```
-transcript-notes/
+smart-study-notes/
 ├── <CourseName>/
 │   ├── <source_transcript>.txt       ← input
 │   ├── <CourseName>_GoodNotes_detailed.md

@@ -107,7 +107,7 @@ Build a hierarchical XML Freemind file:
 ### Step 7 — Convert .mm → .xmind
 Run the converter script (uses Python venv):
 ```bash
-cd /Users/arya/my-space/transcript-notes
+cd /Users/arya/my-space/smart-study-notes
 .venv/bin/python scripts/generate_valid_xmind.py <FileName>_StudyNotes/<file>.mm <FileName>_StudyNotes/<file>.xmind
 ```
 
@@ -115,7 +115,7 @@ Or use the inline procedure in [xmind-conversion reference](./references/xmind-c
 
 ### Step 8 — Export A4 PDF
 ```bash
-cd /Users/arya/my-space/transcript-notes
+cd /Users/arya/my-space/smart-study-notes
 .venv/bin/python scripts/md_to_pdf_a4.py <FileName>_StudyNotes/<file>.md <FileName>_StudyNotes/<file_A4>.pdf
 ```
 
