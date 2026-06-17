@@ -20,7 +20,7 @@ Or run the scripts manually:
 
 ```bash
 # 1. Activate environment (install once if needed)
-python3 -m venv .venv && .venv/bin/pip install reportlab markdown xmind-sdk
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 # 2. Markdown → A4 PDF
 .venv/bin/python scripts/md_to_pdf_a4.py <CourseName>/<file>.md <CourseName>/<file>_A4.pdf

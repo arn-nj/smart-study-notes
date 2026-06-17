@@ -27,7 +27,7 @@ transcript-notes/
 - Virtualenv is at `.venv/` in the workspace root.
 - Always run Python as `.venv/bin/python` — never the system Python.
 - Required packages: `reportlab`, `markdown`, `xmind-sdk`
-- Re-install if needed: `python3 -m venv .venv && .venv/bin/pip install reportlab markdown xmind-sdk`
+- Re-install if needed: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`
 
 ## Quick Commands (run from workspace root)
 ```bash

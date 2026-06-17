@@ -128,7 +128,7 @@ Ensure all outputs are inside `<CourseName>/` and scripts remain in `scripts/`.
 ## Python Environment
 - Virtualenv: `.venv` at workspace root
 - Required packages: `reportlab`, `markdown`, `xmind-sdk`
-- Install once: `python3 -m venv .venv && .venv/bin/pip install reportlab markdown xmind-sdk`
+- Install once: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`
 - Use the venv Python at `.venv/bin/python` — **not** the system Python
 
 ## Quality Checklist
