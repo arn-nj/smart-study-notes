@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560">
+  <!-- Squared paper background -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#c8d8e8" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50"/>
+    </marker>
+  </defs>
+  <rect width="800" height="560" fill="#f7f9fc"/>
+  <rect width="800" height="560" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="400" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#1a252f">Pi — Agentic Loop (3-Phase Process Flow)</text>
+  <line x1="60" y1="44" x2="740" y2="44" stroke="#2c3e50" stroke-width="1.5"/>
+
+  <!-- YOU SEND MESSAGE box -->
+  <rect x="290" y="60" width="220" height="44" rx="8" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="400" y="82" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="white">You Send a Message</text>
+  <text x="400" y="97" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d6eaf8">Triggers the agentic loop</text>
+
+  <!-- Arrow 1 -->
+  <line x1="400" y1="104" x2="400" y2="134" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- PHASE 1 -->
+  <rect x="160" y="138" width="480" height="84" rx="8" fill="#eaf4fb" stroke="#3498db" stroke-width="2"/>
+  <text x="220" y="160" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#1a6fa3">Phase 1 — Initialize Context</text>
+  <text x="180" y="180" font-family="Georgia, serif" font-size="11" fill="#2c3e50">• System prompt (hardcoded or system.md override)</text>
+  <text x="180" y="196" font-family="Georgia, serif" font-size="11" fill="#2c3e50">• agents.md (home + cwd) + skill descriptions + tool descriptions</text>
+  <text x="180" y="212" font-family="Georgia, serif" font-size="11" fill="#2c3e50">• Message history (or compacted summary) + current message</text>
+
+  <!-- Arrow 2 -->
+  <line x1="400" y1="222" x2="400" y2="250" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- PHASE 2 -->
+  <rect x="160" y="254" width="480" height="80" rx="8" fill="#fef9e7" stroke="#f39c12" stroke-width="2"/>
+  <text x="220" y="276" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#9a6c07">Phase 2 — Transform Context</text>
+  <text x="180" y="296" font-family="Georgia, serif" font-size="11" fill="#2c3e50">• Call checkCompaction() — after turn end OR before prompt</text>
+  <text x="180" y="312" font-family="Georgia, serif" font-size="11" fill="#2c3e50">• If over limit → LLM summarizes history → replaces with compact checkpoint</text>
+
+  <!-- Arrow 3 -->
+  <line x1="400" y1="334" x2="400" y2="362" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- PHASE 3 -->
+  <rect x="160" y="366" width="480" height="96" rx="8" fill="#eafaf1" stroke="#27ae60" stroke-width="2"/>
+  <text x="220" y="388" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#1a7a40">Phase 3 — LLM Call + Tool Loop</text>
+  <text x="180" y="408" font-family="Georgia, serif" font-size="11" fill="#2c3e50">• Send full context to LLM (OpenAI / Anthropic / Kimi / Minimax...)</text>
+  <text x="180" y="424" font-family="Georgia, serif" font-size="11" fill="#2c3e50">• LLM returns: Tool Call → execute → append result → repeat</text>
+  <text x="180" y="440" font-family="Georgia, serif" font-size="11" fill="#2c3e50">• LLM returns: Final Reply → turn ends → show to user</text>
+  <text x="180" y="456" font-family="Georgia, serif" font-size="11" fill="#888">   ↳ simple: 2-3 calls | complex: hundreds of calls</text>
+
+  <!-- Arrow 4 -->
+  <line x1="400" y1="462" x2="400" y2="490" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- RESPONSE -->
+  <rect x="290" y="494" width="220" height="44" rx="8" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+  <text x="400" y="516" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="white">Response to You ✓</text>
+  <text x="400" y="531" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d5f5e3">Turn complete</text>
+
+  <!-- Side label: loop-back arrow -->
+  <path d="M 640 480 Q 760 480 760 300 Q 760 104 640 104" fill="none" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+  <text x="772" y="296" font-family="Georgia, serif" font-size="11" fill="#e74c3c" transform="rotate(90,772,296)">Next message →</text>
+  <text x="668" y="296" font-family="Georgia, serif" font-size="10" fill="#e74c3c">loop</text>
+  <text x="668" y="310" font-family="Georgia, serif" font-size="10" fill="#e74c3c">repeats</text>
+
+  <!-- Footer -->
+  <text x="400" y="550" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">Pi Architecture — 100% custom agent loop, no external frameworks</text>
+</svg>

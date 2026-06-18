@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#c8d8e8" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e67e22"/>
+    </marker>
+  </defs>
+  <rect width="800" height="520" fill="#f7f9fc"/>
+  <rect width="800" height="520" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="400" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#1a252f">Compaction System — checkCompaction()</text>
+  <line x1="60" y1="44" x2="740" y2="44" stroke="#2c3e50" stroke-width="1.5"/>
+
+  <!-- Two trigger points at top -->
+  <rect x="80" y="64" width="240" height="56" rx="8" fill="#2980b9" stroke="#2471a3" stroke-width="2"/>
+  <text x="200" y="88" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">Trigger 1</text>
+  <text x="200" y="107" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d6eaf8">After agent turn ends</text>
+
+  <rect x="480" y="64" width="240" height="56" rx="8" fill="#8e44ad" stroke="#7d3c98" stroke-width="2"/>
+  <text x="600" y="88" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">Trigger 2</text>
+  <text x="600" y="107" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#e8daef">Before each user prompt</text>
+
+  <!-- Arrows converge to checkCompaction -->
+  <line x1="200" y1="120" x2="340" y2="168" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="120" x2="460" y2="168" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- checkCompaction box -->
+  <rect x="270" y="172" width="260" height="56" rx="8" fill="#e67e22" stroke="#ca6f1e" stroke-width="2"/>
+  <text x="400" y="196" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="white">checkCompaction()</text>
+  <text x="400" y="216" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#fdebd0">Count tokens from LLM usage fields</text>
+
+  <!-- Token counting formula box -->
+  <rect x="200" y="244" width="400" height="54" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="400" y="264" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#9a6c07">Token Count = usage.input + usage.output</text>
+  <text x="400" y="282" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#9a6c07">+ cache.read + cache.write</text>
+  <text x="400" y="296" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#bdc3c7">(from LLM provider response fields)</text>
+
+  <!-- Arrow from checkCompaction to decision -->
+  <line x1="400" y1="228" x2="400" y2="244" stroke="#e67e22" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- Decision diamond -->
+  <polygon points="400,312 480,348 400,384 320,348" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2"/>
+  <text x="400" y="344" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#2c3e50">Near</text>
+  <text x="400" y="360" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#2c3e50">limit?</text>
+
+  <!-- NO path -->
+  <line x1="320" y1="348" x2="180" y2="348" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="60" y="326" width="120" height="44" rx="8" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+  <text x="120" y="348" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">No</text>
+  <text x="120" y="364" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d5f5e3">Continue as-is</text>
+
+  <!-- YES path -->
+  <line x1="480" y1="348" x2="620" y2="348" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="620" y="326" width="120" height="44" rx="8" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+  <text x="680" y="348" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">Yes</text>
+  <text x="680" y="364" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#fadbd8">Compact!</text>
+
+  <!-- Compaction output -->
+  <line x1="680" y1="370" x2="680" y2="410" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="540" y="414" width="260" height="82" rx="8" fill="#fdedec" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="670" y="434" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#c0392b">Compaction Summary Contains:</text>
+  <text x="554" y="452" font-family="Georgia, serif" font-size="10" fill="#2c3e50">• Goal + Constraints &amp; preferences</text>
+  <text x="554" y="467" font-family="Georgia, serif" font-size="10" fill="#2c3e50">• Progress (done / blocked) + Key decisions</text>
+  <text x="554" y="482" font-family="Georgia, serif" font-size="10" fill="#2c3e50">• Next steps + Critical context</text>
+  <text x="554" y="493" font-family="Georgia, serif" font-size="9" fill="#888">  replaces raw message history</text>
+
+  <!-- Footer -->
+  <text x="250" y="455" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">Pi does NOT count</text>
+  <text x="250" y="469" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">characters/4 to estimate tokens</text>
+  <text x="250" y="483" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">— trusts LLM usage fields instead</text>
+</svg>

@@ -15,6 +15,7 @@ Given a raw course transcript file, produce:
 4. **`<CourseName>_course_videos_fixed.xmind`** — XMind-ready mindmap
 5. **`svg/` folder** — Hand-drawn SVG sketches for key concepts (auto-generated via content-to-sketch)
 6. **`svg/INDEX.md`** — Visual reference guide with sketch metadata
+7. **`<CourseName>_INDEX.md`** — Master topic index with all pages, key concepts, and flashcard questions
 
 All outputs go into a `<CourseName>/` subfolder alongside the source transcript.
 
@@ -57,6 +58,7 @@ smart-study-notes/
 │   ├── <CourseName>_course_videos.mm
 │   ├── <CourseName>_course_videos_clean.mm
 │   ├── <CourseName>_course_videos_fixed.xmind
+│   ├── <CourseName>_INDEX.md         ← master topic index
 │   └── svg/                          ← auto-generated sketches
 │       ├── <CourseName>_ProcessFlow_sketch.svg
 │       ├── <CourseName>_KeyConcept1_sketch.svg
@@ -236,7 +238,63 @@ done
 - Use XML entities for special characters
 - Ensure all tags are properly closed
 
-### Step 6 — Export A4 PDF
+### Step 6 — Generate Topic Index
+Create `<CourseName>_INDEX.md` inside the course folder. This file is a master index of everything in the notebook.
+
+**Structure:**
+```markdown
+# <CourseName> — Topic Index
+
+> Quick-navigation index for all pages, concepts, and review items.
+
+## Table of Contents
+| # | Page Title | Difficulty | Topics Covered |
+|---|-----------|-----------|----------------|
+| 1 | Page 1 title | Easy | topic A, topic B |
+| 2 | Page 2 title | Medium | topic C |
+...
+
+## All Key Concepts (A–Z)
+Alphabetically sorted master glossary:
+- **ConceptName** — one-line plain-English definition *(Page N)*
+- **ConceptName** — ... *(Page N)*
+
+## All Flashcard Questions
+Flat list of every Q&A from every page — ideal for bulk review:
+| Q | A | Page |
+|---|---|------|
+| question | answer | N |
+
+## All Checkpoint Items
+- [ ] checkpoint from page 1 *(Page N)*
+- [ ] checkpoint from page 2 *(Page N)*
+
+## Quick-Find by Topic
+Group-by-theme cross-reference (manually assigned to broad themes):
+### <Theme 1>
+- Page N: page title — key concept
+- Page N: page title — key concept
+### <Theme 2>
+- ...
+
+## Spaced Repetition Master Schedule
+Consolidated Day 1 / 3 / 7 / 14 / 30 items across all pages:
+| Day | Review Item | Page |
+|-----|-------------|------|
+| 1 | ... | N |
+| 3 | ... | N |
+...
+```
+
+**Rules:**
+- Table of Contents must list every page (1 row per page)
+- Key Concepts A–Z: collect all bolded terms from all pages, de-duplicate, sort alphabetically
+- Flashcard table: copy all `| Q | A |` rows from all pages, add a Page column
+- Checkpoint items: collect all `- [ ] ...` lines from all pages
+- Quick-Find groups: assign pages to 3-6 broad themes based on content
+- Spaced Repetition schedule: flatten all Day 1/3/7/14/30 bullets across all pages
+
+### Step 7 — Export A4 PDF
 ```bash
 source .venv/bin/activate
 python scripts/md_to_pdf_a4.py <CourseName>/<file>.md <CourseName>/<file_A4>.pdf
@@ -244,7 +302,7 @@ python scripts/md_to_pdf_a4.py <CourseName>/<file>.md <CourseName>/<file_A4>.pdf
 
 The PDF will include embedded SVG sketches from the markdown.
 
-### Step 7 — Move Files Into Course Folder
+### Step 8 — Move Files Into Course Folder
 Ensure all outputs are inside `<CourseName>/` and scripts remain in `scripts/`.
 
 ## Python Environment
@@ -266,6 +324,12 @@ Ensure all outputs are inside `<CourseName>/` and scripts remain in `scripts/`.
 - [ ] PDF page count matches Markdown page count
 - [ ] Checkpoints and review prompts appear throughout the notes
 - [ ] No page exceeds roughly 5 minutes of reading time
+- [ ] `<CourseName>_INDEX.md` exists in course folder
+- [ ] Index Table of Contents has one row per note page
+- [ ] Key Concepts A–Z covers all bolded terms from all pages
+- [ ] Flashcard table includes every Q&A row with page reference
+- [ ] All checkpoint items collected with page references
+- [ ] Spaced repetition master schedule spans Day 1 through 30
 
 ### SVG Sketch Quality (content-to-sketch integration)
 - [ ] SVG count is explicit or derived from topic count

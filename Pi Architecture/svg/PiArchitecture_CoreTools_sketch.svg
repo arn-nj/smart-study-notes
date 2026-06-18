@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#c8d8e8" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50"/>
+    </marker>
+  </defs>
+  <rect width="800" height="480" fill="#f7f9fc"/>
+  <rect width="800" height="480" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="400" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#1a252f">Pi Core Tools — Minimal Toolbox</text>
+  <line x1="60" y1="44" x2="740" y2="44" stroke="#2c3e50" stroke-width="1.5"/>
+
+  <!-- Central Pi label -->
+  <rect x="320" y="186" width="160" height="60" rx="30" fill="#1a252f" stroke="#2c3e50" stroke-width="2.5"/>
+  <text x="400" y="212" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="white">Pi</text>
+  <text x="400" y="232" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#bdc3c7">LLM decides tool</text>
+
+  <!-- read tool -->
+  <rect x="60" y="80" width="180" height="80" rx="8" fill="#2980b9" stroke="#2471a3" stroke-width="2"/>
+  <text x="150" y="108" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="white">read</text>
+  <text x="150" y="128" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d6eaf8">Read file contents</text>
+  <text x="150" y="144" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d6eaf8">from the filesystem</text>
+  <line x1="240" y1="120" x2="320" y2="200" stroke="#2980b9" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- bash tool -->
+  <rect x="560" y="80" width="180" height="80" rx="8" fill="#c0392b" stroke="#a93226" stroke-width="2"/>
+  <text x="650" y="108" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="white">bash</text>
+  <text x="650" y="128" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#fadbd8">Run any shell</text>
+  <text x="650" y="144" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#fadbd8">command</text>
+  <line x1="560" y1="120" x2="480" y2="200" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- edit tool -->
+  <rect x="60" y="270" width="180" height="80" rx="8" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+  <text x="150" y="298" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="white">edit</text>
+  <text x="150" y="318" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d5f5e3">Make targeted</text>
+  <text x="150" y="334" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d5f5e3">edits to a file</text>
+  <line x1="240" y1="310" x2="320" y2="236" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- write tool -->
+  <rect x="560" y="270" width="180" height="80" rx="8" fill="#8e44ad" stroke="#7d3c98" stroke-width="2"/>
+  <text x="650" y="298" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="white">write</text>
+  <text x="650" y="318" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#e8daef">Create or overwrite</text>
+  <text x="650" y="334" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#e8daef">a file</text>
+  <line x1="560" y1="310" x2="480" y2="236" stroke="#8e44ad" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- Disabled tools section -->
+  <rect x="160" y="390" width="200" height="60" rx="8" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="260" y="414" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#95a5a6">grep</text>
+  <text x="260" y="434" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#95a5a6">disabled by default</text>
+  <text x="260" y="447" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#bdc3c7">read-only mode only</text>
+
+  <rect x="440" y="390" width="200" height="60" rx="8" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="540" y="414" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#95a5a6">find</text>
+  <text x="540" y="434" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#95a5a6">disabled by default</text>
+  <text x="540" y="447" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#bdc3c7">enable: --tools read,grep,find</text>
+
+  <!-- Labels for disabled -->
+  <text x="400" y="380" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#7f8c8d">⬇ Additional (disabled by default — read-only mode)</text>
+
+  <!-- Footer note -->
+  <text x="400" y="468" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">Add web search as 1st extension | install packages for more | ask Pi to create new tools</text>
+</svg>

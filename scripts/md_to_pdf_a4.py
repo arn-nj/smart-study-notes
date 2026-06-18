@@ -48,14 +48,45 @@ IMAGE_MAX_HEIGHT = IMAGE_PRESETS[IMAGE_SIZE_MODE]["height"]
 IMAGE_CAPTION_SIZE = IMAGE_PRESETS[IMAGE_SIZE_MODE]["caption_size"]
 IMAGE_CAPTION_LEADING = IMAGE_PRESETS[IMAGE_SIZE_MODE]["caption_leading"]
 
-FONT_HAND = "BradleyHand"
-FONT_BODY = "ComicSans"
-FONT_BOLD = "ComicSansBold"
 FONT_MONO = "Courier"
 
-pdfmetrics.registerFont(TTFont(FONT_HAND, "/System/Library/Fonts/Supplemental/Bradley Hand Bold.ttf"))
-pdfmetrics.registerFont(TTFont(FONT_BODY, "/System/Library/Fonts/Supplemental/Comic Sans MS.ttf"))
-pdfmetrics.registerFont(TTFont(FONT_BOLD, "/System/Library/Fonts/Supplemental/Comic Sans MS Bold.ttf"))
+import platform as _platform
+
+def _find_font(mac_path: str, win_candidates: list[str]) -> str | None:
+    """Return the correct font path for the current OS only."""
+    if _platform.system() == "Darwin":
+        return mac_path if Path(mac_path).exists() else None
+    if _platform.system() == "Windows":
+        for c in win_candidates:
+            if Path(c).exists():
+                return c
+    return None
+
+_HAND_PATH = _find_font(
+    "/System/Library/Fonts/Supplemental/Bradley Hand Bold.ttf",
+    [r"C:\Windows\Fonts\segoepr.ttf", r"C:\Windows\Fonts\segoeprb.ttf", r"C:\Windows\Fonts\georgia.ttf"],
+)
+_BODY_PATH = _find_font(
+    "/System/Library/Fonts/Supplemental/Comic Sans MS.ttf",
+    [r"C:\Windows\Fonts\comic.ttf"],
+)
+_BOLD_PATH = _find_font(
+    "/System/Library/Fonts/Supplemental/Comic Sans MS Bold.ttf",
+    [r"C:\Windows\Fonts\comicbd.ttf", r"C:\Windows\Fonts\comic.ttf"],
+)
+
+def _reg(name: str, path: str | None) -> str:
+    if path:
+        try:
+            pdfmetrics.registerFont(TTFont(name, path))
+            return name
+        except Exception:
+            pass
+    return "Helvetica"
+
+FONT_HAND = _reg("BradleyHand",   _HAND_PATH)
+FONT_BODY = _reg("ComicSans",     _BODY_PATH)
+FONT_BOLD = _reg("ComicSansBold", _BOLD_PATH)
 
 PAGE_BG = colors.HexColor("#FFFEF5")
 RULE = colors.HexColor("#D6E4F7")

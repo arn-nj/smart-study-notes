@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#c8d8e8" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8e44ad"/>
+    </marker>
+  </defs>
+  <rect width="800" height="520" fill="#f7f9fc"/>
+  <rect width="800" height="520" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="400" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#1a252f">Skills System — Lazy Loading via TUI Intercept</text>
+  <line x1="60" y1="44" x2="740" y2="44" stroke="#2c3e50" stroke-width="1.5"/>
+
+  <!-- System Prompt (always present) -->
+  <rect x="60" y="58" width="300" height="80" rx="8" fill="#2c3e50" stroke="#1a252f" stroke-width="2"/>
+  <text x="210" y="80" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="white">System Prompt (at startup)</text>
+  <text x="76" y="100" font-family="Georgia, serif" font-size="10" fill="#bdc3c7">&lt;skills&gt;</text>
+  <text x="76" y="115" font-family="Georgia, serif" font-size="10" fill="#bdc3c7">  &lt;skill name=&quot;transcript-to-notes&quot;</text>
+  <text x="76" y="128" font-family="Georgia, serif" font-size="10" fill="#bdc3c7">    description=&quot;Convert transcripts...&quot;/&gt;</text>
+
+  <!-- Label: description only -->
+  <rect x="370" y="72" width="180" height="34" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="460" y="88" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#9a6c07">Description only</text>
+  <text x="460" y="103" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#9a6c07">NOT full content ✓</text>
+  <line x1="360" y1="89" x2="372" y2="89" stroke="#f39c12" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 1: User types command -->
+  <rect x="60" y="180" width="300" height="44" rx="8" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="210" y="200" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">User types: /skill:transcript-to-notes</text>
+  <text x="210" y="217" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d6eaf8">Step 1 — command sent from TUI input</text>
+
+  <!-- Arrow down - TUI intercepts -->
+  <line x1="210" y1="224" x2="210" y2="258" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: TUI Intercepts -->
+  <rect x="60" y="262" width="300" height="60" rx="8" fill="#e67e22" stroke="#ca6f1e" stroke-width="2"/>
+  <text x="210" y="284" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">TUI Intercepts Command</text>
+  <text x="210" y="302" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#fdebd0">PyCore NEVER sees raw /skill: command</text>
+  <text x="210" y="316" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#fdebd0">TUI transforms it first</text>
+
+  <!-- Arrow down to transformed message -->
+  <line x1="210" y1="322" x2="210" y2="356" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Transformed message -->
+  <rect x="60" y="360" width="300" height="90" rx="8" fill="#8e44ad" stroke="#7d3c98" stroke-width="2"/>
+  <text x="210" y="380" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="white">Transformed Message Sent to LLM</text>
+  <text x="76" y="400" font-family="Georgia, serif" font-size="10" fill="#e8daef">&lt;skill</text>
+  <text x="76" y="414" font-family="Georgia, serif" font-size="10" fill="#e8daef">  name=&quot;transcript-to-notes&quot;</text>
+  <text x="76" y="428" font-family="Georgia, serif" font-size="10" fill="#e8daef">  location=&quot;~/.pi/skills/SKILL.md&quot;/&gt;</text>
+  <text x="76" y="442" font-family="Georgia, serif" font-size="10" fill="#bdc3c7">+ description included</text>
+
+  <!-- Right side: LLM + read tool -->
+  <rect x="480" y="262" width="260" height="64" rx="8" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+  <text x="610" y="286" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">LLM Calls read Tool</text>
+  <text x="610" y="304" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d5f5e3">reads file at location provided</text>
+  <text x="610" y="320" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d5f5e3">gets full SKILL.md content</text>
+
+  <!-- Arrow from transformed to LLM -->
+  <line x1="360" y1="405" x2="478" y2="290" stroke="#8e44ad" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow-purple)"/>
+  <text x="440" y="360" font-family="Georgia, serif" font-size="10" fill="#8e44ad" transform="rotate(-40,440,360)">sent to LLM</text>
+
+  <!-- Arrow from read to execution -->
+  <line x1="610" y1="326" x2="610" y2="364" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="480" y="368" width="260" height="52" rx="8" fill="#1e8449" stroke="#186a3b" stroke-width="2"/>
+  <text x="610" y="391" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">LLM Executes Skill</text>
+  <text x="610" y="409" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#d5f5e3">Follows instructions from SKILL.md</text>
+
+  <!-- Custom commands comparison -->
+  <rect x="480" y="446" width="260" height="56" rx="8" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1.5"/>
+  <text x="610" y="466" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#2c3e50">Custom /commands (different!)</text>
+  <text x="610" y="482" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">TUI immediately replaces with full text</text>
+  <text x="610" y="496" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">never reaches core as a command</text>
+
+  <!-- Footer -->
+  <text x="210" y="468" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">Key: lazy loading keeps</text>
+  <text x="210" y="482" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">context lean — 500-line skills</text>
+  <text x="210" y="496" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">only loaded when invoked</text>
+</svg>

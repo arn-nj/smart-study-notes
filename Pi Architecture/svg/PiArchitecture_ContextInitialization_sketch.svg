@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="540" viewBox="0 0 800 540">
+  <!-- Squared paper background -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#c8d8e8" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50"/>
+    </marker>
+  </defs>
+  <rect width="800" height="540" fill="#f7f9fc"/>
+  <rect width="800" height="540" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="400" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#1a252f">Context Initialization — 6 Layers</text>
+  <line x1="60" y1="44" x2="740" y2="44" stroke="#2c3e50" stroke-width="1.5"/>
+
+  <!-- Layer stack visual -->
+  <!-- Layer 1: System Prompt -->
+  <rect x="160" y="60" width="480" height="56" rx="4" fill="#2c3e50" stroke="#1a252f" stroke-width="1.5"/>
+  <text x="192" y="84" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">Layer 1 — System Prompt</text>
+  <text x="192" y="102" font-family="Georgia, serif" font-size="11" fill="#bdc3c7">Hardcoded ~20 lines | override: system.md | add: append-system.md</text>
+
+  <!-- Layer 2: agents.md -->
+  <rect x="160" y="126" width="480" height="50" rx="4" fill="#2980b9" stroke="#2471a3" stroke-width="1.5"/>
+  <text x="192" y="147" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">Layer 2 — agents.md Files</text>
+  <text x="192" y="163" font-family="Georgia, serif" font-size="11" fill="#d6eaf8">Auto-loaded from home dir AND current working dir | ⚠️ don&apos;t add too many</text>
+
+  <!-- Layer 3: Skill Descriptions -->
+  <rect x="160" y="186" width="480" height="50" rx="4" fill="#8e44ad" stroke="#7d3c98" stroke-width="1.5"/>
+  <text x="192" y="207" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">Layer 3 — Skill Descriptions</text>
+  <text x="192" y="223" font-family="Georgia, serif" font-size="11" fill="#e8daef">Name + short description only — NOT full skill content (lazy-loaded)</text>
+
+  <!-- Layer 4: Tool Descriptions -->
+  <rect x="160" y="246" width="480" height="50" rx="4" fill="#c0392b" stroke="#a93226" stroke-width="1.5"/>
+  <text x="192" y="267" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">Layer 4 — Tool Descriptions</text>
+  <text x="192" y="283" font-family="Georgia, serif" font-size="11" fill="#fadbd8">All loaded tools: read, bash, edit, write (+ any extension tools)</text>
+
+  <!-- Layer 5: Message History -->
+  <rect x="160" y="306" width="480" height="50" rx="4" fill="#d35400" stroke="#b7470a" stroke-width="1.5"/>
+  <text x="192" y="327" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">Layer 5 — Message History</text>
+  <text x="192" y="343" font-family="Georgia, serif" font-size="11" fill="#fdebd0">Full history if short | compacted summary if context was previously compacted</text>
+
+  <!-- Layer 6: Current Message -->
+  <rect x="160" y="366" width="480" height="50" rx="4" fill="#27ae60" stroke="#1e8449" stroke-width="1.5"/>
+  <text x="192" y="387" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="white">Layer 6 — Current Message</text>
+  <text x="192" y="403" font-family="Georgia, serif" font-size="11" fill="#d5f5e3">Your current prompt — appended last to complete the context</text>
+
+  <!-- Arrow pointing down to LLM -->
+  <line x1="400" y1="420" x2="400" y2="450" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- LLM Call box -->
+  <rect x="260" y="454" width="280" height="44" rx="8" fill="#1a252f" stroke="#2c3e50" stroke-width="2"/>
+  <text x="400" y="476" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="white">Send to LLM Provider</text>
+  <text x="400" y="492" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#bdc3c7">OpenAI / Anthropic / Kimi / Minimax</text>
+
+  <!-- Right side labels -->
+  <text x="656" y="94" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">ALWAYS</text>
+  <text x="656" y="156" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">ALWAYS</text>
+  <text x="656" y="216" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">ALWAYS</text>
+  <text x="656" y="276" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">ALWAYS</text>
+  <text x="656" y="336" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">ALWAYS</text>
+  <text x="656" y="396" font-family="Georgia, serif" font-size="10" fill="#27ae60">YOUR MSG</text>
+
+  <!-- Footer -->
+  <text x="400" y="530" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#7f8c8d">Pi — Context built fresh on every message | order matters</text>
+</svg>
