@@ -19,6 +19,8 @@ Given a PDF book or large text, produce:
 3. **`<BookName>_Quick_Reference.md`** — 1-page visual summaries per major section
 4. **`<BookName>_Action_Items.md`** — executable takeaways and real-world applications
 5. **`<BookName>_book_mindmap.xmind`** — XMind mindmap showing chapter relationships and themes
+6. **`svg/` folder** — Hand-drawn SVG sketches for key concepts (auto-generated via content-to-sketch)
+7. **`svg/INDEX.md`** — Visual reference guide with sketch metadata
 
 All outputs go into a `<BookName>/` subfolder.
 
@@ -90,7 +92,70 @@ One visual 1-pager per major section:
 - Include difficulty and time estimates
 - Cross-reference back to source chapter
 
-### Step 6 — Create Freemind Mindmap (`.mm`)
+### Step 6 — Generate SVG Sketches (content-to-sketch integration)
+Use the **content-to-sketch** skill to create hand-drawn visuals for key concepts:
+
+1. **Identify topics and key concepts** from the PDF:
+   - Core process flows (how the system works)
+   - Architectural diagrams (component relationships)
+   - Decision trees (if/then logic)
+   - Comparison charts (before/after, with/without)
+   - Chapter summary visuals (key takeaways)
+
+   SVG count rules:
+   - Minimum: `1 SVG per topic/chapter section`
+   - Default: derive SVG count from detected topics or chapter sections
+   - Optional: user can request a fixed total count
+   - Never generate fewer SVGs than the number of selected topics
+
+   Example requests:
+   - `Generate one SVG for every chapter section in this book summary.`
+   - `Generate 18 SVGs total, but keep one minimum per topic.`
+   - `Use topic-density mode so heavier sections get more diagrams.`
+
+2. **Create svg/ subfolder**:
+```bash
+mkdir -p <BookName>/svg
+```
+
+3. **Generate SVG sketches** for each topic/concept:
+   - Use squared paper background (GoodNotes compatible)
+   - Include 15+ text labels per sketch (accessibility)
+   - Keep file size under 10KB (3-6KB optimal)
+   - Use high contrast colors (WCAG compliant)
+   - Add arrows/markers for visual flow
+   - Ensure every topic gets at least one SVG
+
+4. **Validate all SVGs**:
+```bash
+cd <BookName>/svg
+for f in *.svg; do xmllint --noout "$f" && echo "✓ $f valid"; done
+```
+
+5. **Create validation script** (`validate_svgs.sh`):
+```bash
+#!/bin/bash
+for f in *.svg; do
+  xmllint --noout "$f" 2>&1 && echo "✓ $f" || echo "✗ $f"
+done
+```
+
+6. **Create INDEX.md** with sketch metadata:
+   - File names and descriptions
+   - Which chapters/sections they visualize
+   - Quality metrics (labels, colors, size)
+
+7. **Embed in markdown notes**:
+```markdown
+![Process Flow](./svg/<BookName>_ProcessFlow_sketch.svg)
+```
+
+**Common SVG issues to fix:**
+- Escape `&` as `&amp;` in text
+- Use XML entities for special characters
+- Ensure all tags are properly closed
+
+### Step 7 — Create Freemind Mindmap (`.mm`)
 See [mindmap format reference](./references/mindmap-format.md).
 
 Build a hierarchical XML Freemind file:
@@ -102,7 +167,7 @@ Build a hierarchical XML Freemind file:
 
 **Critical**: Escape ALL `&` as `&amp;` in node TEXT attributes. No bare `&` allowed.
 
-### Step 7 — Convert .mm → .xmind
+### Step 8 — Convert .mm → .xmind
 Run the converter script (uses Python venv):
 ```bash
 cd /Users/arya/my-space/smart-study-notes
@@ -111,13 +176,13 @@ cd /Users/arya/my-space/smart-study-notes
 
 Or use the inline procedure in [xmind-conversion reference](./references/xmind-conversion.md).
 
-### Step 8 — Export A4 PDF
+### Step 9 — Export A4 PDF
 ```bash
 cd /Users/arya/my-space/smart-study-notes
 .venv/bin/python scripts/md_to_pdf_a4.py <BookName>/<file>.md <BookName>/<file_A4>.pdf
 ```
 
-The PDF will use squared paper background for handwritten aesthetic in GoodNotes.
+The PDF will use squared paper background for handwritten aesthetic in GoodNotes and include embedded SVG sketches.
 
 ## Strategic Chunking for Large Books
 
@@ -173,3 +238,21 @@ The PDF will use squared paper background for handwritten aesthetic in GoodNotes
 - [ ] Spaced-repetition facts build conceptual understanding
 - [ ] PDF and mindmap are generated without errors
 - [ ] All outputs are in the `<BookName>/` folder
+
+### SVG Sketch Quality (content-to-sketch integration)
+- [ ] SVG count is explicit or derived from topic count
+- [ ] Every topic/chapter section has at least one SVG
+- [ ] All SVGs in `svg/` subfolder with INDEX.md
+- [ ] All SVGs pass XML validation (`xmllint --noout`)
+- [ ] All ampersands escaped as `&amp;`
+- [ ] Each sketch has 15+ text labels (accessibility)
+- [ ] File sizes under 10KB (3-6KB optimal)
+- [ ] High contrast colors (8-21 unique colors)
+- [ ] Arrows/markers for visual flow
+- [ ] Sketches embedded in markdown with `![](./svg/...)` references
+- [ ] validation_report.txt shows 0 errors, 0 warnings
+
+## Related Skills
+- **content-to-sketch** — Generates the SVG sketches (auto-invoked in Step 6)
+- **transcript-to-notes** — Alternative for transcript input
+- **md-to-notes** — Alternative for markdown input

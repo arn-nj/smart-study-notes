@@ -44,6 +44,9 @@ Q: What proves success?  A: Correct response path.
 - Intent clarity improves routing.
 - Tools execute; topics steer.
 - Grounding improves factuality.
+
+![Build & Iterate Cycle](./svg/CopilotStudio_BuildIterateCycle_sketch.svg)
+![Foundations & Pillars](./svg/CopilotStudio_FoundationsPillars_sketch.svg)
 - Trace logs support debugging.
 - Permissions shape rollout.
 - Design for safe failure.
@@ -212,6 +215,8 @@ Builds practical Copilot Studio implementation confidence.
 - **Grounding**: Main concept.
 - **Source-controlled answers**: Practical angle.
 
+![Grounding: Foundation of Accuracy](./svg/CopilotStudio_Grounding_Accuracy.svg)
+
 ## Process Flow / Steps
 1. Define task.
 2. Configure artifact.
@@ -262,6 +267,8 @@ Builds practical Copilot Studio implementation confidence.
 ## Key Concepts
 - **Intent routing**: Main concept.
 - **Topic/node design**: Practical angle.
+
+![Intent Routing: Topics & Nodes](./svg/CopilotStudio_IntentRouting_Topics.svg)
 
 ## Process Flow / Steps
 1. Define task.
@@ -314,6 +321,8 @@ Builds practical Copilot Studio implementation confidence.
 - **External actions**: Main concept.
 - **Tool invocation**: Practical angle.
 
+![Tool Integration: Extending Agent Capabilities](./svg/CopilotStudio_ToolIntegration.svg)
+
 ## Process Flow / Steps
 1. Define task.
 2. Configure artifact.
@@ -364,6 +373,8 @@ Builds practical Copilot Studio implementation confidence.
 ## Key Concepts
 - **Orchestration**: Main concept.
 - **Agent handoff**: Practical angle.
+
+![Multi-Agent Orchestration](./svg/CopilotStudio_MultiAgentOrchestration.svg)
 
 ## Process Flow / Steps
 1. Define task.

@@ -1,1107 +1,1079 @@
-TOGAF Practitioner — GoodNotes-style DETAILED Study Notebook
-===========================================================
-
-Format: Each video/lesson from the transcript is one page. Each page follows your rules: notebook-style headings, callouts, ASCII sketches, analogy, visual sketch, real-world example, exam relevance, flashcards, practice questions, one-page revision and 8 memory bullets to remember in 30 days. Pages are concise but detailed enough for study and spaced repetition.
-
--- Page 1 — Introduction & Course Structure
-
-Big Picture
-- TOGAF helps enterprises plan & govern change to realize business value.
-
-Key Concepts
-- Purpose: guide effective change via current vs target state and governance.
-  - Analogy: City master plan — shows what to build, when, and who approves.
-  - Visual sketch (ASCII):
-    [Baseline] --gap--> [Target]
-       |                   |
-      models            roadmaps
-
-- Stakeholders & Governance
-  - Real-world: Execs approve vision; EA team writes roadmap and manages risks.
-  - Exam relevance: Understand role of Request for Architecture Work and Statement of
-    Architecture Work.
-
-Why It Matters
-- Prevents wasted projects, aligns investments, reduces risk.
-
-Process Flow (mini)
-- Request → Preliminary → Phase A (Vision) → B–D (domain architectures) → E/F (roadmap & migration)
-
-Common Mistakes
-- Over-scoping the first architecture project.
-- Skipping stakeholder confirmation.
-
-Visual Memory Hooks
-- Icon set: 🗺️ (map) 🎯 (vision) 🔁 (iteration)
-
-Flashcards
-- Q: What triggers an ADM cycle? A: Request for Architecture Work.
-
-Practice Questions
-- Q: What is the Statement of Architecture Work for? (Short answer)
-
-One-Page Revision
-- EA = map; Vision = direction; ADM = method; Repo = single source
-
-What to remember 30 days from now
-- EA guides change to deliver value
-- Request starts ADM
-- Vision must be stakeholder-aligned
-- Keep scope minimal
-- Use repository first
-- Roadmaps show transitions
-- Contracts ensure compliance
-- Measure value, not just outputs
-
--- Page 2 — TOGAF Core Concepts (levels, continuum, states)
-
-Big Picture
-- Organize large landscapes using levels (strategic/segment/capability) and continuum (generic→specific).
-
-Key Concepts
-- Architecture Levels
-  - Analogy: Map zoom (world → country → city)
-  - ASCII:
-    [Strategic]
-      |
-    [Segment]
-      |
-    [Capability]
-  - Example: Strategic defines enterprise vision; capability defines a payroll process.
-  - Exam: Identify correct scope & time horizon per level.
-
-- Architecture Continuum
-  - Analogy: Reference library → custom design
-  - Visual: Generic <--- foundation --- Specific
-  - Use: Promote reuse and reduce redundancy.
-
-- Architecture States: Baseline, Transition(s), Target, Candidate, Resting
-  - Real-world: Baseline = legacy systems; transition = phased migration; target = new cloud platform.
-
-Why It Matters
-- Choose right granularity and reuse models to save time.
-
-Process tips
-- Only update landscape when a justified project requests it; avoid speculative work.
-
-Common Mistakes
-- Mixing levels in a single model; over-detailing strategic architectures.
-
-Flashcards
-- Q: Name 3 architecture levels. A: Strategic, Segment, Capability.
-
-Practice Question
-- Given scenario with enterprise-wide vision, which level to use? (Strategic)
-
-One-Page Revision
-- Levels = breadth vs detail; Continuum = reuse; States = baseline→target
-
-30-day bullets
-- 3 levels & their purpose
-- Continuum = generic→specific
-- Baseline vs target distinction
-- Use models for storytelling
-- Roadmaps come from gaps
-- Maintain approved architectures
-- Scope projects to requests
-- Reuse rather than redesign
-
--- Page 3 — Architecture Development Method (ADM) — Overview + Phase A deep dive
-
-Big Picture
-- ADM is the stepwise cycle to develop and maintain architecture.
-
-Key Concepts
-- ADM sequence (A→B→C→D→E→F→G→H) with Requirements Management at center.
-  - Analogy: Project lifecycle with gates and reviews.
-  - ASCII:
-    (Reqs)
-      •
-    A → B → C → D → E → F → G → H
-
-- Phase A (Architecture Vision): essential exam focus
-  - Steps: scope → identify stakeholders & concerns → confirm goals/drivers → develop vision → statement of architecture work
-  - Analogy: Pitch deck that gets executive buy-in.
-  - Visual: [Stakeholder map] -> [High-level baseline/target] -> [Vision summary]
-  - Real World: If stakeholders disagree, the project stalls; align early.
-  - Exam relevance: know inputs (request for architecture work, principles, repository) and outputs (Statement of Architecture Work, Architecture Vision, Communication Plan).
-
-Why It Matters
-- Phase A sets the contract and scope—errors here amplify downstream.
-
-Process Flow (Phase A condensed)
-- Receive request → Scope (breadth/depth/time) → Stakeholders → Team capability check → Draft vision → Secure approval
-
-Common Mistakes
-- Failing to scope breadth/time properly; insufficient stakeholder map.
-
-Flashcards
-- Q: Primary output of Phase A? A: Statement of Architecture Work + Architecture Vision.
-
-Practice Questions
-- Scenario: Sponsor provides a vague request—what step next? (Scope & stakeholder identification)
-
-One-Page Revision
-- Memorize Phase A steps and artifacts; find Statement of Architecture Work in exam.
-
-30-day bullets
-- Phase A establishes the project
-- Statement of Architecture Work = contract
-- Stakeholder map directs views
-- Use repository assets early
-- Scope breadth vs depth tradeoff
-- Confirm team capability early
-- Vision summarizes value & KPIs
-- Communication Plan = who, when, how
-
-Worked Example — Phase A (quick)
-- Scenario: Sponsor requests 'improve customer onboarding' across two business units.
-  Steps: 1) Scope breadth: org units A+B; 2) Stakeholders: Head of Sales, Head of Ops, CIO; 3) Baseline: current onboarding flow; 4) Draft vision: reduce onboarding time by 50% in 12 months; 5) Outputs: Statement of Architecture Work, stakeholder map, initial KPIs.
-
-Quick ASCII Sketch (Phase A stakeholder map)
-  [Sponsor]
-     |       
-  [Head Sales] - [Head Ops] - [CIO]
-     \         |         /
-      ---- [EA Team] -----
-
-Inputs & Outputs (Phase A) — study checklist
-- Key Inputs:
-  - Request for Architecture Work (formal trigger)
-  - Business goals & strategies
-  - Applicable principles & constraints
-  - Existing repository assets (reference models, templates)
-- Key Outputs:
-  - Statement of Architecture Work (SoAW)
-  - Architecture Vision (1‑page summary + KPIs)
-  - Communication Plan (stakeholder messages & schedule)
-
-Phase A: Quick checklist for study & exam (tick list)
-- Confirm trigger & sponsor
-- Define scope (org units, capabilities, time horizon)
-- Identify top 8 stakeholders and their concerns
-- Draft measurable vision (SMART goal + 2 KPIs)
-- Identify one reusable repo asset per deliverable
-- Produce SoAW with success criteria and governance points
-
-Sample stakeholder concerns (common exam patterns)
-- Sponsor: ROI, time-to-value, executive visibility
-- CIO: integration risk, infra readiness, licensing
-- Head Ops: process disruption, training, SLA impact
-- Head Sales: customer experience, reporting needs
-Extra Flashcards — Phase A
-- Q: Name two non-architectural inputs to Phase A. A: Request for Architecture Work, business drivers/goals.
-- Q: What's the main purpose of the Communication Plan? A: Deliver right info to right stakeholders at right time.
-
--- Page 4 — Phase B: Business Architecture (details & techniques)
-
-Big Picture
-- Business architecture defines capabilities, value streams, org maps, and processes that target the business strategy.
-
-Key Concepts & Techniques
-- Business Capability Map
-  - Analogy: Catalog of abilities
-  - ASCII (mini): [Strategic]—[Core]—[Supporting]
-  - Use: Heatmap capabilities by maturity/value/cost.
-
-- Value Streams
-  - Analogy: Conveyor belt of perceived stakeholder value
-  - ASCII: Advertise -> Select -> Pay -> Deliver
-  - Map stages to capabilities and processes.
-
-- Information Mapping (nouns→entities)
-  - Tip: Use noun-challenge to extract key data entities.
-
-- Organization Map vs Org Chart
-  - Org map shows interactions across boundaries (not hierarchy).
-
-Approach (GAP method)
-- Baseline → Target → Gap Analysis → Candidate roadmap components → Impact resolution → Stakeholder review
-
-Real-world pointers
-- Use existing assets (reference models) in the repo; avoid reinventing models.
-
-Exam Relevance
-- Know artifacts: capability map, value streams, information maps, and typical matrices used in Phase B.
-
-Common Mistakes
-- Overly detailed baselines; inconsistent levels of detail between baseline and target.
-
-Flashcard
-- Q: What technique links capabilities to value stream stages? A: Mapping & matrices (capability ↔ value stream)
-
-Practice Qs
-- Short scenario: Which artifact helps show which org unit supports which capability? (Org map)
-
-One-Page Revision
-- Build baseline only to necessary level; use same level of detail for baseline & target.
-
-30-day bullets
-- Capabilities = business abilities
-- Value streams show stakeholder-perceived flow
-- Info map = nouns → relationships
-- Org map = network of actors
-- Heatmaps show priority/maturity
-- Reuse industry reference models
-- Gap→work packages→roadmap
-- Stakeholder approval needed for target
-
-Worked Example — Business Capability Mapping
-- Problem: Sales process has duplicated capabilities across regions.
-  Steps: 1) Create level-1 capability map; 2) Heatmap for duplication (red = duplicated); 3) Propose consolidation work package; 4) Map to org units and applications.
-
-ASCII: Capability heatmap legend
-  [Green]=good [Yellow]=improve [Red]=missing/duplicated
-
-Capability mapping: practical steps & mini-example
-- Steps:
-  1) List Level‑1 capabilities (e.g., Lead Mgmt, Quote, Order Fulfilment, Billing)
-  2) For each region, mark presence/ownership and maturity (1–5)
-  3) Produce heatmap: color by duplication or misalignment
-  4) Identify consolidation candidates (same capability, different apps)
-  5) Draft Work Package: Consolidate Capabilities — Pilot Region
-
-Mini-example (table style)
-Capability | Region A owner | Region B owner | Maturity A | Maturity B | Action
-Lead Mgmt | Sales A         | Sales B         | 4          | 2          | Consolidate -> Pilot
-Billing   | Finance A       | Finance B       | 3          | 3          | Standardize interfaces
-
-Study tip: when asked to show a capability heatmap in exam, sketch two columns (capability vs regions) and mark colors/maturities — explain consolidation rationale.
-
-Extra Flashcards — Phase B
-- Q: What does a value stream stage represent? A: An incremental value-adding activity for stakeholders.
-- Q: Why use an org map? A: To show cross-boundary interactions and responsibilities.
-
--- Page 5 — Phase C: Information Systems (Data & Application)
-
-Big Picture
-- Data and application architectures enable the business architecture.
-
-Key Concepts
-- Data meta-model: Data Entity, Logical Data Component, Physical Data Component
-  - Analogy: Entity = noun, Logical grouping = folder, Physical = database/schema
-  - ASCII snippet: Customer -> Contract -> Address
-
-- Application artifacts: Application Portfolio Catalog, App Comm Diagram, App-Org Matrix
-
-Data considerations
-- Data at rest / in motion / in use / open data
-- Governance, migration, quality attributes
-
-App Architecture pointers
-- Use industry models (TRM, TRIPLE-ERM) and vendor reference models to save time.
-
-Exam relevance
-- Recognize which artifacts are data vs application; know purpose of logical vs physical models.
-
-Common Mistakes
-- Confusing entities with attributes; modelling too many attributes early.
-
-Flashcard
-- Q: Three meta-model entities for data? A: Data entity, logical component, physical component.
-
-Practice Q
-- Given requirements to share data enterprise-wide, which data principle supports this? (Data shared principle)
-
-One-Page Revision
-- Data meta-model + key diagrams + governance basics
-
-30-day bullets
-- Data entity ≠ attribute
-- Logical vs physical components
-- Data migration & governance are vital
-- App portfolio catalogs list logical & physical apps
-- App communication diagrams show interfaces
-- Use repo & reference models
-- Keep data models concise at first
-- Trace ownership for data entities
-
-Worked Example — Data entity mapping
-- Scenario: 'Customer' entity used in Billing and CRM.
-  Steps: 1) List attributes used by both systems; 2) Decide canonical source (Authoritative Source = Billing); 3) Define data access policy & migration steps.
-
-ASCII: Data flow (simple)
-  [Billing DB] --> (API) --> [CRM]
-
-Extra Flashcards — Phase C
-- Q: When to use logical vs physical data models? A: Logical for design/requirements, physical for implementation details.
-- Q: What are three 'states' of data to consider? A: At rest, in motion, in use.
-
--- Page 6 — Phase D: Technology Architecture
-
-Big Picture
-- Technology architecture defines platforms, infrastructure, and standards to support apps & data.
-
-Key Concepts
-- Technology Portfolio Catalog, Platform Decomposition, Environments & Locations
-  - Analogy: Building materials and utilities for the city
-
-Considerations
-- Technology can be a driver of change; anticipate innovation but manage discontinuities.
-
-Exam relevance
-- Understand artifacts and when to apply them; TRM and platform decomposition diagrams.
-
-Common Mistakes
-- Letting technology push architecture without business alignment.
-
-Flashcard
-- Q: Purpose of Technology Portfolio Catalog? A: Life-cycle management of tech products & standards basis.
-
-Practice Q
-- Which diagram shows OS used at each location? (Environment & Location diagram)
-
-One-Page Revision
-- Tech = platforms + standards + lifecycle; map to apps & data.
-
-30-day bullets
-- Tech supports apps & data
-- Platform decomposition shows building blocks
-- Catalogue aids lifecycle mgmt
-- Anticipate innovation benefits & risks
-- Reuse standards library
-- Map tech to locations/environments
-- Keep diagrams logical, not overly detailed
-- Align tech choices to business value
-
-Visual sketch (ASCII): Platform stack (concise)
-  [Business Apps]
-    |
-  [Middleware / Services]
-    |
-  [Platform: Containers / App Servers]
-    |
-  [Infrastructure: VMs / Baremetal / Cloud]
-    |
-  [Network / Storage]
-
-Study tip: label one platform with a standard (e.g., Kubernetes) and one tech component mapping to show traceability.
-
--- Page 7 — Phases E & F: Opportunities & Solutions / Migration Planning
-
-Big Picture
-- E identifies delivery vehicles and builds initial roadmap; F finalizes migration plan and order.
-
-Key Concepts
-- Consolidated Gaps, Solutions & Dependencies Matrix
-- Implementation Factor Catalog
-- Work Packages, Transition Architectures, Roadmap, Implementation & Migration Plan
-
-Analogy
-- Road trip planning: gaps = distance, work packages = legs, transition states = overnight stops.
-
-Process Flow
-- Consolidate gaps → prioritize based on value/risk → group into work packages → define transitions → timeline & costs → confirm with stakeholders
-
-Exam relevance
-- Know the matrix types and the purpose of work packages vs projects vs transition architectures.
-
-Common Mistakes
-- Ignoring dependencies; sequencing work incorrectly.
-
-Flashcard
-- Q: What is a work package? A: Grouping of activities to realize capability increments.
-
-Practice Q
-- How to choose greenfield vs evolutionary approach? (Based on constraints, risk, legacy)
-
-One-Page Revision
-- Use consolidated matrices; define clear outcomes for transitions.
-
-30-day bullets
-- Roadmap = timeline of work packages
-- Consolidated gap matrix central to planning
-- Dependencies define sequence
-- Work packages → projects → portfolios
-- Choose implementation approach per context
-- Proof-of-concept = implementation, not architecture
-- Cost/benefit & risk prioritize projects
-- Update repo with roadmap outputs
-
-Worked Example — Creating a Work Package
-- Gap: No shared CRM across regions; solution options: (A) Build in-house, (B) Buy SaaS, (C) Hybrid.
-  Steps: 1) Consolidate gaps; 2) Cost estimate + value index; 3) Define Work Package: "CRM consolidation—Phase 1 (pilot region)"; 4) Dependencies: Data migration, SSO, Org training.
-
-ASCII: Work package -> dependencies
-  [Work Package: CRM P1]
-     |-- Data migration
-     |-- SSO integration
-     |-- Training
-
-Extra Flashcards — E/F
-- Q: What table documents solution building blocks across transitions? A: Transition Architecture State Evolution table.
-- Q: Name a key input to Phase E. A: Candidate architecture roadmap components from B–D.
-
--- Page 8 — Phase G: Implementation Governance
-
-Big Picture
-- Ensure delivered solutions comply with the approved architecture.
-
-Key Concepts
-- Architecture Contract, Compliance Reviews, Post-Implementation Reviews
-
-Analogy
-- QA and inspections during construction: architect checks contractor.
-
-Process Flow
-- Confirm scope → identify resources/skills → guide deployment → run compliance reviews → publish post-implementation results
-
-Exam relevance
-- Know compliance levels (irrelevant → fully conformant → non-conformant) and what a compliance review checks.
-
-Common Mistakes
-- Over-reliance on reviews without developer feedback loops.
-
-Flashcard
-- Q: What is an architecture contract? A: Joint agreement on deliverables, quality, fitness.
-
-Practice Q
-- Which artifact documents acceptance criteria for an architecture project? (Statement of Architecture Work)
-
-One-Page Revision
-- Governance enforces compliance; contracts define expectations.
-
-30-day bullets
-- Contracts connect architecture to implementation
-- Compliance reviews at checkpoints
-- Use repo to track decisions
-- Train teams on expectations
-- Update baseline once deployed
-- Post-implementation reviews capture lessons
-- Architecture board handles major approvals
-- Use artifacts to demonstrate value
-
-Visual sketch (ASCII): Deployment & compliance flow
-  [Design Approved]
-    |
-  [Dev & Test] --> [Compliance Review]
-    |                |
-  [Pre-Prod] ---------+--> [Remediation/Approve]
-    |
-  [Production]
-
-Quick note: mark compliance checkpoints at Dev/Test, Pre-Prod and Production for review dates.
-
--- Page 9 — Phase H & Requirements Management
-
-Big Picture
-- H manages change post-deployment; Requirements Management runs continuously across the ADM.
-
-Key Concepts
-- Change Requests, Value Realization, Monitoring, Risk & Classification (simplification, incremental, re-architecting)
-
-Analogy
-- Maintenance cycle & continuous backlog refinement.
-
-Process Flow
-- Monitor → assess → classify change → decide: small update or new ADM cycle
-
-Exam relevance
-- Know change request content and how requirements feed phases.
-
-Common Mistakes
-- Not documenting change rationale or impact fully.
-
-Flashcard
-- Q: Requirements repository purpose? A: Single point of truth for requirements across ADM cycles.
-
-Practice Q
-- What triggers a new ADM cycle? (Major change/re-architecting request)
-
-One-Page Revision
-- Requirements are central; H decides whether to reopen ADM.
-
-30-day bullets
-- Requirements management is continuous
-- Change requests must include impact assessment
-- Classify changes: simplification/incremental/re-architect
-- Value realization is measured & tracked
-- Monitor performance KPIs
-- Use governance to approve updates
-- Document lessons & decisions
-- Keep requirements repo current
-
-Visual sketch (ASCII): Change request lifecycle
-  [Change Raised]
-    |
-  [Impact Assessment] --(minor)-> [Implement]
-    |--(major)-> [New ADM?]
-    |
-  [Approval] -> [Plan & Schedule] -> [Implement]
-
-Study tip: in exams, briefly outline impact assessment steps and decision criteria for new ADM vs direct implement.
-
--- Page 10 — Techniques: Gap Analysis, Trade-offs, Business Scenario
-
-Big Picture
-- Concrete techniques help derive actionable roadmap items.
-
-Key Concepts
-- Gap analysis: eliminated/new/impacted building blocks
-- Architecture Trade-Off Method: define criteria → investigate alternatives → select/merge
-- Business Scenario Technique: SMART scenarios drive architecture requirements
-
-Analogy
-- Gap = pothole on the road; trade-off = choosing speed vs cost.
-
-Exam relevance
-- Demonstrate trade-off facilitation and ability to justify alternatives with criteria.
-
-Common Mistakes
-- Using subjective criteria without agreed weighting.
-
-Flashcard
-- Q: 3 steps of trade-off method? A: Select criteria → define alternatives → select/assemble best.
-
-Practice Q
-- Given two alternatives with similar value, what do you examine next? (Dependencies, risk, stakeholder priorities)
-
-One-Page Revision
-- Document criteria, estimate gaps, perform stakeholder review.
-
-30-day bullets
-- Gap types & examples
-- Trade-offs require shared value metrics
-- Business scenario = SMART
-- Use matrices to consolidate gaps
-- Weighting criteria is essential
-- Engage stakeholders early in trade-offs
-- Document chosen alternative & rationale
-- Reuse viewpoints for stakeholder views
-
-Worked Example — Trade-off Analysis (compact)
-- Decision: Replace legacy ERP vs wrap with API layer.
-  Criteria: Cost (30%), Time (25%), Risk (25%), Strategic fit (20%).
-  Scores: Replace (7,5,6,8) -> weighted = (2.1+1.25+1.5+1.6)=6.45
-           Wrap (5,8,7,6) -> weighted = (1.5+2.0+1.75+1.2)=6.45
-  Result: tie -> use secondary criteria: organizational readiness -> choose Wrap + plan for Replace later.
-
-ASCII: Trade-off table (mini)
-  Criteria | Replace | Wrap
-  Cost     | 7       | 5
-  Time     | 5       | 8
-  Risk     | 6       | 7
-  Fit      | 8       | 6
-
-Trade-off scoring: formula & tie-break rules (study-ready)
-- Weighted score formula: WeightedScore = sum( weight_i * score_i ) for all criteria i.
-  - Normalise weights so they sum to 1 (or use percentage weights as shown).
-  - Use consistent scoring scale (1–9 or 1–10) and document scale in answer.
-- Tie-break guidance (exam):
-  1) Use secondary criterion (e.g., organizational readiness, compliance) pre-agreed with stakeholders.
-  2) If still tied, prefer approach with smaller implementation risk or shorter time-to-value.
-  3) Document rationale concisely: show weighted scores, secondary criteria and final rationale.
-
-Quick exam phrasing tip: "I used criteria A–D with weights X; scored alternatives out of 9; weighted totals tie; selected Wrap due to higher organizational readiness and lower up-front cost, with plan to revisit for full replacement in roadmap." 
-
-Extra Flashcards — Techniques
-- Q: What secondary step after scoring equals? A: Use secondary criteria or stakeholder negotiation.
-- Q: What is the purpose of the consolidated gap matrix? A: Group gaps and map to potential solutions and dependencies.
-
--- Page 11 — Security & Risk (summary)
-
-Big Picture
-- Security architecture is pervasive; risk management is integral to all ADM phases.
-
-Key Concepts
-- Security Service Catalog, Trust Framework, Risk Register, Controls & Audit
-
-Analogy
-- Safety protocols built into building codes.
-
-Process Flow
-- Capture security requirements in Phase A → design controls in B–D → test & audit in G → monitor in H
-
-Exam relevance
-- Know difference between business vs cyber risk; classification and mitigation planning.
-
-Common Mistakes
-- Adding security late; not mapping controls to assets.
-
-Flashcard
-- Q: Risk assessment dimensions? A: Effect × Frequency (→ initial risk classification)
-
-Practice Q
-- Where to record security building blocks? (Security Service Catalog / Repository)
-
-One-Page Revision
-- Security = design + controls + monitoring + awareness.
-
-30-day bullets
-- Security crosses all phases
-- Use security service catalog
-- Risk = effect × frequency
-- Controls trace to assets & services
-- Audit & pen tests in Phase G
-- Training & awareness are required
-- Include security in migration planning
-- Update repo with security classifications
-
-Worked Example — Risk Assessment (compact)
-- Asset: Customer PII in CRM; Threat: Data breach; Effect = Critical, Frequency = Occasional → Initial risk = High.
-  Mitigations: Encryption at rest & in transit, IAM controls, regular pen tests.
-
-ASCII: Risk matrix (qualitative)
-  Impact \ Likelihood
-      | Likely | Occasional | Unlikely
-  High|  X     |    X      |
-  Med |        |    X      |
-
-Risk scoring: simple numerical example (study-ready)
-- Use numeric scales for repeatable answers:
-  - Impact: 1 (Low), 2 (Medium), 3 (High)
-  - Likelihood: 1 (Unlikely), 2 (Occasional), 3 (Likely)
-  - Risk score = Impact × Likelihood (1–9)
-  - Example: Customer PII -> Impact=3, Likelihood=2 → Risk=6 (High/Action)
-
-Mitigation mapping (short)
-- Controls: Encryption, IAM, Logging
-- Residual risk calculation: ResidualRisk = InitialRisk × (1 - Effectiveness)
-  - If controls reduce likelihood by 50% (Effectiveness=0.5): ResidualRisk=6 × 0.5 = 3 (Medium)
-
-Exam tip: show quick math and mitigation mapping — impact×likelihood, list 2–3 controls, give residual score and recommended next step (accept/mitigate/transfer).
-
-Extra Flashcards — Security
-- Q: What does IAM stand for? A: Identity and Access Management.
-- Q: Where to record mitigation decisions? A: Governance repository / Implementation Factor Catalog.
-
--- Page 12 — Architecture Repository, Standards & Metamodel
-
-Big Picture
-- Repository stores landscapes, standards, governance logs, requirements, and SBS.
-
-Key Concepts
-- Standards lifecycle (proposed → provisional → standard → phasing out → retired)
-- Enterprise metamodel = types & relationships; supports traceability & completeness.
-
-Analogy
-- Repo = indexed library with version control.
-
-Exam relevance
-- Know repository elements and what goes in each section.
-
-Common Mistakes
-- Uncontrolled duplication and no versioning.
-
-Flashcard
-- Q: Three classes of standards? A: Legal/regulatory, Industry, Organizational.
-
-Practice Q
-- Which repository element holds decision logs? (Governance repository)
-
-One-Page Revision
-- Keep repo tidy, versioned, and accessible.
-
-30-day bullets
-- Repo = single source
-- Standards classified & lifecycle-managed
-- Metamodel supports completeness checks
-- Governance repo stores decision logs
-- Requirements repo central for ADM
-- SBS stored in resolution landscape
-- Use repo assets before creating new ones
-- Keep templates & viewpoints reusable
-
-Visual sketch (ASCII): Repository structure (example)
-  /repository
-    /landscapes
-      /strategic
-      /segment
-    /standards
-      /api-security
-      /data-governance
-    /reference
-      /templates
-      /viewpoints
-    /requirements
-    /governance
-
-Study tip: point to a file path in the repo when answering exam scenarios to show traceability (e.g., /repository/standards/api-security.md).
-
-Enterprise metamodel: quick example (study-ready)
-- Types: Capability, Application Component, Data Entity, Technology Component, Requirement, Work Package
-- Example relationships (triples):
-  - Capability "realized by" Application Component
-  - Application Component "uses" Data Entity
-  - Work Package "implements" Requirement
-
-Standards lifecycle entry example
-- Standard: "REST API security standard"
-  - Status: Provisional
-  - Owner: Security Architecture Board
-  - Effective date: 2026-01-01
-  - Rationale: Align APIs to enterprise IAM
-  - Deprecation plan: Review in 12 months
-
-Study tip: in exam scenarios, point to metamodel triples to show traceability from stakeholder concern → requirement → work package.
-
--- Page 13 — Exam Preparation & Time Management (detailed)
-
-Big Picture
-- Part 2 exam tests application of TOGAF in scenarios; practice under exam conditions.
-
-Key Tips
-- Use TOC of provided PDFs for quick lookup.
-- Time strategy: allocate ~11 min / question; skip and return to hard ones.
-- Question strategy: identify ADM phase and stakeholder concerns, eliminate distractors.
-
-Practice Drill
-- Simulate 8-question sets under 90 minutes; review incorrect answers and map to phases/artifacts.
-
-Flashcard
-- Q: Passing score? A: 24/40 (60%)
-
-One-Page Revision
-- Practice, timeboxing, TOC navigation skills.
-
-30-day bullets
-- Simulate full exam conditions
-- Learn TOC positions for quick lookup
-- Identify ADM phase from scenario
-- Eliminate obviously wrong answers first
-- Use repository references when allowed
-- Check remaining time & review
-- Prioritize quick wins
-- Learn to extract facts from scenarios
-
-Visual sketch (ASCII): Exam timebox matrix
-  [90 minutes total]
-  -----------------------------
-  | Question 1-2: 20m | Quick wins |
-  | Question 3-6: 44m | Mid-depth |
-  | Question 7-8: 26m | Deep thought |
-  -----------------------------
-
-Exam tip: flag hard questions and return; use first 10 minutes to scan all 8 scenarios for quick wins.
-
-Exam Drill — Quick Checklist (during exam)
-- 1) Identify ADM phase(s) in scenario
-- 2) List 3 affected stakeholders & their concerns
-- 3) Find the artifact most likely required (e.g., Statement of Architecture Work, Roadmap, Requirements Spec)
-- 4) Eliminate options that conflict with principles or constraints
-- 5) Choose best-fit and note rationale in margin
-
-Extra Flashcards — Exam Prep
-- Q: How many questions in part 2? A: 8 scenario-based questions.
-- Q: What's the passing %? A: 60% (24/40).
-
--- End of notebook --
-
-If you want: I can export this file into separate GoodNotes pages (PDF) or split into one markdown file per video. Which export would you like next?
-
--- Additional per-lesson pages (expanded) --
-
--- Page: Course Structure (lesson)
-
-Big Picture
-- Course organized in nine sections; this lesson orients on structure and goals.
-
-Key Points
-- Course map: Intro → Core concepts → ADM → Techniques → Content → Capability → Security → Exam prep
-  - Analogy: Course = roadmap; each section a milestone.
-  - Visual (ASCII): [Intro] -> [Core] -> [ADM] -> [Techniques] -> [Exam]
-
-Why It Matters
-- Knowing structure helps chunk study sessions and schedule spaced repetition.
-
-Exam relevance
-- Recognize which sections produce which artifacts.
-
-Practice Q
-- How many sections are in the course? (Answer: 9 main sections)
-
-30-day bullets
-- Use roadmap to plan study sessions
-- Prioritize ADM phases for practice
-- Map videos to practice flashcards
-
-Visual sketch (ASCII): Course map (chunking)
-  [Intro] -> [Core Concepts] -> [ADM] -> [Techniques] -> [Exam Prep]
-
-Study tip: plan 30–60 minute sessions per chunk; review flashcards after each chunk.
-
--- Page: Course Instructors (lesson)
-
-Big Picture
-- Two instructors: practical consultant and academic researcher—both bring applied examples.
-
-Key Points
-- Their backgrounds (consulting, PhD) signal balance of practice and theory.
-  - Real-world tip: Listen for their examples; instructors often hint at exam-relevant distinctions.
-
-Why It Matters
-- Instructor emphasis signals exam focus (practical governance, artifacts).
-
-Flashcard
-- Q: Why note instructor background? A: It indicates practical vs theoretical emphasis.
+-- Page 1: Course Roadmap and Study Target
+
+## Header
+Time: ~3 min | Video 1 | Difficulty: Easy
 
-30-day bullets
-- Note recurring real-world examples
-- Track instructor tips for exam prep
+## What You'll Learn
+How the TOGAF Practitioner course is organized so you can study it as a sequence instead of a wall of theory.
+
+## Core Idea (60 sec)
+- The course moves from orientation to core TOGAF concepts, then into ADM phases, governance, security, and exam strategy.
+- Example: if you know the map first, every later phase fits into a clear study slot.
+
+## Visual Summary
+Course Map -> Core Concepts -> ADM Phases -> Techniques -> Governance -> Security -> Exam Tactics
+
+![TOGAF Course Roadmap](./svg/TOGAF_CourseRoadmap_sketch.svg)
 
-Visual sketch (ASCII): Instructor signal map
-  [Instructor A: Practical] ---> real-world tips, governance examples
-  [Instructor B: Academic ] ---> theory, definitions, exam rationale
+## Real-World Use First
+Scenario: You have one week before the exam and need a study order that does not waste time.
+Why it matters: A course roadmap lets you review the highest-yield topics first and revisit weak spots with purpose.
 
-Study tip: tag instructor quotes in notes as "practical" vs "theory" for quick review.
-
--- Page: Certification Program (lesson)
-
-Big Picture
-- Part 2 is scenario-based, open-book, 8 complex questions, 90 minutes (+60 if ESL).
-
-Key Facts
-- Scoring: best=5, second=3, third=1, distractor=0; pass = 24/40 (60%).
-- Use provided PDFs; learn TOC navigation.
-
-Exam Tips
-- Practice finding terms in the provided PDFs quickly; bookmark common artifacts.
-
-Practice Q
-- What is the point structure for the best answer? (5 points)
-
-30-day bullets
-- 8 scenario questions, 90 minutes
-- Passing score 24/40
-- Open-book: get fast at TOC lookup
-
-Visual sketch (ASCII): Exam essentials checklist
-  [Format: 8 scenario Qs]  [Time: 90m]  [Open-book: PDFs]
-  [Scoring: 5/3/1/0]  [Pass: 24/40]
-
-Study tip: create a single-page cheat sheet with TOC anchors to common artifacts.
-
--- Page: Enterprise Architecture Purpose (lesson)
-
-Big Picture
-- EA guides change by describing baseline, target, and gaps; supports governance of change.
-
-Key Concepts
-- Purpose: align change to value, direct and control change activity, enable governance and risk mgmt.
-  - Analogies: Map + governance compass.
-
-Real-World
-- Use EA to decide retire or upgrade legacy systems by tracing value.
-
-Exam relevance
-- Expect scenario questions asking about governance roles and outputs.
-
-30-day bullets
-- EA = baseline vs target
-- Governance = direction + control
-- Traceability to value is essential
-
-Visual sketch (ASCII): Baseline → Gap → Target (value link)
-  [Baseline] --(gaps)-> [Target]
-      |                     |
-  [Assets]             [Value Delivered]
-
-Study tip: when answering exam scenarios, always map requirements to value delivery steps.
-
--- Page: Enterprise Architecture Landscape (lesson)
-
-Big Picture
-- Landscape is composed of multiple models and views populated over time via projects.
-
-Key Concepts
-- Models trade-off formality vs purpose; reuse is key; landscapes updated per projects only.
-
-Visual Hook
-- Multi-model stack: diagrams, catalogs, matrices, roadmaps.
-
-Exam relevance
-- Know that landscapes are developed incrementally—not all at once.
-
-Practice Q
-- Why not build the whole landscape proactively? (Answer: waste of effort without need)
-
-30-day bullets
-- Landscape = many connected models
-- Formal models enable reuse
-- Update per project
-
-Visual sketch (ASCII): Model stack
-  [Catalogs]
-  [Diagrams]
-  [Matrices]
-  [Roadmaps]
-
-Study tip: in a scenario, call out which model provides the quickest evidence (e.g., catalog vs diagram).
-
--- Page: Architecture States (lesson)
-
-Big Picture
-- Baseline, Candidate, Transition(s), Target, Resting states capture approval and realization status.
-
-Key Concepts
-- Transition architectures provide milestones and measurable business value.
-
-Analogy
-- Staircase: each step = transition architecture toward the top (target).
-
-Exam relevance
-- Roadmaps and transition architecture timing questions likely.
-
-Practice Q
-- What is a resting architecture? (A state with value even if change activity pauses)
-
-30-day bullets
-- Baseline = current reference
-- Target = approved future
-- Transition = incremental states
-
-Visual sketch (ASCII): Staircase to Target
-  [Baseline] -> [Transition1] -> [Transition2] -> [Target]
-
-Study tip: identify measurable outcomes for each transition in answers (time, capability, KPI).
-
--- Page: Digital Enterprise (lesson)
-
-Big Picture
-- Four contexts for digital enterprise maturity: individual founder → team → teams of teams → enduring enterprise.
-
-Key Concepts
-- Each context has different EA focus: concept, product mgmt, coordination, governance & compliance.
-
-Real-World
-- Small startups emphasize rapid delivery; large enterprises emphasize governance and risk.
-
-Exam relevance
-- Recognize appropriate EA focus per organizational context.
-
-30-day bullets
-- 4 contexts: founder, team, teams-of-teams, enduring
-- Focus shifts from product to governance
-
-Visual sketch (ASCII): Context maturity funnel
-  Founder -> Team -> Teams-of-teams -> Enduring
-
-Study tip: match architecture emphasis (speed vs governance) to context in scenarios.
-
--- Page: Preliminary Phase (lesson)
-
-Big Picture
-- Build architecture capability: org model, tools, principles, governance baseline.
-
-Key Steps
-- Review org context, scope affected elements, define roles, tailor TOGAF, set maturity targets.
-
-Analogy
-- Set up workshop before starting a big program—define who, how, what.
-
-Exam relevance
-- Know that preliminary is about capability, not a deliverable architecture.
-
-Practice Q
-- What is a primary output of preliminary phase? (Answer: tailored architecture framework and principles)
-
-30-day bullets
-- Define org model and processes
-- Set architecture principles
-- Tailor TOGAF to org needs
-
-Visual sketch (ASCII): Capability setup checklist
-  [Org model] [Tools] [Principles] [Governance Board] [Templates]
-
-Study tip: list 3 tailoring decisions and justify them by org constraints in exam answers.
-
--- Page: ADM Iteration (lesson)
-
-Big Picture
-- Iterations manage complexity: full ADM cycles, development iterations, capability iterations, transition planning iterations.
-
-Key Points
-- Use iterations to converge on detail only where needed; combine strategies (concurrent cycles + nested iterations).
-
-Exam relevance
-- Expect scenario where iteration choice affects scope and governance.
-
-Practice Q
-- When to run a preliminary-phase iteration? (If capability or principles need updating)
-
-30-day bullets
-- Iteration types: full ADM, development, capability, governance, transition
-- Iterate to reduce risk and focus effort
-
-Visual sketch (ASCII): Nested iterations model
-  [Full ADM]
-    [Development iterations]
-      [Capability mini-iterations]
-
-Study tip: explain iteration choice by risk, stakeholder readiness and delivery cadence.
-
--- Page: Business Scenario Technique (lesson)
-
-Big Picture
-- Structured way to derive architecture requirements from business problems (SMART criteria).
-
-Key Steps
-- Premise formulation → initial verification → refinement; document actors, outcomes, environment, value streams.
-
-Exam relevance
-- Use scenario technique to justify architecture choices in exam questions.
-
-Practice Q
-- What does SMART stand for? (Specific, Measurable, Actionable, Realistic, Time-bound)
-
-30-day bullets
-- Business scenarios inform requirements
-- Use noun challenge for info concepts
-- Iterate until fit-for-purpose
-
-Visual sketch (ASCII): Business Scenario template
-  Premise: ______
-  Actors: ____ | Outcomes: ____ | Value: ____ | Timebox: ____
-
-Study tip: in exam answers, format one-line business scenario using this template before proposing requirements.
-
--- Page: Gap Analysis (lesson)
-
-Big Picture
-- Identify accidental, deliberate, or open shortfalls between baseline and target.
-
-Key Points
-- Use metrics and matrices; classify gaps (eliminated/new/impacted) and create gap-closure options.
-
-Exam relevance
-- Gap matrices often basis for roadmaps and work packages.
-
-Practice Q
-- Name 2 gap types. (Eliminated, New)
-
-30-day bullets
-- Gaps drive work packages
-- Use matrices to consolidate
-- Map gaps to solutions & dependencies
-
-Visual sketch (ASCII): Gap matrix (mini)
-  Capability | Baseline | Target | Gap | Work Package
-  X         |   2      |   4    |  +2 | WP-123
-
-Study tip: show one-row gap matrix in scenario answers to justify chosen work package.
-
--- Page: Architecture Trade-off (lesson)
-
-Big Picture
-- Trade-off method: choose criteria, define alternatives, assess impacts, and select/merge.
-
-Key Steps
-- Define evaluation criteria from vision/principles → model alternatives → stakeholder review → select.
-
-Exam relevance
-- You may be asked to justify selection between alternatives using trade-off reasoning.
-
-Practice Q
-- What are typical trade-off criteria? (Value, cost, risk, time, compliance)
-
-30-day bullets
-- Define criteria explicitly
-- Weight criteria with stakeholders
-- Document rationale for chosen alternative
-
-Visual sketch (ASCII): Trade-off scoring (mini)
-  Criteria | Weight | Alt A score | Alt B score | Weighted A | Weighted B
-  Cost     | 30%    | 7           | 5           | 2.1        | 1.5
-
-Study tip: always state the scoring scale and tie-breaker when writing trade-off answers.
-
+## Process Flow / Steps
+1. Learn the course structure and exam target.
+2. Understand core EA concepts.
+3. Master the ADM phases and their outputs.
+4. Add techniques, governance, security, and exam tactics.
+
+## Key Concepts
+- **Practitioner exam**: the TOGAF Part 2 exam focused on analysis and application.
+- **Course structure**: the ordered path from concepts to implementation and exam prep.
+
+## Quick Facts
+Q: What is the course trying to achieve?  A: Prepare you for TOGAF Enterprise Architecture Part 2.
+Q: What is the main study sequence?  A: Concepts first, then ADM, then governance, security, and exam prep.
+
+## Try This Right Now
+- Write the six main study blocks on one sticky note.
+- Mark which block already feels familiar and which feels risky.
+
+## Common Mistakes
+- Starting with detailed phases before learning the whole map.
+- Studying topics in isolation instead of as one architecture story.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Main goal of the course? | Pass TOGAF Practitioner by applying the standard. |
+| Best first move? | Learn the roadmap before the details. |
+
+## Spaced Repetition
+- Day 1: Recite the six major study blocks from memory.
+- Day 3: Explain why ADM is the center of the course.
+- Day 7: Map one weak topic to its course section.
+- Day 14: Rebuild the full study flow on paper.
+- Day 30: Use the roadmap to plan a mock revision day.
+
+## One-Page Revision
+- The course is a study path, not a pile of lectures.
+- Core concepts make the ADM easier.
+- Governance and security appear after the main method.
+- Exam prep is a final skill layer, not the first step.
+
+## Checkpoint
+- [ ] I can describe the course flow in one sentence.
+
+## 30-Day Memory Bullets
+- Practitioner means applied TOGAF, not recall only.
+- The course starts broad and then narrows.
+- ADM is the heart of the learning path.
+- Governance matters after design starts.
+- Security is integrated, not separate.
+- Exam tactics come last on purpose.
+- A roadmap reduces study overload.
+- Sequence improves memory.
+
+--
+
+-- Page 2: Certification Program and Exam Rules
+
+## Header
+Time: ~4 min | Video 2 | Difficulty: Easy
+
+## What You'll Learn
+What the Part 2 exam looks like, how scoring works, and why open-book does not make it easy.
+
+## Core Idea (60 sec)
+- The exam is scenario-based single choice with weighted scoring, so answer quality matters more than speed alone.
+- Example: the best answer gives 5 points, the second best gives 3, and a distractor gives 0.
+
+## Visual Summary
+Scenario -> Compare 4 answers -> Pick best TOGAF-aligned option -> Earn weighted points
+
+![TOGAF Certification Program](./svg/TOGAF_Certification_sketch.svg)
+
+## Real-World Use First
+Scenario: You open a long scenario question and need to decide whether to answer now or return later.
+Why it matters: Time and scoring strategy are part of passing, not just content knowledge.
+
+## Process Flow / Steps
+1. Read the scenario and the actual question.
+2. Spot the ADM phase, stakeholder concern, or technique.
+3. Remove the distractor and weak options.
+4. Choose the most TOGAF-consistent answer.
+
+## Key Concepts
+- **Open book**: the exam provides approved reference PDFs electronically.
+- **Weighted scoring**: answers can be best, second best, third best, or distractor.
+
+## Quick Facts
+Q: How many questions are in Part 2?  A: Eight scenario-based questions.
+Q: What is the pass mark?  A: 24 out of 40 points.
+
+## Try This Right Now
+- Write `8 questions / 90 minutes / 24 points` from memory.
+- Decide your personal skip-and-return rule for hard questions.
+
+## Common Mistakes
+- Assuming open-book means no preparation is needed.
+- Spending too long searching the reference PDFs for every answer.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Format of Part 2? | Scenario-based single choice with weighted answers. |
+| Why practice under time? | Because lookup time can drain the whole exam. |
+
+## Spaced Repetition
+- Day 1: Recall the scoring model.
+- Day 3: Recall the pass mark and question count.
+- Day 7: Practice one scenario under time.
+- Day 14: Explain why open-book can still be hard.
+- Day 30: Run a full 90-minute mock block.
+
+## One-Page Revision
+- Eight questions decide the result.
+- Best answer matters more than merely acceptable answer.
+- Open-book helps only if you know where to look.
+- Time management is part of exam skill.
+
+## Checkpoint
+- [ ] I can explain the scoring and pass rule without notes.
+
+## 30-Day Memory Bullets
+- Part 2 tests analysis and application.
+- There are eight scenario questions.
+- Best answer earns 5 points.
+- Pass mark is 24 of 40.
+- Open-book uses provided PDFs.
+- Reference familiarity saves time.
+- Weighted scoring rewards precision.
+- Time pressure changes strategy.
+
+--
+
+-- Page 3: Enterprise Architecture Purpose
+
+## Header
+Time: ~4 min | Video 3 | Difficulty: Easy
+
+## What You'll Learn
+Why enterprise architecture exists and how it guides change toward business value.
+
+## Core Idea (60 sec)
+- Enterprise architecture compares the current state with a future state and highlights the change needed to close the gap.
+- Example: if a company wants faster service delivery, EA defines what must change in process, data, apps, and technology.
+
+## Visual Summary
+Baseline State -> Gap -> Target State -> Directed Change -> Better Business Value
+
+![EA Purpose and Governance](./svg/TOGAF_EAPurpose_sketch.svg)
+
+## Real-World Use First
+Scenario: A company wants better efficiency but has too many disconnected change projects.
+Why it matters: EA gives one direction so teams improve the same enterprise instead of working at cross purposes.
+
+## Process Flow / Steps
+1. Describe the current enterprise state.
+2. Define the desired future state.
+3. Identify the gap between them.
+4. Govern change to stay on the best path.
+
+## Key Concepts
+- **Baseline architecture**: the current reference state.
+- **Target architecture**: the approved future state.
+
+## Quick Facts
+Q: What does EA guide?  A: Effective change.
+Q: Why is governance attached to EA?  A: Change needs direction and control.
+
+## Try This Right Now
+- Pick one problem at work and write its baseline, target, and gap in one line each.
+- Ask which stakeholders would approve the change path.
+
+## Common Mistakes
+- Treating architecture as documentation only.
+- Jumping to tools before defining the target state.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Core purpose of EA? | Guide effective change to improve the enterprise. |
+| What reveals the work ahead? | The gap between baseline and target. |
+
+## Spaced Repetition
+- Day 1: Recite baseline, target, and gap.
+- Day 3: Explain why governance is part of architecture.
+- Day 7: Apply the idea to a real business problem.
+- Day 14: Explain EA in plain language to someone else.
+- Day 30: Review one example of value-driven change.
+
+## One-Page Revision
+- EA is about change, not static diagrams.
+- Baseline and target define direction.
+- Gaps reveal what must change.
+- Governance keeps change aligned to value.
+
+## Checkpoint
+- [ ] I can describe EA as a business change tool.
+
+## 30-Day Memory Bullets
+- EA starts with business improvement.
+- Baseline is current truth.
+- Target is approved future.
+- Gaps drive work.
+- Governance directs change.
+- Governance also controls drift.
+- Value is the real goal.
+- Change without architecture wastes effort.
+
+--
+
+-- Page 4: Landscape, Levels, and Continuum
+
+## Header
+Time: ~5 min | Video 4 | Difficulty: Medium
+
+## What You'll Learn
+How TOGAF organizes a large architecture landscape so complexity stays manageable.
+
+## Core Idea (60 sec)
+- TOGAF uses architecture levels and the architecture continuum to organize many connected architectures.
+- Example: a strategic architecture sets direction, while segment and capability architectures add detail closer to execution.
+
+## Visual Summary
+Strategic -> Segment -> Capability
+Generic -> Industry -> Organization Specific
+
+![Landscape Levels and Continuum](./svg/TOGAF_LandscapeLevels_sketch.svg)
+
+## Real-World Use First
+Scenario: A large enterprise has many programs and cannot manage every design at one level of detail.
+Why it matters: Levels and continuum prevent one giant, unusable architecture model.
+
+## Process Flow / Steps
+1. Group architectures by breadth and detail.
+2. Use strategic architecture for executive direction.
+3. Use segment architecture for portfolio-level planning.
+4. Use capability architecture for detailed change increments.
+
+## Key Concepts
+- **Strategic architecture**: broad, low-detail, long-horizon architecture.
+- **Architecture continuum**: the range from generic architecture to enterprise-specific architecture.
+
+## Quick Facts
+Q: Which level is most detailed?  A: Capability architecture.
+Q: What does the continuum classify?  A: Degree of abstraction from generic to specific.
+
+## Try This Right Now
+- Take one architecture topic you know and label it strategic, segment, or capability.
+- Identify whether its patterns are generic or enterprise-specific.
+
+## Common Mistakes
+- Treating all architecture work as the same granularity.
+- Ignoring reusable generic material from outside the enterprise.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Three architecture levels? | Strategic, segment, capability. |
+| Why use continuum? | To classify architectures from generic to specific. |
+
+## Spaced Repetition
+- Day 1: Recall the three levels.
+- Day 3: Explain the difference between level and continuum.
+- Day 7: Give one real example per level.
+- Day 14: Draw the generic-to-specific spectrum.
+- Day 30: Explain how reuse fits the continuum.
+
+## One-Page Revision
+- Levels manage granularity.
+- Continuum manages abstraction.
+- Strategic is broad and long-term.
+- Capability is narrow and detailed.
+
+## Checkpoint
+- [ ] I can tell level and continuum apart quickly.
+
+## 30-Day Memory Bullets
+- Landscape is a set of related architectures.
+- Strategic covers the broadest scope.
+- Segment supports programs and portfolios.
+- Capability is the most detailed level.
+- Breadth and depth both matter.
+- Continuum runs from generic to specific.
+- Reuse reduces unnecessary invention.
+- Classification improves navigation.
+
+--
+
+-- Page 5: Architecture States and the Digital Enterprise
+
+## Header
+Time: ~5 min | Video 5 | Difficulty: Medium
+
+## What You'll Learn
+How TOGAF describes architecture over time and how the digital enterprise contexts shape modern EA thinking.
+
+## Core Idea (60 sec)
+- Architecture states show where the enterprise is now, where it wants to go, and which transition steps create value on the way.
+- Example: a baseline becomes a target through transition architectures, while digital-enterprise context changes how complex the environment is.
+
+## Visual Summary
+Baseline -> Candidate -> Target
+Baseline -> Transition 1 -> Transition 2 -> Target
+Founder -> Team -> Teams of Teams -> Enduring Enterprise
+
+![States and Digital Enterprise](./svg/TOGAF_StatesDigital_sketch.svg)
+
+## Real-World Use First
+Scenario: Your enterprise cannot jump straight to the target because risk, budget, and change capacity are limited.
+Why it matters: Transition architectures turn big strategy into milestones, and digital context tells you how much coordination is needed.
+
+## Process Flow / Steps
+1. Confirm the baseline state.
+2. Approve the target or keep it as candidate.
+3. Insert transition architectures if value must arrive incrementally.
+4. Assess the digital-enterprise context to match complexity.
+
+## Key Concepts
+- **Transition architecture**: an intermediate state that provides measurable business value.
+- **Digital enterprise contexts**: founder, team, teams of teams, and enduring enterprise.
+
+## Quick Facts
+Q: Is there always a baseline architecture?  A: Yes.
+Q: Which digital context emphasizes governance and compliance most?  A: The enduring enterprise.
+
+## Try This Right Now
+- List one example where a transition state is safer than a big-bang target.
+- Decide which digital-enterprise context best matches your organization today.
+
+## Common Mistakes
+- Treating candidate and target architecture as the same thing.
+- Ignoring enterprise change capacity when planning transitions.
+
+## Flashcards
+| Q | A |
+|---|---|
+| What sits between baseline and target? | One or more transition architectures. |
+| Four digital contexts? | Founder, team, teams of teams, enduring enterprise. |
+
+## Spaced Repetition
+- Day 1: Recall the architecture states.
+- Day 3: Explain why transition states matter.
+- Day 7: Match a company to one digital context.
+- Day 14: Draw a simple milestone roadmap.
+- Day 30: Explain state planning in one real transformation.
+
+## One-Page Revision
+- Baseline is always present.
+- Candidate is not yet approved.
+- Transition states deliver value on the path.
+- Digital context changes governance needs.
+
+## Checkpoint
+- [ ] I can explain architecture states and digital contexts together.
+
+## 30-Day Memory Bullets
+- Baseline is the change anchor.
+- Target is approved future state.
+- Candidate lacks approval.
+- Transition states are milestones.
+- Resting architecture is an unplanned pause state.
+- Digital context 1 is founder.
+- Digital context 4 is enduring enterprise.
+- Complexity grows with context.
+
+--
+
+-- Page 6: Preliminary Phase and Architecture Capability
+
+## Header
+Time: ~4 min | Video 6 | Difficulty: Medium
+
+## What You'll Learn
+What the preliminary phase sets up before the ADM starts and why capability comes before heavy architecture work.
+
+## Core Idea (60 sec)
+- The preliminary phase establishes how the enterprise will do architecture, not the target architecture itself.
+- Example: principles, governance, roles, tools, and framework tailoring are set before deeper phases begin.
+
+## Visual Summary
+Define Enterprise -> Set Principles -> Set Governance -> Set Team -> Set Tools -> Enable ADM
+
+![Preliminary Phase Capability](./svg/TOGAF_Preliminary_sketch.svg)
+
+## Real-World Use First
+Scenario: A team starts architecture work without agreed principles or governance and keeps arguing about method.
+Why it matters: The preliminary phase prevents process confusion before design effort begins.
+
+## Process Flow / Steps
+1. Review organizational context.
+2. Define the architecture capability needed.
+3. Establish governance process and resources.
+4. Tailor frameworks, principles, and tools.
+
+## Key Concepts
+- **Architecture capability**: the enterprise ability to perform architecture work well.
+- **Architecture principles**: rules and guidelines that shape architecture choices.
+
+## Quick Facts
+Q: Is preliminary phase part of the formal practitioner curriculum?  A: Not mainly, but it still matters for context.
+Q: What is the warning here?  A: Build only the capability you need for the architecture at hand.
+
+## Try This Right Now
+- Write three principles you would want before any architecture project starts.
+- Identify one governance step your team currently lacks.
+
+## Common Mistakes
+- Building a large capability before there is any real architecture demand.
+- Forgetting to tailor the framework to the enterprise.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Main output of preliminary phase? | An established architecture capability. |
+| Why tailor the framework? | Because each enterprise has its own context and constraints. |
+
+## Spaced Repetition
+- Day 1: Recall the purpose of preliminary phase.
+- Day 3: List the main setup elements.
+- Day 7: Explain why principles matter early.
+- Day 14: Relate capability to governance.
+- Day 30: Review one example capability gap.
+
+## One-Page Revision
+- Preliminary is setup work.
+- Capability comes before large-scale architecture effort.
+- Principles and governance reduce confusion.
+- Tailoring makes TOGAF practical.
+
+## Checkpoint
+- [ ] I can explain what the preliminary phase prepares.
+
+## 30-Day Memory Bullets
+- Capability includes people, process, and tools.
+- Governance belongs in setup.
+- Principles guide later design choices.
+- Tailoring is required.
+- Scope the enterprise early.
+- Maturity matters.
+- Do not overbuild capability.
+- Setup supports later speed.
+
+--
+
+-- Page 7: Phase A Architecture Vision
+
+## Header
+Time: ~5 min | Video 7 | Difficulty: Medium
+
+## What You'll Learn
+How Phase A starts the architecture project, defines scope, and creates agreement around the vision.
+
+## Core Idea (60 sec)
+- Phase A builds a shared summary of the problem, target, and work required before deep design starts.
+- Example: the statement of architecture work acts like a contract between sponsor and architecture team.
+
+## Visual Summary
+Request for Architecture Work -> Scope -> Stakeholders -> Vision -> Statement of Architecture Work
+
+![Phase A Architecture Vision](./svg/TOGAF_PhaseA_Vision_sketch.svg)
+
+## Real-World Use First
+Scenario: A sponsor wants architecture help, but the team has not yet agreed on scope or target outcome.
+Why it matters: Phase A prevents expensive design work on the wrong problem.
+
+## Process Flow / Steps
+1. Confirm the request for architecture work.
+2. Define scope, domains, breadth, and time horizon.
+3. Identify stakeholders, concerns, and requirements.
+4. Create the architecture vision and secure approval.
+
+## Key Concepts
+- **Statement of Architecture Work**: the approved response to the request for architecture work.
+- **Communication plan**: the planned way to deliver architecture information to stakeholders.
+
+## Quick Facts
+Q: Where do in-scope requirements go?  A: Into the Architecture Requirements Specification.
+Q: What must key stakeholders agree on?  A: The target, scope, value, and effort of change.
+
+## Try This Right Now
+- Draft one sentence that defines a target architecture problem.
+- List three stakeholder concerns you would need to resolve before proceeding.
+
+## Common Mistakes
+- Skipping stakeholder mapping.
+- Treating scope as fixed before checking enterprise constraints and priorities.
+
+## Flashcards
+| Q | A |
+|---|---|
+| What starts an ADM cycle? | A request for architecture work. |
+| Main deliverable of Phase A? | Statement of Architecture Work containing the architecture vision. |
+
+## Spaced Repetition
+- Day 1: Recall the main Phase A flow.
+- Day 3: Explain statement of architecture work.
+- Day 7: Practice identifying scope dimensions.
+- Day 14: Recreate the stakeholder-to-vision logic.
+- Day 30: Explain Phase A in a mock scenario.
+
+## One-Page Revision
+- Phase A secures agreement before detail.
+- Scope covers breadth, depth, domains, and time.
+- Stakeholders drive requirements.
+- Vision becomes a formal work statement.
+
+## Checkpoint
+- [ ] I can explain why Phase A happens before domain architectures.
+
+## 30-Day Memory Bullets
+- Start with the request for architecture work.
+- Scope must be explicit.
+- Stakeholders define concerns.
+- Requirements need a home.
+- Vision is a summary answer.
+- Communication plan supports alignment.
+- Approval matters before detail.
+- Phase A builds permission to proceed.
+
+--
+
+-- Page 8: Phase B Business Architecture
+
+## Header
+Time: ~5 min | Video 8 | Difficulty: Hard
+
+## What You'll Learn
+Why business architecture comes before the other domain architectures and which techniques make it concrete.
+
+## Core Idea (60 sec)
+- Phase B defines how the business creates value so data, application, and technology can align to it.
+- Example: business capabilities, value streams, organization maps, and business models reveal what must change.
+
+## Visual Summary
+Business Goals -> Baseline Business Architecture -> Target Business Architecture -> Gap Analysis -> Roadmap Components
+
+![Phase B Business Architecture](./svg/TOGAF_PhaseB_Business_sketch.svg)
+
+## Real-World Use First
+Scenario: A team wants to redesign applications but has not clarified the capabilities and value streams they must support.
+Why it matters: Business architecture keeps later technical design tied to real business outcomes.
+
+## Process Flow / Steps
+1. Select reference models, viewpoints, and tools.
+2. Model the baseline business architecture.
+3. Model the target business architecture.
+4. Perform gap analysis and candidate roadmap planning.
+
+## Key Concepts
+- **Business capability**: an ability the business has or needs to achieve an outcome.
+- **Value stream**: the end-to-end flow that creates stakeholder value.
+
+## Quick Facts
+Q: Why is Phase B a prerequisite?  A: Other domains should enable the business architecture.
+Q: What review is critical here?  A: Formal stakeholder review and approval.
+
+## Try This Right Now
+- Name one capability and one value stream from a business you know.
+- Ask which organization unit owns or performs them.
+
+## Common Mistakes
+- Modeling every process detail before understanding stakeholder value.
+- Forgetting to resolve impacts across the wider architecture landscape.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Two common Phase B techniques? | Business capability mapping and value stream analysis. |
+| Why do stakeholder reviews matter? | Because unapproved target architectures cannot govern implementation. |
+
+## Spaced Repetition
+- Day 1: Recall the baseline-target-gap pattern.
+- Day 3: Explain capability versus value stream.
+- Day 7: Sketch a simple business capability map.
+- Day 14: Relate business architecture to business-IT alignment.
+- Day 30: Explain why Phase B comes first.
+
+## One-Page Revision
+- Phase B shapes later domains.
+- Value streams show how value is delivered.
+- Capabilities show what the business must be able to do.
+- Approval is required for governance.
+
+## Checkpoint
+- [ ] I can explain the role of business architecture in the ADM.
+
+## 30-Day Memory Bullets
+- Business architecture is first among the domain phases.
+- Use baseline and target with the same detail level.
+- Capability maps are stable views.
+- Value streams are stakeholder-centered.
+- Organization maps are not org charts.
+- Business models inform architecture.
+- Gap analysis reveals work.
+- Approval defines the future path.
+
+--
+
+-- Page 9: Phase C Information Systems Architecture
+
+## Header
+Time: ~5 min | Video 9 | Difficulty: Hard
+
+## What You'll Learn
+How Phase C develops target data and application architecture to support the agreed business architecture.
+
+## Core Idea (60 sec)
+- Phase C has two parts, data architecture and application architecture, and both exist to enable the business architecture.
+- Example: data principles guide shared data, while application views show which systems support which services.
+
+## Visual Summary
+Business Architecture -> Data Architecture + Application Architecture -> Support Target Vision
+
+![Phase C Information Systems](./svg/TOGAF_PhaseC_InfoSystems_sketch.svg)
+
+## Real-World Use First
+Scenario: You know the business capability changes required, but you still need to define which data and applications must exist.
+Why it matters: Phase C turns business intent into information-system structure.
+
+## Process Flow / Steps
+1. Reuse relevant repository inputs and principles.
+2. Model target data entities and components.
+3. Model logical and physical application components.
+4. Run gap analysis and identify missing systems or data changes.
+
+## Key Concepts
+- **Data architecture**: the structure of enterprise data at rest, in motion, in use, and as open data.
+- **Application architecture**: the logical and physical application components and their relationships.
+
+## Quick Facts
+Q: Can data and application architecture be developed in parallel?  A: Yes.
+Q: What is a common data principle example?  A: Data should be shared across enterprise functions when appropriate.
+
+## Try This Right Now
+- Pick one business capability and list the data it depends on.
+- Name one application that would logically support that capability.
+
+## Common Mistakes
+- Jumping to physical products before clarifying logical components.
+- Ignoring data governance and migration considerations.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Two halves of Phase C? | Data architecture and application architecture. |
+| Why start with logical components? | They describe function without locking into one implementation too early. |
+
+## Spaced Repetition
+- Day 1: Recall the two halves of Phase C.
+- Day 3: Explain data at rest, in motion, and in use.
+- Day 7: Sketch one logical application communication idea.
+- Day 14: Map one data entity to one business function.
+- Day 30: Explain how Phase C enables the business architecture.
+
+## One-Page Revision
+- Phase C supports business architecture.
+- Data and application can run in parallel.
+- Logical views come before heavy implementation detail.
+- Gap analysis still drives change planning.
+
+## Checkpoint
+- [ ] I can distinguish data architecture from application architecture.
+
+## 30-Day Memory Bullets
+- Phase C splits into data and application.
+- Shared data principles matter.
+- Use data entities and components.
+- Application catalogs help structure the landscape.
+- Communication diagrams show interfaces.
+- Keep models only as detailed as needed.
+- Repository reuse saves time.
+- Phase C still follows baseline-target-gap logic.
+
+--
+
+-- Page 10: Phase D Technology Architecture
+
+## Header
+Time: ~4 min | Video 10 | Difficulty: Medium
+
+## What You'll Learn
+How technology architecture supports the other domains and why it can also drive business change.
+
+## Core Idea (60 sec)
+- Technology architecture is not just a passive responder; emerging technology can also become a change driver.
+- Example: a new platform capability can open a better business operating model instead of merely implementing an old one.
+
+## Visual Summary
+Business + Data + Application Needs -> Technology Building Blocks
+New Technology -> New Business Opportunity
+
+![Phase D Technology Architecture](./svg/TOGAF_PhaseD_Technology_sketch.svg)
+
+## Real-World Use First
+Scenario: A cloud platform or automation tool creates a new option the business had not considered before.
+Why it matters: Technology architecture should both support existing needs and reveal new possibilities.
+
+## Process Flow / Steps
+1. Reuse standards, services, and repository material.
+2. Define the target technology building blocks.
+3. Anticipate technology-driven change.
+4. Assess impacts and lifecycle implications.
+
+## Key Concepts
+- **Technology portfolio catalog**: a structured list of technology components in use.
+- **Platform decomposition diagram**: a view that breaks a technology platform into supporting components.
+
+## Quick Facts
+Q: Which domains does technology architecture support directly?  A: Business, data, and application architecture.
+Q: What extra warning appears here?  A: Fast-changing technology can create discontinuities across the enterprise.
+
+## Try This Right Now
+- Pick one application and list the technology platform pieces it relies on.
+- Ask whether any new technology could reduce risk or create value.
+
+## Common Mistakes
+- Treating technology as a pure implementation afterthought.
+- Ignoring lifecycle and standardization concerns.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Can Phase D drive change? | Yes, emerging technologies can create new opportunities. |
+| Common Phase D artifact? | Technology portfolio catalog. |
+
+## Spaced Repetition
+- Day 1: Recall the main purpose of Phase D.
+- Day 3: Explain why tech can be both driver and enabler.
+- Day 7: Draw a simple platform decomposition.
+- Day 14: Connect one business need to one technology service.
+- Day 30: Review one example of technology-led change.
+
+## One-Page Revision
+- Technology supports the earlier domains.
+- It can also create new business options.
+- Standards and lifecycle matter.
+- Repository reuse still applies.
+
+## Checkpoint
+- [ ] I can explain how technology architecture differs from application architecture.
+
+## 30-Day Memory Bullets
+- Phase D defines technology building blocks.
+- Technology can be a change driver.
+- Repository reuse matters here too.
+- Technology standards reduce chaos.
+- Platform decomposition explains support structure.
+- Environment views can show location usage.
+- Change impacts must be assessed.
+- Phase D still aligns to business value.
+
+--
+
+-- Page 11: Phases E and F Delivery and Migration
+
+## Header
+Time: ~5 min | Video 11 | Difficulty: Hard
+
+## What You'll Learn
+How TOGAF moves from target architecture to delivery planning through work packages, transition architectures, and migration logic.
+
+## Core Idea (60 sec)
+- Phase E identifies what must be delivered, while Phase F finalizes how and when it will be delivered.
+- Example: work packages group change, transition architectures stage value, and migration planning turns them into coordinated projects.
+
+## Visual Summary
+Gaps -> Solutions -> Work Packages -> Transition Architectures -> Roadmap -> Implementation and Migration Plan
+
+![Phases E and F Migration](./svg/TOGAF_PhaseEF_Migration_sketch.svg)
+
+## Real-World Use First
+Scenario: You know the target architecture, but you still must sequence projects, estimate value, and respect change capacity.
+Why it matters: Good design without migration planning rarely reaches production safely.
+
+## Process Flow / Steps
+1. Consolidate gaps, solutions, dependencies, and risks.
+2. Group changes into major work packages.
+3. Define transition architectures if value must arrive incrementally.
+4. Finalize roadmap, migration plan, and prioritization.
+
+## Key Concepts
+- **Work package**: a grouped set of changes that helps realize the target architecture.
+- **Implementation and migration plan**: the detailed plan that coordinates delivery over time.
+
+## Quick Facts
+Q: What does Phase E initialize?  A: The architecture roadmap and draft implementation and migration plan.
+Q: What does Phase F finalize?  A: The implementation and migration plan and approved project sequencing.
+
+## Try This Right Now
+- Pick one target architecture and list two work packages needed to reach it.
+- Decide whether a greenfield, revolutionary, or evolutionary approach fits better.
+
+## Common Mistakes
+- Ignoring dependencies between work packages.
+- Treating transition architectures as optional when enterprise change capacity is limited.
+
+## Flashcards
+| Q | A |
+|---|---|
+| What links target architecture to projects? | Work packages, roadmap, and migration planning. |
+| Why use transition architectures? | To stage value and reduce risk. |
+
+## Spaced Repetition
+- Day 1: Recall the E-to-F flow.
+- Day 3: Explain work package versus project.
+- Day 7: Compare greenfield and evolutionary approaches.
+- Day 14: Practice listing dependencies for a small roadmap.
+- Day 30: Rebuild the migration logic from memory.
+
+## One-Page Revision
+- Phase E identifies delivery vehicles.
+- Phase F sharpens and approves the delivery plan.
+- Dependencies and value drive sequencing.
+- Transition architectures protect realism.
+
+## Checkpoint
+- [ ] I can explain how TOGAF moves from design to delivery planning.
+
+## 30-Day Memory Bullets
+- Consolidated gaps matter before planning.
+- Work packages group change logically.
+- Transition states provide milestones.
+- Roadmaps show progression over time.
+- Migration plans need coordination with business frameworks.
+- Value and risk shape priority.
+- Change capacity limits sequencing.
+- Approved plans enable implementation.
+
+--
+
+-- Page 12: Phases G and H Governance and Change
+
+## Header
+Time: ~5 min | Video 12 | Difficulty: Hard
+
+## What You'll Learn
+How TOGAF governs implementation and then manages architecture change after deployment.
+
+## Core Idea (60 sec)
+- Phase G watches implementation for compliance, while Phase H keeps the architecture alive as change requests appear.
+- Example: an architecture contract guides delivery, and change requests later decide whether to update or restart an ADM cycle.
+
+## Visual Summary
+Approved Architecture -> Architecture Contract -> Compliance Reviews -> Deployed Solution -> Change Requests -> New ADM if Needed
+
+![Phases G and H Governance](./svg/TOGAF_PhaseGH_Governance_sketch.svg)
+
+## Real-World Use First
+Scenario: An implementation team wants to deviate from the target architecture because of delivery pressure.
+Why it matters: Governance keeps changes visible and controlled instead of accidental.
+
+## Process Flow / Steps
+1. Confirm scope and priorities for deployment.
+2. Guide implementation teams and review compliance.
+3. Publish updated baselines after deployment.
+4. Assess change requests and trigger new work when needed.
+
+## Key Concepts
+- **Architecture contract**: the agreement that links architecture intent to implementation obligations.
+- **Change request**: the formal description of a proposed deviation, extension, or update.
+
+## Quick Facts
+Q: Which phase runs parallel to implementation projects?  A: Phase G.
+Q: Which phase acts as a holding phase after deployment?  A: Phase H.
+
+## Try This Right Now
+- Imagine one implementation deviation and write what the change request should describe.
+- Decide whether the change is minor maintenance, incremental, or full re-architecting.
+
+## Common Mistakes
+- Assuming implementation teams can change architecture silently.
+- Forgetting to update the new baseline after deployment.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Main aim of Phase G? | Ensure implementation complies with the architecture. |
+| Main aim of Phase H? | Manage architecture change and decide when to restart the ADM. |
+
+## Spaced Repetition
+- Day 1: Recall what Phase G governs.
+- Day 3: Recall what Phase H manages.
+- Day 7: Explain the role of the architecture contract.
+- Day 14: Practice classifying one change request.
+- Day 30: Explain how a new ADM cycle can begin from Phase H.
+
+## One-Page Revision
+- Governance is active during implementation.
+- Contracts and compliance reviews enforce direction.
+- Change requests keep deviations visible.
+- Phase H decides whether change is small or cycle-restarting.
+
+## Checkpoint
+- [ ] I can explain how TOGAF governs delivery and later change.
+
+## 30-Day Memory Bullets
+- Phase G runs with implementation.
+- Architecture contracts guide delivery.
+- Compliance reviews test conformance.
+- Baselines must be updated after deployment.
+- Phase H manages change after delivery.
+- Change requests need rationale and impact.
+- Some changes are maintenance only.
+- Bigger changes restart architecture work.
+
+--
+
+-- Page 13: Requirements, Iteration, and Core Techniques
+
+## Header
+Time: ~5 min | Video 13 | Difficulty: Hard
+
+## What You'll Learn
+How requirements management stays at the center of the ADM and which supporting techniques appear repeatedly in practitioner scenarios.
+
+## Core Idea (60 sec)
+- Requirements management continuously feeds every ADM phase, while iteration and techniques like business scenarios, gap analysis, and trade-offs help refine choices.
+- Example: new requirements can trigger another pass through one phase, several phases, or a new cycle.
+
+## Visual Summary
+Requirements -> ADM Phases -> New Facts -> Impact Assessment -> Iteration -> Refined Architecture
+
+![Requirements and Techniques](./svg/TOGAF_RequirementsTechniques_sketch.svg)
+
+## Real-World Use First
+Scenario: During design, a new stakeholder concern appears and changes the target architecture.
+Why it matters: You need a controlled way to record, assess, prioritize, and route that requirement.
+
+## Process Flow / Steps
+1. Capture requirements in or beyond current scope.
+2. Consolidate and baseline them.
+3. Assess impact when requirements change.
+4. Use business scenarios, gap analysis, and trade-offs to refine the response.
+
+## Key Concepts
+- **Requirements Management**: the ongoing process that keeps architecture requirements available and controlled.
+- **Architecture trade-off**: a structured comparison of alternatives against criteria and stakeholder preferences.
+
+## Quick Facts
+Q: Which phase sits in the middle of the ADM?  A: Requirements Management.
+Q: Why iterate?  A: Because architecture development is continuous and information arrives over time.
+
+## Try This Right Now
+- Write one requirement and decide whether it is in scope or should go to the repository.
+- Compare two architecture alternatives using three criteria.
+
+## Common Mistakes
+- Treating requirements as a one-time input.
+- Making trade-off decisions without agreed criteria or stakeholder context.
+
+## Flashcards
+| Q | A |
+|---|---|
+| What keeps the ADM fed with current needs? | Requirements Management. |
+| What technique compares competing options? | Architecture trade-off. |
+
+## Spaced Repetition
+- Day 1: Recall the role of requirements management.
+- Day 3: Explain when iteration is useful.
+- Day 7: Practice one tiny business scenario.
+- Day 14: Explain the two kinds of gaps.
+- Day 30: Rebuild the requirement impact flow.
+
+## One-Page Revision
+- Requirements stay active through the whole ADM.
+- Iteration is normal, not failure.
+- Business scenarios clarify real need.
+- Trade-offs compare alternatives against value and risk.
+
+## Checkpoint
+- [ ] I can explain how requirements and iteration interact.
+
+## 30-Day Memory Bullets
+- Requirements management is continuous.
+- Requirements can be in-scope or repository-held.
+- Impact assessments guide rework.
+- Iteration manages uncertainty.
+- Business scenarios clarify business need.
+- Gap analysis compares baseline and target.
+- Trade-offs need criteria.
+- Stakeholder preferences shape choices.
+
+--
+
+-- Page 14: Repository, Governance, Security, and Exam Prep
+
+## Header
+Time: ~5 min | Video 14 | Difficulty: Hard
+
+## What You'll Learn
+How repository content, governance controls, security additions, and exam tactics fit together in the practitioner mindset.
+
+## Core Idea (60 sec)
+- A strong practitioner uses the architecture repository as working memory, governance as control, security as a cross-cutting concern, and exam tactics as the final execution skill.
+- Example: repository views support compliance reviews, security concerns cut across all domains, and exam answers should follow TOGAF spirit under time pressure.
+
+## Visual Summary
+Repository -> Views and Standards -> Governance and Contracts -> Security Across Domains -> Exam Tactics
+
+![Repository Governance Security Exam](./svg/TOGAF_RepositoryGovernanceSecurity_sketch.svg)
+
+## Real-World Use First
+Scenario: You must answer a scenario question about stakeholder concerns, repository reuse, compliance, and security in one decision.
+Why it matters: Practitioner success comes from connecting concepts instead of memorizing them separately.
+
+## Process Flow / Steps
+1. Reuse architecture landscape, standards, and requirements repositories.
+2. Govern with compliance reviews and contracts.
+3. Add security concerns across phases and domains.
+4. Answer exam scenarios by aligning to TOGAF terms and intent.
+
+## Key Concepts
+- **Architecture repository**: the structured store for landscapes, standards, governance data, requirements, and solution information.
+- **Enterprise security architecture**: the cross-cutting structure that manages security and risk across the enterprise.
+
+## Quick Facts
+Q: What should you do first when you need existing architecture information?  A: Check the repository.
+Q: What is one strong exam tactic?  A: Identify the ADM phase and remove the distractor first.
+
+## Try This Right Now
+- Name three repository parts you would search before creating new architecture content.
+- Practice one answer elimination rule for scenario questions.
+
+## Common Mistakes
+- Ignoring repository reuse and reinventing everything.
+- Treating security as a separate silo instead of a cross-domain concern.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Two exam tactics that save time? | Spot the ADM phase and remove the distractor. |
+| Why does the repository matter? | It preserves integrity and reduces duplicate architecture work. |
+
+## Spaced Repetition
+- Day 1: Recall the main repository parts.
+- Day 3: Explain why security is cross-cutting.
+- Day 7: Practice one compliance-related scenario.
+- Day 14: Run one timed question set.
+- Day 30: Explain the practitioner mindset in one minute.
+
+## One-Page Revision
+- Repository is the single architecture memory system.
+- Governance controls compliance and change.
+- Security runs through every domain and phase.
+- Exam success depends on TOGAF-aligned reasoning under time pressure.
+
+## Checkpoint
+- [ ] I can connect repository, governance, security, and exam strategy in one explanation.
+
+## 30-Day Memory Bullets
+- Start with the repository.
+- Standards support governance.
+- Compliance reviews test architecture fit.
+- Contracts guide implementation.
+- Security is cross-cutting.
+- Risk and value stay connected.
+- TOGAF terms matter in exam answers.
+- Remove distractors quickly.

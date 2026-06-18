@@ -1,0 +1,15 @@
+OK TOGAF_Certification_sketch.svg
+OK TOGAF_CourseRoadmap_sketch.svg
+OK TOGAF_EAPurpose_sketch.svg
+OK TOGAF_LandscapeLevels_sketch.svg
+OK TOGAF_PhaseA_Vision_sketch.svg
+OK TOGAF_PhaseB_Business_sketch.svg
+OK TOGAF_PhaseC_InfoSystems_sketch.svg
+OK TOGAF_PhaseD_Technology_sketch.svg
+OK TOGAF_PhaseEF_Migration_sketch.svg
+OK TOGAF_PhaseGH_Governance_sketch.svg
+OK TOGAF_Preliminary_sketch.svg
+OK TOGAF_RepositoryGovernanceSecurity_sketch.svg
+OK TOGAF_RequirementsTechniques_sketch.svg
+OK TOGAF_StatesDigital_sketch.svg
+errors=0 warnings=0

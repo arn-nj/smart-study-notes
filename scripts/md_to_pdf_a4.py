@@ -4,28 +4,49 @@ md_to_pdf_a4.py
 Convert a GoodNotes-style Markdown notebook to a handwritten-look A4 PDF.
 
 Usage:
-    python md_to_pdf_a4.py <input.md> <output.pdf>
+    python md_to_pdf_a4.py <input.md> <output.pdf> [small|medium|large]
 """
 
 from __future__ import annotations
 
 import html
+import os
 import re
 import sys
 from dataclasses import dataclass
+from pathlib import Path
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
+from reportlab.graphics import renderPDF
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import PageBreak, Paragraph, Preformatted, SimpleDocTemplate, Spacer, Table, TableStyle
+from reportlab.platypus import Image, PageBreak, Paragraph, Preformatted, SimpleDocTemplate, Spacer, Table, TableStyle
+
+from svglib.svglib import svg2rlg
 
 
 INPUT_MD = sys.argv[1] if len(sys.argv) > 1 else "TOGAF_GoodNotes_detailed.md"
 OUTPUT_PDF = sys.argv[2] if len(sys.argv) > 2 else "TOGAF_GoodNotes_detailed_A4.pdf"
+INPUT_DIR = Path(INPUT_MD).resolve().parent
+IMAGE_SIZE_MODE = (sys.argv[3] if len(sys.argv) > 3 else os.environ.get("GOODNOTES_IMAGE_SIZE", "large")).lower()
+
+IMAGE_PRESETS = {
+    "small": {"width": 145 * mm, "height": 62 * mm, "caption_size": 7.5, "caption_leading": 9},
+    "medium": {"width": 155 * mm, "height": 76 * mm, "caption_size": 8.0, "caption_leading": 10},
+    "large": {"width": 165 * mm, "height": 95 * mm, "caption_size": 8.5, "caption_leading": 11},
+}
+
+if IMAGE_SIZE_MODE not in IMAGE_PRESETS:
+    IMAGE_SIZE_MODE = "large"
+
+IMAGE_MAX_WIDTH = IMAGE_PRESETS[IMAGE_SIZE_MODE]["width"]
+IMAGE_MAX_HEIGHT = IMAGE_PRESETS[IMAGE_SIZE_MODE]["height"]
+IMAGE_CAPTION_SIZE = IMAGE_PRESETS[IMAGE_SIZE_MODE]["caption_size"]
+IMAGE_CAPTION_LEADING = IMAGE_PRESETS[IMAGE_SIZE_MODE]["caption_leading"]
 
 FONT_HAND = "BradleyHand"
 FONT_BODY = "ComicSans"
@@ -163,8 +184,24 @@ def is_ascii_marker(line: str) -> bool:
     )
 
 
+def is_arrow_summary_line(line: str) -> bool:
+    stripped = line.strip()
+    if not stripped or line != line.lstrip():
+        return False
+    if "->" not in stripped and "<-" not in stripped:
+        return False
+
+    parts = [part.strip() for part in re.split(r"\s*(?:->|<-)\s*", stripped) if part.strip()]
+    if len(parts) < 2:
+        return False
+
+    return all(re.fullmatch(r"[A-Za-z0-9&(),'/+ -]{1,40}", part) for part in parts)
+
+
 def looks_like_diagram_line(line: str) -> bool:
     stripped = line.strip()
+    if is_arrow_summary_line(line):
+        return False
     return bool(
         re.search(r"[┌┐└┘├┤┬┴┼─│→←↑↓►◄▲▼]", stripped)
         or stripped.startswith("[")
@@ -179,6 +216,86 @@ def clean_md(text: str) -> str:
     text = re.sub(r"\*\*(.*?)\*\*", r"\1", text)
     text = re.sub(r"`(.*?)`", r"\1", text)
     return text
+
+
+def parse_markdown_image(line: str) -> tuple[str, str] | None:
+    match = re.match(r"^!\[([^\]]*)\]\(([^)]+)\)\s*$", line.strip())
+    if not match:
+        return None
+    return match.group(1).strip(), match.group(2).strip()
+
+
+def resolve_image_path(raw_path: str) -> Path:
+    candidate = Path(raw_path)
+    if candidate.is_absolute() and candidate.exists():
+        return candidate
+
+    direct = (INPUT_DIR / raw_path).resolve()
+    if direct.exists():
+        return direct
+
+    fallback_svg = (INPUT_DIR / "svg" / os.path.basename(raw_path)).resolve()
+    if fallback_svg.exists():
+        return fallback_svg
+
+    return direct
+
+
+def image_caption(text: str):
+    style = ParagraphStyle(
+        "ImageCaption",
+        parent=BODY,
+        fontName=FONT_BODY,
+        fontSize=IMAGE_CAPTION_SIZE,
+        leading=IMAGE_CAPTION_LEADING,
+        alignment=TA_CENTER,
+        textColor=FOOTER_FG,
+        spaceAfter=0,
+    )
+    return Paragraph(xml_text(text), style)
+
+
+def svg_flowable(path: Path, alt_text: str):
+    drawing = svg2rlg(str(path))
+    if drawing is None:
+        raise ValueError(f"Could not parse SVG: {path}")
+
+    x_scale = IMAGE_MAX_WIDTH / drawing.width if drawing.width else 1
+    y_scale = IMAGE_MAX_HEIGHT / drawing.height if drawing.height else 1
+    scale = min(x_scale, y_scale, 1.0)
+    if scale != 1.0:
+        drawing.width *= scale
+        drawing.height *= scale
+        drawing.scale(scale, scale)
+
+    flowable = renderPDF.GraphicsFlowable(drawing)
+    caption = image_caption(alt_text or path.name)
+    return [flowable, Spacer(1, 1 * mm), caption, Spacer(1, 2 * mm)]
+
+
+def raster_flowable(path: Path, alt_text: str):
+    flowable = Image(str(path))
+    flowable._restrictSize(IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT)
+    caption = image_caption(alt_text or path.name)
+    return [flowable, Spacer(1, 1 * mm), caption, Spacer(1, 2 * mm)]
+
+
+def markdown_image_flowables(line: str):
+    parsed = parse_markdown_image(line)
+    if not parsed:
+        return None
+
+    alt_text, raw_path = parsed
+    path = resolve_image_path(raw_path)
+    if not path.exists():
+        return [card_block(f"Image missing: {raw_path}", "warning"), Spacer(1, 2.5 * mm)]
+
+    suffix = path.suffix.lower()
+    if suffix == ".svg":
+        return svg_flowable(path, alt_text)
+    if suffix in {".png", ".jpg", ".jpeg", ".gif", ".webp"}:
+        return raster_flowable(path, alt_text)
+    return [labeled_paragraph(f"Image asset not supported: {raw_path}"), Spacer(1, 2.5 * mm)]
 
 
 @dataclass
@@ -473,6 +590,12 @@ def build_story(pages: list[PageContent]):
                 i += 1
                 continue
 
+            image_flowables = markdown_image_flowables(raw)
+            if image_flowables is not None:
+                story.extend(image_flowables)
+                i += 1
+                continue
+
             if stripped.startswith("# "):
                 current_section = "normal"
                 story.append(section_band(stripped[2:].strip(), current_section))
@@ -508,6 +631,8 @@ def build_story(pages: list[PageContent]):
                             continue
                         break
                     blank_count = 0
+                    if parse_markdown_image(nxt_raw):
+                        break
                     if re.match(r"^(##|#|--|={3,})", nxt):
                         break
                     if is_list_heading(nxt_raw) and not is_ascii_marker(nxt_raw):
@@ -604,6 +729,8 @@ def build_story(pages: list[PageContent]):
                             continue
                         break
                     blank_count = 0
+                    if parse_markdown_image(nxt):
+                        break
                     if re.match(r"^(#|[-*+]|\d+[.)]|Q:|A:)", nxt.strip()):
                         break
                     if nxt.count("|") >= 2 and not nxt.strip().startswith("["):
@@ -647,4 +774,4 @@ doc = SimpleDocTemplate(
     bottomMargin=14 * mm,
 )
 doc.build(story, onFirstPage=page_background, onLaterPages=page_background)
-print(f"Wrote {OUTPUT_PDF}  ({len(pages)} pages)")
+print(f"Wrote {OUTPUT_PDF}  ({len(pages)} source pages, image size: {IMAGE_SIZE_MODE})")

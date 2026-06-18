@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+  <defs>
+    <pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#d8e3f0" stroke-width="1"/></pattern>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#2e5d3b"/></marker>
+  </defs>
+  <rect width="900" height="520" fill="#fffdf6"/><rect width="900" height="520" fill="url(#g)"/>
+  <rect x="30" y="26" width="840" height="56" rx="18" fill="#dfeedd"/><text x="55" y="61" font-size="28" font-family="Verdana" fill="#225b35">TOGAF Course Roadmap</text>
+  <rect x="55" y="120" width="150" height="86" rx="18" fill="#fef3c7" stroke="#3b3b3b"/><text x="80" y="150" font-size="22">Start</text><text x="75" y="178" font-size="16">Course map</text><text x="78" y="198" font-size="16">Study target</text>
+  <rect x="255" y="120" width="150" height="86" rx="18" fill="#dbeafe" stroke="#3b3b3b"/><text x="283" y="150" font-size="22">Concepts</text><text x="278" y="178" font-size="16">Purpose</text><text x="278" y="198" font-size="16">Landscape</text>
+  <rect x="455" y="120" width="150" height="86" rx="18" fill="#fde2e2" stroke="#3b3b3b"/><text x="500" y="150" font-size="22">ADM</text><text x="478" y="178" font-size="16">Phases A to H</text><text x="485" y="198" font-size="16">Requirements</text>
+  <rect x="655" y="120" width="170" height="86" rx="18" fill="#dcfce7" stroke="#3b3b3b"/><text x="690" y="150" font-size="22">Finish</text><text x="678" y="178" font-size="16">Governance</text><text x="685" y="198" font-size="16">Security and exam</text>
+  <line x1="205" y1="163" x2="255" y2="163" stroke="#2e5d3b" stroke-width="4" marker-end="url(#a)"/><line x1="405" y1="163" x2="455" y2="163" stroke="#2e5d3b" stroke-width="4" marker-end="url(#a)"/><line x1="605" y1="163" x2="655" y2="163" stroke="#2e5d3b" stroke-width="4" marker-end="url(#a)"/>
+  <rect x="70" y="280" width="760" height="170" rx="20" fill="#ffffff" stroke="#58708c" stroke-width="2"/>
+  <text x="95" y="318" font-size="18">Labels:</text><text x="95" y="345" font-size="16">Core concepts first</text><text x="95" y="368" font-size="16">ADM is the center</text><text x="95" y="391" font-size="16">Techniques support choices</text><text x="95" y="414" font-size="16">Governance controls change</text>
+  <text x="380" y="345" font-size="16">Security is cross-cutting</text><text x="380" y="368" font-size="16">Repository stores memory</text><text x="380" y="391" font-size="16">Exam is scenario based</text><text x="380" y="414" font-size="16">Weighted scoring matters</text>
+  <text x="635" y="345" font-size="16">Open book still timed</text><text x="635" y="368" font-size="16">Use table of contents</text><text x="635" y="391" font-size="16">Review weak topics</text><text x="635" y="414" font-size="16">Practice under pressure</text>
+</svg>

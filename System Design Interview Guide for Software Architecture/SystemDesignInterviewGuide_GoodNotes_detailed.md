@@ -1,690 +1,491 @@
-# System Design Interview Guide for Software Architecture — GoodNotes Detailed Notes
-
-## PAGE 1: Introduction
-
-### Video Focus
-- How to approach system design interviews with a repeatable framework.
-- Why interviewers evaluate trade-offs, not just a perfect final architecture.
-
-### Core Concepts
-- Clarify the problem first: users, traffic, read/write ratio, latency goals, and consistency needs.
-- Structure answers in layers:
-  - Requirements (functional + non-functional)
-  - High-level design
-  - Deep dives (data model, scaling, reliability)
-  - Bottlenecks and trade-offs
-- Communicate assumptions explicitly to avoid misalignment.
-
-### Worked Example
-- Prompt: "Design a scalable URL shortener."
-- Good opening sequence:
-  - Ask expected QPS, retention, custom aliases, analytics requirements.
-  - Define SLA targets (e.g., p95 latency, availability).
-  - Start with API + storage + cache + ID generation.
-
-### Architecture Snapshot
-```text
-Client -> API Gateway -> App Service -> Cache -> DB
-                       \-> Queue -> Analytics Pipeline
-```
-
-### Interview-Ready Flashcards
-Q: What is the first thing to do in a system design interview?
-A: Clarify scope and constraints before proposing architecture.
-
-Q: Why are assumptions important?
-A: They define boundaries and justify design trade-offs.
-
-Q: What do interviewers look for most?
-A: Structured thinking, prioritization, and trade-off awareness.
-
-### 30-Day Retention Bullets
-- Start every answer with requirements and constraints.
-- Use a layered explanation: broad to deep.
-- State trade-offs early: consistency, latency, cost, complexity.
-
-
-
-## PAGE 2: Choosing the Right DB
-
-### Video Focus
-- Selecting between SQL and NoSQL based on workload and access patterns.
-- Matching database choice to consistency, scaling, and query flexibility requirements.
-
-### Core Concepts
-- SQL is strong for:
-  - ACID transactions
-  - relational joins
-  - strict schema and integrity
-- NoSQL is strong for:
-  - horizontal scale
-  - flexible schema
-  - high write throughput
-- Common decision filters:
-  - Read-heavy vs write-heavy
-  - Strong consistency vs eventual consistency
-  - Query complexity vs simple key-based access
-
-### Worked Example
-- Ride-sharing payments ledger:
-  - Use relational DB for transactions and financial correctness.
-- Session store / profile cache:
-  - Use key-value/document DB for low latency at scale.
-
-### Architecture Snapshot
-```text
-Transactional path -> SQL primary + replicas
-High-throughput path -> NoSQL partitioned cluster
-Search path -> Search index
-```
-
-### Interview-Ready Flashcards
-Q: When should SQL be preferred?
-A: When transactional integrity and relational queries are critical.
-
-Q: When should NoSQL be preferred?
-A: When scale, flexible schema, and low-latency key-based access dominate.
-
-Q: Can both be used together?
-A: Yes, polyglot persistence is common in real systems.
-
-### 30-Day Retention Bullets
-- Choose DB based on access pattern, not trend.
-- Mention partitioning, replication, and consistency mode.
-- Tie DB choice directly to business constraints.
-
-
-
-## PAGE 3: URL Shortener System Design
-
-### Video Focus
-- Designing tiny URL creation and redirection at internet scale.
-
-### Core Concepts
-- Functional requirements:
-  - Create short URL
-  - Redirect short URL to long URL
-  - Optional custom alias + expiration + analytics
-- Key components:
-  - API service
-  - ID generation / hash
-  - Key-value store
-  - cache layer
-  - rate limiter
-- Capacity framing:
-  - Very read-heavy workload (redirects >> creates)
-
-### Worked Example
-- Write path:
-  - Validate URL
-  - Generate short key
-  - Persist mapping
-  - Return short link
-- Read path:
-  - Check cache
-  - Fallback to DB
-  - Return 301/302 redirect
-
-### Architecture Snapshot
-```text
-Create API -> ID Generator -> KV Store
-Read API -> Cache (hit?) -> KV Store -> Redirect
-```
-
-### Interview-Ready Flashcards
-Q: Why cache is critical here?
-A: Redirect traffic is high and repetitive, so cache cuts DB load and latency.
-
-Q: How to avoid key collisions?
-A: Use deterministic namespace or globally unique ID strategy.
-
-Q: What HTTP response is used for redirect?
-A: Typically 301 or 302 depending on permanence.
-
-### 30-Day Retention Bullets
-- State read-heavy nature and cache-first strategy.
-- Discuss key generation and collision handling.
-- Include abuse controls: rate limits and malicious URL checks.
-
-
-
-## PAGE 4: Airbnb / Booking.com System Design
-
-### Video Focus
-- Building a large-scale accommodation marketplace with search and booking consistency.
-
-### Core Concepts
-- Two distinct workloads:
-  - Search and discovery (read-heavy, geo filters, ranking)
-  - Booking and payment (transaction-heavy, consistency-critical)
-- Avoid double booking with:
-  - inventory locking
-  - transactional confirmation
-  - idempotent booking APIs
-- Search optimization:
-  - denormalized listing index
-  - geo indexing
-  - precomputed ranking signals
-
-### Worked Example
-- Booking flow:
-  - User selects room/date
-  - System checks availability lock
-  - Payment authorization
-  - Booking confirmation + event publish
-
-### Architecture Snapshot
-```text
-User -> Search Service -> Search Index
-User -> Booking Service -> Inventory DB -> Payment
-                              \-> Event Bus -> Notifications
-```
-
-### Interview-Ready Flashcards
-Q: Why separate search and booking storage models?
-A: Search needs fast denormalized reads; booking needs strict consistency.
-
-Q: How is overselling prevented?
-A: Locking or reservation hold with transactional commit.
-
-Q: Why idempotency keys?
-A: To prevent duplicate charges/bookings on retries.
-
-### 30-Day Retention Bullets
-- Separate discovery from transaction path.
-- Prioritize consistency for inventory updates.
-- Include cancellation/refund flows in edge cases.
-
-
-
-## PAGE 5: Amazon System Design
-
-### Video Focus
-- Designing an e-commerce platform with catalog, cart, checkout, and order lifecycle.
-
-### Core Concepts
-- Core domains:
-  - Product catalog
-  - Search
-  - Cart
-  - Orders
-  - Payments
-  - Inventory
-- Design principles:
-  - service decomposition by domain
-  - asynchronous events for order pipeline
-  - eventual consistency across non-critical joins
-- Hot paths:
-  - Product page read latency
-  - Checkout reliability
-
-### Worked Example
-- Checkout path:
-  - Validate cart and stock
-  - Create order record
-  - Process payment
-  - Reserve/decrement inventory
-  - Emit order events for shipment and notifications
-
-### Architecture Snapshot
-```text
-Catalog -> Search Index
-Cart -> Checkout -> Order Service -> Payment
-                            \-> Inventory
-                            \-> Event Bus -> Fulfillment
-```
-
-### Interview-Ready Flashcards
-Q: Why event-driven order pipeline?
-A: It decouples services and improves resiliency at scale.
-
-Q: Where is strong consistency needed most?
-A: Payment and inventory mutation boundaries.
-
-Q: What improves product read speed?
-A: CDN + cache + read replicas/indexing.
-
-### 30-Day Retention Bullets
-- Model by bounded context (catalog/order/payment).
-- Mention idempotent checkout and retry safety.
-- Explain where eventual consistency is acceptable.
-
-
-
-## PAGE 6: WhatsApp System Design
-
-### Video Focus
-- Building low-latency, reliable, real-time messaging at global scale.
-
-### Core Concepts
-- Messaging essentials:
-  - Persistent connection (WebSocket-like)
-  - Message queueing and fanout
-  - Delivery acknowledgments
-  - Presence and last-seen
-- Reliability concerns:
-  - Offline message storage
-  - exactly-once illusions via idempotency and dedupe
-  - ordered delivery within a chat
-- Scale:
-  - shard by user/chat ID
-  - regional routing
-
-### Worked Example
-- Send message:
-  - Sender -> chat gateway
-  - Persist message
-  - Push to recipient if online
-  - Store for later delivery if offline
-  - Ack state transitions: sent, delivered, read
-
-### Architecture Snapshot
-```text
-Client <-> Realtime Gateway -> Chat Service -> Message Store
-                                  \-> Queue -> Push/Notification
-```
-
-### Interview-Ready Flashcards
-Q: Why long-lived connections?
-A: They reduce handshake overhead and enable real-time delivery.
-
-Q: How to support offline users?
-A: Persist undelivered messages and replay on reconnect.
-
-Q: How is ordering maintained?
-A: Partition by conversation and sequence messages.
-
-### 30-Day Retention Bullets
-- Mention connection management and heartbeat.
-- Explain message states and ack pipeline.
-- Cover dedupe/idempotency for retries.
-
-
-
-## PAGE 7: Notification System at Scale
-
-### Video Focus
-- Designing a multi-channel notification platform (push, email, SMS, in-app).
-
-### Core Concepts
-- Requirements:
-  - fanout to many users
-  - template rendering
-  - channel preferences
-  - throttling and retries
-- Core architecture:
-  - producer services publish events
-  - notification orchestrator decides channel
-  - channel-specific workers send notifications
-- Reliability:
-  - dead-letter queues
-  - backoff retry
-  - idempotent sends
-
-### Worked Example
-- Event: order shipped
-  - Event bus receives event
-  - Rules engine selects channels
-  - Templating service personalizes content
-  - workers send and update delivery logs
-
-### Architecture Snapshot
-```text
-Producer -> Event Bus -> Notification Orchestrator
-                        -> Template Service
-                        -> Channel Workers (Push/Email/SMS)
-```
-
-### Interview-Ready Flashcards
-Q: Why separate channel workers?
-A: Each channel has different rate limits and failure patterns.
-
-Q: What is DLQ used for?
-A: Capturing repeatedly failed messages for inspection/replay.
-
-Q: Why user preference service?
-A: To honor opt-in/opt-out and avoid spam.
-
-### 30-Day Retention Bullets
-- Separate orchestration from channel delivery.
-- Include retries with backoff and DLQ.
-- Track delivery analytics and suppression rules.
-
-
-
-## PAGE 8: Uber System Design
-
-### Video Focus
-- Real-time matching of riders and drivers with geo-distributed low latency.
-
-### Core Concepts
-- Core flows:
-  - Rider requests trip
-  - Driver discovery by geospatial proximity
-  - Dispatch and acceptance
-  - Trip tracking and billing
-- Data/compute concerns:
-  - High-frequency location updates
-  - geospatial index (grid/geohash)
-  - surge pricing computation
-
-### Worked Example
-- Matching process:
-  - Rider request enters dispatch service
-  - Nearby drivers queried from geo index
-  - candidates ranked by ETA and acceptance score
-  - first accepted driver gets assignment
-
-### Architecture Snapshot
-```text
-Rider App -> Dispatch -> Geo Index -> Driver Candidates
-Driver App -> Realtime Location Stream -> Location Store
-```
-
-### Interview-Ready Flashcards
-Q: Why geospatial indexing?
-A: To quickly find nearest drivers from massive location streams.
-
-Q: What keeps ETA accurate?
-A: Frequent location updates plus traffic-aware routing.
-
-Q: Why asynchronous trip events?
-A: To decouple billing, receipts, and analytics from dispatch path.
-
-### 30-Day Retention Bullets
-- Emphasize low-latency matching loop.
-- Include live location ingestion strategy.
-- Mention cancellation and re-dispatch edge cases.
-
-
-
-## PAGE 9: Twitter System Design
-
-### Video Focus
-- Designing a social feed system with high write volume and high read fanout.
-
-### Core Concepts
-- Core features:
-  - Post tweet
-  - Follow/unfollow
-  - Home timeline
-  - likes/retweets/replies
-- Feed strategies:
-  - Fanout-on-write (push to followers)
-  - Fanout-on-read (pull during timeline request)
-  - Hybrid for celebrity users
-- Storage:
-  - tweet object store + index
-  - relationship graph store
-
-### Worked Example
-- Hybrid timeline:
-  - Normal accounts use fanout-on-write
-  - Celebrity accounts computed on read to avoid write explosion
-
-### Architecture Snapshot
-```text
-Tweet Service -> Timeline Fanout Workers -> Timeline Store
-Follow Graph -> Read API -> Timeline Merge Service
-```
-
-### Interview-Ready Flashcards
-Q: Why not pure fanout-on-write always?
-A: Celebrity users create massive follower write amplification.
-
-Q: Why cache timelines?
-A: Home feed is frequently read and benefits heavily from caching.
-
-Q: What is key trade-off?
-A: Write cost vs read latency.
-
-### 30-Day Retention Bullets
-- Explain hybrid timeline strategy clearly.
-- Mention graph scale and partitioning.
-- Include ranking and relevance pipeline.
-
-
-
-## PAGE 10: Facebook / Instagram System Design
-
-### Video Focus
-- Building media-heavy social platforms with feed ranking and interaction scale.
-
-### Core Concepts
-- Major workloads:
-  - media upload and processing
-  - feed generation and ranking
-  - engagement graph updates
-- Media pipeline:
-  - upload -> object storage -> transcoding -> CDN delivery
-- Feed pipeline:
-  - candidate generation
-  - ranking model
-  - personalization and freshness constraints
-
-### Worked Example
-- Photo upload flow:
-  - User uploads image
-  - metadata stored
-  - async resize/transcode jobs
-  - CDN invalidation/update
-  - feed event emitted
-
-### Architecture Snapshot
-```text
-Upload API -> Object Store -> Media Processing -> CDN
-Post/Event -> Feed Candidate Service -> Ranker -> Home Feed API
-```
-
-### Interview-Ready Flashcards
-Q: Why async media processing?
-A: Heavy transforms should not block user upload response.
-
-Q: Why CDN is essential?
-A: Global low-latency media delivery and origin offload.
-
-Q: What feed quality dimensions matter?
-A: Relevance, freshness, diversity, and safety.
-
-### 30-Day Retention Bullets
-- Separate media serving from feed ranking concerns.
-- Mention object storage + CDN pattern.
-- Include abuse moderation checkpoints.
-
-
-
-## PAGE 11: YouTube / Netflix System Design
-
-### Video Focus
-- Designing large-scale video platforms for upload, processing, and streaming.
-
-### Core Concepts
-- End-to-end flow:
-  - upload ingestion
-  - transcoding to multiple bitrates/resolutions
-  - chunked distribution via CDN
-  - adaptive bitrate playback
-- Metadata and discovery:
-  - video catalog
-  - search and recommendations
-- Reliability:
-  - multi-region replication
-  - hot content caching
-
-### Worked Example
-- Playback path:
-  - Client requests manifest
-  - player selects bitrate based on network
-  - pulls video chunks from nearest CDN edge
-
-### Architecture Snapshot
-```text
-Uploader -> Ingestion -> Transcoding Farm -> Origin Storage -> CDN
-Viewer -> Playback API -> Manifest -> CDN Segments
-```
-
-### Interview-Ready Flashcards
-Q: Why adaptive bitrate streaming?
-A: It keeps playback smooth across changing network conditions.
-
-Q: Why pre-transcode multiple versions?
-A: Different devices and bandwidth need different encodings.
-
-Q: What is CDN role here?
-A: Serve high-volume segments close to users.
-
-### 30-Day Retention Bullets
-- Mention transcode pipeline and storage lifecycle.
-- Explain manifest + chunk-based delivery.
-- Discuss recommendation and watch-history scale.
-
-
-
-## PAGE 12: Zoom System Design
-
-### Video Focus
-- Building low-latency video conferencing with reliable audio/video quality.
-
-### Core Concepts
-- Meeting architecture:
-  - signaling plane for session setup
-  - media plane for RTP/stream transport
-  - SFU/MCU options for multiparty calls
-- QoS factors:
-  - jitter buffering
-  - packet loss handling
-  - adaptive bitrate
-- Collaboration features:
-  - screen sharing
-  - chat
-  - recording
-
-### Worked Example
-- Group meeting:
-  - participants connect to nearest regional media node
-  - SFU forwards selected streams
-  - dynamic adaptation adjusts quality per participant network
-
-### Architecture Snapshot
-```text
-Client -> Signaling Service -> Session Control
-Client <-> Media Node (SFU) <-> Other Participants
-```
-
-### Interview-Ready Flashcards
-Q: Why SFU is common for large calls?
-A: It scales better than full mesh by forwarding streams efficiently.
-
-Q: What does signaling handle?
-A: Session setup, participant state, and control messages.
-
-Q: How to reduce perceived lag?
-A: Regional edge nodes plus adaptive media strategies.
-
-### 30-Day Retention Bullets
-- Separate signaling and media planes.
-- Include packet loss/jitter mitigation.
-- Discuss scaling strategy by meeting size.
-
-
-
-## PAGE 13: Google Maps System Design
-
-### Video Focus
-- Designing map rendering, routing, and location search at global scale.
-
-### Core Concepts
-- Core capabilities:
-  - map tile serving
-  - geocoding and reverse geocoding
-  - routing and ETA
-  - traffic updates
-- Data strategy:
-  - partition by geo tiles
-  - cache hot regions aggressively
-  - periodic map data refresh pipelines
-- Routing complexity:
-  - shortest path + traffic constraints
-  - multi-criteria optimization
-
-### Worked Example
-- Route request:
-  - Source/destination geocoded
-  - route engine computes candidate paths
-  - traffic model adjusts ETA
-  - turn-by-turn response returned
-
-### Architecture Snapshot
-```text
-Client -> Maps API -> Tile Service + Geocode Service + Route Engine
-Traffic Stream -> Realtime Processing -> ETA Model
-```
-
-### Interview-Ready Flashcards
-Q: Why tile-based maps?
-A: Tiles enable scalable caching and incremental rendering.
-
-Q: Why separate geocoding service?
-A: Address parsing/search has distinct indexing needs.
-
-Q: What drives ETA quality?
-A: Historical traffic + realtime signals + route model tuning.
-
-### 30-Day Retention Bullets
-- Explain tile caching and geo partitioning.
-- Mention realtime traffic ingestion.
-- Include fallback when traffic feed is delayed.
-
-
-
-## PAGE 14: Biggest Mistakes to Avoid in the Interview
-
-### Video Focus
-- Avoiding common system design interview failures.
-
-### Core Concepts
-- Frequent mistakes:
-  - jumping into components without clarifying requirements
-  - ignoring scale estimates and bottlenecks
-  - proposing one-size-fits-all architecture
-  - not discussing trade-offs
-  - poor communication and no structured flow
-- Better strategy:
-  - ask targeted clarifying questions
-  - estimate capacity quickly
-  - iterate design in layers
-  - call out alternatives and why you choose one
-
-### Worked Example
-- Weak answer: "Use microservices + Kafka + Redis + NoSQL everywhere."
-- Strong answer:
-  - "Given read-heavy traffic and moderate consistency needs, we use cache-first reads and partitioned storage; for payment we keep strict transactional boundaries."
-
-### Architecture Snapshot
-```text
-Requirements -> Capacity -> High-Level Design -> Deep Dive -> Trade-offs -> Risks
-```
-
-### Interview-Ready Flashcards
-Q: What is the #1 mistake?
-A: Not clarifying requirements and assumptions first.
-
-Q: What separates strong from average answers?
-A: Explicit trade-offs and bottleneck-driven refinements.
-
-Q: Should one architecture fit all systems?
-A: No, architecture must match workload and constraints.
-
-### 30-Day Retention Bullets
-- Keep a consistent answer template under time pressure.
-- Narrate design decisions with trade-offs.
-- Always finish with scaling, reliability, and failure handling.
-
----
-
-## Final Revision Sheet (1-Minute)
-- Start with requirement clarification and scale assumptions.
-- Pick storage, cache, and communication patterns by workload.
-- Distinguish consistency-critical paths from eventually consistent paths.
-- Use async pipelines to decouple heavy/non-blocking work.
-- Close every answer with bottlenecks, trade-offs, and improvements.
+-- Page 1: Introduction to the System Design Interview Series
+
+## Header
+⏱️ ~3 min | 📚 Video 1 | ⚡ Easy
+
+## What You'll Learn
+Why this series matters and how to use system design prep like a repeatable interview skill, not random memorization.
+
+## Core Idea (60 sec)
+- System design prep has two tracks: common interview questions and core architecture topics.
+- Strong answers come from reusable patterns, not isolated tricks.
+
+## Visual Summary
+Interview Prep -> Learn Patterns -> Practice Trade-offs -> Explain Clearly -> Better Design Answers
+
+![System Design Interview Roadmap](./svg/SystemDesignInterviewGuide_IntroRoadmap_sketch.svg)
+
+## Real-World Use First
+Scenario: You enter an interview and get a broad design problem with no obvious starting point.
+Why it matters: A reusable framework keeps you from freezing and helps you structure the discussion fast.
+
+## Process Flow / Steps
+1. Clarify the problem and scale.
+2. Identify functional and non-functional requirements.
+3. Pick core components and storage choices.
+4. Explain trade-offs and failure points.
+
+## Key Concepts
+- **Functional requirements**: what the system must do for users.
+- **Non-functional requirements**: quality targets like latency, scale, and availability.
+
+## Quick Facts
+Q: What are the two big goals of the series?  A: Common questions and must-know design topics.
+Q: What makes a good interview answer?  A: Clear structure plus trade-off reasoning.
+
+## Try This Right Now
+- Write one system you use daily.
+- List 2 functional and 2 non-functional requirements.
+
+## Common Mistakes
+- Jumping into databases before clarifying the problem.
+- Naming tools without explaining why they fit.
+
+## Flashcards
+| Q | A |
+|---|---|
+| First design step? | Clarify requirements and scale. |
+| Strong interview signal? | Explaining trade-offs clearly. |
+
+## Spaced Repetition
+- Day 1: Recall FR vs NFR.
+- Day 3: Rehearse a 4-step answer structure.
+- Day 7: Apply the structure to a known app.
+- Day 14: Explain one trade-off out loud.
+- Day 30: Solve one fresh system prompt.
+
+## One-Page Revision
+- Start with clarity, not components.
+- Separate FRs from NFRs early.
+- Use patterns and trade-offs repeatedly.
+
+## Checkpoint
+- [ ] I can explain how to open a system design answer.
+
+## 30-Day Memory Bullets
+- System design starts with scope.
+- Requirements drive architecture.
+- Scale changes the design.
+- Trade-offs matter more than tool names.
+- Patterns are reusable.
+- Clear communication is part of the design.
+- NFRs shape technology choices.
+- Preparation should feel structured.
+
+-- Page 2: Choosing the Right Database
+
+## Header
+⏱️ ~5 min | 📚 Video 2 | ⚡ Medium
+
+## What You'll Learn
+How to choose a storage system by matching data structure, query pattern, and scale to the right database family.
+
+## Core Idea (60 sec)
+- Database choice usually affects non-functional requirements more than functional requirements.
+- The best choice depends on data shape, access pattern, and growth pattern.
+
+## Visual Summary
+Structured + ACID -> RDBMS
+Structured + no strict ACID -> RDBMS or NoSQL
+Flexible schema + rich queries -> Document DB
+Huge growing data + few query types -> Columnar DB
+Search text -> Search Engine
+Metrics over time -> Time Series DB
+
+![Database Selection Flow](./svg/SystemDesignInterviewGuide_DatabaseChoice_sketch.svg)
+
+## Real-World Use First
+Scenario: You design Amazon, Uber, or a monitoring platform and need storage that scales correctly.
+Why it matters: The wrong database can still work functionally but fail badly on scale, latency, or consistency.
+
+## Process Flow / Steps
+1. Check if data is structured or unstructured.
+2. Check whether ACID guarantees are required.
+3. Inspect query variety and query shape.
+4. Inspect whether data is steadily or explosively growing.
+5. Combine databases when real-world needs differ by subsystem.
+
+## Key Concepts
+- **RDBMS**: best when transactions and consistency matter.
+- **Document DB**: good for flexible schemas and many attributes.
+- **Columnar DB**: good for huge append-heavy datasets with narrow query types.
+- **Search engine**: used for text search, not primary source of truth.
+- **Time series DB**: optimized for append-only metric streams.
+- **Blob storage**: good for images and videos, not regular querying.
+
+## Quick Facts
+Q: Best cache default in interviews?  A: Redis is a strong default answer.
+Q: Search text with fuzzy matching?  A: Elasticsearch or Solr.
+Q: Metrics system storage?  A: Time series DB like OpenTSDB or InfluxDB.
+
+## Try This Right Now
+- Take one app you know.
+- Write one cache, one primary DB, and one analytics store choice with reasons.
+
+## Common Mistakes
+- Treating Elasticsearch as the source of truth.
+- Using one database for every subsystem just for simplicity.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Need atomic money transfer? | Use an ACID-capable relational database. |
+| Need flexible product attributes? | Use a document database. |
+| Need huge append-only event data? | Use Cassandra or HBase style storage. |
+
+## Spaced Repetition
+- Day 1: Recall 3 database choice factors.
+- Day 3: Rebuild the decision tree from memory.
+- Day 7: Map Amazon subsystems to storage types.
+- Day 14: Explain why search engines are not source of truth.
+- Day 30: Solve one database-choice interview prompt aloud.
+
+## One-Page Revision
+- Data shape matters.
+- Query pattern matters.
+- Scale pattern matters.
+- Real systems usually combine multiple databases.
+
+## Checkpoint
+- [ ] I can explain when to use RDBMS vs document DB vs Cassandra.
+
+## 30-Day Memory Bullets
+- Functional fit is not enough.
+- NFRs drive storage decisions.
+- Cache defaults are often key-value stores.
+- Blob storage handles files.
+- Search engines handle text search.
+- Time series DBs handle metrics.
+- ACID matters for money and counts.
+- Real systems often blend multiple stores.
+
+-- Page 3: URL Shortener System Design
+
+## Header
+⏱️ ~5 min | 📚 Video 3 | ⚡ Medium
+
+## What You'll Learn
+How to design a short URL system with unique key generation, low latency, and room for analytics.
+
+## Core Idea (60 sec)
+- A URL shortener mostly needs two functions: shorten and redirect.
+- The hard part is generating unique tokens without collisions or a bad single point of failure.
+
+## Visual Summary
+Long URL -> Short URL Service -> Token Range -> Cassandra Store -> Short URL
+Short URL Hit -> Lookup -> Redirect
+Analytics -> Kafka -> Hadoop or Spark
+
+![URL Shortener Architecture](./svg/SystemDesignInterviewGuide_URLShortener_sketch.svg)
+
+## Real-World Use First
+Scenario: Social apps need short links that resolve fast and stay highly available.
+Why it matters: Link redirection sits in a user-facing hot path, so latency and reliability matter immediately.
+
+## Process Flow / Steps
+1. Estimate scale and choose short-code length.
+2. Pick a safe character set such as base62.
+3. Allocate token ranges to stateless service instances.
+4. Save short-to-long mapping in a scalable store.
+5. Emit analytics asynchronously for clicks and geography.
+
+## Key Concepts
+- **Base62**: uses digits plus upper and lower case letters.
+- **Collision**: two long URLs getting the same short token.
+- **Token service**: allocates unique ranges to avoid collisions.
+- **Asynchronous analytics**: keeps redirect latency low.
+
+## Quick Facts
+Q: Why not one Redis counter for all tokens?  A: It becomes a scaling and failure bottleneck.
+Q: Why allocate ranges?  A: Each app instance can generate unique short URLs locally.
+
+## Try This Right Now
+- Assume 1,000 new URLs per second for 10 years.
+- Write down what scale question you would ask before picking token length.
+
+## Common Mistakes
+- Ignoring collision handling.
+- Blocking the redirect path on analytics writes.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Main write problem? | Generating globally unique short codes. |
+| Good analytics pattern? | Parallel or buffered Kafka writes. |
+
+## Spaced Repetition
+- Day 1: Recall FRs and NFRs.
+- Day 3: Re-explain token ranges.
+- Day 7: Compare Redis counter vs token service.
+- Day 14: Rebuild the redirect path.
+- Day 30: Sketch the architecture from memory.
+
+## One-Page Revision
+- Shorten and redirect are the two core functions.
+- Unique token generation is the central design risk.
+- Token ranges reduce collisions and hot spots.
+- Analytics should not slow redirects.
+
+## Checkpoint
+- [ ] I can explain why range allocation beats a single global counter.
+
+## 30-Day Memory Bullets
+- Token length comes from scale.
+- Base62 expands the key space.
+- Collisions must be avoided, not just retried blindly.
+- Token service can run at lower scale.
+- Cassandra suits massive mapping storage.
+- Redirect path should stay lean.
+- Analytics can be async.
+- Geography metrics can guide data-center choices.
+
+-- Page 4: Hotel Booking System Design
+
+## Header
+⏱️ ~5 min | 📚 Video 4 | ⚡ Hard
+
+## What You'll Learn
+How to design search, booking, inventory control, and analytics for a large hotel platform like Booking.com or Airbnb.
+
+## Core Idea (60 sec)
+- Search and hotel metadata scale differently from booking and inventory writes.
+- Booking correctness depends on transactional storage and temporary reservation handling.
+
+## Visual Summary
+Hotel Manager -> Hotel Service -> MySQL + CDN
+Kafka -> Search Consumer -> Elasticsearch
+User Search -> Search Service -> Booking Service -> Payment
+Booking TTL -> Redis -> Cancel or Confirm
+
+![Hotel Booking Architecture](./svg/SystemDesignInterviewGuide_HotelBooking_sketch.svg)
+
+## Real-World Use First
+Scenario: A traveler searches by location and dates, then tries to reserve one of the last rooms.
+Why it matters: You need low latency in search and strong correctness in booking at the same time.
+
+## Process Flow / Steps
+1. Store hotel metadata in relational tables.
+2. Push updates through Kafka to power search indexing.
+3. Search via Elasticsearch for text and filters.
+4. Reserve inventory in MySQL with transactional updates.
+5. Use Redis TTL to expire unpaid reservations.
+6. Archive finished bookings into Cassandra.
+
+## Key Concepts
+- **Search index**: optimized copy for discovery, not source of truth.
+- **Available rooms table**: tracks remaining inventory by room and date.
+- **Reservation TTL**: temporary hold before payment succeeds.
+- **Archival flow**: moves terminal bookings to cheaper, scalable storage.
+
+## Quick Facts
+Q: Why use MySQL in booking flow?  A: Transactions and constraints protect inventory.
+Q: Why use Elasticsearch in search?  A: Fuzzy search and filtering perform well there.
+
+## Try This Right Now
+- Describe what happens if payment succeeds after the reservation TTL expires.
+- Pick one recovery strategy and explain why.
+
+## Common Mistakes
+- Using the search index as booking truth.
+- Holding rooms forever while waiting for payment.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Booking source of truth? | Relational booking database. |
+| Finished bookings stored where? | Cassandra after archival. |
+
+## Spaced Repetition
+- Day 1: Recall service split.
+- Day 3: Rebuild reservation TTL logic.
+- Day 7: Explain search vs booking consistency.
+- Day 14: Re-explain archival to Cassandra.
+- Day 30: Walk through one booking race condition.
+
+## One-Page Revision
+- Search and booking need different storage models.
+- Redis TTL handles payment timeout flow.
+- Kafka spreads updates to search and analytics.
+- Archive old bookings for scale.
+
+## Checkpoint
+- [ ] I can explain why booking correctness depends on transactions.
+
+## 30-Day Memory Bullets
+- Hotel data is relational.
+- Images belong in CDN/blob storage.
+- Search indexing is async.
+- Booking flow must reserve inventory safely.
+- TTL prevents permanent stock blocking.
+- Cassandra fits historical booking reads.
+- Analytics belongs off the hot path.
+- Data centers can split by geography.
+
+-- Page 5: Amazon-Style E-commerce System Design
+
+## Header
+⏱️ ~5 min | 📚 Video 5 | ⚡ Hard
+
+## What You'll Learn
+How search, serviceability, cart, orders, inventory, and recommendations work together in a large e-commerce platform.
+
+## Core Idea (60 sec)
+- Search, cart, order, and inventory are separate systems because their scale and consistency needs differ.
+- Inventory and order placement need stronger correctness than search and recommendations.
+
+## Visual Summary
+Supplier Feed -> Kafka -> Item Service + Search Consumer
+User Search -> Search Service + Serviceability
+Cart/Wishlist -> MySQL
+Checkout -> Order Service + Inventory + Payment + Kafka
+
+![Amazon E-commerce Architecture](./svg/SystemDesignInterviewGuide_AmazonCommerce_sketch.svg)
+
+## Real-World Use First
+Scenario: A user searches for a TV, checks serviceability, adds it to cart, and checks out while stock is low.
+Why it matters: User experience depends on fast search, but revenue depends on correct inventory and order state.
+
+## Process Flow / Steps
+1. Ingest supplier catalog through Kafka.
+2. Store flexible item attributes in MongoDB.
+3. Index searchable product fields in Elasticsearch.
+4. Filter by serviceability and delivery time.
+5. Create order in MySQL and lock inventory.
+6. Confirm or cancel based on payment result.
+7. Archive terminal orders to Cassandra.
+
+## Key Concepts
+- **MongoDB**: good for flexible product attributes.
+- **Serviceability**: checks whether an item can be delivered to a user.
+- **Order TTL**: temporary state while payment is pending.
+- **Archival service**: moves completed or cancelled orders out of hot storage.
+- **Recommendation pipeline**: learns from search, wishlist, cart, and orders.
+
+## Quick Facts
+Q: Why not keep all historical orders in MySQL forever?  A: Scale and cost become bottlenecks.
+Q: Why use Kafka here?  A: It decouples ingestion, search, order events, and analytics.
+
+## Try This Right Now
+- Name one part of the system where availability wins.
+- Name one part where consistency wins.
+
+## Common Mistakes
+- Mixing search concerns with order correctness.
+- Forgetting serviceability before checkout.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Flexible product schema store? | MongoDB. |
+| Historical order store? | Cassandra. |
+| Search index store? | Elasticsearch. |
+
+## Spaced Repetition
+- Day 1: Recall item, search, and order split.
+- Day 3: Explain why inventory locking matters.
+- Day 7: Rebuild the checkout flow.
+- Day 14: Explain archival and recommendations.
+- Day 30: Compare search consistency vs order consistency.
+
+## One-Page Revision
+- Different subsystems need different stores.
+- Search is fast and index-based.
+- Orders and inventory need transaction safety.
+- Recommendation quality depends on user event streams.
+
+## Checkpoint
+- [ ] I can explain why a single database is the wrong answer here.
+
+## 30-Day Memory Bullets
+- Catalog data is flexible.
+- Search should be filter-friendly.
+- Serviceability must appear early.
+- Inventory must not oversell.
+- Order states need transactional flow.
+- Kafka connects the ecosystem.
+- Old orders belong in archival storage.
+- Recommendations come from behavior signals.
+
+-- Page 6: WhatsApp-Style Chat System Design
+
+## Header
+⏱️ ~5 min | 📚 Video 6 | ⚡ Hard
+
+## What You'll Learn
+How to design one-to-one chat, group messaging, message persistence, media handling, and read receipts at massive scale.
+
+## Core Idea (60 sec)
+- Real-time chat depends on open WebSocket connections plus fast lookup of which server holds which user.
+- Message persistence and delivery state need to work even when users go offline.
+
+## Visual Summary
+Sender -> WebSocket Handler -> Message Service + WebSocket Manager
+If receiver online -> target handler -> receiver
+If offline -> store and replay later
+Group message -> Kafka -> Group Message Handler -> fan-out
+
+![WhatsApp Messaging Architecture](./svg/SystemDesignInterviewGuide_WhatsAppChat_sketch.svg)
+
+## Real-World Use First
+Scenario: You send a chat message, the other person may be online, offline, or reading from another device.
+Why it matters: The system must feel instant while still handling persistence, acknowledgements, and retries.
+
+## Process Flow / Steps
+1. Maintain active user connections through WebSocket handlers.
+2. Track user-to-handler mapping in Redis through a manager service.
+3. Persist messages in Cassandra.
+4. Route direct messages to the correct handler if the receiver is online.
+5. Fetch unread messages when users reconnect.
+6. Fan out group messages asynchronously via Kafka.
+7. Store media separately in object storage.
+
+## Key Concepts
+- **WebSocket handler**: keeps a live bidirectional session with active clients.
+- **WebSocket manager**: tells the system where a user is connected.
+- **Offline replay**: delivers stored unread messages later.
+- **Group fan-out**: handled asynchronously to keep the direct path light.
+- **Asset service**: stores images and videos outside the main message path.
+
+## Quick Facts
+Q: Why cache user-to-handler mapping?  A: It removes repeated central lookups.
+Q: Why separate asset upload from message send?  A: Media is much larger than text and needs different storage.
+
+## Try This Right Now
+- Explain one race condition between reconnect and message save.
+- Write one mitigation in plain language.
+
+## Common Mistakes
+- Doing heavy group fan-out logic inside the WebSocket handler.
+- Ignoring offline delivery and read receipt persistence.
+
+## Flashcards
+| Q | A |
+|---|---|
+| Active connection registry? | Redis behind a WebSocket manager. |
+| Massive chat message store? | Cassandra. |
+
+## Spaced Repetition
+- Day 1: Recall the online delivery path.
+- Day 3: Re-explain offline replay.
+- Day 7: Explain group fan-out via Kafka.
+- Day 14: Explain asset upload flow.
+- Day 30: Rebuild the whole chat architecture from memory.
+
+## One-Page Revision
+- WebSockets power real-time delivery.
+- Redis tracks who is connected where.
+- Cassandra stores huge message volume.
+- Group messages should fan out asynchronously.
+
+## Checkpoint
+- [ ] I can explain how chat works when the receiver is offline.
+
+## 30-Day Memory Bullets
+- Real-time chat needs live connections.
+- Routing needs a fast user-to-server map.
+- Offline messages must persist.
+- Read receipts may need storage too.
+- Group fan-out is heavier than one-to-one chat.
+- Media should use object storage.
+- Caching reduces central lookup cost.
+- Race conditions need explicit handling.
