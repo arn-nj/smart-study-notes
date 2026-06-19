@@ -1,0 +1,111 @@
+{
+    "pages": {
+        "1": {
+            "Concept Focus": [
+                "Pi is architected around a strict engine-interface boundary so reasoning state and user interaction evolve independently."
+            ],
+            "Connecting Dots": [
+                "This split explains why context, sessions, and tools remain core concerns while interaction behaviors are handled by the TUI layer."
+            ]
+        },
+        "2": {
+            "Concept Focus": [
+                "The loop acts as a model-guided control cycle where tool selection and turn completion emerge from iterative responses."
+            ],
+            "Same Idea, Different Layer": [
+                "Instead of deterministic branching logic, the system relies on repeated context updates plus tool feedback to drive next actions."
+            ]
+        },
+        "3": {
+            "Concept Focus": [
+                "Context initialization is a layered assembly pipeline where ordering directly affects instruction priority and retrieval efficiency."
+            ],
+            "Connecting Dots": [
+                "Using compact skill descriptors at setup time anticipates lazy-loading later, preserving token budget without reducing discoverability."
+            ]
+        },
+        "4": {
+            "Concept Focus": [
+                "Compaction is governed by runtime usage signals rather than static token heuristics."
+            ],
+            "Implications": [
+                "Long-running sessions remain tractable because summary checkpoints preserve continuity while reducing context payload."
+            ],
+            "Edge Case": [
+                "When provider usage telemetry is incomplete, conservative compaction behavior may trigger earlier to avoid overflow risk."
+            ]
+        },
+        "5": {
+            "Concept Focus": [
+                "Tool execution transforms a single prompt into an iterative reasoning-action loop until the model decides no further calls are needed."
+            ],
+            "Implications": [
+                "Execution quality depends on reinjecting each tool result into context so subsequent reasoning reflects actual system state."
+            ]
+        },
+        "6": {
+            "Concept Focus": [
+                "JSONL persistence optimizes append throughput and observability by storing each message as an independent line object."
+            ],
+            "Connecting Dots": [
+                "This structure pairs naturally with branch lineage metadata, enabling replay and debugging without heavyweight storage systems."
+            ]
+        },
+        "7": {
+            "Concept Focus": [
+                "Parent-linked identifiers encode conversation branching as a graph over a flat event log."
+            ],
+            "Same Idea, Applied Elsewhere": [
+                "The pattern mirrors commit DAG design, where immutable history supports safe exploration and reversible decision paths."
+            ]
+        },
+        "8": {
+            "Concept Focus": [
+                "A minimal default toolset favors composability and predictable safety boundaries over broad built-in feature surface."
+            ],
+            "Implications": [
+                "Extension-based expansion keeps the trusted core small while allowing specialized capabilities per workflow context."
+            ]
+        },
+        "9": {
+            "Concept Focus": [
+                "Extensions are event-driven adapters that hook lifecycle points without mutating core orchestration semantics."
+            ],
+            "Connecting Dots": [
+                "Explicit phase events allow cross-cutting behaviors like custom tools and renderers to be attached modularly."
+            ]
+        },
+        "10": {
+            "Concept Focus": [
+                "The system prompt is intentionally concise, serving as a coordination scaffold rather than an exhaustive rule corpus."
+            ],
+            "Implications": [
+                "Prompt minimalism reduces instruction interference and makes targeted augmentation via append files more controllable."
+            ]
+        },
+        "11": {
+            "Concept Focus": [
+                "Startup flow separates command ingestion from orchestration so initialization remains centralized and test-friendly."
+            ],
+            "Connecting Dots": [
+                "Session creation occurring after config and extension loading guarantees runtime behavior reflects finalized startup state."
+            ]
+        },
+        "12": {
+            "Concept Focus": [
+                "The TUI uses component-local rendering tied to event updates to prevent global redraw jitter."
+            ],
+            "Implications": [
+                "Per-region refresh improves perceived responsiveness during streaming output and concurrent status updates."
+            ]
+        },
+        "13": {
+            "Concept Focus": [
+                "Skills are lazily loaded so rich instruction files remain available on demand without permanently inflating context."
+            ],
+            "Edge Case": [
+                "If a referenced skill path is inaccessible at invocation time, execution may degrade to descriptor-only guidance."
+            ]
+        }
+    }
+}

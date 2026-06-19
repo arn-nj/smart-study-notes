@@ -16,6 +16,7 @@ Given a raw course transcript file, produce:
 5. **`svg/` folder** — Hand-drawn SVG sketches for key concepts (auto-generated via content-to-sketch)
 6. **`svg/INDEX.md`** — Visual reference guide with sketch metadata
 7. **`<CourseName>_INDEX.md`** — Master topic index with all pages, key concepts, and flashcard questions
+8. **`<CourseName>_AI_Elaboration.json` or `<CourseName>_AI_Elaboration.md`** — optional external AI synthesis for page-level elaboration used by the XMind enrichment step
 
 All outputs go into a `<CourseName>/` subfolder alongside the source transcript.
 
@@ -29,8 +30,7 @@ All outputs go into a `<CourseName>/` subfolder alongside the source transcript.
 - **Time estimates**: Show how long each page should take to read
 - **Difficulty ratings**: Mark pages as Easy, Medium, or Hard to reduce overwhelm
 - **Action-first structure**: Put practical use before abstract explanation
-- **Active recall built in**: Flashcards, quick questions, and checkpoints on every lesson
-- **Spaced repetition schedule**: Explicit Day 1, 3, 7, 14, and 30 review cues
+- **Active recall built in**: Flashcards and quick questions on every lesson
 - **Whitespace heavy formatting**: Keep pages breathable and scannable
 - **Concrete examples first**: Use real scenarios before theory
 - **Progress signals**: Checkboxes and small completion markers for momentum
@@ -94,9 +94,10 @@ For each short video/lesson, create one page. If a lesson is dense, split it int
 ## What You'll Learn
 (1 sentence on why this matters to the learner right now)
 
-## Core Idea (60 sec)
-- One plain-language idea
-- One concrete example
+## Deep Dive Explanation
+- Explain the mechanism in 2-4 concrete bullets
+- Add at least one cause-and-effect relationship
+- Include one concrete example tied to the lesson
 
 ## Visual Summary
 (ASCII diagram, compact table, or flowchart)
@@ -113,38 +114,17 @@ Why it matters: ...
 - **Term**: definition in simple words
 - **Term**: definition in simple words
 
-## Quick Facts
-Q: ...  A: ...
-Q: ...  A: ...
-
 ## Try This Right Now
 - 30-second action
 - Observable result
-
-## Common Mistakes
-- Mistake 1
-- Mistake 2
 
 ## Flashcards
 | Q | A |
 |---|---|
 | question | answer |
 
-## Spaced Repetition
-- Day 1: ...
-- Day 3: ...
-- Day 7: ...
-- Day 14: ...
-- Day 30: ...
-
 ## One-Page Revision
 - 3-5 bullets for a 30-second review
-
-## Checkpoint
-- [ ] I can explain this lesson in one sentence
-
-## 30-Day Memory Bullets
-- 8 single-line facts to revisit across 30 days
 ```
 
 Separate pages with `--` on a line by itself (used as page delimiter by the PDF script).
@@ -155,6 +135,8 @@ Formatting rules for every page:
 - Use icons and whitespace for quick scanning
 - Keep jargon paired with plain-English meaning
 - Prefer one idea per bullet
+- Make remaining sections elaborative with mechanism, rationale, and impact details
+- Do not create sections titled `Intro`, `Introduction`, `Core Idea`, `Quick Facts`, or `Common Mistakes`
 
 ### Step 3 — Create Freemind Mindmap (`.mm`)
 See [mindmap format reference](./references/mindmap-format.md).
@@ -162,8 +144,26 @@ See [mindmap format reference](./references/mindmap-format.md).
 Build a hierarchical XML Freemind file:
 - Root node: course name
 - Level 1: page/lesson titles
-- Level 2 per page: What You'll Learn, Core Idea, Visual Summary, Real-World Use, Key Concepts, Flashcards, Spaced Repetition, One-Page Revision
-- Level 3+: subnodes from page content
+- Level 2: use this exact schema in this exact order for every lesson:
+   1. `Concept Deep Dive`
+   2. `Worked Example`
+   3. `Demo Walkthrough`
+   4. `Advanced Scenario`
+   5. `Trade-offs`
+- Level 3+: elaborative subnodes from page content
+
+Schema requirements:
+- `Concept Deep Dive`: explain the mechanism and core model in plain language.
+- `Worked Example`: include scenario, inputs, execution, and result.
+- `Demo Walkthrough`: children must be `Goal`, `Setup`, `Steps`, `Expected Result`, `Why this works`.
+- `Advanced Scenario`: include scenario setup, constraints, recommended decision, and concept-backed answer.
+- `Trade-offs`: include options, benefits, costs, and decision guidance.
+
+Do not include Flashcards as mindmap nodes; keep Flashcards only in the markdown notes.
+Never include nodes titled or themed as Flashcards, Q/A, Questions & Answers, Interesting Talking Points, Pitfalls & Clarifications, Narrative Flow, In This Section, or What You'll Learn.
+Never include instructional/meta coaching text as node content (for example: "What you'll learn", "Why it matters", "In summary, you'll learn", presenter instructions, or audience prompts).
+Do not add `One-Page Revision` nodes to the mindmap.
+Make Level 3+ child nodes complete, context-rich phrases (not terse labels).
 
 **Critical**: escape ALL `&` as `&amp;` in node TEXT attributes. No bare `&` allowed.
 
@@ -174,6 +174,14 @@ source .venv/bin/activate
 python scripts/generate_valid_xmind.py --input <CourseName>/<file>.mm --output <CourseName>/<file>.xmind
 ```
 Or use the inline procedure in [xmind-conversion reference](./references/xmind-conversion.md).
+
+### Step 4.5 - Generate Pitch Deck from XMind
+Run the XMind deck skill pipeline after `.xmind` is produced:
+```bash
+cd .github/skills/xmind-to-pitch-deck
+npm run build
+npm run deck -- --input "<CourseName>/<CourseName>_course_videos_fixed.xmind" --out "<CourseName>/<CourseName>_pitch_deck.html" --auto-scroll false
+```
 
 ### Step 5 — Generate SVG Sketches (content-to-sketch integration)
 Use the **content-to-sketch** skill to create hand-drawn visuals for key concepts:
@@ -233,6 +241,106 @@ done
 ![Process Flow](./svg/<CourseName>_ProcessFlow_sketch.svg)
 ```
 
+### Step 5.5 — Generate External AI Elaboration Artifact
+Create a separate AI synthesis file when you want richer XMind elaboration that is not limited to the GoodNotes markdown text.
+
+This can be done for all notes in the course, not just a subset. The goal is to produce a page-by-page elaboration layer that complements every lesson page.
+
+Suggested AI prompt to use:
+```text
+You are generating highly targeted, page-level AI elaboration for a student course notes package.
+
+Input Sources:
+- GoodNotes markdown pages (containing handwritten/typed course notes)
+- SVG/index metadata when available
+- Optional chapter/page index
+
+Task:
+For every page in the course, analyze the core academic concept and synthesize 1 to 10 highly specific elaboration lines. Your objective is to deepen the user's understanding of the concept without echoing what is already written.
+
+Strict Formatting Rules:
+1. JSON Output (Default): Output a single valid MINIFIED JSON object (no extra whitespace/newlines beyond what JSON requires) following this exact structural taxonomy per page:
+{
+   "pages": {
+      "1": {
+         "Concept Focus": ["Define the core underlying theory or mechanism in 1 sentence"],
+         "Connecting Dots": ["Cross-reference this concept to a prior page or related course theme"],
+         "Same Idea, Applied Elsewhere": ["Provide a concrete, real-world industry or academic application"],
+         "Implications": ["Explain the downstream effect, practical outcome, or why this matters"],
+         "Edge Case": ["Detail a specific scenario where this concept breaks down or behaves differently"]
+      }
+   }
+}
+2. Markdown Output (Only if explicitly requested): Keep the same structural taxonomy using a heading per page (e.g., "## Page 1") followed by prefix-led bullets that map to the same dimensions.
+3. Universal Scope: Include every single page from the input source in the output. If a page contains low information density or simple diagrams, output exactly one line using the "Concept Focus:" prefix.
+
+Strict Content Constraints:
+- Zero Verbatim Repetition: Never reuse strings, phrases, or explicit definitions from the source notes.
+- Ban Meta-Headings: Never restate or mirror structural headings from the input (e.g., "Scenario", "Why it matters", "In summary").
+- Anchor to Evidence: Every elaboration line must be heavily anchored in the specific page content. Do not use generic filler, broad definitions, or introductory phrases.
+- Zero Schema Deviation: Do not invent new prefixes. Stick exclusively to the five specified structural anchors: Concept Focus, Connecting Dots, Same Idea (Applied Elsewhere/Different Layer), Implications, and Edge Case.
+- Do NOT include empty arrays for dimensions that have no insights on a given page; omit the dimension key entirely to keep the payload clean.
+
+Synthesis Criteria and Labels:
+- Every dimension key must map to an array of strings.
+- If a specific dimension has multiple distinct points, include each point as its own array item under that same dimension.
+
+Example Dimension Formatting:
+- "Implications": ["Main downstream impact point"]
+- "Implications": ["First distinct downstream impact", "Second distinct downstream impact"]
+
+Output Format:
+```json
+{
+   "pages": {
+     "1": {
+        "Concept Focus": ["Core technical anchor of the page"],
+        "Implications": [
+           "Increased memory usage during high-concurrency states",
+           "Higher CPU overhead due to constant cache misses"
+        ],
+        "Edge Case": ["Fails silently when system clock drifts by >50ms"]
+     },
+     "2": {
+        "Concept Focus": ["Core technical anchor of the page"],
+        "Connecting Dots": ["Links local variables to global state mutations"]
+     }
+   }
+}
+```
+```
+
+Recommended format:
+- **JSON**: `<CourseName>_AI_Elaboration.json`
+- **Markdown**: `<CourseName>_AI_Elaboration.md`
+
+Recommended page-scoped structure:
+```json
+{
+   "pages": {
+      "1": {
+         "Concept Focus": ["..."],
+         "Connecting Dots": ["..."],
+         "Same Idea, Applied Elsewhere": ["..."],
+         "Implications": ["...", "..."],
+         "Edge Case": ["..."]
+      },
+      "2": {
+         "Concept Focus": ["..."],
+         "Same Idea, Different Layer": ["..."],
+         "Implications": ["..."]
+      }
+   }
+}
+```
+
+Rules:
+- Keep the elaboration separate from the main GoodNotes markdown.
+- Use concise, page-specific synthesis instead of repeating the note text.
+- Prefer JSON if the content is generated by another tool or model.
+- The XMind converter will auto-detect this file when it sits beside the course files.
+- If you generate it for the whole course, include an entry for every page, even if some pages only need a short `Concept Focus` line.
+
 **Common SVG issues to fix:**
 - Escape `&` as `&amp;` in text
 - Use XML entities for special characters
@@ -265,10 +373,6 @@ Flat list of every Q&A from every page — ideal for bulk review:
 |---|---|------|
 | question | answer | N |
 
-## All Checkpoint Items
-- [ ] checkpoint from page 1 *(Page N)*
-- [ ] checkpoint from page 2 *(Page N)*
-
 ## Quick-Find by Topic
 Group-by-theme cross-reference (manually assigned to broad themes):
 ### <Theme 1>
@@ -277,22 +381,13 @@ Group-by-theme cross-reference (manually assigned to broad themes):
 ### <Theme 2>
 - ...
 
-## Spaced Repetition Master Schedule
-Consolidated Day 1 / 3 / 7 / 14 / 30 items across all pages:
-| Day | Review Item | Page |
-|-----|-------------|------|
-| 1 | ... | N |
-| 3 | ... | N |
-...
 ```
 
 **Rules:**
 - Table of Contents must list every page (1 row per page)
 - Key Concepts A–Z: collect all bolded terms from all pages, de-duplicate, sort alphabetically
 - Flashcard table: copy all `| Q | A |` rows from all pages, add a Page column
-- Checkpoint items: collect all `- [ ] ...` lines from all pages
 - Quick-Find groups: assign pages to 3-6 broad themes based on content
-- Spaced Repetition schedule: flatten all Day 1/3/7/14/30 bullets across all pages
 
 ### Step 7 — Export A4 PDF
 ```bash
@@ -314,7 +409,7 @@ Ensure all outputs are inside `<CourseName>/` and scripts remain in `scripts/`.
 ## Quality Checklist
 - [ ] Each page starts with time estimate and difficulty flag
 - [ ] Each short lesson is 1 page; long lessons are split into 2-3 micro-pages
-- [ ] Every page has: What You'll Learn, Core Idea, Visual Summary, Real-World Use, Flashcards, Spaced Repetition
+- [ ] Every page has: What You'll Learn, Deep Dive Explanation, Visual Summary, Real-World Use, Flashcards
 - [ ] Bullets are short, concrete, and one idea each
 - [ ] Real-world example appears before abstract explanation
 - [ ] ASCII diagrams or tables appear on the core concept pages
@@ -322,14 +417,11 @@ Ensure all outputs are inside `<CourseName>/` and scripts remain in `scripts/`.
 - [ ] Mindmap `.mm` passes `xmllint --noout` without errors
 - [ ] `.xmind` opens in XMind without "not a valid XMind File" error
 - [ ] PDF page count matches Markdown page count
-- [ ] Checkpoints and review prompts appear throughout the notes
 - [ ] No page exceeds roughly 5 minutes of reading time
 - [ ] `<CourseName>_INDEX.md` exists in course folder
 - [ ] Index Table of Contents has one row per note page
 - [ ] Key Concepts A–Z covers all bolded terms from all pages
 - [ ] Flashcard table includes every Q&A row with page reference
-- [ ] All checkpoint items collected with page references
-- [ ] Spaced repetition master schedule spans Day 1 through 30
 
 ### SVG Sketch Quality (content-to-sketch integration)
 - [ ] SVG count is explicit or derived from topic count
@@ -348,3 +440,4 @@ Ensure all outputs are inside `<CourseName>/` and scripts remain in `scripts/`.
 - **content-to-sketch** — Generates the SVG sketches (auto-invoked in Step 5)
 - **md-to-notes** — Alternative for markdown input
 - **pdf-to-notes** — Alternative for PDF/book input
+

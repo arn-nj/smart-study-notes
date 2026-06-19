@@ -1,0 +1,21 @@
+{
+  "name": "xmind-to-pitch-deck-skill",
+  "version": "0.1.50",
+  "private": true,
+  "description": "TypeScript/Node boilerplate to convert XMind or exported JSON to cinematic Reveal.js decks",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/index.ts",
+    "deck": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.5.0",
+    "jszip": "^3.10.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

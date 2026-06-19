@@ -1,0 +1,25 @@
+{
+  "layout": {
+    "width": 1600,
+    "height": 900,
+    "aspectRatio": "16:9",
+    "center": false
+  },
+  "animation": {
+    "engine": ["Reveal fragments", "GSAP"],
+    "fragmentClass": "fade-up",
+    "staggerSeconds": 0.08,
+    "durationSeconds": 0.72,
+    "easing": "power3.out"
+  },
+  "mapping": {
+    "centralTopic": "Title Slide",
+    "mainTopics": "Slides",
+    "subtopics": "Animated content blocks"
+  },
+  "videoReadability": {
+    "highContrast": true,
+    "font": "Outfit",
+    "baseTextSizePx": 28
+  }
+}

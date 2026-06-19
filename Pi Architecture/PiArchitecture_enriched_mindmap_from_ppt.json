@@ -1,0 +1,778 @@
+{
+  "title": "Pi Architecture — Agent Loop, Tools, TUI and More",
+  "subtitle": "PowerPoint narrative deck",
+  "children": [
+    {
+      "title": "1. Introduction — What is Pi?",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Pi is a minimalist AI coding agent built entirely from scratch",
+              "children": []
+            },
+            {
+              "title": "Two main parts: **PyCore** (the engine) and **PyInteractive** (the interface)",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "Pi: A minimalist AI coding agent, entirely custom-built, no external frameworks",
+              "children": []
+            },
+            {
+              "title": "PyCore: The agentic loop — handles conversations, tools, sessions",
+              "children": []
+            },
+            {
+              "title": "PyInteractive: The interface layer — TUI, CLI entry, skills, extensions",
+              "children": []
+            },
+            {
+              "title": "RPC Mode: Pi can also be called programmatically, not just interactively",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2. The Agentic Loop — Core Engine Overview",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Every message you send triggers a fixed 3-phase loop: Initialize → Transform → LLM Call",
+              "children": []
+            },
+            {
+              "title": "This loop is the same whether it's your first message or your hundredth",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Demo Walkthrough",
+          "children": [
+            {
+              "title": "Step 1: **Initialize Context** — assemble system prompt + skills + tools + history + your message",
+              "children": []
+            },
+            {
+              "title": "Step 2: **Transform Context** — check if compaction is needed; compact if so",
+              "children": []
+            },
+            {
+              "title": "Step 3: **LLM Call** — send full context to selected model",
+              "children": []
+            },
+            {
+              "title": "Step 4: **Tool Loop** — model calls tools (read/edit/bash/write); results fed back; repeat until done",
+              "children": []
+            },
+            {
+              "title": "Step 5: **Final Reply** — model decides no more tool calls needed; emits response to you",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "Agent Loop: The repeating cycle that processes every user message",
+              "children": []
+            },
+            {
+              "title": "Context Window: The combined token budget holding system prompt + history + tools",
+              "children": []
+            },
+            {
+              "title": "Tool Call: A structured request from the LLM to use a tool (e.g. read a file)",
+              "children": []
+            },
+            {
+              "title": "Turn: One complete pass through the loop, ending in a final reply",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. Context Initialization — Building the System Prompt",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Context is built in layers: system prompt → agents.md files → skill descriptions → tool descriptions → history → your message",
+              "children": []
+            },
+            {
+              "title": "You can customize almost every layer",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Demo Walkthrough",
+          "children": [
+            {
+              "title": "Step 1: Load **system prompt** (hardcoded; override with `system.md` in `.pi/` or `--system-prompt` flag)",
+              "children": []
+            },
+            {
+              "title": "Step 2: Append **agents.md** files from home directory AND current working directory",
+              "children": []
+            },
+            {
+              "title": "Step 3: Append **skill descriptions** (name + short description, not full skill content)",
+              "children": []
+            },
+            {
+              "title": "Step 4: Append **tool descriptions** for all loaded tools",
+              "children": []
+            },
+            {
+              "title": "Step 5: Append **message history** (or compacted summary if previously compacted)",
+              "children": []
+            },
+            {
+              "title": "Step 6: Append **your current message**",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "system.md: Place in `.pi/` to override the default system prompt",
+              "children": []
+            },
+            {
+              "title": "append-system.md: Place in `.pi/` to ADD to (not replace) the default prompt",
+              "children": []
+            },
+            {
+              "title": "agents.md: Markdown file Pi auto-loads — use for persistent project context",
+              "children": []
+            },
+            {
+              "title": "Skill description: Short summary loaded into context; full skill content loaded only when invoked",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "4. Context Transformation — When and How Pi Compacts",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Pi calls `checkCompaction` at two moments: after every agent turn AND before every new prompt",
+              "children": []
+            },
+            {
+              "title": "Instead of estimating tokens upfront, Pi trusts the LLM's own usage numbers in its response",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Demo Walkthrough",
+          "children": [
+            {
+              "title": "Step 1: Agent turn ends OR user is about to send a prompt → trigger `checkCompaction`",
+              "children": []
+            },
+            {
+              "title": "Step 2: Check token count: use LLM-provided usage if available (input + output + cache read + cache write)",
+              "children": []
+            },
+            {
+              "title": "Step 3: If no usage in response → estimate: add `usage.input` + `usage.output` + `cache.read` + `cache.write`",
+              "children": []
+            },
+            {
+              "title": "Step 4: If total is near the context limit → run compaction summarization",
+              "children": []
+            },
+            {
+              "title": "Step 5: Compaction = send full history to LLM with special summarization prompt → get structured summary",
+              "children": []
+            },
+            {
+              "title": "Step 6: Replace message history with this summary for all future turns",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "checkCompaction: Pi's function to decide if history needs to be compressed",
+              "children": []
+            },
+            {
+              "title": "Compaction trigger: After agent turn ends OR before next user prompt",
+              "children": []
+            },
+            {
+              "title": "Token estimation: Uses LLM response usage fields (input + output + cache)",
+              "children": []
+            },
+            {
+              "title": "Compacted summary: Structured checkpoint stored instead of raw message history",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5. The LLM Call & Tool Execution Loop",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Pi sends the full assembled context to the LLM → model either makes a tool call OR gives a final reply",
+              "children": []
+            },
+            {
+              "title": "Tool results flow back into the LLM; this repeats until no more tool calls",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Demo Walkthrough",
+          "children": [
+            {
+              "title": "Step 1: Full context (with assembled prompt + history) sent to configured LLM provider",
+              "children": []
+            },
+            {
+              "title": "Step 2: LLM returns either: **(a) tool call** or **(b) final text reply**",
+              "children": []
+            },
+            {
+              "title": "Step 3: If tool call: Pi executes the tool, captures output, appends to context",
+              "children": []
+            },
+            {
+              "title": "Step 4: LLM is called again with the updated context including tool result",
+              "children": []
+            },
+            {
+              "title": "Step 5: Steps 3-4 repeat until LLM returns a final text reply",
+              "children": []
+            },
+            {
+              "title": "Step 6: Final reply is shown to the user; turn ends",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "Tool call: Structured JSON returned by LLM specifying which tool to invoke and with what args",
+              "children": []
+            },
+            {
+              "title": "Tool result: The output of executing that tool, appended back to context",
+              "children": []
+            },
+            {
+              "title": "Provider: Which LLM serves the call — can be OpenAI, Anthropic, Kimi, Minimax, etc.",
+              "children": []
+            },
+            {
+              "title": "Turn: Entire tool loop from first LLM call to final reply",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "6. Sessions & Memory — JSONL Storage",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Sessions are stored as JSONL files (one JSON object per line) organized by working directory",
+              "children": []
+            },
+            {
+              "title": "JSONL allows appending new messages without rewriting the entire file",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Demo Walkthrough",
+          "children": [
+            {
+              "title": "Step 1: Pi maps sessions to working directories (path encoded as directory name)",
+              "children": []
+            },
+            {
+              "title": "Step 2: Each session = one `.jsonl` file with a unique ID",
+              "children": []
+            },
+            {
+              "title": "Step 3: Every message (user, assistant, tool call, tool result) is appended as a new JSON line",
+              "children": []
+            },
+            {
+              "title": "Step 4: Each line contains: `id`, `parentId`, `type`, `role`, `content`, `timestamp`",
+              "children": []
+            },
+            {
+              "title": "Step 5: Compacted summaries replace raw history lines when compaction occurs",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "JSONL: JSON Lines — one JSON object per line; easy to append without parsing the whole file",
+              "children": []
+            },
+            {
+              "title": "Session file: `.jsonl` file in `~/.pi/agent/sessions/<directory>/`",
+              "children": []
+            },
+            {
+              "title": "Working directory mapping: Sessions are organized by the directory Pi was run in",
+              "children": []
+            },
+            {
+              "title": "Append-only: New messages are always appended to end — never overwrites old lines",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "7. Session Tree Structure — Forking Conversations",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Every message has a `parentId` pointing to the message it branched from — this creates a tree automatically",
+              "children": []
+            },
+            {
+              "title": "You can fork at any point (`/tree` to navigate, select a past node, start fresh from there)",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Demo Walkthrough",
+          "children": [
+            {
+              "title": "Step 1: Every message written to JSONL has an `id` field (unique) and a `parentId` (previous message's id)",
+              "children": []
+            },
+            {
+              "title": "Step 2: Messages with the SAME `parentId` = forked branches from the same parent",
+              "children": []
+            },
+            {
+              "title": "Step 3: Pi reads the tree by following `parentId` chains",
+              "children": []
+            },
+            {
+              "title": "Step 4: `/tree` command in TUI shows all branches visually",
+              "children": []
+            },
+            {
+              "title": "Step 5: You can select any node to jump back and fork a new branch from that point",
+              "children": []
+            },
+            {
+              "title": "Step 6: All branches live in the same `.jsonl` file — nothing is deleted",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "parentId: Reference to the previous message — creates the tree structure",
+              "children": []
+            },
+            {
+              "title": "Fork: Start a new branch from any past message; both branches coexist in the file",
+              "children": []
+            },
+            {
+              "title": "/tree: TUI command to visualize and navigate all conversation branches",
+              "children": []
+            },
+            {
+              "title": "Branch: A path through the conversation tree; multiple can stem from one parent",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "8. Core Tools — The Minimal Toolbox",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Pi ships with 4 tools: **read**, **bash**, **edit**, **write**",
+              "children": []
+            },
+            {
+              "title": "Grep and find also exist but are disabled by default (read-only mode only)",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Demo Walkthrough",
+          "children": [
+            {
+              "title": "Step 1: LLM decides which tool to call and with what arguments",
+              "children": []
+            },
+            {
+              "title": "Step 2: Pi executes the tool (file I/O, shell command, etc.)",
+              "children": []
+            },
+            {
+              "title": "Step 3: Result is returned to the LLM as a tool response",
+              "children": []
+            },
+            {
+              "title": "Step 4: For read-only mode: run Pi with `--tools read,grep,find` to restrict to safe tools",
+              "children": []
+            },
+            {
+              "title": "Step 5: Add extra tools: ask Pi to create a new tool, or install packages",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "read: Read any file from the filesystem",
+              "children": []
+            },
+            {
+              "title": "bash: Execute arbitrary shell commands",
+              "children": []
+            },
+            {
+              "title": "edit: Apply targeted changes to an existing file",
+              "children": []
+            },
+            {
+              "title": "write: Create or overwrite a file",
+              "children": []
+            },
+            {
+              "title": "Read-only mode: `--tools read,grep,find` — useful for programmatic/RPC use",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "9. Extensions — Extending Pi's Capabilities",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Extensions are TypeScript packages that plug into Pi's event system",
+              "children": []
+            },
+            {
+              "title": "They can add tools, commands, keyboard shortcuts, system prompt content, and custom message rendering",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Demo Walkthrough",
+          "children": [
+            {
+              "title": "Step 1: Write extension as TypeScript package",
+              "children": []
+            },
+            {
+              "title": "Step 2: Package defines which events to subscribe to and what to do",
+              "children": []
+            },
+            {
+              "title": "Step 3: When Pi starts, it loads all installed extensions",
+              "children": []
+            },
+            {
+              "title": "Step 4: Extension hooks fire at the appropriate points in the agent loop",
+              "children": []
+            },
+            {
+              "title": "Step 5: New tools registered by extensions appear in Pi's tool list",
+              "children": []
+            },
+            {
+              "title": "Step 6: Custom commands/shortcuts available immediately in TUI",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "Extension: A TypeScript package that plugs into Pi's event system",
+              "children": []
+            },
+            {
+              "title": "Event subscription: Register to fire code when specific loop events occur",
+              "children": []
+            },
+            {
+              "title": "Tool registration: Add entirely new tools (e.g. web search, browser, API calls)",
+              "children": []
+            },
+            {
+              "title": "Modular design: Pi's architecture explicitly supports this — no hacks needed",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "10. System Prompt Deep Dive — What Pi Tells Itself",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Pi's system prompt is ~20 lines — extremely minimal",
+              "children": []
+            },
+            {
+              "title": "It tells the agent what it is, lists skills with markup tags, and includes current date + working directory",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "System prompt: The root instruction set passed to the LLM at every turn",
+              "children": []
+            },
+            {
+              "title": "Skills markup: Skills are embedded with XML-like tags in the prompt — this allows TUI to parse them",
+              "children": []
+            },
+            {
+              "title": "append-system.md: Adds your content after Pi's default prompt without replacing it",
+              "children": []
+            },
+            {
+              "title": "system.md: Completely replaces Pi's default prompt — use with caution",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "11. CLI Entry Point — From Command to Agent Session",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Two files handle startup: `client.ts` (receives the command) and `main.ts` (orchestrates everything)",
+              "children": []
+            },
+            {
+              "title": "It's not until `main.ts` that the actual agent session is created",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "client.ts: Entry point; receives command, delegates to main",
+              "children": []
+            },
+            {
+              "title": "main.ts: Parses args, loads config, loads extensions, creates session, runs mode",
+              "children": []
+            },
+            {
+              "title": "Interactive mode: Full TUI experience",
+              "children": []
+            },
+            {
+              "title": "RPC mode: Programmatic API calls to Pi",
+              "children": []
+            },
+            {
+              "title": "STDIO mode: Pass a prompt via CLI arg; Pi runs once and exits",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "12. Terminal User Interface — The TUI Design",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Pi's TUI is completely custom — no Textual, no React Terminal, no third-party UI lib",
+              "children": []
+            },
+            {
+              "title": "It's component-based: each component manages its own rendering, input handling, and dynamic updates",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "Custom TUI: Built entirely in TypeScript for Pi — no external TUI libraries",
+              "children": []
+            },
+            {
+              "title": "Component-based: Each component = own render logic + input handling + dynamic updates",
+              "children": []
+            },
+            {
+              "title": "Event subscription: Components subscribe to agent loop events to update dynamically",
+              "children": []
+            },
+            {
+              "title": "No flicker: Each component redraws independently — no full screen clear/redraw",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "13. Skills System — How Pi Reads and Uses Skills",
+      "children": [
+        {
+          "title": "How It Works (Easy Breakdown)",
+          "children": [
+            {
+              "title": "Skills are `.md` files with detailed instructions; only their **description** goes into the system prompt",
+              "children": []
+            },
+            {
+              "title": "When a skill is invoked, the TUI intercepts the command and sends the skill's **location** — Pi reads it on demand",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Demo Walkthrough",
+          "children": [
+            {
+              "title": "Step 1: Skill descriptions (short) are listed in system prompt at startup",
+              "children": []
+            },
+            {
+              "title": "Step 2: User types `/skill:<name>` in TUI",
+              "children": []
+            },
+            {
+              "title": "Step 3: TUI intercepts the command (never reaches PyCore raw)",
+              "children": []
+            },
+            {
+              "title": "Step 4: TUI transforms it into a structured message with: name, description, and **file location**",
+              "children": []
+            },
+            {
+              "title": "Step 5: This transformed message is sent to the LLM",
+              "children": []
+            },
+            {
+              "title": "Step 6: LLM calls `read` tool on the provided location to get full skill content",
+              "children": []
+            },
+            {
+              "title": "Step 7: LLM then executes the skill's instructions",
+              "children": []
+            },
+            {
+              "title": "Step 8: Custom `/commands` (not skills): TUI replaces them with full prompt text directly — never reach PyCore",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "Key Concepts You Can Explain",
+          "children": [
+            {
+              "title": "Skill: A `.md` file with detailed instructions — only description in system prompt",
+              "children": []
+            },
+            {
+              "title": "Skill invocation: `/skill:<name>` — intercepted by TUI, not passed raw to PyCore",
+              "children": []
+            },
+            {
+              "title": "Lazy loading: Full skill content loaded by LLM on demand via read tool",
+              "children": []
+            },
+            {
+              "title": "Custom commands: Slash commands that are simple prompt replacements — fully expanded at TUI layer",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

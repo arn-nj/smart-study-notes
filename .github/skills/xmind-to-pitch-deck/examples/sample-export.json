@@ -1,0 +1,39 @@
+[
+  {
+    "rootTopic": {
+      "title": "AI Agent Platform Pitch",
+      "children": {
+        "attached": [
+          {
+            "title": "The Problem",
+            "children": {
+              "attached": [
+                { "title": "Teams lose hours in repetitive workflows" },
+                { "title": "Knowledge is trapped in docs and chats" }
+              ]
+            }
+          },
+          {
+            "title": "Our Solution",
+            "children": {
+              "attached": [
+                { "title": "Unified agent runtime with tool orchestration" },
+                { "title": "Human-in-the-loop approvals for critical actions" },
+                { "title": "Session memory for continuity" }
+              ]
+            }
+          },
+          {
+            "title": "Go-To-Market",
+            "children": {
+              "attached": [
+                { "title": "Land with 2-week pilot" },
+                { "title": "Expand via workflow packs" }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+]

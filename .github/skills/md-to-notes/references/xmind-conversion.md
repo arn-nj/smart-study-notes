@@ -76,8 +76,19 @@ if __name__ == '__main__':
 cd /Users/arya/my-space/smart-study-notes
 .venv/bin/python scripts/generate_valid_xmind.py \
   <FileName>_StudyNotes/<file>_clean.mm \
-  <FileName>_StudyNotes/<file>_fixed.xmind
+    <FileName>_StudyNotes/<file>_fixed.xmind \
+    [<FileName>_StudyNotes/<FileName>_GoodNotes_detailed.md]
 ```
+
+### Notes-Driven Enrichment (Default)
+When a notes markdown file is provided (or auto-detected), the generator enriches each page topic by:
+- inserting In this section as the first child node
+- populating Scenario, Why it matters, and In summary from notes content
+- adding Process Flow / Steps when present in notes
+- adding AI Elaboration subnode with deterministic elaboration bullets
+- adding SVG References with links to ./svg/<file>.svg
+
+Content filtering still excludes Flashcard/Q&A and One-Page Revision style sections.
 
 ## Sanitising .mm XML
 Before converting, ensure the `.mm` is valid XML:

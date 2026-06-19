@@ -21,6 +21,7 @@ Given a PDF book or large text, produce:
 5. **`<BookName>_book_mindmap.xmind`** — XMind mindmap showing chapter relationships and themes
 6. **`svg/` folder** — Hand-drawn SVG sketches for key concepts (auto-generated via content-to-sketch)
 7. **`svg/INDEX.md`** — Visual reference guide with sketch metadata
+8. **`<BookName>_AI_Elaboration.json` or `<BookName>_AI_Elaboration.md`** — optional external AI synthesis for page-level elaboration used by downstream XMind enrichment
 
 All outputs go into a `<BookName>/` subfolder.
 
@@ -36,7 +37,6 @@ All outputs go into a `<BookName>/` subfolder.
 - **Progress checkboxes**: ✓ dopamine hits after each micro-section (engagement + completion feedback)
 - **Action-first approach**: "Try This Right Now" before abstract explanation (executive scaffolding)
 - **Quick facts**: Flashcard Q&A format forces active retrieval (combat working memory limits)
-- **Spaced repetition locked in**: Built-in Days 1–3–7–14–30 review schedule (no "when should I study?" paralysis)
 - **Real-world examples first**: Concrete scenarios before theory (interest-dependent attention)
 - **Hyperlinks + anchor navigation**: Jump to topics non-linearly (supports scattered attention patterns)
 - **Emoji + icons**: Visual cues for quick section identification (supports ADHD scanning)
@@ -70,14 +70,12 @@ See [handwritten-notebook-format-adhd](./references/handwritten-notebook-format-
 For each micro-chunk (every 3–5 minutes of content), create one page with ADHD support built-in:
 - **Header with time + difficulty**: ⏱️ ~3 min | 📚 Chapter X | ⚡ Easy/Medium/Hard (executive scaffolding)
 - **Hook first**: "What You'll Learn" (personal benefit, not abstract topic)
-- **Core Idea (60 sec)**: Ultra-simple, concrete, one example included
 - **Visual summary**: ASCII diagram, table, or flowchart (NOT paragraphs)
 - **Real-world application FIRST**: Concrete scenarios (interest-dependent attention)
-- **Quick facts**: Flashcard Q&A forcing active retrieval (minimal reading volume)
+- **Deep explanation required**: expand each key concept with mechanism, rationale, and impact
 - **Try This Right Now**: ≤30 seconds + observable result + "why it matters"
-- **Spaced repetition**: Days 1–3–7–14–30 with specific facts (locked schedule)
-- **Checkpoint ✓**: Dopamine feedback boxes + progress message
 - **Whitespace + icons**: Generous spacing + ⏱️📚⚡✓🗓️ for quick scanning
+- Do not create sections titled `Intro`, `Introduction`, `Core Idea`, `Quick Facts`, or `Common Mistakes`
 
 ### Step 4 — Create Quick Reference Pages
 One visual 1-pager per major section:
@@ -91,6 +89,106 @@ One visual 1-pager per major section:
 - Organized by priority (quick wins first)
 - Include difficulty and time estimates
 - Cross-reference back to source chapter
+
+### Step 5.5 — Generate External AI Elaboration Artifact
+Create a separate AI synthesis file when you want richer XMind elaboration that is not limited to the PDF/book text.
+
+This can be done for all notes in the book, not just a subset. The goal is to produce a page-by-page elaboration layer that complements every chapter or micro-section.
+
+Suggested AI prompt to use:
+```text
+You are generating highly targeted, page-level AI elaboration for a student course notes package.
+
+Input Sources:
+- GoodNotes markdown pages (containing handwritten/typed course notes)
+- SVG/index metadata when available
+- Optional chapter/page index
+
+Task:
+For every page in the course, analyze the core academic concept and synthesize 1 to 10 highly specific elaboration lines. Your objective is to deepen the user's understanding of the concept without echoing what is already written.
+
+Strict Formatting Rules:
+1. JSON Output (Default): Output a single valid MINIFIED JSON object (no extra whitespace/newlines beyond what JSON requires) following this exact structural taxonomy per page:
+{
+   "pages": {
+      "1": {
+         "Concept Focus": ["Define the core underlying theory or mechanism in 1 sentence"],
+         "Connecting Dots": ["Cross-reference this concept to a prior page or related course theme"],
+         "Same Idea, Applied Elsewhere": ["Provide a concrete, real-world industry or academic application"],
+         "Implications": ["Explain the downstream effect, practical outcome, or why this matters"],
+         "Edge Case": ["Detail a specific scenario where this concept breaks down or behaves differently"]
+      }
+   }
+}
+2. Markdown Output (Only if explicitly requested): Keep the same structural taxonomy using a heading per page (e.g., "## Page 1") followed by prefix-led bullets that map to the same dimensions.
+3. Universal Scope: Include every single page from the input source in the output. If a page contains low information density or simple diagrams, output exactly one line using the "Concept Focus:" prefix.
+
+Strict Content Constraints:
+- Zero Verbatim Repetition: Never reuse strings, phrases, or explicit definitions from the source notes.
+- Ban Meta-Headings: Never restate or mirror structural headings from the input (e.g., "Scenario", "Why it matters", "In summary").
+- Anchor to Evidence: Every elaboration line must be heavily anchored in the specific page content. Do not use generic filler, broad definitions, or introductory phrases.
+- Zero Schema Deviation: Do not invent new prefixes. Stick exclusively to the five specified structural anchors: Concept Focus, Connecting Dots, Same Idea (Applied Elsewhere/Different Layer), Implications, and Edge Case.
+- Do NOT include empty arrays for dimensions that have no insights on a given page; omit the dimension key entirely to keep the payload clean.
+
+Synthesis Criteria and Labels:
+- Every dimension key must map to an array of strings.
+- If a specific dimension has multiple distinct points, include each point as its own array item under that same dimension.
+
+Example Dimension Formatting:
+- "Implications": ["Main downstream impact point"]
+- "Implications": ["First distinct downstream impact", "Second distinct downstream impact"]
+
+Output Format:
+```json
+{
+   "pages": {
+     "1": {
+        "Concept Focus": ["Core technical anchor of the page"],
+        "Implications": [
+           "Increased memory usage during high-concurrency states",
+           "Higher CPU overhead due to constant cache misses"
+        ],
+        "Edge Case": ["Fails silently when system clock drifts by >50ms"]
+     },
+     "2": {
+        "Concept Focus": ["Core technical anchor of the page"],
+        "Connecting Dots": ["Links local variables to global state mutations"]
+     }
+   }
+}
+```
+```
+
+Recommended format:
+- **JSON**: `<BookName>_AI_Elaboration.json`
+- **Markdown**: `<BookName>_AI_Elaboration.md`
+
+Recommended page-scoped structure:
+```json
+{
+   "pages": {
+      "1": {
+         "Concept Focus": ["..."],
+         "Connecting Dots": ["..."],
+         "Same Idea, Applied Elsewhere": ["..."],
+         "Implications": ["...", "..."],
+         "Edge Case": ["..."]
+      },
+      "2": {
+         "Concept Focus": ["..."],
+         "Same Idea, Different Layer": ["..."],
+         "Implications": ["..."]
+      }
+   }
+}
+```
+
+Rules:
+- Keep the elaboration separate from the main GoodNotes markdown.
+- Use concise, page-specific synthesis instead of repeating the note text.
+- Prefer JSON if the content is generated by another tool or model.
+- The XMind converter will auto-detect this file when it sits beside the book files.
+- If you generate it for the whole book, include an entry for every page, even if some pages only need a short `Concept Focus` line.
 
 ### Step 6 — Generate SVG Sketches (content-to-sketch integration)
 Use the **content-to-sketch** skill to create hand-drawn visuals for key concepts:
@@ -161,9 +259,26 @@ See [mindmap format reference](./references/mindmap-format.md).
 Build a hierarchical XML Freemind file:
 - Root node: book title
 - Level 1: chapters or major sections
-- Level 2: topics and key concepts
-- Level 3: applications, examples, flashcards
-- Level 4+: detailed facts or action items
+- Level 2: use this exact schema in this exact order for every chapter/section:
+   1. `Concept Deep Dive`
+   2. `Worked Example`
+   3. `Demo Walkthrough`
+   4. `Advanced Scenario`
+   5. `Trade-offs`
+- Level 3+: elaborative nodes derived from chapter content
+
+Schema requirements:
+- `Concept Deep Dive`: explain mechanism and conceptual model clearly.
+- `Worked Example`: include scenario, inputs, execution, and result.
+- `Demo Walkthrough`: children must be `Goal`, `Setup`, `Steps`, `Expected Result`, `Why this works`.
+- `Advanced Scenario`: include scenario setup, constraints, recommended decision, and concept-backed answer.
+- `Trade-offs`: include options, benefits, costs, and decision guidance.
+
+Do not include Flashcards as mindmap nodes; keep Flashcards only in the markdown notes.
+Never include nodes titled or themed as Flashcards, Q/A, Questions & Answers, Interesting Talking Points, Pitfalls & Clarifications, Narrative Flow, In This Section, or What You'll Learn.
+Never include instructional/meta coaching text as node content (for example: "What you'll learn", "Why it matters", "In summary, you'll learn", presenter instructions, or audience prompts).
+Do not add `One-Page Revision` nodes to the mindmap.
+Make Level 3+ child nodes complete, context-rich phrases (not terse labels).
 
 **Critical**: Escape ALL `&` as `&amp;` in node TEXT attributes. No bare `&` allowed.
 
@@ -183,6 +298,14 @@ cd /Users/arya/my-space/smart-study-notes
 ```
 
 The PDF will use squared paper background for handwritten aesthetic in GoodNotes and include embedded SVG sketches.
+
+### Step 10 - Generate Pitch Deck from XMind
+After `.xmind` is generated, run the XMind deck skill pipeline:
+```bash
+cd .github/skills/xmind-to-pitch-deck
+npm run build
+npm run deck -- --input "<BookName>/<file>.xmind" --out "<BookName>/<BookName>_pitch_deck.html" --auto-scroll false
+```
 
 ## Strategic Chunking for Large Books
 
@@ -216,7 +339,6 @@ The PDF will use squared paper background for handwritten aesthetic in GoodNotes
 - [ ] Real-world application comes BEFORE abstract explanation
 - [ ] "Try This Right Now" action is concrete and ≤30 seconds (executive scaffolding)
 - [ ] Flashcards force active recall (not just recognition)
-- [ ] Spaced-repetition schedule is explicit (Days 1, 3, 7, 14, 30 — no guessing)
 - [ ] Progress checkboxes ✓ visible (dopamine feedback after each section)
 - [ ] Whitespace is generous between concepts (breathing room)
 - [ ] Hyperlinks + anchors allow non-linear navigation (scattered attention support)
@@ -235,7 +357,6 @@ The PDF will use squared paper background for handwritten aesthetic in GoodNotes
 - [ ] No page exceeds 5 minutes of reading
 - [ ] Quick reference pages are scannable in <1 minute
 - [ ] Action items are prioritized by ease and immediate impact
-- [ ] Spaced-repetition facts build conceptual understanding
 - [ ] PDF and mindmap are generated without errors
 - [ ] All outputs are in the `<BookName>/` folder
 
@@ -256,3 +377,4 @@ The PDF will use squared paper background for handwritten aesthetic in GoodNotes
 - **content-to-sketch** — Generates the SVG sketches (auto-invoked in Step 6)
 - **transcript-to-notes** — Alternative for transcript input
 - **md-to-notes** — Alternative for markdown input
+
