@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#d7dbe3" stroke-width="1"/></pattern><marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#111827"/></marker></defs>
+  <rect width="1200" height="800" fill="#fcfcff"/><rect width="1200" height="800" fill="url(#grid)"/>
+  <text x="600" y="120" text-anchor="middle" font-size="34" font-family="Arial" fill="#111827">Sessions and Thread Management</text>
+  <rect x="80" y="240" width="240" height="140" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <text x="200" y="292" text-anchor="middle" font-size="24" font-family="Arial">Rename + inspect</text><text x="200" y="325" text-anchor="middle" font-size="18" font-family="Arial">session name and path</text>
+  <rect x="480" y="240" width="240" height="140" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text x="600" y="292" text-anchor="middle" font-size="24" font-family="Arial">Tree, fork, clone</text><text x="600" y="325" text-anchor="middle" font-size="18" font-family="Arial">branch safely</text>
+  <rect x="880" y="240" width="240" height="140" rx="18" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+  <text x="1000" y="292" text-anchor="middle" font-size="24" font-family="Arial">Compact + export</text><text x="1000" y="325" text-anchor="middle" font-size="18" font-family="Arial">archive and reuse</text>
+  <line x1="320" y1="310" x2="480" y2="310" stroke="#111827" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="720" y1="310" x2="880" y2="310" stroke="#111827" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="600" y="530" text-anchor="middle" font-size="22" font-family="Arial" fill="#334155">Sessions turn a chat into a recoverable, branchable, exportable structure</text>
+</svg>

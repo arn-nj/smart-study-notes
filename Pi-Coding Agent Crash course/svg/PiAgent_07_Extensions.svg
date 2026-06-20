@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#d7dbe3" stroke-width="1"/></pattern><marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#111827"/></marker></defs>
+  <rect width="1200" height="800" fill="#fffaf8"/><rect width="1200" height="800" fill="url(#grid)"/>
+  <text x="600" y="120" text-anchor="middle" font-size="34" font-family="Arial" fill="#111827">Extensions</text>
+  <rect x="90" y="245" width="260" height="130" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <text x="220" y="297" text-anchor="middle" font-size="24" font-family="Arial">Startup quote</text><text x="220" y="330" text-anchor="middle" font-size="18" font-family="Arial">workspace hook</text>
+  <rect x="470" y="245" width="260" height="130" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text x="600" y="297" text-anchor="middle" font-size="24" font-family="Arial">Danger guard</text><text x="600" y="330" text-anchor="middle" font-size="18" font-family="Arial">confirm destructive commands</text>
+  <rect x="850" y="245" width="260" height="130" rx="18" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+  <text x="980" y="297" text-anchor="middle" font-size="24" font-family="Arial">Reload and test</text><text x="980" y="330" text-anchor="middle" font-size="18" font-family="Arial">prove the hook works</text>
+  <line x1="350" y1="310" x2="470" y2="310" stroke="#111827" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="730" y1="310" x2="850" y2="310" stroke="#111827" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="600" y="530" text-anchor="middle" font-size="22" font-family="Arial" fill="#334155">Extensions add safety and workflow behavior after install</text>
+</svg>

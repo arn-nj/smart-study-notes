@@ -1,0 +1,5 @@
+Validation report
+- XML well-formed: yes
+- Bare ampersands: none detected
+- Sketch count: 9
+- Notes: sketches are simplified concept diagrams aligned to the transcript sections
