@@ -51,6 +51,32 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python scripts/generate_valid_xmind.py <CourseName>/<file>_clean.mm <CourseName>/<file>_fixed.xmind
 ```
 
+## Excalidraw self-hosting
+
+Based on the official Excalidraw development/self-hosting docs, this repo includes:
+
+- official editor app via Docker: `npm run excalidraw:selfhost`
+
+Details:
+- workspace-level self-host app docs: `tools/excalidraw-selfhost/README.md`
+- skill-owned runtime helpers live in the linked `copilot-skills` submodule
+
+## Linked skills repository
+
+This repo links reusable skills through the `copilot-skills/` git submodule.
+
+Clone with submodules:
+
+```bash
+git clone --recurse-submodules git@github-personal:arn-nj/smart-study-notes.git
+```
+
+If already cloned:
+
+```bash
+git submodule update --init --recursive
+```
+
 ## Folder structure
 ```
 smart-study-notes/
@@ -62,14 +88,12 @@ smart-study-notes/
 │   └── TOGAF_course_videos_fixed2.xmind
 ├── scripts/
 │   ├── md_to_pdf_a4.py             ← Markdown → A4 PDF
-│   ├── generate_valid_xmind.py     ← .mm → .xmind
-│   └── mm_to_xmind.py              ← legacy converter
-└── .github/
-    ├── copilot-instructions.md
-    └── skills/
-        ├── transcript-to-notes/
-        ├── pdf-to-notes/
-        ├── md-to-notes/
-        ├── content-to-sketch/
-        └── architecture-doc/
+│   └── generate_valid_xmind.py     ← .mm → .xmind
+├── .github/
+│   └── copilot-instructions.md
+├── copilot-skills/                  ← linked reusable skills repo (git submodule)
+│   ├── skills/
+│   └── scripts/
+└── tools/
+    └── excalidraw-selfhost/
 ```

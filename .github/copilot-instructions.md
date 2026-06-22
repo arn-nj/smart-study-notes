@@ -4,7 +4,7 @@
 This workspace converts raw course transcripts into study materials: GoodNotes notebooks, A4 PDFs, and XMind mindmaps.
 
 ## Visual Preference
-- GoodNotes-facing notebook outputs should use a squared paper (graph paper) background style by default.
+- GoodNotes-facing notebook outputs should use a sepia-tone paper background with handwritten fonts (no grid).
 
 ## Folder Convention
 Every course lives in its own subfolder:
@@ -19,8 +19,7 @@ smart-study-notes/
 │   └── <CourseName>_course_videos_fixed.xmind
 └── scripts/                ← shared, reusable scripts
     ├── md_to_pdf_a4.py
-    ├── generate_valid_xmind.py
-    └── mm_to_xmind.py
+    └── generate_valid_xmind.py
 ```
 
 ## Python Environment
@@ -35,8 +34,12 @@ smart-study-notes/
 .venv/bin/python scripts/md_to_pdf_a4.py <CourseName>/<file>.md <CourseName>/<file_A4>.pdf
 
 # Freemind .mm → valid XMind
-.venv/bin/python scripts/generate_valid_xmind.py <CourseName>/<file>_clean.mm <CourseName>/<file>_fixed.xmind
+.venv/bin/python scripts/generate_valid_xmind.py <CourseName>/<file>_clean.mm <CourseName>/<file>_fixed.xmind <CourseName>/<CourseName>_GoodNotes_detailed.md
 ```
+
+## Linked Skills
+- Reusable skills are linked through the `copilot-skills/` git submodule at the workspace root.
+- Primary skill content lives under `copilot-skills/skills/`.
 
 ## When to Use the Skill
 When a user drops a new transcript `.txt` file into a course folder and asks to generate notes or mindmap, invoke the **transcript-to-notes** skill (type `/transcript-to-notes` in chat or ask to "make notes from this transcript").

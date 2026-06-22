@@ -1,0 +1,4 @@
+[submodule "copilot-skills"]
+	path = copilot-skills
+	url = git@github-personal:arn-nj/copilot-skills.git
+	branch = master
