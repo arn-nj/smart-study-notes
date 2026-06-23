@@ -1,0 +1,561 @@
+[
+  {
+    "lessonTitle": "From Prompt Engineering to Context Engineering",
+    "lessonSlug": "prompt-to-context",
+    "archetype": "type_a",
+    "coreMechanism": "capability expansion by moving from one-shot prompting to selective context loading inside a tiny memory budget",
+    "what": "Shows why prompt-only execution breaks down as task scope expands.",
+    "how": "A small working window forces the system to pull only the right files and tools into the bench at the right time.",
+    "why": "Selective context loading creates stronger execution than a single oversized prompt.",
+    "realWorldAnchor": "A repo-scale coding task fails when the model tries to answer everything from one instruction.",
+    "mentalModel": "Two workbenches: one empty except for an instruction card, the other fed by a small intake gate that loads only the needed tools.",
+    "edgeCase": "Dumping every file onto the bench overfills the workspace and creates clutter instead of progress.",
+    "primaryEntities": [
+      "request card",
+      "prompt-only bench",
+      "file shelf",
+      "tool rack",
+      "small context gate",
+      "prepared workbench",
+      "output tray"
+    ],
+    "primaryFlow": "request -> small context gate -> prepared bench -> stable output",
+    "mainConstraint": "Tiny context window / bounded work surface.",
+    "tradeoff": "Better execution requires orchestration and selective loading overhead.",
+    "physicalAnalogy": "A tiny workshop that upgrades from spoken instructions only to a bench fed by just-in-time tools and file cards.",
+    "labelFusion": "Prompt, files, tools, window, and output labels live directly on the workbench objects.",
+    "compositionIntent": "Left side shows fragile prompt-only work; right side shows a constrained intake gate feeding a prepared bench.",
+    "hotPath": "request crate -> small window gate -> prepared bench -> stable output tray",
+    "secondaryPaths": [
+      "prompt-only shortcut",
+      "full-dump clutter spill"
+    ],
+    "mustShow": [
+      "tiny working surface",
+      "selective loading",
+      "comparison with prompt-only path"
+    ],
+    "mustNotShow": [
+      "what/how/why cards",
+      "generic box pipeline"
+    ],
+    "visualSceneType": "workbench-upgrade",
+    "sceneObjects": [
+      "instruction card",
+      "shaky result bubble",
+      "task crate",
+      "file shelf",
+      "tool rack",
+      "small gate",
+      "prepared bench",
+      "stable output tray",
+      "clutter pile"
+    ],
+    "objectToConceptMap": {
+      "instruction card": "prompt engineering",
+      "small gate": "context window",
+      "file shelf": "relevant repo state",
+      "tool rack": "capabilities/actions",
+      "prepared bench": "context engineering",
+      "clutter pile": "overloaded context"
+    },
+    "spatialLayout": "split comparison: weak left branch, strong right branch with central bottleneck",
+    "entryPoint": "left-center request card",
+    "exitPoint": "far-right stable output tray",
+    "failureBranch": "oversized full dump spills into clutter below the gate",
+    "comparisonAxis": "instruction-only vs selective-context execution",
+    "evidenceArtifact": "tiny window gate physically constrains what reaches the bench",
+    "dominantMotion": "left-to-right selective loading",
+    "forbiddenTemplate": "same row of identical labeled boxes",
+    "visualSaliencePlan": "See the small gate and prepared bench first, then notice the weak prompt-only branch, then the clutter spill.",
+    "hotPathEncoding": "cyan fill on gate, bench, output tray; thick cyan arrows across the right branch",
+    "secondaryPathEncoding": "prompt-only branch stays thin navy; clutter spill is red and downward",
+    "diagramIntent": "layered-control",
+    "formalFramework": "c4",
+    "sceneFamilyCandidates": [
+      "workbench-upgrade",
+      "cargo-screening-line",
+      "dispatch-control-room"
+    ],
+    "selectedSceneFamily": "workbench-upgrade",
+    "selectionReason": "The lesson is about upgrading from instruction-only work to a prepared working surface with selective context loading, so a bench/world metaphor teaches the shift better than a pure filter or dispatch view.",
+    "formalCompanionSuggested": "recommended",
+    "salienceGoal": {
+      "first": "small context gate",
+      "second": "prepared bench",
+      "third": "clutter spill / weak prompt-only branch"
+    },
+    "silhouetteContrastRules": "Instruction card must feel flat and fragile, the small window gate constrained, the prepared bench broad and usable, and the clutter spill loose and messy.",
+    "propInventory": [
+      "file shelf",
+      "tool rack",
+      "task crate"
+    ],
+    "textureInventory": [
+      "bench surface line",
+      "gate frame marks"
+    ]
+  },
+  {
+    "lessonTitle": "Tool Calling, MCP, and RAG as Context Controls",
+    "lessonSlug": "tools-mcp-rag",
+    "archetype": "type_c",
+    "coreMechanism": "external capability routing that fetches only the relevant repo slice, platform action, or knowledge fragment",
+    "what": "Shows how agents avoid stuffing all information into one prompt.",
+    "how": "A dispatch hub routes requests to the archive, vendor desk, or knowledge library and returns only a filtered working set.",
+    "why": "Selective external access keeps the live context small and useful.",
+    "realWorldAnchor": "A coding agent needs code, provider actions, and outside docs without carrying everything at once.",
+    "mentalModel": "A control room dispatches runners to three specialized stations instead of burying one desk in every document.",
+    "edgeCase": "Directly dumping all sources into the operator desk creates overload.",
+    "primaryEntities": [
+      "request board",
+      "dispatch hub",
+      "repo shelf",
+      "vendor desk",
+      "knowledge library",
+      "filtered working set tray"
+    ],
+    "primaryFlow": "request -> dispatch hub -> chosen external station -> filtered working set",
+    "mainConstraint": "Only relevant slices should return to the agent workspace.",
+    "tradeoff": "More routing complexity buys cleaner context and better precision.",
+    "physicalAnalogy": "A control room sending runners to an archive, a vendor counter, or a library.",
+    "labelFusion": "Tool, MCP, and RAG labels are placed on the station signs rather than on detached captions.",
+    "compositionIntent": "Central dispatch hub with three distinct outward channels and one filtered return tray.",
+    "hotPath": "request board -> dispatch hub -> selected station -> working set tray",
+    "secondaryPaths": [
+      "non-selected stations remain available but visually quieter",
+      "prompt dump overflow"
+    ],
+    "mustShow": [
+      "three external capability types",
+      "central routing",
+      "filtered return"
+    ],
+    "mustNotShow": [
+      "three identical boxes in a row",
+      "paragraph explanation panels"
+    ],
+    "visualSceneType": "control-room-dispatch",
+    "sceneObjects": [
+      "request board",
+      "dispatch console",
+      "repo shelf",
+      "vendor desk",
+      "knowledge library",
+      "working set tray",
+      "overflow bin"
+    ],
+    "objectToConceptMap": {
+      "repo shelf": "tool calling / repo inspection",
+      "vendor desk": "MCP / provider capability surface",
+      "knowledge library": "RAG",
+      "working set tray": "selected context returned to agent"
+    },
+    "spatialLayout": "hub-and-spoke with a clear inbound request and outbound filtered tray",
+    "entryPoint": "left request board",
+    "exitPoint": "right working set tray",
+    "failureBranch": "direct prompt dump falls into an overload bin below the hub",
+    "comparisonAxis": "targeted retrieval vs prompt stuffing",
+    "evidenceArtifact": "only the tray on the far right is loaded, not the whole room",
+    "dominantMotion": "inbound request, outward routing, then filtered return",
+    "forbiddenTemplate": "simple triangle of labels with no dispatch semantics",
+    "visualSaliencePlan": "See the dispatch hub first, then the filtered tray, then the three stations as capability options.",
+    "hotPathEncoding": "cyan request board, cyan hub core, cyan return tray, and thicker inbound/return arrows",
+    "secondaryPathEncoding": "station spokes are thinner navy; overload branch is red",
+    "diagramIntent": "filtering-routing",
+    "formalFramework": "sequence",
+    "sceneFamilyCandidates": [
+      "dispatch-control-room",
+      "sorting-desk",
+      "cargo-screening-line"
+    ],
+    "selectedSceneFamily": "dispatch-control-room",
+    "selectionReason": "The concept is primarily about routing a request to the right external capability and returning only the relevant slice, which is naturally a dispatch problem.",
+    "formalCompanionSuggested": "strongly-recommended",
+    "salienceGoal": {
+      "first": "dispatch hub",
+      "second": "filtered working set tray",
+      "third": "archive/vendor/library stations"
+    },
+    "silhouetteContrastRules": "Dispatch hub should feel central and operative, stations should feel distinct destinations, and the return tray should feel like a reduced, selected payload.",
+    "propInventory": [
+      "request board",
+      "runner lanes",
+      "overflow bin"
+    ],
+    "textureInventory": [
+      "control-room floor marks",
+      "station sign rails"
+    ]
+  },
+  {
+    "lessonTitle": "The Summarization Trap in Long-Running Tasks",
+    "lessonSlug": "summarization-trap",
+    "archetype": "type_b",
+    "coreMechanism": "lossy context compression removes unfinished details and produces false completion signals",
+    "what": "Shows how long autonomous work drifts when detailed state is repeatedly compressed.",
+    "how": "A full checklist is squeezed through a compression press into a tiny summary slip while dropped details fall out and a false-done stamp appears.",
+    "why": "Compression without verification causes the agent to believe work was completed when hidden checks vanished.",
+    "realWorldAnchor": "An agent spends hours on a feature, summarizes midway, and later assumes incomplete work was already verified.",
+    "mentalModel": "A project checklist gets fed into a press until only a short note remains.",
+    "edgeCase": "Each extra summarization loop increases the chance of losing acceptance criteria or test status.",
+    "primaryEntities": [
+      "full checklist board",
+      "compression press",
+      "summary slip",
+      "false done stamp",
+      "missing checks pile"
+    ],
+    "primaryFlow": "full checklist -> compression press -> summary slip -> false done state",
+    "mainConstraint": "Context window pressure forces compression.",
+    "tradeoff": "Smaller state is cheaper to carry but less trustworthy.",
+    "physicalAnalogy": "A manager shrinking a giant checklist into shorter and shorter notes until critical items disappear.",
+    "labelFusion": "Checklist, summary, and false-done labels sit directly on the paper objects and stamp.",
+    "compositionIntent": "Large-to-small pipeline with an obvious loss branch below the press.",
+    "hotPath": "full checklist -> press -> summary slip",
+    "secondaryPaths": [
+      "dropped checks peeling downward",
+      "false done stamp branch"
+    ],
+    "mustShow": [
+      "lossy compression",
+      "disappearing detail",
+      "wrong completion signal"
+    ],
+    "mustNotShow": [
+      "abstract memory cloud",
+      "generic box sequence"
+    ],
+    "visualSceneType": "compression-press-checklist",
+    "sceneObjects": [
+      "checklist board",
+      "press",
+      "summary slip",
+      "done stamp",
+      "missing checks pile"
+    ],
+    "objectToConceptMap": {
+      "checklist board": "full execution state",
+      "press": "summarization/compression",
+      "summary slip": "compressed context",
+      "done stamp": "false completion signal",
+      "missing checks pile": "lost requirements/tests"
+    },
+    "spatialLayout": "left-to-right shrinking flow with a downward red loss branch",
+    "entryPoint": "left checklist board",
+    "exitPoint": "right summary slip / done stamp zone",
+    "failureBranch": "dropped checklist cards fall into a red missing-checks pile",
+    "comparisonAxis": "full state vs compressed state",
+    "evidenceArtifact": "summary slip is visibly tiny compared with the original board",
+    "dominantMotion": "compression inward and loss downward",
+    "forbiddenTemplate": "same-sized boxes connected by arrows",
+    "visualSaliencePlan": "See the giant checklist and press first, then notice the tiny summary slip, then the red false-done consequences.",
+    "hotPathEncoding": "thick cyan arrow into and out of the press with the summary slip centered on the main lane",
+    "secondaryPathEncoding": "red dropped-detail branch and red false-done stamp dominate the consequence area",
+    "diagramIntent": "teaching-metaphor",
+    "formalFramework": "state-diagram",
+    "sceneFamilyCandidates": [
+      "compression-press-checklist",
+      "mission-control-board",
+      "sorting-desk"
+    ],
+    "selectedSceneFamily": "compression-press-checklist",
+    "selectionReason": "The lesson is about lossy compression and missing detail, so a press shrinking a checklist into a tiny summary visually communicates the fidelity loss better than a general state board.",
+    "formalCompanionSuggested": "recommended",
+    "salienceGoal": {
+      "first": "compression press",
+      "second": "full checklist",
+      "third": "missing checks / false done consequences"
+    },
+    "silhouetteContrastRules": "Checklist must feel large and dense, press must feel compressive, summary slip tiny, and false-done marker consequence-oriented.",
+    "propInventory": [
+      "dropped scraps",
+      "done stamp",
+      "warning pile"
+    ],
+    "textureInventory": [
+      "paper lines",
+      "press plates"
+    ]
+  },
+  {
+    "lessonTitle": "Harness Engineering as a Controlled Iteration Loop",
+    "lessonSlug": "harness-loop",
+    "archetype": "type_b",
+    "coreMechanism": "bounded task execution loop with fresh context, verification gates, and documentation before moving on",
+    "what": "Shows the harness as an execution environment above raw prompt/context control.",
+    "how": "A requirements binder feeds one task card at a time into a build-test-document loop, then resets the lane for the next card.",
+    "why": "Short verified loops reduce drift and keep progress grounded in explicit artifacts.",
+    "realWorldAnchor": "A product request is decomposed into small tasks that are implemented and verified one by one.",
+    "mentalModel": "An assembly lane that pulls one card, works it, checks it, stamps it, and reloads fresh context.",
+    "edgeCase": "Skipping the test gate sends broken work downstream.",
+    "primaryEntities": [
+      "requirements binder",
+      "task picker",
+      "build bench",
+      "test gate",
+      "docs stamp",
+      "done tray",
+      "fresh-context hopper"
+    ],
+    "primaryFlow": "requirements binder -> task picker -> build bench -> test gate -> docs stamp -> done tray -> fresh-context hopper -> task picker",
+    "mainConstraint": "Only one bounded task should be active per loop.",
+    "tradeoff": "Loop discipline slows raw throughput but raises reliability and recoverability.",
+    "physicalAnalogy": "A factory lane with a single-card pull system and a verification gate.",
+    "labelFusion": "Task, test, docs, and reset labels live on stations and trays.",
+    "compositionIntent": "Strong horizontal lane plus a visible top reset return and a red rework chute.",
+    "hotPath": "task picker -> build bench -> test gate -> docs stamp -> done tray -> fresh-context hopper",
+    "secondaryPaths": [
+      "rework chute from failed test back to build bench"
+    ],
+    "mustShow": [
+      "one task at a time",
+      "verification gate",
+      "fresh context reset"
+    ],
+    "mustNotShow": [
+      "one-shot giant task box",
+      "circular loop with no stations"
+    ],
+    "visualSceneType": "task-card-qa-lane",
+    "sceneObjects": [
+      "requirements binder",
+      "task picker",
+      "build bench",
+      "test diamond",
+      "docs stamp",
+      "done tray",
+      "fresh-context hopper",
+      "rework chute"
+    ],
+    "objectToConceptMap": {
+      "requirements binder": "requirements doc",
+      "task picker": "task selection",
+      "build bench": "implementation",
+      "test diamond": "verification",
+      "docs stamp": "documentation",
+      "fresh-context hopper": "iteration reset"
+    },
+    "spatialLayout": "horizontal production lane with top reset loop and bottom rework branch",
+    "entryPoint": "left requirements binder",
+    "exitPoint": "right done tray",
+    "failureBranch": "failed test diverts down and back to build bench",
+    "comparisonAxis": "bounded iteration vs long unbounded run",
+    "evidenceArtifact": "single task card visible on the lane",
+    "dominantMotion": "left-to-right processing with loop-back reset",
+    "forbiddenTemplate": "abstract circle arrows with no task stations",
+    "visualSaliencePlan": "See the lane stations first, then the cyan reset loop, then the red rework chute.",
+    "hotPathEncoding": "cyan fill on active lane stations and thick cyan arrows across the production path",
+    "secondaryPathEncoding": "rework path is red and thinner; binder stays neutral",
+    "diagramIntent": "workflow-process",
+    "formalFramework": "bpmn",
+    "sceneFamilyCandidates": [
+      "qa-lane",
+      "relay-loop-track",
+      "mission-control-board"
+    ],
+    "selectedSceneFamily": "qa-lane",
+    "selectionReason": "The real mechanism is bounded work passing through build, test, documentation, and reset, which is closer to a verified production lane than a generic loop icon.",
+    "formalCompanionSuggested": "strongly-recommended",
+    "salienceGoal": {
+      "first": "build\u2192test lane",
+      "second": "fresh-context reset hopper",
+      "third": "rework chute"
+    },
+    "silhouetteContrastRules": "Task picker, build bench, test gate, docs stamp, and reset hopper should all read as different work stations rather than equal boxes.",
+    "propInventory": [
+      "requirements binder",
+      "single task card",
+      "done tray"
+    ],
+    "textureInventory": [
+      "lane rails",
+      "station floor marks"
+    ]
+  },
+  {
+    "lessonTitle": "How Prompt, Context, and Harness Layers Fit Together",
+    "lessonSlug": "layer-model",
+    "archetype": "type_a",
+    "coreMechanism": "stacked control architecture where harness orchestrates context and prompt rather than replacing them",
+    "what": "Shows the relationship between prompt, context, and harness as layered control surfaces.",
+    "how": "A theater stack places the harness in the director booth, context in the prop layer, and prompt in the script/actor layer.",
+    "why": "The image explains that harnessing uses prompt and context instead of deprecating them.",
+    "realWorldAnchor": "Teams wrongly assume harnessing makes prompting irrelevant, but the loop still depends on lower layers.",
+    "mentalModel": "A stage where the director cues the scene, stagehands bring props, and the actor still follows the script.",
+    "edgeCase": "Without the top booth the stage still has props and script but no reliable scene order.",
+    "primaryEntities": [
+      "director booth",
+      "cue rail",
+      "context prop layer",
+      "script card",
+      "actor",
+      "output curtain",
+      "loose props spill"
+    ],
+    "primaryFlow": "director booth -> prop/context layer -> actor following script -> output curtain",
+    "mainConstraint": "Control works only when the layers cooperate instead of operating in isolation.",
+    "tradeoff": "More layers increase orchestration clarity but require explicit separation of responsibilities.",
+    "physicalAnalogy": "A three-layer theater stack with booth, prop deck, and performance stage.",
+    "labelFusion": "Harness, context, and prompt labels are embedded on booth, prop deck, and script card.",
+    "compositionIntent": "Vertical stack with top-down control and bottom-stage execution.",
+    "hotPath": "harness booth -> context props -> script-guided actor -> output curtain",
+    "secondaryPaths": [
+      "loose props spill when orchestration is absent"
+    ],
+    "mustShow": [
+      "three distinct layers",
+      "top-down control",
+      "prompt still present"
+    ],
+    "mustNotShow": [
+      "three floating text boxes",
+      "flat table of definitions"
+    ],
+    "visualSceneType": "layered-theater-stack",
+    "sceneObjects": [
+      "director booth",
+      "cue rail",
+      "prop deck",
+      "script card",
+      "actor",
+      "output curtain",
+      "loose props spill"
+    ],
+    "objectToConceptMap": {
+      "director booth": "harness layer",
+      "prop deck": "context engineering",
+      "script card": "prompt engineering",
+      "actor": "coding agent",
+      "loose props spill": "unorchestrated context"
+    },
+    "spatialLayout": "vertical layer stack with stage output on the right",
+    "entryPoint": "top director booth",
+    "exitPoint": "right-side output curtain",
+    "failureBranch": "unmanaged props slide off the deck to the side",
+    "comparisonAxis": "orchestrated stack vs isolated layers",
+    "evidenceArtifact": "script remains visible on the stage even with the harness booth above it",
+    "dominantMotion": "top-down cueing and rightward scene output",
+    "forbiddenTemplate": "three generic stacked boxes with definitions inside",
+    "visualSaliencePlan": "See the top booth first, then the prop deck, then the actor and script on the stage.",
+    "hotPathEncoding": "cyan booth, cue rail, prop deck highlights, and output lane to the curtain",
+    "secondaryPathEncoding": "loose props spill is red and off-axis",
+    "diagramIntent": "layered-control",
+    "formalFramework": "c4",
+    "sceneFamilyCandidates": [
+      "layered-theater-stack",
+      "machine-room-hub",
+      "control-room-levers"
+    ],
+    "selectedSceneFamily": "layered-theater-stack",
+    "selectionReason": "The lesson is fundamentally about stacked responsibilities and top-down orchestration, which the theater stack explains more directly than a system hub.",
+    "formalCompanionSuggested": "recommended",
+    "salienceGoal": {
+      "first": "director booth",
+      "second": "prop/context deck",
+      "third": "script-guided stage output"
+    },
+    "silhouetteContrastRules": "Booth should feel supervisory, prop deck shelf-like, script small and paper-like, actor organic, and curtain directional.",
+    "propInventory": [
+      "cue rail",
+      "relevant file props",
+      "loose props spill"
+    ],
+    "textureInventory": [
+      "curtain edges",
+      "stage border lines"
+    ]
+  },
+  {
+    "lessonTitle": "From Cloud Agents to Autonomous Production Cycles",
+    "lessonSlug": "production-cycle",
+    "archetype": "type_b",
+    "coreMechanism": "background automation chains request intake, cloud execution, artifact review, notification, and scheduled re-runs into a repeatable loop",
+    "what": "Shows harnessing as a production cycle instead of a one-off chat session.",
+    "how": "An operations loop cycles through request queue, cloud workers, PR/notification, daily checks, and triggers the next run.",
+    "why": "The loop makes autonomous maintenance and recurring execution practical.",
+    "realWorldAnchor": "A website update workflow runs in the cloud, opens a PR, pings Slack, and rechecks daily for new model releases.",
+    "mentalModel": "A night-shift operations room where the same loop keeps the system current without a human watching every minute.",
+    "edgeCase": "Only real changes should escalate to a human handoff instead of generating noisy output every day.",
+    "primaryEntities": [
+      "request queue",
+      "cloud agent",
+      "PR board",
+      "daily watcher",
+      "ops board",
+      "human handoff gate"
+    ],
+    "primaryFlow": "request queue -> cloud agent -> PR board -> daily watcher -> request queue",
+    "mainConstraint": "The loop must keep running in the background and only surface meaningful updates.",
+    "tradeoff": "Autonomy reduces manual checking but requires reliable trigger, review, and notification gates.",
+    "physicalAnalogy": "A night operations room with a closed route between intake, workers, review board, and recurring patrol.",
+    "labelFusion": "Slack, cloud, PR, and daily check labels are attached to the stations in the loop.",
+    "compositionIntent": "Perimeter cycle around an ops board with a clearly weaker red branch to human escalation.",
+    "hotPath": "request queue -> cloud agent -> PR board -> daily watcher -> request queue",
+    "secondaryPaths": [
+      "human handoff for real updates"
+    ],
+    "mustShow": [
+      "closed production loop",
+      "cloud execution",
+      "recurring trigger",
+      "escalation branch"
+    ],
+    "mustNotShow": [
+      "linear one-way pipeline",
+      "chat bubble metaphor"
+    ],
+    "visualSceneType": "night-ops-cycle",
+    "sceneObjects": [
+      "request queue",
+      "cloud agent",
+      "PR board",
+      "daily watcher",
+      "ops board",
+      "human handoff"
+    ],
+    "objectToConceptMap": {
+      "request queue": "Slack trigger / incoming work",
+      "cloud agent": "background cloud execution",
+      "PR board": "artifact + notification output",
+      "daily watcher": "scheduled automation",
+      "human handoff": "review only when needed"
+    },
+    "spatialLayout": "diamond-like perimeter loop around a central ops board",
+    "entryPoint": "left request queue",
+    "exitPoint": "back into request queue / recurring loop",
+    "failureBranch": "real-change escalation branches to a red human handoff gate",
+    "comparisonAxis": "continuous production loop vs manual one-off runs",
+    "evidenceArtifact": "the same request queue is reached again after the daily watcher station",
+    "dominantMotion": "clockwise perimeter loop",
+    "forbiddenTemplate": "straight row of automation labels",
+    "visualSaliencePlan": "See the closed cyan loop first, then the cloud agent at the top, then the red human handoff branch.",
+    "hotPathEncoding": "cyan-filled perimeter stations with thick clockwise arrows",
+    "secondaryPathEncoding": "human handoff branch is red and lower-right",
+    "diagramIntent": "workflow-process",
+    "formalFramework": "bpmn",
+    "sceneFamilyCandidates": [
+      "relay-loop-track",
+      "dispatch-control-room",
+      "mission-control-board"
+    ],
+    "selectedSceneFamily": "relay-loop-track",
+    "selectionReason": "The lesson is a repeating production loop with request intake, execution, review, and scheduled re-entry, so a cyclic relay/ops loop is the clearest teaching world.",
+    "formalCompanionSuggested": "strongly-recommended",
+    "salienceGoal": {
+      "first": "closed production loop",
+      "second": "cloud agent station",
+      "third": "human escalation branch"
+    },
+    "silhouetteContrastRules": "Request queue, cloud agent, PR board, watcher, and escalation handoff should each have different station identities so the loop does not collapse into a ring of same-size cards.",
+    "propInventory": [
+      "ops board",
+      "daily watcher cue",
+      "human handoff gate"
+    ],
+    "textureInventory": [
+      "perimeter loop markings",
+      "night-ops floor route"
+    ]
+  }
+]

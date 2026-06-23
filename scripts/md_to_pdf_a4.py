@@ -52,27 +52,78 @@ FONT_MONO = "Courier"
 
 import platform as _platform
 
-def _find_font(mac_path: str, win_candidates: list[str]) -> str | None:
-    """Return the correct font path for the current OS only."""
-    if _platform.system() == "Darwin":
+def _first_existing(candidates: list[str]) -> str | None:
+    for candidate in candidates:
+        if candidate and Path(candidate).exists():
+            return candidate
+    return None
+
+
+def _find_font(
+    mac_path: str,
+    win_candidates: list[str],
+    linux_candidates: list[str] | None = None,
+    env_var: str | None = None,
+) -> str | None:
+    """Return the best font path for the current OS, with env override support.
+
+    Linux/WSL support is important here because WSL can often reuse Windows fonts
+    mounted under /mnt/c/Windows/Fonts even when the runtime OS is Linux.
+    """
+    if env_var:
+        override = os.environ.get(env_var)
+        if override and Path(override).exists():
+            return override
+
+    system = _platform.system()
+    if system == "Darwin":
         return mac_path if Path(mac_path).exists() else None
-    if _platform.system() == "Windows":
-        for c in win_candidates:
-            if Path(c).exists():
-                return c
+    if system == "Windows":
+        return _first_existing(win_candidates)
+    if system == "Linux":
+        return _first_existing(linux_candidates or [])
     return None
 
 _HAND_PATH = _find_font(
     "/System/Library/Fonts/Supplemental/Bradley Hand Bold.ttf",
     [r"C:\Windows\Fonts\segoepr.ttf", r"C:\Windows\Fonts\segoeprb.ttf", r"C:\Windows\Fonts\georgia.ttf"],
+    [
+        "/mnt/c/Windows/Fonts/segoepr.ttf",
+        "/mnt/c/Windows/Fonts/segoeprb.ttf",
+        "/usr/share/fonts/truetype/msttcorefonts/Comic_Sans_MS.ttf",
+        "/usr/share/fonts/truetype/msttcorefonts/comic.ttf",
+        "/usr/share/fonts/truetype/ubuntu/Ubuntu-Italic[wdth,wght].ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf",
+    ],
+    env_var="GOODNOTES_HAND_FONT",
 )
 _BODY_PATH = _find_font(
     "/System/Library/Fonts/Supplemental/Comic Sans MS.ttf",
     [r"C:\Windows\Fonts\comic.ttf"],
+    [
+        "/mnt/c/Windows/Fonts/comic.ttf",
+        "/mnt/c/Windows/Fonts/Comic.ttf",
+        "/usr/share/fonts/truetype/msttcorefonts/Comic_Sans_MS.ttf",
+        "/usr/share/fonts/truetype/msttcorefonts/comic.ttf",
+        "/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf",
+        "/usr/share/fonts/truetype/ubuntu/Ubuntu[wdth,wght].ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    ],
+    env_var="GOODNOTES_BODY_FONT",
 )
 _BOLD_PATH = _find_font(
     "/System/Library/Fonts/Supplemental/Comic Sans MS Bold.ttf",
     [r"C:\Windows\Fonts\comicbd.ttf", r"C:\Windows\Fonts\comic.ttf"],
+    [
+        "/mnt/c/Windows/Fonts/comicbd.ttf",
+        "/mnt/c/Windows/Fonts/comic.ttf",
+        "/usr/share/fonts/truetype/msttcorefonts/Comic_Sans_MS_Bold.ttf",
+        "/usr/share/fonts/truetype/msttcorefonts/comicbd.ttf",
+        "/usr/share/fonts/truetype/ubuntu/Ubuntu-B.ttf",
+        "/usr/share/fonts/truetype/ubuntu/Ubuntu[wdth,wght].ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    ],
+    env_var="GOODNOTES_BOLD_FONT",
 )
 
 def _reg(name: str, path: str | None) -> str:
@@ -88,31 +139,32 @@ FONT_HAND = _reg("BradleyHand",   _HAND_PATH)
 FONT_BODY = _reg("ComicSans",     _BODY_PATH)
 FONT_BOLD = _reg("ComicSansBold", _BOLD_PATH)
 
-PAGE_BG = colors.HexColor("#FFFEF5")
-RULE = colors.HexColor("#D6E4F7")
-MARGIN_LINE = colors.HexColor("#F4A7A7")
-HEADER_BG = colors.HexColor("#3A5FA0")
-HEADER_FG = colors.white
-BODY_FG = colors.HexColor("#2C2C2C")
-SUB_FG = colors.HexColor("#1A3A6B")
-CARD_YELLOW = colors.HexColor("#FFF9C4")
-CARD_YELLOW_EDGE = colors.HexColor("#F5C518")
-CARD_GREEN = colors.HexColor("#D4EDDA")
-CARD_GREEN_EDGE = colors.HexColor("#2ECC71")
-CARD_CODE = colors.HexColor("#EEF2E5")
-CARD_CODE_FG = colors.HexColor("#274218")
-CARD_LABEL = colors.HexColor("#FFF0C2")
-FOOTER_FG = colors.HexColor("#888888")
+PAGE_BG = colors.HexColor("#F5EDDA")   # sepia parchment
+RULE = colors.HexColor("#C8B99A")      # warm sepia ruled lines
+MARGIN_LINE = colors.HexColor("#C49A6C")  # amber margin line
+UNRULED_PAPER = os.environ.get("GOODNOTES_RULED", "false").lower() not in {"1", "true", "yes", "on"}
+HEADER_BG = colors.HexColor("#5C3D1E")   # dark sepia header
+HEADER_FG = colors.HexColor("#FEF6E4")   # cream header text
+BODY_FG = colors.HexColor("#2B1D0E")     # dark brown body text
+SUB_FG = colors.HexColor("#6B3A1F")      # warm brown sub-heading
+CARD_YELLOW = colors.HexColor("#F7ECCC")
+CARD_YELLOW_EDGE = colors.HexColor("#C8923A")
+CARD_GREEN = colors.HexColor("#E8E0D0")
+CARD_GREEN_EDGE = colors.HexColor("#7A6040")
+CARD_CODE = colors.HexColor("#EAE2D2")
+CARD_CODE_FG = colors.HexColor("#3A3020")
+CARD_LABEL = colors.HexColor("#F5E6C8")
+FOOTER_FG = colors.HexColor("#9B7653")
 
 SECTION_COLORS = {
-    "normal": (colors.HexColor("#DFF0E2"), colors.HexColor("#23663A")),
-    "flashcard": (CARD_YELLOW, colors.HexColor("#6D4C00")),
-    "exam": (CARD_GREEN, colors.HexColor("#155724")),
-    "warning": (colors.HexColor("#FFF3CD"), colors.HexColor("#856404")),
-    "revision": (colors.HexColor("#EDE7F6"), colors.HexColor("#4A2A84")),
-    "bullets": (colors.HexColor("#FCE4EC"), colors.HexColor("#880E4F")),
-    "process": (colors.HexColor("#E0F7FA"), colors.HexColor("#006064")),
-    "code": (colors.HexColor("#E6F3E6"), colors.HexColor("#255D2A")),
+    "normal": (colors.HexColor("#EDE0C8"), colors.HexColor("#4A2C0A")),
+    "flashcard": (colors.HexColor("#F7ECCC"), colors.HexColor("#6D4C00")),
+    "exam": (colors.HexColor("#E8E0D0"), colors.HexColor("#3B2A12")),
+    "warning": (colors.HexColor("#F5E6C8"), colors.HexColor("#7A4500")),
+    "revision": (colors.HexColor("#EDE3D5"), colors.HexColor("#5C3319")),
+    "bullets": (colors.HexColor("#F2E3D0"), colors.HexColor("#6B2D0E")),
+    "process": (colors.HexColor("#E4DDD0"), colors.HexColor("#3A2B1A")),
+    "code": (colors.HexColor("#EAE2D2"), colors.HexColor("#3A3020")),
 }
 
 SECTION_KEYWORDS = {
@@ -431,25 +483,24 @@ def page_background(canvas, doc):
     canvas.setFillColor(PAGE_BG)
     canvas.rect(0, 0, width, height, fill=1, stroke=0)
 
-    # Draw squared paper grid across the writing area.
-    canvas.setStrokeColor(RULE)
-    canvas.setLineWidth(0.25)
-    y = height - 22 * mm
-    while y > 12 * mm:
-        canvas.line(0, y, width, y)
-        y -= grid
-    x = 0
-    while x <= width:
-        canvas.line(x, 12 * mm, x, height - 22 * mm)
-        x += grid
+    if not UNRULED_PAPER:
+        # Optional ruled mode for users who prefer lined paper.
+        canvas.setStrokeColor(RULE)
+        canvas.setLineWidth(0.3)
+        y = height - 22 * mm
+        while y > 12 * mm:
+            canvas.line(0, y, width, y)
+            y -= grid
 
-    canvas.setStrokeColor(MARGIN_LINE)
-    canvas.setLineWidth(0.8)
-    canvas.line(18 * mm, 0, 18 * mm, height)
+        canvas.setStrokeColor(MARGIN_LINE)
+        canvas.setLineWidth(0.8)
+        canvas.line(18 * mm, 0, 18 * mm, height)
+
     canvas.setLineWidth(0.4)
     canvas.line(20 * mm, 9 * mm, width - 15 * mm, 9 * mm)
     canvas.setFillColor(FOOTER_FG)
     canvas.setFont(FONT_BODY, 7)
+    canvas.setFillColor(colors.HexColor("#9B7653"))
     canvas.drawCentredString(width / 2, 5 * mm, f"Study Notes  .  GoodNotes A4  .  {canvas.getPageNumber()}")
     canvas.restoreState()
 
