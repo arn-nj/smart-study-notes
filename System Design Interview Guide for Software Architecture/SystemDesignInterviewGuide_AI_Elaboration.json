@@ -1,0 +1,247 @@
+{
+  "pages": {
+    "1": {
+      "Concept Focus": [
+        "This page is the navigation hub for the notebook and groups lessons by likely interview use-case."
+      ]
+    },
+    "2": {
+      "Concept Focus": [
+        "Structured interview decomposition is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to the interview framework by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Introduction to the Interview Series degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Introduction to the Interview Series."
+      ]
+    },
+    "3": {
+      "Concept Focus": [
+        "Matching storage engines to data shape, query pattern, and scale constraints is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to Introduction to the Interview Series by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Choosing the Right Database degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Choosing the Right Database."
+      ]
+    },
+    "4": {
+      "Concept Focus": [
+        "Unique token generation plus low-latency redirect lookup is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to Choosing the Right Database by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in URL Shortener System Design degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in URL Shortener System Design."
+      ]
+    },
+    "5": {
+      "Concept Focus": [
+        "Availability search, reservation hold, and transactional booking confirmation under concurrency is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to URL Shortener System Design by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Airbnb / Booking.com System Design degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Airbnb / Booking.com System Design."
+      ]
+    },
+    "6": {
+      "Concept Focus": [
+        "Service decomposition across catalog, search, inventory, cart, orders, payments, and media delivery is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to Airbnb / Booking.com System Design by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Amazon-Style Commerce System degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Amazon-Style Commerce System."
+      ]
+    },
+    "7": {
+      "Concept Focus": [
+        "Persistent connection routing plus durable message fan-out and delivery receipts is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to Amazon-Style Commerce System by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in WhatsApp-Style Chat System degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in WhatsApp-Style Chat System."
+      ]
+    },
+    "8": {
+      "Concept Focus": [
+        "Channel-agnostic event ingestion with pluggable delivery handlers and retry policies is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to WhatsApp-Style Chat System by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Notification System at Scale degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Notification System at Scale."
+      ]
+    },
+    "9": {
+      "Concept Focus": [
+        "Real-time location ingestion, nearest-driver matching, trip state transitions, and payment completion is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to Notification System at Scale by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Uber-Style Ride Hailing degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Uber-Style Ride Hailing."
+      ]
+    },
+    "10": {
+      "Concept Focus": [
+        "Tweet write path, follower graph fan-out, and feed retrieval under celebrity skew is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to Uber-Style Ride Hailing by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Twitter-Style Feed System degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Twitter-Style Feed System."
+      ]
+    },
+    "11": {
+      "Concept Focus": [
+        "Social graph, media distribution, ranking, and notification coordination for a consumer network is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to Twitter-Style Feed System by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Facebook / Instagram Feed & Social Graph degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Facebook / Instagram Feed & Social Graph."
+      ]
+    },
+    "12": {
+      "Concept Focus": [
+        "Upload, transcoding, storage, cdn distribution, recommendation, and playback analytics is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to Facebook / Instagram Feed & Social Graph by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in YouTube / Netflix Video Platform degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in YouTube / Netflix Video Platform."
+      ]
+    },
+    "13": {
+      "Concept Focus": [
+        "Session setup, media routing, participant state, and optional recording under real-time latency constraints is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to YouTube / Netflix Video Platform by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Zoom / Video Calling System degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Zoom / Video Calling System."
+      ]
+    },
+    "14": {
+      "Concept Focus": [
+        "Map tile serving, geospatial indexing, routing computation, live traffic updates, and search integration is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to Zoom / Video Calling System by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Google Maps / Location Platform degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Google Maps / Location Platform."
+      ]
+    },
+    "15": {
+      "Concept Focus": [
+        "Failure prevention through disciplined scoping, estimation, and trade-off narration is the page's core technical anchor."
+      ],
+      "Connecting Dots": [
+        "This lesson connects to Google Maps / Location Platform by reusing the same requirement-first reasoning pattern."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same decision logic appears in adjacent system-design problems whenever a hot path must stay fast while side effects move async."
+      ],
+      "Implications": [
+        "If you optimize the wrong storage or routing path first, the visible user journey in Biggest Mistakes to Avoid degrades before the rest of the system does."
+      ],
+      "Edge Case": [
+        "The edge case to watch is burst traffic or concurrent writes landing on the same critical resource in Biggest Mistakes to Avoid."
+      ]
+    }
+  }
+}

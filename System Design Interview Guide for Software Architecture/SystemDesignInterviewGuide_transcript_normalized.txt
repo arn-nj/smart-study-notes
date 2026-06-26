@@ -1,0 +1,111 @@
+=== Section ===
+Introduction
+
+--- Lesson ---
+Introduction
+
+Hi Everyone, welcome to the System Design Interview Preparation Series from CodeKarle. So if you are giving interviews and want to make sure that you really nail your System Design Interview, then this series is for you. We'll cover two important things as part of the series: 1) The most common interview questions that most companies are asking these days 2) We'll look at some important topics that you need to be well aware of before you go for a Design Interview. So, continue watching and Happy Learning!!
+
+=== Section ===
+Choosing the right Database
+
+--- Lesson ---
+Choosing the Right DB
+
+Hi everyone. Let's talk about databases now. So in your system design interview how good your design is and how well it can scale depends very much on the choice of database that you've used. Now databases generally do not impact your functional requirements, so whatever your functional requirement is you can satisfy that by using any database that you want. But normally the non-functional requirements are the ones which are impacted by the choice of database. So let's just say you have certain query patterns, or certain kind of a data structure or certain kind of a scale to handle, there are a different set of databases optimized for different kinds of such things, right. So based on the choice of database it would impact how well your design can scale up to the requirements that are give
+
+=== Section ===
+System design case studies - Practical real world applications
+
+--- Lesson ---
+URL Shortner System Design
+
+Hello everyone! Welcome to codeKarle. In this video we'll be talking about possibly one of the most common system design interview question. So let's see how do we design a URL shortening service, something very similar to tinyurl.com. Let's start with the functional (FRs) and non functional requirements (NFRs). This is a fairly straightforward problem. You have these two functional requirements - given a long URL, you get a short URL. So, when somebody wants to shorten the URL, they'll give you a long URL and you need to return a shorter URL for that. On the other side, when somebody hits a short URL then you basically redirect the person to the longer URL, which is the second point. On the non-functional side, this service needs to be highly available and it should work at a very low lat
+
+=== Section ===
+System design case studies - Practical real world applications
+
+--- Lesson ---
+Airbnb / Booking.com System Design
+
+Hi everyone! Welcome to CodeKarle. My name is Sandeep in this video we will be looking at a very common design interview problem which has been asked by a lot of companies lately so let's look at how do we design a hotel booking system something very similar to booking.com or airbnb but just one thing to call out we will be looking at a very high level architecture of the whole system and not at a lower level class diagram and all of that in this video so before we jump into the problem let's first look at the functional requirements then we look at the non-functional requirements of what we want to achieve and then we look at the design so we have two major consumers of this application one is the hotel side of users and then there are the consumers who want to book the hotel so for the h
+
+=== Section ===
+What not to do
+
+--- Lesson ---
+Amazon System Design
+
+Hi everyone! Welcome to CodeKarle. In this video, we'll be looking at another very common System Design Interview problem, which is to design an ecommerce application, something very similar to Amazon or Flipkart or anything of that sort. Let's look at some functional and non-functional requirements(NFRs) that this platform should support. So the very first thing is that people should be able to search for whatever product they want to buy and along with searching we should also be able to tell them whether we can deliver it to them or not. So let's just say a particular user is in a very remote location where we cannot deliver a particular product then we should clearly call it out right on the search page. Why? -  because let's say a user has seen hundred products and then they go to che
+
+=== Section ===
+Let’s review our learnings.
+
+--- Lesson ---
+Whatsapp System Design
+
+1 Hello everyone!! 2 This is another video in the system design interview preparation series from codeKarle. 3 So, in this video let's talk about how do we design a chat application, 4 something like a WhatsApp or a Facebook Messenger 5 or any other messenger of that sort. 6 Now, let's look at some functional and 7 non-functional requirements that this platform needs to support. 8 We will support a One-to-One Chat wherein a person can send a message to another person or a user. 9 There would be something called a Group Chat where 10 somebody could make a group of people and whenever anybody in the group 11 sends a message to the group, that message is received by everybody in the group. 12 The messages could contain text, it could contain images, it could contain videos 13 and then it coul
+
+=== Section ===
+Let’s review our learnings.
+
+--- Lesson ---
+Notification System at scale
+
+Hello, everyone! In this video, we'll look at how can we design a notification service that is scalable enough. This is never a stand alone system but this is always embedded in some other system design. Even I have used it in a lot of other system designs videos that I have made. Let's say if you are building a e-commerce application or a booking system or anything of that sort. You'll always have a notification service which will be used to notify your consumers. Let's look at how can we build a notification service. Now let's look at some Functional (FRs) and Non Functional Requirements (NFRs) that this platform should support. The very obvious first thing is that it should be able to send notifications. The next thing is that it should be pluggable. Now what does pluggable mean? So let
+
+=== Section ===
+Let’s review our learnings.
+
+--- Lesson ---
+Uber System Design
+
+Hello, everyone!! Myself Sandeep from codeKarle. And in this video, let's look at how do we design a cab booking system, something like an Uber or OLA or Lyft or something of that sort. Let's start with the functional and non functional requirements that we want this system to support. So, very first thing is - as a customer, when you open your app, you should be able to see what cabs are around you. So, that is the See Cab feature in your vicinity. The next thing is - if you want to book a cab from one place, point A to point B let's say, you need to know how much time it will take to travel from point A to point B. And, you should be able to get an approximate price of how much would it cost you to book a cab via this platform. The next thing is - you should obviously be able to book a c
+
+=== Section ===
+Let’s review our learnings.
+
+--- Lesson ---
+Twitter System Design
+
+Hello everyone!! This is another video from the Design Interview Preparation Series from CodeKarle. So in this video let's look at how do we design Twitter. Let's look at some of the Functional and Non-Functional Requirements that we want this platform to support. So from the functional side, the very first thing is we should be able to Tweet, which is basically saying that we should be able to post a content of 140 characters length. It could have a image, it could have a video content, it would probably have links to external websites and all of that, okay. The second requirement is something called Re-Tweet. So if somebody has tweeted something, you should be able to Re-Tweet that, which is very similar to a share on Facebook. The next thing is you should be able to follow someone. Now 
+
+=== Section ===
+Let’s review our learnings.
+
+--- Lesson ---
+Facebook / Instagram System Design
+
+Hello everyone!! Welcome to CodeKarle. In this video we will be talking about how to design a social network like Facebook. The important thing to get take care of here is, how do we design a system that can scale up to the requirements that Facebook has. Now I have already made a video on how to be device twitter, so I would recommend to watch that video first because this video takes an inspiration of that video and tries to take it to the next level by making some changes which can help that system scale to a much larger volume at a lower cost and in a much scalable way. Now the same system can be used for any other social network as well, like Instagram, LinkedIn or even Twitter for that matter. So yeah let's get started! Let's look at some of the functional and non-functional requirem
+
+=== Section ===
+Let’s review our learnings.
+
+--- Lesson ---
+YouTube / Netflix System Design
+
+Hello everyone, myself Sandeep from CodeKarle. In this video will be looking at one of the most common interview problems being asked in product companies these days, which is how do you build a video streaming platform, something very similar to a Netflix or YouTube, Amazon Prime, Hotstar, anything of that sort. So now let's look at some of the functional and non-functional requirements that we want this platform to support. So the very first thing is people should be able to come up and upload video. Now, those people could be individuals like you and me, or it could be production houses who are uploading their movie and songs and all of that. But all of those people should be able to upload video. Now as a convention, we will be calling all such people who are uploading videos as produc
+
+=== Section ===
+Let’s review our learnings.
+
+--- Lesson ---
+Zoom System Design
+
+Hello everyone!! This is another video in the system design interview preparation series from codeKarle. Now, this is something that has lately been asked very frequently by a lot of companies. So, let's look at how do we build a video conferencing application or a video chatting application, something very similar to Zoom or WebEx or WhatsApp video call or Facebook video call, Google Hangouts. There are a lot of apps these days. So, let's try to build one of them. Also, near the end, we'll try to look at how could we enhance this platform to build a live streaming system. Something, for example, if you want to stream a live speech of a politician, or if you want to stream a live game or match, how do you do that to millions of users? Let's look at some of the functional and non-functional
+
+=== Section ===
+Let’s review our learnings.
+
+--- Lesson ---
+Google Maps System Design
+
+Hi everyone!! Welcome to CodeKarle. My name is Sandeep, and in this video we'll go over how do we design a navigation application like Google Maps. Now let's go over some Functional and Non Functional Requirements(NFRs) that we want this platform to support. So the very first thing is when a person wants to move from point A to point B, this platform should be able to give them a couple of information . 1) What is the route that they should follow 2) Given that route how much distance they'll have to cover and how much time it will take. As an enhanced variant we could also build a system in which we show them 2-3 routes and then let them choose that they want to minimize the distance or minimize the time. 3) The next thing is that it should have a very pluggable model. So let's say we mak
+
+=== Section ===
+Let’s review our learnings.
+
+--- Lesson ---
+Biggest mistakes to avoid in the interview
+
+Let's look at some of the biggest mistakes that candidates make in a System Design interview. A lot of times people don't even ask whether it's a low level design or a high level design that you need and straightaway jump to a class level diagram making classes, functions and all of that. And that's not right, in case the interviewer is expecting a high level design. So make sure you clarify what exactly you want before you actually go present a solution. The next thing which is very similar again, is let's say if the interviewer asked you to design Uber and let's say, you know how Uber is built. Don't jump straight into the solution. Right! Why? Because Uber has a lot of functionality, maybe the interviewer was actually interested in a couple of specific ones. Right! So just clarify befor

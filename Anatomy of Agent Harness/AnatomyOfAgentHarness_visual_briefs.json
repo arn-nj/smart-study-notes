@@ -1,0 +1,1936 @@
+{
+  "course": "AnatomyOfAgentHarness",
+  "chapters": [
+    {
+      "chapterTitle": "Foundation Models Changed the Build Sequence",
+      "chapterSlug": "foundation-models-changed-build-sequence",
+      "archetype": "type_a",
+      "coreMechanism": "foundation-model APIs removing model-training bottlenecks so agent design moves earlier in the product lifecycle",
+      "what": "Foundation Models Changed the Build Sequence explains foundation-model APIs removing model-training bottlenecks so agent design moves earlier in the product lifecycle.",
+      "how": "It works by mapping Foundation models, Agent design, Product-first validation into the scene objects old engine forge, foundation API dock, product test lane, deferred data workshop.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why foundation models made agent design an early architectural decision instead of a late implementation detail.",
+      "mentalModel": "a factory that no longer needs to build its own engine before testing a new vehicle design",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress foundation models changed the build sequence beyond short demo conditions.",
+      "primaryEntities": [
+        "Foundation models",
+        "Agent design",
+        "Product-first validation"
+      ],
+      "primaryFlow": [
+        "old forge bypass",
+        "API dock",
+        "product test lane"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a factory that no longer needs to build its own engine before testing a new vehicle design",
+      "labelFusion": "Foundation Models Changed the Build Sequence labels embedded directly in the visual metaphor",
+      "compositionIntent": "left-to-right transition from heavy training to fast product validation",
+      "hotPath": "old forge bypass -> API dock -> product test lane",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "foundation-model APIs removing model-training bottlenecks so agent design moves earlier in the product lifecycle",
+        "Foundation models",
+        "old forge bypass -> API dock -> product test lane",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "factory-upgrade",
+      "sceneObjects": [
+        "old engine forge",
+        "foundation API dock",
+        "product test lane",
+        "deferred data workshop"
+      ],
+      "objectToConceptMap": {
+        "old engine forge": "Foundation models",
+        "foundation API dock": "Agent design",
+        "product test lane": "Product-first validation",
+        "deferred data workshop": "foundation-model APIs removing model-training bottlenecks so agent design moves earlier in the product lifecycle"
+      },
+      "spatialLayout": "left-to-right transition from heavy training to fast product validation",
+      "entryPoint": "old forge bypass",
+      "exitPoint": "product test lane",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "old forge bypass -> API dock -> product test lane",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "engine forge",
+        "api dock",
+        "test lane",
+        "bypass chute",
+        "deferred workshop",
+        "vehicle frame"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.35,
+        "requireAtLeast": [
+          "machine",
+          "route",
+          "dock",
+          "workspace"
+        ]
+      },
+      "forbiddenGeometry": [
+        "before/after text boxes only",
+        "three equal rectangles labeled training/api/product"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 10,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer see that API access removes an earlier engine-building bottleneck and moves product testing forward?"
+      }
+    },
+    {
+      "chapterTitle": "Canvas Planning Shows the Demo-to-Production Gap",
+      "chapterSlug": "canvas-planning-demo-production-gap",
+      "archetype": "type_a",
+      "coreMechanism": "separate planning canvases exposing the difference between a proof-of-concept agent and a production-ready one",
+      "what": "Canvas Planning Shows the Demo-to-Production Gap explains separate planning canvases exposing the difference between a proof-of-concept agent and a production-ready one.",
+      "how": "It works by mapping POC canvas, Production canvas, Demo reliability gap into the scene objects POC blueprint, production blueprint, fault-tolerance add-ons, governance checklist.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "How planning surfaces reveal why a working demo is not the same as a production harness.",
+      "mentalModel": "an architect using one blueprint to prove the concept and another to carry real-world load, faults, and regulations",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress canvas planning shows the demo-to-production gap beyond short demo conditions.",
+      "primaryEntities": [
+        "POC canvas",
+        "Production canvas",
+        "Demo reliability gap"
+      ],
+      "primaryFlow": [
+        "POC plan",
+        "production plan",
+        "scale/fault overlays"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "an architect using one blueprint to prove the concept and another to carry real-world load, faults, and regulations",
+      "labelFusion": "Canvas Planning Shows the Demo-to-Production Gap labels embedded directly in the visual metaphor",
+      "compositionIntent": "left panel proves concept, right panel absorbs production constraints",
+      "hotPath": "POC plan -> production plan -> scale/fault overlays",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "separate planning canvases exposing the difference between a proof-of-concept agent and a production-ready one",
+        "POC canvas",
+        "POC plan -> production plan -> scale/fault overlays",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "dual-blueprint-comparison",
+      "sceneObjects": [
+        "POC blueprint",
+        "production blueprint",
+        "fault-tolerance add-ons",
+        "governance checklist"
+      ],
+      "objectToConceptMap": {
+        "POC blueprint": "POC canvas",
+        "production blueprint": "Production canvas",
+        "fault-tolerance add-ons": "Demo reliability gap",
+        "governance checklist": "separate planning canvases exposing the difference between a proof-of-concept agent and a production-ready one"
+      },
+      "spatialLayout": "left panel proves concept, right panel absorbs production constraints",
+      "entryPoint": "POC plan",
+      "exitPoint": "scale/fault overlays",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "demo-speed vs production-reliability",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "POC plan -> production plan -> scale/fault overlays",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "poc blueprint",
+        "production blueprint",
+        "fault overlay stencil",
+        "governance checklist",
+        "load warning marker"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.35,
+        "requireAtLeast": [
+          "document",
+          "overlay",
+          "checklist"
+        ]
+      },
+      "forbiddenGeometry": [
+        "left box vs right box with paragraphs",
+        "venn diagram without blueprint mechanics"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 10,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer see why a demo blueprint is insufficient for production load and governance?"
+      }
+    },
+    {
+      "chapterTitle": "What the Agent Harness Actually Is",
+      "chapterSlug": "what-the-agent-harness-actually-is",
+      "archetype": "type_a",
+      "coreMechanism": "the complete software infrastructure around the model producing agent behavior",
+      "what": "What the Agent Harness Actually Is explains the complete software infrastructure around the model producing agent behavior.",
+      "how": "It works by mapping Agent harness, Emergent behavior, Infrastructure delta into the scene objects raw model core, memory rack, tool ports, safety relays.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "What practitioners mean when they say the harness is the product around the model.",
+      "mentalModel": "a machine room around a processor with memory racks, I/O ports, switches, and safety relays",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress what the agent harness actually is beyond short demo conditions.",
+      "primaryEntities": [
+        "Agent harness",
+        "Emergent behavior",
+        "Infrastructure delta"
+      ],
+      "primaryFlow": [
+        "model core",
+        "memory/tool/safety rails",
+        "user-facing behavior"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a machine room around a processor with memory racks, I/O ports, switches, and safety relays",
+      "labelFusion": "What the Agent Harness Actually Is labels embedded directly in the visual metaphor",
+      "compositionIntent": "center-out system view showing the harness surrounding the model",
+      "hotPath": "model core -> memory/tool/safety rails -> user-facing behavior",
+      "secondaryPaths": [
+        "scaling branch",
+        "governance branch"
+      ],
+      "mustShow": [
+        "the complete software infrastructure around the model producing agent behavior",
+        "Agent harness",
+        "model core -> memory/tool/safety rails -> user-facing behavior",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "machine-room-hub",
+      "sceneObjects": [
+        "raw model core",
+        "memory rack",
+        "tool ports",
+        "safety relays",
+        "loop console"
+      ],
+      "objectToConceptMap": {
+        "raw model core": "Agent harness",
+        "memory rack": "Emergent behavior",
+        "tool ports": "Infrastructure delta",
+        "safety relays": "the complete software infrastructure around the model producing agent behavior",
+        "loop console": "the complete software infrastructure around the model producing agent behavior"
+      },
+      "spatialLayout": "center-out system view showing the harness surrounding the model",
+      "entryPoint": "model core",
+      "exitPoint": "user-facing behavior",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "model core -> memory/tool/safety rails -> user-facing behavior",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "central engine/core",
+        "memory rack",
+        "tool ports",
+        "safety rail",
+        "loop console",
+        "output chute",
+        "gauge"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.3,
+        "requireAtLeast": [
+          "core",
+          "module",
+          "route",
+          "safetyMarker"
+        ]
+      },
+      "forbiddenGeometry": [
+        "hub node with equal text spokes only",
+        "plain architecture card of boxes"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 10,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer see a real core plus attached support systems producing agent behavior?"
+      },
+      "silhouettePlan": "Make the model core a large rounded engine silhouette; keep memory as a tall rack, tool ports as a low connector bank, safety relays as a narrow warning cabinet, and the user-facing behavior as a directional output chute so roles are recognizable by outline alone.",
+      "propDensity": "Add 4 supporting props: gauge cluster, relay lines, plug-port circles, and a stability/capacity readout near the core; keep them quieter than the hot path.",
+      "asymmetryPlan": "Keep the core near center but cluster memory/tool systems to the left and safety/console systems to the right so the room feels inhabited rather than perfectly radial.",
+      "antiCardFraming": "Do not frame every subsystem as identical cards; use one rack, one port bank, one relay cabinet, and open connector rails around the core.",
+      "sceneTexture": "Use subtle machine-room floor wiring, short connector rails, and gauge marks to make the environment feel infrastructural without turning into background clutter.",
+      "premiumSceneTest": {
+        "objectSilhouettesDistinct": true,
+        "propDensitySupportsMetaphor": true,
+        "layoutNotPerfectGrid": true,
+        "notCardFramedByDefault": true,
+        "sceneTexturePresentButSubtle": true,
+        "primaryQuestion": "Does the scene feel like a real machine room around a model core rather than a hub-and-spoke box diagram?"
+      }
+    },
+    {
+      "chapterTitle": "Prompt, Context, and Harness Engineering",
+      "chapterSlug": "prompt-context-harness-engineering",
+      "archetype": "type_a",
+      "coreMechanism": "three concentric engineering layers around the model with increasing scope and control",
+      "what": "Prompt, Context, and Harness Engineering explains three concentric engineering layers around the model with increasing scope and control.",
+      "how": "It works by mapping Prompt engineering, Context engineering, Harness engineering into the scene objects script layer, prop/context layer, director/harness layer.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "How prompt engineering, context engineering, and harness engineering differ and build on one another.",
+      "mentalModel": "a theater stack where the script guides the actor, props support the scene, and a director controls the whole sequence",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress prompt, context, and harness engineering beyond short demo conditions.",
+      "primaryEntities": [
+        "Prompt engineering",
+        "Context engineering",
+        "Harness engineering"
+      ],
+      "primaryFlow": [
+        "script",
+        "props/context",
+        "director/harness"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a theater stack where the script guides the actor, props support the scene, and a director controls the whole sequence",
+      "labelFusion": "Prompt, Context, and Harness Engineering labels embedded directly in the visual metaphor",
+      "compositionIntent": "bottom-to-top layered control stack",
+      "hotPath": "script -> props/context -> director/harness",
+      "secondaryPaths": [
+        "scaling branch",
+        "governance branch"
+      ],
+      "mustShow": [
+        "three concentric engineering layers around the model with increasing scope and control",
+        "Prompt engineering",
+        "script -> props/context -> director/harness",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "layered-theater-stack",
+      "sceneObjects": [
+        "script layer",
+        "prop/context layer",
+        "director/harness layer"
+      ],
+      "objectToConceptMap": {
+        "script layer": "Prompt engineering",
+        "prop/context layer": "Context engineering",
+        "director/harness layer": "Harness engineering"
+      },
+      "spatialLayout": "bottom-to-top layered control stack",
+      "entryPoint": "script",
+      "exitPoint": "director/harness",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "script -> props/context -> director/harness",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "director booth",
+        "cue rail",
+        "prop deck",
+        "script card",
+        "stage",
+        "performer",
+        "output curtain",
+        "loose prop spill"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.3,
+        "requireAtLeast": [
+          "booth",
+          "stage",
+          "route",
+          "spill"
+        ]
+      },
+      "forbiddenGeometry": [
+        "three stacked labeled boxes",
+        "flat comparison table of prompt/context/harness"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 9,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer infer control layering without reading the words prompt, context, and harness?"
+      },
+      "silhouettePlan": "Make the director booth elevated and narrow, the cue rail long and horizontal, the prop deck wide and shelf-like, the script card compact and paper-like, and the actor/stage area visibly theatrical.",
+      "propDensity": "Add 4 supporting props: hanging cues, stacked props, stage rails, and curtain edges; keep props lighter than the director-to-output hot path.",
+      "asymmetryPlan": "Bias the stage action slightly rightward so the output curtain feels like the performance destination while the script and props sit lower and left of the actor.",
+      "antiCardFraming": "Avoid turning prompt/context/harness into three stacked info cards; preserve an actual stage world with open space, rails, booth, and props.",
+      "sceneTexture": "Use subtle curtain edges, stage borders, cue drops, and deck lines so the scene reads like a theater stack instead of a layered UI.",
+      "premiumSceneTest": {
+        "objectSilhouettesDistinct": true,
+        "propDensitySupportsMetaphor": true,
+        "layoutNotPerfectGrid": true,
+        "notCardFramedByDefault": true,
+        "sceneTexturePresentButSubtle": true,
+        "primaryQuestion": "Does the learner perceive a theater world with stacked control responsibilities rather than three framed layers?"
+      }
+    },
+    {
+      "chapterTitle": "The Orchestration Loop",
+      "chapterSlug": "orchestration-loop",
+      "archetype": "type_b",
+      "coreMechanism": "the ReAct or TAO loop that repeatedly assembles prompts, calls the model, executes tools, and repeats until done",
+      "what": "The Orchestration Loop explains the ReAct or TAO loop that repeatedly assembles prompts, calls the model, executes tools, and repeats until done.",
+      "how": "It works by mapping The Orchestration Loop, Harness component, Runtime responsibility into the scene objects prompt station, model station, tool station, observation station.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why the orchestration loop is the heartbeat of the harness.",
+      "mentalModel": "a conveyor belt passing one work card through think, act, observe, and repeat checkpoints",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress the orchestration loop beyond short demo conditions.",
+      "primaryEntities": [
+        "The Orchestration Loop",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "assemble",
+        "infer",
+        "act",
+        "observe",
+        "repeat"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a conveyor belt passing one work card through think, act, observe, and repeat checkpoints",
+      "labelFusion": "The Orchestration Loop labels embedded directly in the visual metaphor",
+      "compositionIntent": "circular loop with one highlighted lap",
+      "hotPath": "assemble -> infer -> act -> observe -> repeat",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "the ReAct or TAO loop that repeatedly assembles prompts, calls the model, executes tools, and repeats until done",
+        "The Orchestration Loop",
+        "assemble -> infer -> act -> observe -> repeat",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "relay-loop-track",
+      "sceneObjects": [
+        "prompt station",
+        "model station",
+        "tool station",
+        "observation station",
+        "termination gate"
+      ],
+      "objectToConceptMap": {
+        "prompt station": "The Orchestration Loop",
+        "model station": "Harness component",
+        "tool station": "Runtime responsibility",
+        "observation station": "the ReAct or TAO loop that repeatedly assembles prompts, calls the model, executes tools, and repeats until done",
+        "termination gate": "the ReAct or TAO loop that repeatedly assembles prompts, calls the model, executes tools, and repeats until done"
+      },
+      "spatialLayout": "circular loop with one highlighted lap",
+      "entryPoint": "assemble",
+      "exitPoint": "repeat",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "assemble -> infer -> act -> observe -> repeat",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "work card",
+        "prompt station",
+        "model station",
+        "tool station",
+        "observation station",
+        "repeat lane",
+        "termination gate"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.35,
+        "requireAtLeast": [
+          "station",
+          "route",
+          "gate"
+        ]
+      },
+      "forbiddenGeometry": [
+        "circular arrows around text labels only",
+        "five identical boxes in a row"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 11,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer follow one loop lap and see where repetition or termination happens?"
+      }
+    },
+    {
+      "chapterTitle": "Tools",
+      "chapterSlug": "tools",
+      "archetype": "type_c",
+      "coreMechanism": "schema-driven external actions that give the agent hands and interfaces",
+      "what": "Tools explains schema-driven external actions that give the agent hands and interfaces.",
+      "how": "It works by mapping Tools, Harness component, Runtime responsibility into the scene objects schema card, file tool, search tool, execution tool.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why tools turn model reasoning into controlled action.",
+      "mentalModel": "a tool wall where each instrument can only be picked through a labeled catalog card with validated inputs",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress tools beyond short demo conditions.",
+      "primaryEntities": [
+        "Tools",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "schema card",
+        "selected tool",
+        "sandbox",
+        "result chute"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a tool wall where each instrument can only be picked through a labeled catalog card with validated inputs",
+      "labelFusion": "Tools labels embedded directly in the visual metaphor",
+      "compositionIntent": "catalog-to-action flow from top-left to bottom-right",
+      "hotPath": "schema card -> selected tool -> sandbox -> result chute",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "schema-driven external actions that give the agent hands and interfaces",
+        "Tools",
+        "schema card -> selected tool -> sandbox -> result chute",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "tool-wall",
+      "sceneObjects": [
+        "schema card",
+        "file tool",
+        "search tool",
+        "execution tool",
+        "result chute"
+      ],
+      "objectToConceptMap": {
+        "schema card": "Tools",
+        "file tool": "Harness component",
+        "search tool": "Runtime responsibility",
+        "execution tool": "schema-driven external actions that give the agent hands and interfaces",
+        "result chute": "schema-driven external actions that give the agent hands and interfaces"
+      },
+      "spatialLayout": "catalog-to-action flow from top-left to bottom-right",
+      "entryPoint": "schema card",
+      "exitPoint": "result chute",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "schema card -> selected tool -> sandbox -> result chute",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "schema card",
+        "tool wall",
+        "selected tool",
+        "sandbox bench",
+        "result chute",
+        "blocked tool lock"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.35,
+        "requireAtLeast": [
+          "tool",
+          "workspace",
+          "route",
+          "lock"
+        ]
+      },
+      "forbiddenGeometry": [
+        "tool list as stacked text cards",
+        "schema -> tool -> result as three equal boxes"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 10,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer see that schema-governed selection gives the agent hands instead of raw text wishes?"
+      }
+    },
+    {
+      "chapterTitle": "Memory",
+      "chapterSlug": "memory",
+      "archetype": "type_a",
+      "coreMechanism": "multi-timescale storage hierarchy separating short-term conversation state from persistent long-term knowledge",
+      "what": "Memory explains multi-timescale storage hierarchy separating short-term conversation state from persistent long-term knowledge.",
+      "how": "It works by mapping Memory, Harness component, Runtime responsibility into the scene objects desk notes, index cards, topic shelves, archive boxes.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why memory must be designed as a hierarchy.",
+      "mentalModel": "a library with a desk notepad, index cards, and archive boxes for different memory timescales",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress memory beyond short demo conditions.",
+      "primaryEntities": [
+        "Memory",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "desk notes",
+        "index",
+        "shelf",
+        "archive"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a library with a desk notepad, index cards, and archive boxes for different memory timescales",
+      "labelFusion": "Memory labels embedded directly in the visual metaphor",
+      "compositionIntent": "top shelf to deep archive hierarchy",
+      "hotPath": "desk notes -> index -> shelf -> archive",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "multi-timescale storage hierarchy separating short-term conversation state from persistent long-term knowledge",
+        "Memory",
+        "desk notes -> index -> shelf -> archive",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "archive-tier-stack",
+      "sceneObjects": [
+        "desk notes",
+        "index cards",
+        "topic shelves",
+        "archive boxes"
+      ],
+      "objectToConceptMap": {
+        "desk notes": "Memory",
+        "index cards": "Harness component",
+        "topic shelves": "Runtime responsibility",
+        "archive boxes": "multi-timescale storage hierarchy separating short-term conversation state from persistent long-term knowledge"
+      },
+      "spatialLayout": "top shelf to deep archive hierarchy",
+      "entryPoint": "desk notes",
+      "exitPoint": "archive",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "desk notes -> index -> shelf -> archive",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "desk notes",
+        "card index",
+        "shelf",
+        "archive boxes",
+        "retrieval slip",
+        "librarian handoff"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.3,
+        "requireAtLeast": [
+          "note",
+          "index",
+          "shelf",
+          "archive"
+        ]
+      },
+      "forbiddenGeometry": [
+        "short-term/mid-term/long-term as identical labeled rectangles",
+        "memory cloud icons only"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 9,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer tell which memory tier is fastest and which is deepest/persistent?"
+      }
+    },
+    {
+      "chapterTitle": "Context Management",
+      "chapterSlug": "context-management",
+      "archetype": "type_b",
+      "coreMechanism": "smallest-possible high-signal token selection to avoid context rot and prompt degradation",
+      "what": "Context Management explains smallest-possible high-signal token selection to avoid context rot and prompt degradation.",
+      "how": "It works by mapping Context Management, Harness component, Runtime responsibility into the scene objects incoming crates, screening gate, high-signal truck, junk pile.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why context management is a production discipline, not a convenience feature.",
+      "mentalModel": "a cargo loader throwing out low-value boxes so only mission-critical crates fit on the truck",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress context management beyond short demo conditions.",
+      "primaryEntities": [
+        "Context Management",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "incoming crates",
+        "screening gate",
+        "high-signal truck"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a cargo loader throwing out low-value boxes so only mission-critical crates fit on the truck",
+      "labelFusion": "Context Management labels embedded directly in the visual metaphor",
+      "compositionIntent": "left-to-right filtering under truck capacity pressure",
+      "hotPath": "incoming crates -> screening gate -> high-signal truck",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "smallest-possible high-signal token selection to avoid context rot and prompt degradation",
+        "Context Management",
+        "incoming crates -> screening gate -> high-signal truck",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "cargo-screening-line",
+      "sceneObjects": [
+        "incoming crates",
+        "screening gate",
+        "high-signal truck",
+        "junk pile",
+        "subagent courier"
+      ],
+      "objectToConceptMap": {
+        "incoming crates": "Context Management",
+        "screening gate": "Harness component",
+        "high-signal truck": "Runtime responsibility",
+        "junk pile": "smallest-possible high-signal token selection to avoid context rot and prompt degradation",
+        "subagent courier": "smallest-possible high-signal token selection to avoid context rot and prompt degradation"
+      },
+      "spatialLayout": "left-to-right filtering under truck capacity pressure",
+      "entryPoint": "incoming crates",
+      "exitPoint": "high-signal truck",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "incoming crates -> screening gate -> high-signal truck",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "intake pile",
+        "screening gate",
+        "conveyor belt",
+        "accepted truck",
+        "reject pile",
+        "side courier lane",
+        "capacity marker"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.25,
+        "requireAtLeast": [
+          "gate",
+          "carrier",
+          "pile",
+          "route"
+        ]
+      },
+      "forbiddenGeometry": [
+        "input/filter/output boxes",
+        "equal visual weight on accept and reject paths"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 9,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer instantly see what gets through, what is discarded, and what capacity is constrained?"
+      },
+      "silhouettePlan": "Make the intake a pile of crates, the screening gate a barred checkpoint, the accepted path a truck silhouette with visible capacity, the reject path a loose dump pile, and the side path a small courier form.",
+      "propDensity": "Add 5 supporting props: crate variation, gate bars, truck wheels, capacity stripe, and courier wheels; keep them subordinate to the intake-gate-truck hot path.",
+      "asymmetryPlan": "Keep the accepted path strong and horizontal, push the reject pile downward, and place the courier side lane off-axis so the composition immediately shows priority vs side handling.",
+      "antiCardFraming": "Do not collapse input/filter/output into three boxes; preserve open cargo flow, loose piles, and a vehicle silhouette.",
+      "sceneTexture": "Use subtle floor-lane marks, gate bars, and truck body details to make the screening metaphor feel physical rather than abstract.",
+      "premiumSceneTest": {
+        "objectSilhouettesDistinct": true,
+        "propDensitySupportsMetaphor": true,
+        "layoutNotPerfectGrid": true,
+        "notCardFramedByDefault": true,
+        "sceneTexturePresentButSubtle": true,
+        "primaryQuestion": "Is it obvious at a glance what gets accepted, what gets discarded, and what capacity constrains the working set?"
+      }
+    },
+    {
+      "chapterTitle": "Prompt Construction",
+      "chapterSlug": "prompt-construction",
+      "archetype": "type_b",
+      "coreMechanism": "hierarchical assembly of system prompt, tool definitions, memory, history, and user message into the next model input",
+      "what": "Prompt Construction explains hierarchical assembly of system prompt, tool definitions, memory, history, and user message into the next model input.",
+      "how": "It works by mapping Prompt Construction, Harness component, Runtime responsibility into the scene objects system layer, tool layer, memory layer, history layer.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "How production harnesses assemble the actual model input each turn.",
+      "mentalModel": "a layered sandwich where the most important ingredients belong near the edges because the middle gets ignored first",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress prompt construction beyond short demo conditions.",
+      "primaryEntities": [
+        "Prompt Construction",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "system",
+        "tools",
+        "memory",
+        "history",
+        "user"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a layered sandwich where the most important ingredients belong near the edges because the middle gets ignored first",
+      "labelFusion": "Prompt Construction labels embedded directly in the visual metaphor",
+      "compositionIntent": "vertical assembly from highest priority to newest request",
+      "hotPath": "system -> tools -> memory -> history -> user",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "hierarchical assembly of system prompt, tool definitions, memory, history, and user message into the next model input",
+        "Prompt Construction",
+        "system -> tools -> memory -> history -> user",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "prompt-stack-sandwich",
+      "sceneObjects": [
+        "system layer",
+        "tool layer",
+        "memory layer",
+        "history layer",
+        "user layer"
+      ],
+      "objectToConceptMap": {
+        "system layer": "Prompt Construction",
+        "tool layer": "Harness component",
+        "memory layer": "Runtime responsibility",
+        "history layer": "hierarchical assembly of system prompt, tool definitions, memory, history, and user message into the next model input",
+        "user layer": "hierarchical assembly of system prompt, tool definitions, memory, history, and user message into the next model input"
+      },
+      "spatialLayout": "vertical assembly from highest priority to newest request",
+      "entryPoint": "system",
+      "exitPoint": "user",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "system -> tools -> memory -> history -> user",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "system layer",
+        "tool layer",
+        "memory layer",
+        "history layer",
+        "user layer",
+        "assembly press",
+        "edge emphasis marker"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.35,
+        "requireAtLeast": [
+          "layer",
+          "assemblyTool",
+          "route"
+        ]
+      },
+      "forbiddenGeometry": [
+        "stack of five plain boxes with arrows",
+        "ingredient list without assembly semantics"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 10,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer see that the next model input is assembled in order and that edge placement matters?"
+      }
+    },
+    {
+      "chapterTitle": "Output Parsing",
+      "chapterSlug": "output-parsing",
+      "archetype": "type_c",
+      "coreMechanism": "classification of model output into final answer, structured tool call, or handoff",
+      "what": "Output Parsing explains classification of model output into final answer, structured tool call, or handoff.",
+      "how": "It works by mapping Output Parsing, Harness component, Runtime responsibility into the scene objects answer tray, tool-call tray, handoff tray, schema check.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why structured output parsing is central to reliable harness execution.",
+      "mentalModel": "a sorting desk that separates letters into answer, action-request, and escalation trays",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress output parsing beyond short demo conditions.",
+      "primaryEntities": [
+        "Output Parsing",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "model output",
+        "classification",
+        "answer/tool/handoff tray"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a sorting desk that separates letters into answer, action-request, and escalation trays",
+      "labelFusion": "Output Parsing labels embedded directly in the visual metaphor",
+      "compositionIntent": "one input split into three explicit output paths",
+      "hotPath": "model output -> classification -> answer/tool/handoff tray",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "classification of model output into final answer, structured tool call, or handoff",
+        "Output Parsing",
+        "model output -> classification -> answer/tool/handoff tray",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "sorting-desk",
+      "sceneObjects": [
+        "answer tray",
+        "tool-call tray",
+        "handoff tray",
+        "schema check"
+      ],
+      "objectToConceptMap": {
+        "answer tray": "Output Parsing",
+        "tool-call tray": "Harness component",
+        "handoff tray": "Runtime responsibility",
+        "schema check": "classification of model output into final answer, structured tool call, or handoff"
+      },
+      "spatialLayout": "one input split into three explicit output paths",
+      "entryPoint": "model output",
+      "exitPoint": "answer/tool/handoff tray",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "model output -> classification -> answer/tool/handoff tray",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "incoming envelope",
+        "sorting desk",
+        "classifier tray",
+        "answer tray",
+        "tool-call tray",
+        "escalation tray",
+        "malformed bin"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.3,
+        "requireAtLeast": [
+          "desk",
+          "tray",
+          "route",
+          "bin"
+        ]
+      },
+      "forbiddenGeometry": [
+        "one node branching to three equal boxes",
+        "plain parser decision tree text"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 9,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Is the act of classification visible, not just the destination labels?"
+      }
+    },
+    {
+      "chapterTitle": "State Management",
+      "chapterSlug": "state-management",
+      "archetype": "type_a",
+      "coreMechanism": "typed persistent state flowing through checkpoints so work can resume after interruptions",
+      "what": "State Management explains typed persistent state flowing through checkpoints so work can resume after interruptions.",
+      "how": "It works by mapping State Management, Harness component, Runtime responsibility into the scene objects state boxes, checkpoint camera, resume arrow, time-travel shelf.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why state management is the continuity layer for long-running harnesses.",
+      "mentalModel": "a mission control board where every update lands in tracked boxes and each checkpoint snapshots the whole board",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress state management beyond short demo conditions.",
+      "primaryEntities": [
+        "State Management",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "state update",
+        "checkpoint",
+        "resume branch"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a mission control board where every update lands in tracked boxes and each checkpoint snapshots the whole board",
+      "labelFusion": "State Management labels embedded directly in the visual metaphor",
+      "compositionIntent": "state snapshots captured at boundary lines",
+      "hotPath": "state update -> checkpoint -> resume branch",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "typed persistent state flowing through checkpoints so work can resume after interruptions",
+        "State Management",
+        "state update -> checkpoint -> resume branch",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "mission-control-board",
+      "sceneObjects": [
+        "state boxes",
+        "checkpoint camera",
+        "resume arrow",
+        "time-travel shelf"
+      ],
+      "objectToConceptMap": {
+        "state boxes": "State Management",
+        "checkpoint camera": "Harness component",
+        "resume arrow": "Runtime responsibility",
+        "time-travel shelf": "typed persistent state flowing through checkpoints so work can resume after interruptions"
+      },
+      "spatialLayout": "state snapshots captured at boundary lines",
+      "entryPoint": "state update",
+      "exitPoint": "resume branch",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "state update -> checkpoint -> resume branch",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "mission board",
+        "tracked state tiles",
+        "checkpoint marker",
+        "snapshot vault",
+        "resume lane",
+        "interruption icon"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.35,
+        "requireAtLeast": [
+          "board",
+          "checkpoint",
+          "vault",
+          "route"
+        ]
+      },
+      "forbiddenGeometry": [
+        "state1 -> state2 -> state3 boxes only",
+        "plain save/resume labels without checkpoint artifact"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 10,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer see how work resumes from a checkpoint after interruption?"
+      }
+    },
+    {
+      "chapterTitle": "Error Handling",
+      "chapterSlug": "error-handling",
+      "archetype": "type_b",
+      "coreMechanism": "failure classification so the harness retries, self-corrects, asks the user, or escalates appropriately",
+      "what": "Error Handling explains failure classification so the harness retries, self-corrects, asks the user, or escalates appropriately.",
+      "how": "It works by mapping Error Handling, Harness component, Runtime responsibility into the scene objects retry bin, self-correct bench, approval desk, debug table.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why compounded failure probability makes error handling a first-class harness component.",
+      "mentalModel": "a repair workshop that routes broken parts into retry bins, self-fix benches, approval desks, or engineer inspection tables",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress error handling beyond short demo conditions.",
+      "primaryEntities": [
+        "Error Handling",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "raw error",
+        "classify",
+        "retry/self-fix/approval/debug"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a repair workshop that routes broken parts into retry bins, self-fix benches, approval desks, or engineer inspection tables",
+      "labelFusion": "Error Handling labels embedded directly in the visual metaphor",
+      "compositionIntent": "routing flow from raw failure into different recovery lanes",
+      "hotPath": "raw error -> classify -> retry/self-fix/approval/debug",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "failure classification so the harness retries, self-corrects, asks the user, or escalates appropriately",
+        "Error Handling",
+        "raw error -> classify -> retry/self-fix/approval/debug",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "repair-routing-workshop",
+      "sceneObjects": [
+        "retry bin",
+        "self-correct bench",
+        "approval desk",
+        "debug table"
+      ],
+      "objectToConceptMap": {
+        "retry bin": "Error Handling",
+        "self-correct bench": "Harness component",
+        "approval desk": "Runtime responsibility",
+        "debug table": "failure classification so the harness retries, self-corrects, asks the user, or escalates appropriately"
+      },
+      "spatialLayout": "routing flow from raw failure into different recovery lanes",
+      "entryPoint": "raw error",
+      "exitPoint": "retry/self-fix/approval/debug",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "raw error -> classify -> retry/self-fix/approval/debug",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "broken-part intake",
+        "classifier bench",
+        "retry bin",
+        "self-fix bench",
+        "approval desk",
+        "engineer inspection table",
+        "halt marker"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.3,
+        "requireAtLeast": [
+          "bench",
+          "bin",
+          "desk",
+          "route"
+        ]
+      },
+      "forbiddenGeometry": [
+        "retry/self-fix/escalate listed as plain branches from a box",
+        "single generic error box"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 10,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer tell that different failures route to different remediation paths?"
+      }
+    },
+    {
+      "chapterTitle": "Guardrails and Safety",
+      "chapterSlug": "guardrails-and-safety",
+      "archetype": "type_a",
+      "coreMechanism": "separation of model intent from permission enforcement with tripwires and policy checks",
+      "what": "Guardrails and Safety explains separation of model intent from permission enforcement with tripwires and policy checks.",
+      "how": "It works by mapping Guardrails and Safety, Harness component, Runtime responsibility into the scene objects request gate, tool gate, tripwire barrier, approval booth.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "How production harnesses separate reasoning from permission enforcement.",
+      "mentalModel": "a security checkpoint where the traveler proposes a route but the gates decide which doors actually open",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress guardrails and safety beyond short demo conditions.",
+      "primaryEntities": [
+        "Guardrails and Safety",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "request",
+        "policy gates",
+        "allow or stop"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a security checkpoint where the traveler proposes a route but the gates decide which doors actually open",
+      "labelFusion": "Guardrails and Safety labels embedded directly in the visual metaphor",
+      "compositionIntent": "entry flow checked by nested safety gates",
+      "hotPath": "request -> policy gates -> allow or stop",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "separation of model intent from permission enforcement with tripwires and policy checks",
+        "Guardrails and Safety",
+        "request -> policy gates -> allow or stop",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "security-gate-checkpoint",
+      "sceneObjects": [
+        "request gate",
+        "tool gate",
+        "tripwire barrier",
+        "approval booth"
+      ],
+      "objectToConceptMap": {
+        "request gate": "Guardrails and Safety",
+        "tool gate": "Harness component",
+        "tripwire barrier": "Runtime responsibility",
+        "approval booth": "separation of model intent from permission enforcement with tripwires and policy checks"
+      },
+      "spatialLayout": "entry flow checked by nested safety gates",
+      "entryPoint": "request",
+      "exitPoint": "allow or stop",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "request -> policy gates -> allow or stop",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "entry corridor",
+        "policy gate",
+        "badge scanner",
+        "quarantine pen",
+        "approved lane",
+        "alarm rail"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.3,
+        "requireAtLeast": [
+          "gate",
+          "scanner",
+          "route",
+          "warningMarker"
+        ]
+      },
+      "forbiddenGeometry": [
+        "policy boxes in a column",
+        "yes/no diamonds without a security scene"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 9,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer see how unsafe behavior is blocked or quarantined before it reaches the approved lane?"
+      }
+    },
+    {
+      "chapterTitle": "Verification Loops",
+      "chapterSlug": "verification-loops",
+      "archetype": "type_b",
+      "coreMechanism": "post-action quality confirmation through tests, visual checks, and separate evaluation passes",
+      "what": "Verification Loops explains post-action quality confirmation through tests, visual checks, and separate evaluation passes.",
+      "how": "It works by mapping Verification Loops, Harness component, Runtime responsibility into the scene objects build item, test rig, visual station, judge desk.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why verification loops separate toy agents from production-ready ones.",
+      "mentalModel": "a quality-assurance lane that stamps nothing as complete until the part passes mechanical, visual, and inspector review",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress verification loops beyond short demo conditions.",
+      "primaryEntities": [
+        "Verification Loops",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "build item",
+        "tests",
+        "visual check",
+        "judge",
+        "pass/fail"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a quality-assurance lane that stamps nothing as complete until the part passes mechanical, visual, and inspector review",
+      "labelFusion": "Verification Loops labels embedded directly in the visual metaphor",
+      "compositionIntent": "left-to-right validation conveyor ending in pass/fail routing",
+      "hotPath": "build item -> tests -> visual check -> judge -> pass/fail",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "post-action quality confirmation through tests, visual checks, and separate evaluation passes",
+        "Verification Loops",
+        "build item -> tests -> visual check -> judge -> pass/fail",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "qa-lane",
+      "sceneObjects": [
+        "build item",
+        "test rig",
+        "visual station",
+        "judge desk",
+        "pass/fail split"
+      ],
+      "objectToConceptMap": {
+        "build item": "Verification Loops",
+        "test rig": "Harness component",
+        "visual station": "Runtime responsibility",
+        "judge desk": "post-action quality confirmation through tests, visual checks, and separate evaluation passes",
+        "pass/fail split": "post-action quality confirmation through tests, visual checks, and separate evaluation passes"
+      },
+      "spatialLayout": "left-to-right validation conveyor ending in pass/fail routing",
+      "entryPoint": "build item",
+      "exitPoint": "pass/fail",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "build item -> tests -> visual check -> judge -> pass/fail",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "work item",
+        "build bench",
+        "test gate",
+        "visual inspection station",
+        "judge node",
+        "pass tray",
+        "rework chute"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.3,
+        "requireAtLeast": [
+          "station",
+          "tray",
+          "route",
+          "reworkMarker"
+        ]
+      },
+      "forbiddenGeometry": [
+        "pass/fail prose instead of branches",
+        "loop arrows with no verification stations"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 9,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer identify where the work is checked and where it loops back on failure?"
+      },
+      "silhouettePlan": "Make the work item rounded and movable, the build bench table-like, the test gate diamond-like and central, the visual station inspection-like, the judge distinct, and the rework chute clearly chute-shaped.",
+      "propDensity": "Add 4 supporting props: bench markings, inspection lens/visual marks, pass tray lip, and rework lane rails; keep them secondary to the QA lane.",
+      "asymmetryPlan": "Keep the main QA lane straight and dominant, place pass higher/right, and bend rework downward and back so the failure route feels physically more costly.",
+      "antiCardFraming": "Do not turn verification into a row of framed labels; preserve a work lane with distinct stations and a spatially meaningful rework branch.",
+      "sceneTexture": "Use subtle lane markings, bench edges, inspection detail, and chute rails to give the QA path a factory-floor feel.",
+      "premiumSceneTest": {
+        "objectSilhouettesDistinct": true,
+        "propDensitySupportsMetaphor": true,
+        "layoutNotPerfectGrid": true,
+        "notCardFramedByDefault": true,
+        "sceneTexturePresentButSubtle": true,
+        "primaryQuestion": "Can a learner see that nothing is complete until it passes through multiple inspection stages and that failure loops back?"
+      }
+    },
+    {
+      "chapterTitle": "Subagent Orchestration",
+      "chapterSlug": "subagent-orchestration",
+      "archetype": "type_a",
+      "coreMechanism": "bounded delegation of subtasks to specialized or isolated agents without losing parent control",
+      "what": "Subagent Orchestration explains bounded delegation of subtasks to specialized or isolated agents without losing parent control.",
+      "how": "It works by mapping Subagent Orchestration, Harness component, Runtime responsibility into the scene objects parent desk, fork room, worktree room, handoff office.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "How production harnesses use subagents without dissolving the main control loop.",
+      "mentalModel": "a project office that can fork workers, open separate workrooms, or hand a dossier to a specialist team",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress subagent orchestration beyond short demo conditions.",
+      "primaryEntities": [
+        "Subagent Orchestration",
+        "Harness component",
+        "Runtime responsibility"
+      ],
+      "primaryFlow": [
+        "parent desk",
+        "specialist room",
+        "summary mailbox"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a project office that can fork workers, open separate workrooms, or hand a dossier to a specialist team",
+      "labelFusion": "Subagent Orchestration labels embedded directly in the visual metaphor",
+      "compositionIntent": "delegation branches that return condensed results to the parent",
+      "hotPath": "parent desk -> specialist room -> summary mailbox",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "bounded delegation of subtasks to specialized or isolated agents without losing parent control",
+        "Subagent Orchestration",
+        "parent desk -> specialist room -> summary mailbox",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "specialist-office",
+      "sceneObjects": [
+        "parent desk",
+        "fork room",
+        "worktree room",
+        "handoff office",
+        "summary mailbox"
+      ],
+      "objectToConceptMap": {
+        "parent desk": "Subagent Orchestration",
+        "fork room": "Harness component",
+        "worktree room": "Runtime responsibility",
+        "handoff office": "bounded delegation of subtasks to specialized or isolated agents without losing parent control",
+        "summary mailbox": "bounded delegation of subtasks to specialized or isolated agents without losing parent control"
+      },
+      "spatialLayout": "delegation branches that return condensed results to the parent",
+      "entryPoint": "parent desk",
+      "exitPoint": "summary mailbox",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "parent desk -> specialist room -> summary mailbox",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "manager desk",
+        "dossier tray",
+        "specialist rooms",
+        "workroom doors",
+        "summary mailbox",
+        "control clipboard",
+        "blocked corridor"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.3,
+        "requireAtLeast": [
+          "desk",
+          "room",
+          "mailbox",
+          "route"
+        ]
+      },
+      "forbiddenGeometry": [
+        "parent/child tree diagram only",
+        "subagent boxes without controlled handoff artifacts"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 10,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer see bounded delegation with controlled summary return?"
+      },
+      "silhouettePlan": "Make the manager desk broad and supervisory, the dossier tray compact and handoff-like, specialist rooms door-based and isolated, the summary mailbox return-focused, and the blocked corridor visibly restrictive.",
+      "propDensity": "Add 4 supporting props: room doors, control clipboard, dossier tray, and mailbox slot; keep them quieter than the delegation/return flow.",
+      "asymmetryPlan": "Let delegation split upward and downward into separate rooms while the summary return converges rightward; keep the blocked corridor low and off the main path.",
+      "antiCardFraming": "Avoid making subagents a tree of rectangles; preserve real rooms, doorways, and return artifacts that communicate controlled delegation.",
+      "sceneTexture": "Use subtle office walls, door edges, corridor spacing, and desk surfaces so the scene reads as a project office rather than an org chart.",
+      "premiumSceneTest": {
+        "objectSilhouettesDistinct": true,
+        "propDensitySupportsMetaphor": true,
+        "layoutNotPerfectGrid": true,
+        "notCardFramedByDefault": true,
+        "sceneTexturePresentButSubtle": true,
+        "primaryQuestion": "Does the scene communicate bounded delegation with controlled summary return, not just branching decomposition?"
+      }
+    },
+    {
+      "chapterTitle": "Step-by-Step Walkthrough and the Ralph Loop",
+      "chapterSlug": "walkthrough-and-ralph-loop",
+      "archetype": "type_b",
+      "coreMechanism": "end-to-end harness cycle with layered termination conditions and filesystem-backed continuity across context windows",
+      "what": "Step-by-Step Walkthrough and the Ralph Loop explains end-to-end harness cycle with layered termination conditions and filesystem-backed continuity across context windows.",
+      "how": "It works by mapping Termination condition, Ralph Loop, Filesystem continuity into the scene objects step 1 station, step 2 station, tool execution, context update.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "How the harness components work together in one cycle and how the Ralph Loop preserves continuity across sessions.",
+      "mentalModel": "a relay course where each lap hands a baton and a clipboard to the next runner",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress step-by-step walkthrough and the ralph loop beyond short demo conditions.",
+      "primaryEntities": [
+        "Termination condition",
+        "Ralph Loop",
+        "Filesystem continuity"
+      ],
+      "primaryFlow": [
+        "prompt assembly",
+        "inference",
+        "tool run",
+        "context update",
+        "filesystem baton"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a relay course where each lap hands a baton and a clipboard to the next runner",
+      "labelFusion": "Step-by-Step Walkthrough and the Ralph Loop labels embedded directly in the visual metaphor",
+      "compositionIntent": "main loop with a side baton handoff into the next session",
+      "hotPath": "prompt assembly -> inference -> tool run -> context update -> filesystem baton",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "end-to-end harness cycle with layered termination conditions and filesystem-backed continuity across context windows",
+        "Termination condition",
+        "prompt assembly -> inference -> tool run -> context update -> filesystem baton",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "relay-handoff-track",
+      "sceneObjects": [
+        "step 1 station",
+        "step 2 station",
+        "tool execution",
+        "context update",
+        "filesystem baton"
+      ],
+      "objectToConceptMap": {
+        "step 1 station": "Termination condition",
+        "step 2 station": "Ralph Loop",
+        "tool execution": "Filesystem continuity",
+        "context update": "end-to-end harness cycle with layered termination conditions and filesystem-backed continuity across context windows",
+        "filesystem baton": "end-to-end harness cycle with layered termination conditions and filesystem-backed continuity across context windows"
+      },
+      "spatialLayout": "main loop with a side baton handoff into the next session",
+      "entryPoint": "prompt assembly",
+      "exitPoint": "filesystem baton",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "prompt assembly -> inference -> tool run -> context update -> filesystem baton",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "requirements baton",
+        "planner lane",
+        "execution lane",
+        "handoff checkpoint",
+        "completion board",
+        "loop marshal"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.35,
+        "requireAtLeast": [
+          "track",
+          "checkpoint",
+          "artifact"
+        ]
+      },
+      "forbiddenGeometry": [
+        "step list in boxes",
+        "simple circle arrows without visible handoff artifacts"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 10,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer follow a concrete baton-style walkthrough through the Ralph-style loop?"
+      }
+    },
+    {
+      "chapterTitle": "How Frameworks Implement the Pattern",
+      "chapterSlug": "how-frameworks-implement-the-pattern",
+      "archetype": "type_a",
+      "coreMechanism": "framework-specific surfaces exposing the same underlying harness pattern through different abstractions",
+      "what": "How Frameworks Implement the Pattern explains framework-specific surfaces exposing the same underlying harness pattern through different abstractions.",
+      "how": "It works by mapping Code-first runner, State graph, Role-based crew into the scene objects Anthropic lane, OpenAI lane, LangGraph lane, CrewAI lane.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "How major frameworks expose harnessing through different runtime abstractions.",
+      "mentalModel": "multiple builders using different toolkits to erect the same structural frame",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress how frameworks implement the pattern beyond short demo conditions.",
+      "primaryEntities": [
+        "Code-first runner",
+        "State graph",
+        "Role-based crew"
+      ],
+      "primaryFlow": [
+        "shared harness backbone",
+        "framework-specific surface"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "multiple builders using different toolkits to erect the same structural frame",
+      "labelFusion": "How Frameworks Implement the Pattern labels embedded directly in the visual metaphor",
+      "compositionIntent": "side-by-side comparison over a shared harness backbone",
+      "hotPath": "shared harness backbone -> framework-specific surface",
+      "secondaryPaths": [
+        "failure branch",
+        "safety stop path"
+      ],
+      "mustShow": [
+        "framework-specific surfaces exposing the same underlying harness pattern through different abstractions",
+        "Code-first runner",
+        "shared harness backbone -> framework-specific surface",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "toolkit-comparison-board",
+      "sceneObjects": [
+        "Anthropic lane",
+        "OpenAI lane",
+        "LangGraph lane",
+        "CrewAI lane"
+      ],
+      "objectToConceptMap": {
+        "Anthropic lane": "Code-first runner",
+        "OpenAI lane": "State graph",
+        "LangGraph lane": "Role-based crew",
+        "CrewAI lane": "framework-specific surfaces exposing the same underlying harness pattern through different abstractions"
+      },
+      "spatialLayout": "side-by-side comparison over a shared harness backbone",
+      "entryPoint": "shared harness backbone",
+      "exitPoint": "framework-specific surface",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "shared harness backbone -> framework-specific surface",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "framework bench",
+        "shared harness parts",
+        "implementation cards",
+        "adapter tools",
+        "comparison ruler"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.35,
+        "requireAtLeast": [
+          "bench",
+          "tool",
+          "comparisonMarker"
+        ]
+      },
+      "forbiddenGeometry": [
+        "vendor comparison table only",
+        "three equal boxes named framework A/B/C"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 11,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer see the common pattern plus the implementation differences across frameworks?"
+      }
+    },
+    {
+      "chapterTitle": "Scaffolding, Co-Evolution, and the Future-Proofing Test",
+      "chapterSlug": "scaffolding-coevolution-future-proofing",
+      "archetype": "type_a",
+      "coreMechanism": "temporary-but-necessary harness complexity that should shrink as models internalize more behavior",
+      "what": "Scaffolding, Co-Evolution, and the Future-Proofing Test explains temporary-but-necessary harness complexity that should shrink as models internalize more behavior.",
+      "how": "It works by mapping Scaffolding metaphor, Co-evolution principle, Future-proofing test into the scene objects scaffold frame, rising building, removed beams, future-proof test banner.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why good harnesses should grow thinner as models improve, without disappearing entirely.",
+      "mentalModel": "construction scaffolding that should be removed floor by floor as the building can stand on its own",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress scaffolding, co-evolution, and the future-proofing test beyond short demo conditions.",
+      "primaryEntities": [
+        "Scaffolding metaphor",
+        "Co-evolution principle",
+        "Future-proofing test"
+      ],
+      "primaryFlow": [
+        "support frame",
+        "rising capability",
+        "removed scaffolding"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "construction scaffolding that should be removed floor by floor as the building can stand on its own",
+      "labelFusion": "Scaffolding, Co-Evolution, and the Future-Proofing Test labels embedded directly in the visual metaphor",
+      "compositionIntent": "scaffold shrinking as the structure becomes self-supporting",
+      "hotPath": "support frame -> rising capability -> removed scaffolding",
+      "secondaryPaths": [
+        "scaling branch",
+        "governance branch"
+      ],
+      "mustShow": [
+        "temporary-but-necessary harness complexity that should shrink as models internalize more behavior",
+        "Scaffolding metaphor",
+        "support frame -> rising capability -> removed scaffolding",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "scaffold-evolution",
+      "sceneObjects": [
+        "scaffold frame",
+        "rising building",
+        "removed beams",
+        "future-proof test banner"
+      ],
+      "objectToConceptMap": {
+        "scaffold frame": "Scaffolding metaphor",
+        "rising building": "Co-evolution principle",
+        "removed beams": "Future-proofing test",
+        "future-proof test banner": "temporary-but-necessary harness complexity that should shrink as models internalize more behavior"
+      },
+      "spatialLayout": "scaffold shrinking as the structure becomes self-supporting",
+      "entryPoint": "support frame",
+      "exitPoint": "removed scaffolding",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "support frame -> rising capability -> removed scaffolding",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "building frame",
+        "external scaffold",
+        "removed scaffold sections",
+        "capability floors",
+        "support braces",
+        "risk tape"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.25,
+        "requireAtLeast": [
+          "structure",
+          "support",
+          "warningMarker"
+        ]
+      },
+      "forbiddenGeometry": [
+        "timeline boxes labeled now/later/future",
+        "three stacked strategy cards"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 8,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer tell what is temporary support and what is durable capability growth?"
+      }
+    },
+    {
+      "chapterTitle": "Seven Architectural Decisions and the Final Takeaway",
+      "chapterSlug": "seven-architectural-decisions-and-final-takeaway",
+      "archetype": "type_a",
+      "coreMechanism": "explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness",
+      "what": "Seven Architectural Decisions and the Final Takeaway explains explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness.",
+      "how": "It works by mapping Harness thickness, Tool scoping strategy, Verification design into the scene objects agent count lever, execution style lever, context lever, verification lever.",
+      "why": "This matters because weak handling here degrades production reliability, observability, or safety once tasks grow longer or more stateful.",
+      "realWorldAnchor": "Why the harness is the real product surface and why its design choices materially shape agent performance.",
+      "mentalModel": "a strategy board with seven levers that change the whole machine even though the engine underneath stays the same",
+      "edgeCase": "The edge case appears when long or ambiguous tasks stress seven architectural decisions and the final takeaway beyond short demo conditions.",
+      "primaryEntities": [
+        "Harness thickness",
+        "Tool scoping strategy",
+        "Verification design"
+      ],
+      "primaryFlow": [
+        "decision levers",
+        "behavior change",
+        "product outcome"
+      ],
+      "mainConstraint": "Keep the runtime high-signal, bounded, and inspectable under longer task durations.",
+      "tradeoff": "More structure and control improve reliability, but add orchestration overhead and implementation complexity.",
+      "physicalAnalogy": "a strategy board with seven levers that change the whole machine even though the engine underneath stays the same",
+      "labelFusion": "Seven Architectural Decisions and the Final Takeaway labels embedded directly in the visual metaphor",
+      "compositionIntent": "dashboard of decisions changing one shared machine",
+      "hotPath": "decision levers -> behavior change -> product outcome",
+      "secondaryPaths": [
+        "scaling branch",
+        "governance branch"
+      ],
+      "mustShow": [
+        "explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness",
+        "Harness thickness",
+        "decision levers -> behavior change -> product outcome",
+        "one visible trade-off callout"
+      ],
+      "mustNotShow": [
+        "generic relabeled box diagram",
+        "floating labels detached from the metaphor",
+        "equal visual weight on every path"
+      ],
+      "visualSceneType": "control-room-levers",
+      "sceneObjects": [
+        "agent count lever",
+        "execution style lever",
+        "context lever",
+        "verification lever",
+        "tool scope lever",
+        "thickness lever"
+      ],
+      "objectToConceptMap": {
+        "agent count lever": "Harness thickness",
+        "execution style lever": "Tool scoping strategy",
+        "context lever": "Verification design",
+        "verification lever": "explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness",
+        "tool scope lever": "explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness",
+        "thickness lever": "explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness"
+      },
+      "spatialLayout": "dashboard of decisions changing one shared machine",
+      "entryPoint": "decision levers",
+      "exitPoint": "product outcome",
+      "failureBranch": "Show one off-path failure, overload, or blocked branch as a weaker alternate route.",
+      "comparisonAxis": "demo-speed vs production-reliability",
+      "evidenceArtifact": "test output, progress file, or structured result token as visible proof of completion",
+      "dominantMotion": "decision levers -> behavior change -> product outcome",
+      "forbiddenTemplate": "Do not use the generic What/How/Why/Constraint/Trade-off five-box row.",
+      "objectPalette": [
+        "decision console",
+        "lever bank",
+        "indicator lights",
+        "tradeoff gauges",
+        "locked mode rail",
+        "selected output lane"
+      ],
+      "shapeQuota": {
+        "maxPlainRectangles": 0.35,
+        "requireAtLeast": [
+          "console",
+          "lever",
+          "gauge",
+          "route"
+        ]
+      },
+      "forbiddenGeometry": [
+        "seven bullet cards in a row",
+        "matrix of decision labels without a control console"
+      ],
+      "labelBudget": {
+        "maxVisibleLabels": 11,
+        "maxCaptions": 1
+      },
+      "sceneTest": {
+        "hotPathVisibleWithoutSentence": true,
+        "failureBranchSpatiallyObvious": true,
+        "reusableByRelabelingOnly": false,
+        "survivesHalfLabelRemoval": true,
+        "primaryQuestion": "Can the viewer see these as control decisions with consequences rather than a static list of principles?"
+      },
+      "silhouettePlan": "Make the console wide and control-centric, levers slender and varied, gauges circular, the selected output lane directional, and the locked mode rail restrictive and warning-colored.",
+      "propDensity": "Add 4 supporting props: indicator lights, gauge needles, console panel lines, and lock/warning marks near the restricted mode rail.",
+      "asymmetryPlan": "Keep the lever bank clustered left/center, spread gauges rightward, and place the locked mode rail below the hot path so consequence and restriction read differently.",
+      "antiCardFraming": "Do not render the seven decisions as a checklist of cards; preserve the idea of a live control console where choices alter machine behavior.",
+      "sceneTexture": "Use subtle panel seams, indicator lights, and gauge markings so the console feels operative without overwhelming the levers.",
+      "premiumSceneTest": {
+        "objectSilhouettesDistinct": true,
+        "propDensitySupportsMetaphor": true,
+        "layoutNotPerfectGrid": true,
+        "notCardFramedByDefault": true,
+        "sceneTexturePresentButSubtle": true,
+        "primaryQuestion": "Does the scene feel like a control room where architectural decisions tune behavior, rather than a static list of principles?"
+      }
+    }
+  ]
+}

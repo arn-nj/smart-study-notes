@@ -1,0 +1,111 @@
+{
+  "pages": {
+    "1": {
+      "Concept Focus": [
+        "This page is the navigation hub that groups the harness lessons by likely study need."
+      ]
+    },
+    "2": {
+      "Concept Focus": [
+        "Capability expansion by moving from one-shot prompts to controlled context loading is the main technical idea on this page."
+      ],
+      "Connecting Dots": [
+        "This page connects to From Prompt Engineering to Context Engineering by moving one layer deeper into agent reliability."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same control pattern appears in autonomous coding, support automation, and background workflow orchestration."
+      ],
+      "Implications": [
+        "If this layer is weak, the system may look capable in demos but fail under longer, more realistic execution ranges."
+      ],
+      "Edge Case": [
+        "The edge case is a long or ambiguous task where the agent must decide whether to continue, reset, summarize, or ask for a new artifact."
+      ]
+    },
+    "3": {
+      "Concept Focus": [
+        "External capability routing so the agent reads only relevant repo state, vendor features, and retrieved knowledge is the main technical idea on this page."
+      ],
+      "Connecting Dots": [
+        "This page connects to From Prompt Engineering to Context Engineering by moving one layer deeper into agent reliability."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same control pattern appears in autonomous coding, support automation, and background workflow orchestration."
+      ],
+      "Implications": [
+        "If this layer is weak, the system may look capable in demos but fail under longer, more realistic execution ranges."
+      ],
+      "Edge Case": [
+        "The edge case is a long or ambiguous task where the agent must decide whether to continue, reset, summarize, or ask for a new artifact."
+      ]
+    },
+    "4": {
+      "Concept Focus": [
+        "Lossy context compression causing the agent to forget unfinished work and misreport completion is the main technical idea on this page."
+      ],
+      "Connecting Dots": [
+        "This page connects to Tool Calling, MCP, and RAG as Context Controls by moving one layer deeper into agent reliability."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same control pattern appears in autonomous coding, support automation, and background workflow orchestration."
+      ],
+      "Implications": [
+        "If this layer is weak, the system may look capable in demos but fail under longer, more realistic execution ranges."
+      ],
+      "Edge Case": [
+        "The edge case is a long or ambiguous task where the agent must decide whether to continue, reset, summarize, or ask for a new artifact."
+      ]
+    },
+    "5": {
+      "Concept Focus": [
+        "Looping the agent through bounded tasks with fresh context, test gates, and progress documentation is the main technical idea on this page."
+      ],
+      "Connecting Dots": [
+        "This page connects to The Summarization Trap in Long-Running Tasks by moving one layer deeper into agent reliability."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same control pattern appears in autonomous coding, support automation, and background workflow orchestration."
+      ],
+      "Implications": [
+        "If this layer is weak, the system may look capable in demos but fail under longer, more realistic execution ranges."
+      ],
+      "Edge Case": [
+        "The edge case is a long or ambiguous task where the agent must decide whether to continue, reset, summarize, or ask for a new artifact."
+      ]
+    },
+    "6": {
+      "Concept Focus": [
+        "Stacked control architecture where prompt defines identity, context defines working set, and harness defines lifecycle orchestration is the main technical idea on this page."
+      ],
+      "Connecting Dots": [
+        "This page connects to Harness Engineering as a Controlled Iteration Loop by moving one layer deeper into agent reliability."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same control pattern appears in autonomous coding, support automation, and background workflow orchestration."
+      ],
+      "Implications": [
+        "If this layer is weak, the system may look capable in demos but fail under longer, more realistic execution ranges."
+      ],
+      "Edge Case": [
+        "The edge case is a long or ambiguous task where the agent must decide whether to continue, reset, summarize, or ask for a new artifact."
+      ]
+    },
+    "7": {
+      "Concept Focus": [
+        "Background automation that chains agent runs, cloud execution, notifications, and recurring checks into a repeatable production loop is the main technical idea on this page."
+      ],
+      "Connecting Dots": [
+        "This page connects to How Prompt, Context, and Harness Layers Fit Together by moving one layer deeper into agent reliability."
+      ],
+      "Same Idea, Applied Elsewhere": [
+        "The same control pattern appears in autonomous coding, support automation, and background workflow orchestration."
+      ],
+      "Implications": [
+        "If this layer is weak, the system may look capable in demos but fail under longer, more realistic execution ranges."
+      ],
+      "Edge Case": [
+        "The edge case is a long or ambiguous task where the agent must decide whether to continue, reset, summarize, or ask for a new artifact."
+      ]
+    }
+  }
+}

@@ -1,0 +1,476 @@
+{
+  "deckTitle": "System Design Interview Guide",
+  "deckSubtitle": "AI-Narrative Deck",
+  "slides": [
+    {
+      "slideId": "lesson-01-introduction",
+      "visualArchetype": "split-screen-analogy",
+      "pacingSeconds": 40,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is structured interview decomposition.",
+        "teleprompterVO": "This slide explains Introduction to the Interview Series by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that use one reusable answer structure so every system-design question starts clear and controlled."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Use one reusable answer structure so every system-design question starts clear and controlled.",
+          "items": [
+            "Prompt -> Requirements -> Scale -> Components -> Trade-offs",
+            "FR answers what to build",
+            "NFR answers how well it must behave"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "structured interview decomposition",
+          "items": [
+            "Clarify the product and user flows.",
+            "State functional and non-functional requirements.",
+            "Estimate scale and hotspots."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson01_introduction.png"
+      ]
+    },
+    {
+      "slideId": "lesson-02-choosing-the-right-db",
+      "visualArchetype": "technical-deep-dive",
+      "pacingSeconds": 40,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is matching storage engines to data shape, query pattern, and scale constraints.",
+        "teleprompterVO": "This slide explains Choosing the Right Database by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that choose storage by workload mechanics instead of by popularity or habit."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Choose storage by workload mechanics instead of by popularity or habit.",
+          "items": [
+            "Data shape matters",
+            "Query pattern matters",
+            "Scale pattern matters"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "matching storage engines to data shape, query pattern, and scale constraints",
+          "items": [
+            "Classify the data shape.",
+            "Check consistency and transaction needs.",
+            "Examine read/write/query patterns."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson02_choosing-the-right-db.png"
+      ]
+    },
+    {
+      "slideId": "lesson-03-url-shortner-system-design",
+      "visualArchetype": "execution-pipeline",
+      "pacingSeconds": 40,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is unique token generation plus low-latency redirect lookup.",
+        "teleprompterVO": "This slide explains URL Shortener System Design by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that design the write path to avoid key collisions and the read path to stay ultra-short."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Design the write path to avoid key collisions and the read path to stay ultra-short.",
+          "items": [
+            "Long URL -> Shortener -> Token range -> Mapping store",
+            "Short URL hit -> Lookup -> Redirect",
+            "Clicks -> Stream -> Analytics"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "unique token generation plus low-latency redirect lookup",
+          "items": [
+            "Estimate keyspace and lifetime volume.",
+            "Generate collision-resistant short codes.",
+            "Persist short-to-long mapping."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson03_url-shortner-system-design.png"
+      ]
+    },
+    {
+      "slideId": "lesson-04-airbnb-booking-com-system-design",
+      "visualArchetype": "execution-pipeline",
+      "pacingSeconds": 55,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is availability search, reservation hold, and transactional booking confirmation under concurrency.",
+        "teleprompterVO": "This slide explains Airbnb / Booking.com System Design by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that use strong consistency on room inventory while keeping search and history layers optimized for their own workloads."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Use strong consistency on room inventory while keeping search and history layers optimized for their own workloads.",
+          "items": [
+            "Search index for discovery",
+            "Inventory DB for correctness",
+            "TTL hold for payment window"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "availability search, reservation hold, and transactional booking confirmation under concurrency",
+          "items": [
+            "Search hotels and availability.",
+            "Lock or hold the selected room.",
+            "Process payment inside a timeout."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson04_airbnb-booking-com-system-design.png"
+      ]
+    },
+    {
+      "slideId": "lesson-05-amazon-system-design",
+      "visualArchetype": "technical-deep-dive",
+      "pacingSeconds": 55,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is service decomposition across catalog, search, inventory, cart, orders, payments, and media delivery.",
+        "teleprompterVO": "This slide explains Amazon-Style Commerce System by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that break a large commerce problem into bounded services with separate storage and scaling profiles."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Break a large commerce problem into bounded services with separate storage and scaling profiles.",
+          "items": [
+            "Catalog -> Search -> Product detail -> Cart -> Order -> Payment",
+            "Inventory and pricing feed the hot path",
+            "Media sits on CDN-backed blob storage"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "service decomposition across catalog, search, inventory, cart, orders, payments, and media delivery",
+          "items": [
+            "Define buyer, seller, and admin flows.",
+            "Separate read-heavy search from write-heavy transactions.",
+            "Keep inventory and orders transactionally safe."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson05_amazon-system-design.png"
+      ]
+    },
+    {
+      "slideId": "lesson-06-whatsapp-system-design",
+      "visualArchetype": "execution-pipeline",
+      "pacingSeconds": 55,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is persistent connection routing plus durable message fan-out and delivery receipts.",
+        "teleprompterVO": "This slide explains WhatsApp-Style Chat System by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that separate real-time delivery from durable persistence so mobile chat feels instant without losing messages."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Separate real-time delivery from durable persistence so mobile chat feels instant without losing messages.",
+          "items": [
+            "Sender socket -> Chat service -> Queue/store -> Recipient socket",
+            "Receipts update after delivery",
+            "Media and profile flows are side services"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "persistent connection routing plus durable message fan-out and delivery receipts",
+          "items": [
+            "Accept message on persistent connection.",
+            "Persist and enqueue the message.",
+            "Fan out to recipient sessions or offline inbox."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson06_whatsapp-system-design.png"
+      ]
+    },
+    {
+      "slideId": "lesson-07-notification-system-at-scale",
+      "visualArchetype": "execution-pipeline",
+      "pacingSeconds": 40,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is channel-agnostic event ingestion with pluggable delivery handlers and retry policies.",
+        "teleprompterVO": "This slide explains Notification System at Scale by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that use one common event model and route it to specialized handlers per channel."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Use one common event model and route it to specialized handlers per channel.",
+          "items": [
+            "Producer event -> Notification bus -> Channel handler -> Provider -> Status",
+            "Retries and DLQ handle transient failures"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "channel-agnostic event ingestion with pluggable delivery handlers and retry policies",
+          "items": [
+            "Publish a notification intent.",
+            "Apply template and preference rules.",
+            "Route by channel."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson07_notification-system-at-scale.png"
+      ]
+    },
+    {
+      "slideId": "lesson-08-uber-system-design",
+      "visualArchetype": "execution-pipeline",
+      "pacingSeconds": 55,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is real-time location ingestion, nearest-driver matching, trip state transitions, and payment completion.",
+        "teleprompterVO": "This slide explains Uber-Style Ride Hailing by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that separate fast-changing geospatial state from slower transactional trip and payment state."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Separate fast-changing geospatial state from slower transactional trip and payment state.",
+          "items": [
+            "Location ingest -> Geo index -> Match engine -> Trip state -> Payment",
+            "Live map updates are hotter than billing writes"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "real-time location ingestion, nearest-driver matching, trip state transitions, and payment completion",
+          "items": [
+            "Ingest driver pings.",
+            "Index drivers by geo region.",
+            "Match rider request to candidate drivers."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson08_uber-system-design.png"
+      ]
+    },
+    {
+      "slideId": "lesson-09-twitter-system-design",
+      "visualArchetype": "split-screen-analogy",
+      "pacingSeconds": 55,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is tweet write path, follower graph fan-out, and feed retrieval under celebrity skew.",
+        "teleprompterVO": "This slide explains Twitter-Style Feed System by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that choose feed fan-out strategy by balancing write amplification against read latency."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Choose feed fan-out strategy by balancing write amplification against read latency.",
+          "items": [
+            "Tweet -> Graph -> Fan-out strategy -> Feed store/cache -> Timeline read",
+            "Hybrid approach handles celebrity skew"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "tweet write path, follower graph fan-out, and feed retrieval under celebrity skew",
+          "items": [
+            "Persist tweet and metadata.",
+            "Resolve follower graph impact.",
+            "Choose fan-out policy."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson09_twitter-system-design.png"
+      ]
+    },
+    {
+      "slideId": "lesson-10-facebook-instagram-system-design",
+      "visualArchetype": "technical-deep-dive",
+      "pacingSeconds": 55,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is social graph, media distribution, ranking, and notification coordination for a consumer network.",
+        "teleprompterVO": "This slide explains Facebook / Instagram Feed & Social Graph by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that model the social graph, media pipeline, and feed ranking as separate but cooperating subsystems."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Model the social graph, media pipeline, and feed ranking as separate but cooperating subsystems.",
+          "items": [
+            "Identity + graph are the core model",
+            "Media pipeline distributes heavy assets",
+            "Feed ranking builds the read experience"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "social graph, media distribution, ranking, and notification coordination for a consumer network",
+          "items": [
+            "Store user and graph relationships.",
+            "Upload and distribute media.",
+            "Generate or rank feed candidates."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson10_facebook-instagram-system-design.png"
+      ]
+    },
+    {
+      "slideId": "lesson-11-youtube-netflix-system-design",
+      "visualArchetype": "execution-pipeline",
+      "pacingSeconds": 55,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is upload, transcoding, storage, CDN distribution, recommendation, and playback analytics.",
+        "teleprompterVO": "This slide explains YouTube / Netflix Video Platform by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that decouple heavy offline media processing from low-latency playback delivery."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Decouple heavy offline media processing from low-latency playback delivery.",
+          "items": [
+            "Upload -> Original store -> Transcode farm -> Manifest -> CDN -> Player",
+            "Analytics and recommendations stay adjacent, not inline"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "upload, transcoding, storage, CDN distribution, recommendation, and playback analytics",
+          "items": [
+            "Receive upload and store original.",
+            "Fan out transcoding jobs.",
+            "Publish manifests and metadata."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson11_youtube-netflix-system-design.png"
+      ]
+    },
+    {
+      "slideId": "lesson-12-zoom-system-design",
+      "visualArchetype": "execution-pipeline",
+      "pacingSeconds": 55,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is session setup, media routing, participant state, and optional recording under real-time latency constraints.",
+        "teleprompterVO": "This slide explains Zoom / Video Calling System by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that design signaling and media transport separately because they solve different latency and state problems."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Design signaling and media transport separately because they solve different latency and state problems.",
+          "items": [
+            "Signal room -> Negotiate media -> Relay video/audio -> Side-record if needed",
+            "Live latency beats heavy server-side processing"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "session setup, media routing, participant state, and optional recording under real-time latency constraints",
+          "items": [
+            "Create or join room through signaling.",
+            "Negotiate connection details.",
+            "Route media through relay/forwarding layer."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson12_zoom-system-design.png"
+      ]
+    },
+    {
+      "slideId": "lesson-13-google-maps-system-design",
+      "visualArchetype": "technical-deep-dive",
+      "pacingSeconds": 55,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is map tile serving, geospatial indexing, routing computation, live traffic updates, and search integration.",
+        "teleprompterVO": "This slide explains Google Maps / Location Platform by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that separate base map serving from dynamic routing and traffic intelligence."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Separate base map serving from dynamic routing and traffic intelligence.",
+          "items": [
+            "Tiles for base map",
+            "Geo search for places",
+            "Road graph for routing"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "map tile serving, geospatial indexing, routing computation, live traffic updates, and search integration",
+          "items": [
+            "Serve map tiles and place data.",
+            "Geocode the query.",
+            "Run route search on road graph."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson13_google-maps-system-design.png"
+      ]
+    },
+    {
+      "slideId": "lesson-14-biggest-mistakes-to-avoid-in-the-interview",
+      "visualArchetype": "split-screen-analogy",
+      "pacingSeconds": 40,
+      "speakerProtocol": {
+        "hook": "From the previous idea, the next system pressure point is failure prevention through disciplined scoping, estimation, and trade-off narration.",
+        "teleprompterVO": "This slide explains Biggest Mistakes to Avoid by starting from the real workload, then walking the hot path, then naming the key trade-off.",
+        "stageDirections": "Advance after the hot-path explanation, then reveal the trade-off callout.",
+        "theDelta": "The hidden architectural why is that avoid predictable interview mistakes by forcing scope, scale, and trade-off checkpoints into every answer."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Avoid predictable interview mistakes by forcing scope, scale, and trade-off checkpoints into every answer.",
+          "items": [
+            "Bad path: assume -> jump to tools -> ignore scale",
+            "Good path: clarify -> estimate -> design -> justify"
+          ]
+        },
+        {
+          "title": "Hot Path",
+          "bodyText": "failure prevention through disciplined scoping, estimation, and trade-off narration",
+          "items": [
+            "Clarify before drawing.",
+            "Estimate before sizing.",
+            "Justify every major component."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/SystemDesignInterviewGuide_lesson14_biggest-mistakes-to-avoid-in-the-interview.png"
+      ]
+    }
+  ]
+}

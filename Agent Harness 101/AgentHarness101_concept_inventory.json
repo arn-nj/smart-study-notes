@@ -1,0 +1,137 @@
+{
+  "course": "AgentHarness101",
+  "lessons": [
+    {
+      "order": 1,
+      "section": "Origins",
+      "section_slug": "origins",
+      "lesson": "From Prompt Engineering to Context Engineering",
+      "lesson_slug": "prompt-to-context",
+      "archetype": "type_a",
+      "difficulty": "Easy",
+      "read_time_minutes": 3,
+      "core_mechanism": "capability expansion by moving from one-shot prompts to controlled context loading",
+      "physical_analogy": "a tiny workbench that first uses only spoken instructions, then starts pulling the right tools onto the table before each task",
+      "label_fusion": "prompt, context, and task labels are embedded on bench cards and the loading chute",
+      "composition_intent": "left-to-right progression from one-shot output to scoped context-assisted work",
+      "visual_archetype": "split-screen-analogy",
+      "key_concepts": [
+        "Prompt engineering",
+        "Context engineering",
+        "Context window"
+      ],
+      "source_excerpt": "Harness engineering existed before the term was coined. Early agents worked with tiny context windows, so prompt-only execution was not enough. Teams started asking how to recycle small memory space to do more with less, which pushed the industry from prompt engineering toward context engineering.",
+      "density": "low"
+    },
+    {
+      "order": 2,
+      "section": "Context Techniques",
+      "section_slug": "context-techniques",
+      "lesson": "Tool Calling, MCP, and RAG as Context Controls",
+      "lesson_slug": "tools-mcp-rag",
+      "archetype": "type_c",
+      "difficulty": "Medium",
+      "read_time_minutes": 4,
+      "core_mechanism": "external capability routing so the agent reads only relevant repo state, vendor features, and retrieved knowledge",
+      "physical_analogy": "a control room that sends runners to the file archive, vendor desk, or knowledge library instead of piling everything on one operator table",
+      "label_fusion": "tool, MCP, and RAG labels are attached to runners and station counters",
+      "composition_intent": "hub-and-spoke capability map with the agent in the center and three context channels branching outward",
+      "visual_archetype": "technical-deep-dive",
+      "key_concepts": [
+        "Tool calling",
+        "MCP-style integration",
+        "RAG"
+      ],
+      "source_excerpt": "Tool calling, MCP, and RAG were used to manage the context window more efficiently. Tool calling explored only the relevant files, MCP added vendor features, and RAG connected external databases for on-demand data.",
+      "density": "medium"
+    },
+    {
+      "order": 3,
+      "section": "Failure Mode",
+      "section_slug": "failure-mode",
+      "lesson": "The Summarization Trap in Long-Running Tasks",
+      "lesson_slug": "summarization-trap",
+      "archetype": "type_b",
+      "difficulty": "Hard",
+      "read_time_minutes": 4,
+      "core_mechanism": "lossy context compression causing the agent to forget unfinished work and misreport completion",
+      "physical_analogy": "a project manager who keeps rewriting a giant checklist into shorter summaries until critical unchecked boxes disappear",
+      "label_fusion": "summary, dropped detail, and false-done labels sit directly on checklist cards and red warning arrows",
+      "composition_intent": "downward compression loop that shrinks memory and then branches into wrong assumptions",
+      "visual_archetype": "execution-pipeline",
+      "key_concepts": [
+        "Context summarization",
+        "False completion signal",
+        "Execution drift"
+      ],
+      "source_excerpt": "As long tasks ran, agents would summarize context to shrink it and continue. The task then became bound by the agent\u2019s own ability to summarize prior work, which is why tasks were often half completed or incorrectly assumed finished.",
+      "density": "medium"
+    },
+    {
+      "order": 4,
+      "section": "Harness Loop",
+      "section_slug": "harness-loop",
+      "lesson": "Harness Engineering as a Controlled Iteration Loop",
+      "lesson_slug": "harness-loop",
+      "archetype": "type_b",
+      "difficulty": "Medium",
+      "read_time_minutes": 4,
+      "core_mechanism": "looping the agent through bounded tasks with fresh context, test gates, and progress documentation",
+      "physical_analogy": "an assembly line that pulls one card at a time, completes it, checks it, stamps it, and only then moves to the next card",
+      "label_fusion": "requirements, task card, test, and document labels are embedded on conveyor stations",
+      "composition_intent": "circular execution loop with a visible reset point between iterations",
+      "visual_archetype": "execution-pipeline",
+      "key_concepts": [
+        "Agent harness",
+        "Iteration reset",
+        "Task decomposition"
+      ],
+      "source_excerpt": "Harness engineering stepped one layer above context engineering by looping the agent in a strict rule set. Each iteration got a fresh prompt and fresh context, then implemented, tested, and documented one task until the whole plan was finished.",
+      "density": "medium"
+    },
+    {
+      "order": 5,
+      "section": "Layer Model",
+      "section_slug": "layer-model",
+      "lesson": "How Prompt, Context, and Harness Layers Fit Together",
+      "lesson_slug": "layer-model",
+      "archetype": "type_a",
+      "difficulty": "Medium",
+      "read_time_minutes": 3,
+      "core_mechanism": "stacked control architecture where prompt defines identity, context defines working set, and harness defines lifecycle orchestration",
+      "physical_analogy": "a three-layer stage setup where the script guides the actor, stagehands bring props, and the director controls scene order",
+      "label_fusion": "prompt, context, and harness labels are embedded on stage script, prop cart, and director booth",
+      "composition_intent": "layered stack showing each control surface and how the top layer uses the lower two",
+      "visual_archetype": "technical-deep-dive",
+      "key_concepts": [
+        "Prompt layer",
+        "Context layer",
+        "Harness layer"
+      ],
+      "source_excerpt": "Harness engineering does not deprecate context engineering or prompt engineering. It leverages both. Prompt shapes the coding agent persona, context loads the relevant information, and harnessing orchestrates them through a stepwise environment.",
+      "density": "low"
+    },
+    {
+      "order": 6,
+      "section": "Production Use",
+      "section_slug": "production-use",
+      "lesson": "From Cloud Agents to Autonomous Production Cycles",
+      "lesson_slug": "production-cycle",
+      "archetype": "type_b",
+      "difficulty": "Medium",
+      "read_time_minutes": 4,
+      "core_mechanism": "background automation that chains agent runs, cloud execution, notifications, and recurring checks into a repeatable production loop",
+      "physical_analogy": "a night-shift operations center that receives requests, dispatches workers, checks daily changes, and raises a ticket only when a real update is ready",
+      "label_fusion": "cloud agent, PR, Slack, and daily check labels sit on dispatch boards and event rails",
+      "composition_intent": "closed production cycle from request trigger to autonomous execution to PR feedback to scheduled reruns",
+      "visual_archetype": "execution-pipeline",
+      "key_concepts": [
+        "Cloud agent",
+        "Artifact output",
+        "Recurring automation"
+      ],
+      "source_excerpt": "The video shows local agents, cloud agents, Slack-triggered requests, and daily automated checks that keep a site updated. This demonstrates harnessing as a production cycle, not just a chat-session trick.",
+      "density": "medium"
+    }
+  ]
+}

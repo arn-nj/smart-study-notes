@@ -1,0 +1,31 @@
+PNG Validation Report
+====================
+✓ SystemDesignInterviewGuide_lesson01_introduction.png valid
+  labels=33 size_kb=81
+✓ SystemDesignInterviewGuide_lesson02_choosing-the-right-db.png valid
+  labels=33 size_kb=84
+✓ SystemDesignInterviewGuide_lesson03_url-shortner-system-design.png valid
+  labels=33 size_kb=85
+✓ SystemDesignInterviewGuide_lesson04_airbnb-booking-com-system-design.png valid
+  labels=33 size_kb=83
+✓ SystemDesignInterviewGuide_lesson05_amazon-system-design.png valid
+  labels=33 size_kb=86
+✓ SystemDesignInterviewGuide_lesson06_whatsapp-system-design.png valid
+  labels=33 size_kb=84
+✓ SystemDesignInterviewGuide_lesson07_notification-system-at-scale.png valid
+  labels=33 size_kb=79
+✓ SystemDesignInterviewGuide_lesson08_uber-system-design.png valid
+  labels=33 size_kb=83
+✓ SystemDesignInterviewGuide_lesson09_twitter-system-design.png valid
+  labels=33 size_kb=78
+✓ SystemDesignInterviewGuide_lesson10_facebook-instagram-system-design.png valid
+  labels=33 size_kb=83
+✓ SystemDesignInterviewGuide_lesson11_youtube-netflix-system-design.png valid
+  labels=33 size_kb=84
+✓ SystemDesignInterviewGuide_lesson12_zoom-system-design.png valid
+  labels=33 size_kb=85
+✓ SystemDesignInterviewGuide_lesson13_google-maps-system-design.png valid
+  labels=33 size_kb=81
+✓ SystemDesignInterviewGuide_lesson14_biggest-mistakes-to-avoid-in-the-interview.png valid
+  labels=33 size_kb=80
+errors=0 warnings=0

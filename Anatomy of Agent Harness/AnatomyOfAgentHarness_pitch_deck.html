@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Anatomy of an Agent Harness</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg0: #020617;
+      --bg1: #0f172a;
+      --bg2: #111827;
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --accent: #22d3ee;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      font-family: Outfit, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      background: linear-gradient(145deg, var(--bg0), var(--bg1) 45%, var(--bg2));
+      color: var(--text-main);
+    }
+    .reveal {
+      font-size: 24px;
+      color: var(--text-main);
+      position: relative;
+      overflow: hidden;
+    }
+    .reveal::after,
+    .industry-bg::after,
+    .video-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+    .reveal .slides {
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+    .reveal .slides section {
+      width: 100% !important;
+      height: 100% !important;
+      box-sizing: border-box;
+      padding: 36px 52px;
+      overflow: hidden;
+    }
+    .slide-shell {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 20px;
+      position: relative;
+    }
+    .slide-head h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.08;
+      font-weight: 900;
+    }
+    .narration-hook {
+      margin: 8px 0 6px;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .pacing {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.75;
+      color: var(--text-muted);
+    }
+    .slide-main {
+      min-height: 0;
+      overflow: hidden;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+    .deck-block {
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: 14px;
+      padding: 14px 16px;
+      overflow: hidden;
+    }
+    .deck-block h3 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .deck-block p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.45;
+      color: #e2e8f0;
+    }
+    .deck-block ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      display: grid;
+      gap: 6px;
+      font-size: 0.98rem;
+      line-height: 1.4;
+    }
+    .visual-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    .visual-card {
+      margin: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(2, 6, 23, 0.5);
+    }
+    .visual-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: contain;
+      display: block;
+      background: rgba(2, 6, 23, 0.5);
+    }
+    .excalidraw-sketch {
+      filter: invert(1) hue-rotate(180deg) brightness(1.5);
+    }
+
+    .layout-split .slide-main {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      align-items: start;
+    }
+    .layout-split .deck-block:nth-child(n+2) {
+      grid-column: 1;
+    }
+    .layout-split .visual-strip {
+      grid-column: 2;
+      align-self: stretch;
+    }
+
+    .layout-hero .slide-main {
+      grid-template-columns: minmax(0, 1fr);
+      place-content: center;
+    }
+    .layout-hero .deck-block {
+      text-align: center;
+      padding: 18px 20px;
+    }
+    .layout-hero .deck-block h3 {
+      font-size: 1.45rem;
+    }
+
+    .layout-pipeline .slide-main {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .layout-pipeline .deck-block {
+      border-left: 4px solid var(--accent);
+    }
+
+    .layout-deep .slide-main {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .note-hook { color: #fef08a; }
+    .note-vo { color: #bfdbfe; }
+    .note-stage { color: #86efac; }
+    .note-delta { color: #f9a8d4; }
+
+    .reveal .fragment.fade-up {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .reveal .fragment.fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 420ms cubic-bezier(.2,.7,.2,1);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <div class="slide-shell">
+          <header class="slide-head">
+            <h1 class="fragment fade-up" data-fragment-index="0" style="margin:0;font-size:clamp(2.6rem,5vw,4.5rem);font-weight:900;line-height:1.02;">The Anatomy of an Agent Harness</h1>
+            <p class="fragment fade-up" data-fragment-index="1" style="font-size:1.2rem;color:var(--text-muted);margin-top:12px;">AI-Narrative Deck</p>
+          </header>
+        </div>
+      </section>
+      
+    <section data-slide-index="0" data-slide-id="chapter-01-foundation-models-changed-build-sequence" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is foundation-model APIs removing model-training bottlenecks so agent design moves earlier in the product lifecycle.</p>
+            <p class="pacing">Pacing: 40s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Foundation Models Changed the Build Sequence explains foundation-model APIs removing model-training bottlenecks so agent design moves earlier in the product lifecycle.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Foundations</li><li class="fragment fade-up" data-fragment-index="3">Foundation models</li><li class="fragment fade-up" data-fragment-index="4">foundation-model APIs removing model-training bottlenecks so agent design moves earlier in the product lifecycle</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>foundation-model APIs removing model-training bottlenecks so agent design moves earlier in the product lifecycle</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is foundation-model APIs removing model-training bottlenecks so agent design moves earlier in the product lifecycle.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Foundation Models Changed the Build Sequence by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="1" data-slide-id="chapter-02-canvas-planning-demo-production-gap" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is separate planning canvases exposing the difference between a proof-of-concept agent and a production-ready one.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Canvas Planning Shows the Demo-to-Production Gap explains separate planning canvases exposing the difference between a proof-of-concept agent and a production-ready one.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Foundations</li><li class="fragment fade-up" data-fragment-index="3">POC canvas</li><li class="fragment fade-up" data-fragment-index="4">separate planning canvases exposing the difference between a proof-of-concept agent and a production-ready one</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>separate planning canvases exposing the difference between a proof-of-concept agent and a production-ready one</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is separate planning canvases exposing the difference between a proof-of-concept agent and a production-ready one.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Canvas Planning Shows the Demo-to-Production Gap by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="2" data-slide-id="chapter-03-what-the-agent-harness-actually-is" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is the complete software infrastructure around the model producing agent behavior.</p>
+            <p class="pacing">Pacing: 40s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>What the Agent Harness Actually Is explains the complete software infrastructure around the model producing agent behavior.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Definition</li><li class="fragment fade-up" data-fragment-index="3">Agent harness</li><li class="fragment fade-up" data-fragment-index="4">the complete software infrastructure around the model producing agent behavior</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>the complete software infrastructure around the model producing agent behavior</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is the complete software infrastructure around the model producing agent behavior.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains What the Agent Harness Actually Is by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="3" data-slide-id="chapter-04-prompt-context-harness-engineering" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is three concentric engineering layers around the model with increasing scope and control.</p>
+            <p class="pacing">Pacing: 40s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Prompt, Context, and Harness Engineering explains three concentric engineering layers around the model with increasing scope and control.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Definition</li><li class="fragment fade-up" data-fragment-index="3">Prompt engineering</li><li class="fragment fade-up" data-fragment-index="4">three concentric engineering layers around the model with increasing scope and control</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>three concentric engineering layers around the model with increasing scope and control</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is three concentric engineering layers around the model with increasing scope and control.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Prompt, Context, and Harness Engineering by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="4" data-slide-id="chapter-05-orchestration-loop" class="layout-pipeline grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is the ReAct or TAO loop that repeatedly assembles prompts, calls the model, executes tools, and repeats until done.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>The Orchestration Loop explains the ReAct or TAO loop that repeatedly assembles prompts, calls the model, executes tools, and repeats until done.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">The Orchestration Loop</li><li class="fragment fade-up" data-fragment-index="4">the ReAct or TAO loop that repeatedly assembles prompts, calls the model, executes tools, and repeats until done</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>the ReAct or TAO loop that repeatedly assembles prompts, calls the model, executes tools, and repeats until done</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is the ReAct or TAO loop that repeatedly assembles prompts, calls the model, executes tools, and repeats until done.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains The Orchestration Loop by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="5" data-slide-id="chapter-06-tools" class="layout-deep grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is schema-driven external actions that give the agent hands and interfaces.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Tools explains schema-driven external actions that give the agent hands and interfaces.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">Tools</li><li class="fragment fade-up" data-fragment-index="4">schema-driven external actions that give the agent hands and interfaces</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>schema-driven external actions that give the agent hands and interfaces</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is schema-driven external actions that give the agent hands and interfaces.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Tools by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="6" data-slide-id="chapter-07-memory" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is multi-timescale storage hierarchy separating short-term conversation state from persistent long-term knowledge.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Memory explains multi-timescale storage hierarchy separating short-term conversation state from persistent long-term knowledge.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">Memory</li><li class="fragment fade-up" data-fragment-index="4">multi-timescale storage hierarchy separating short-term conversation state from persistent long-term knowledge</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>multi-timescale storage hierarchy separating short-term conversation state from persistent long-term knowledge</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is multi-timescale storage hierarchy separating short-term conversation state from persistent long-term knowledge.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Memory by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="7" data-slide-id="chapter-08-context-management" class="layout-pipeline grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is smallest-possible high-signal token selection to avoid context rot and prompt degradation.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Context Management explains smallest-possible high-signal token selection to avoid context rot and prompt degradation.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">Context Management</li><li class="fragment fade-up" data-fragment-index="4">smallest-possible high-signal token selection to avoid context rot and prompt degradation</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>smallest-possible high-signal token selection to avoid context rot and prompt degradation</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is smallest-possible high-signal token selection to avoid context rot and prompt degradation.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Context Management by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="8" data-slide-id="chapter-09-prompt-construction" class="layout-pipeline grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is hierarchical assembly of system prompt, tool definitions, memory, history, and user message into the next model input.</p>
+            <p class="pacing">Pacing: 40s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Prompt Construction explains hierarchical assembly of system prompt, tool definitions, memory, history, and user message into the next model input.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">Prompt Construction</li><li class="fragment fade-up" data-fragment-index="4">hierarchical assembly of system prompt, tool definitions, memory, history, and user message into the next model input</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>hierarchical assembly of system prompt, tool definitions, memory, history, and user message into the next model input</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is hierarchical assembly of system prompt, tool definitions, memory, history, and user message into the next model input.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Prompt Construction by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="9" data-slide-id="chapter-10-output-parsing" class="layout-deep grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is classification of model output into final answer, structured tool call, or handoff.</p>
+            <p class="pacing">Pacing: 40s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Output Parsing explains classification of model output into final answer, structured tool call, or handoff.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">Output Parsing</li><li class="fragment fade-up" data-fragment-index="4">classification of model output into final answer, structured tool call, or handoff</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>classification of model output into final answer, structured tool call, or handoff</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is classification of model output into final answer, structured tool call, or handoff.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Output Parsing by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="10" data-slide-id="chapter-11-state-management" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is typed persistent state flowing through checkpoints so work can resume after interruptions.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>State Management explains typed persistent state flowing through checkpoints so work can resume after interruptions.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">State Management</li><li class="fragment fade-up" data-fragment-index="4">typed persistent state flowing through checkpoints so work can resume after interruptions</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>typed persistent state flowing through checkpoints so work can resume after interruptions</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is typed persistent state flowing through checkpoints so work can resume after interruptions.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains State Management by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="11" data-slide-id="chapter-12-error-handling" class="layout-pipeline grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is failure classification so the harness retries, self-corrects, asks the user, or escalates appropriately.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Error Handling explains failure classification so the harness retries, self-corrects, asks the user, or escalates appropriately.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">Error Handling</li><li class="fragment fade-up" data-fragment-index="4">failure classification so the harness retries, self-corrects, asks the user, or escalates appropriately</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>failure classification so the harness retries, self-corrects, asks the user, or escalates appropriately</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is failure classification so the harness retries, self-corrects, asks the user, or escalates appropriately.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Error Handling by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="12" data-slide-id="chapter-13-guardrails-and-safety" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is separation of model intent from permission enforcement with tripwires and policy checks.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Guardrails and Safety explains separation of model intent from permission enforcement with tripwires and policy checks.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">Guardrails and Safety</li><li class="fragment fade-up" data-fragment-index="4">separation of model intent from permission enforcement with tripwires and policy checks</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>separation of model intent from permission enforcement with tripwires and policy checks</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is separation of model intent from permission enforcement with tripwires and policy checks.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Guardrails and Safety by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="13" data-slide-id="chapter-14-verification-loops" class="layout-pipeline grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is post-action quality confirmation through tests, visual checks, and separate evaluation passes.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Verification Loops explains post-action quality confirmation through tests, visual checks, and separate evaluation passes.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">Verification Loops</li><li class="fragment fade-up" data-fragment-index="4">post-action quality confirmation through tests, visual checks, and separate evaluation passes</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>post-action quality confirmation through tests, visual checks, and separate evaluation passes</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is post-action quality confirmation through tests, visual checks, and separate evaluation passes.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Verification Loops by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="14" data-slide-id="chapter-15-subagent-orchestration" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is bounded delegation of subtasks to specialized or isolated agents without losing parent control.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Subagent Orchestration explains bounded delegation of subtasks to specialized or isolated agents without losing parent control.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">The 11 Components</li><li class="fragment fade-up" data-fragment-index="3">Subagent Orchestration</li><li class="fragment fade-up" data-fragment-index="4">bounded delegation of subtasks to specialized or isolated agents without losing parent control</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>bounded delegation of subtasks to specialized or isolated agents without losing parent control</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is bounded delegation of subtasks to specialized or isolated agents without losing parent control.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Subagent Orchestration by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="15" data-slide-id="chapter-16-walkthrough-and-ralph-loop" class="layout-pipeline grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is end-to-end harness cycle with layered termination conditions and filesystem-backed continuity across context windows.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Step-by-Step Walkthrough and the Ralph Loop explains end-to-end harness cycle with layered termination conditions and filesystem-backed continuity across context windows.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Synthesis</li><li class="fragment fade-up" data-fragment-index="3">Termination condition</li><li class="fragment fade-up" data-fragment-index="4">end-to-end harness cycle with layered termination conditions and filesystem-backed continuity across context windows</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>end-to-end harness cycle with layered termination conditions and filesystem-backed continuity across context windows</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is end-to-end harness cycle with layered termination conditions and filesystem-backed continuity across context windows.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Step-by-Step Walkthrough and the Ralph Loop by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="16" data-slide-id="chapter-17-how-frameworks-implement-the-pattern" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is framework-specific surfaces exposing the same underlying harness pattern through different abstractions.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>How Frameworks Implement the Pattern explains framework-specific surfaces exposing the same underlying harness pattern through different abstractions.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Synthesis</li><li class="fragment fade-up" data-fragment-index="3">Code-first runner</li><li class="fragment fade-up" data-fragment-index="4">framework-specific surfaces exposing the same underlying harness pattern through different abstractions</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>framework-specific surfaces exposing the same underlying harness pattern through different abstractions</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is framework-specific surfaces exposing the same underlying harness pattern through different abstractions.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains How Frameworks Implement the Pattern by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="17" data-slide-id="chapter-18-scaffolding-coevolution-future-proofing" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is temporary-but-necessary harness complexity that should shrink as models internalize more behavior.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Scaffolding, Co-Evolution, and the Future-Proofing Test explains temporary-but-necessary harness complexity that should shrink as models internalize more behavior.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Synthesis</li><li class="fragment fade-up" data-fragment-index="3">Scaffolding metaphor</li><li class="fragment fade-up" data-fragment-index="4">temporary-but-necessary harness complexity that should shrink as models internalize more behavior</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>temporary-but-necessary harness complexity that should shrink as models internalize more behavior</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is temporary-but-necessary harness complexity that should shrink as models internalize more behavior.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Scaffolding, Co-Evolution, and the Future-Proofing Test by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="18" data-slide-id="chapter-19-seven-architectural-decisions-and-final-takeaway" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next harness pressure point is explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness.</p>
+            <p class="pacing">Pacing: 55s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Seven Architectural Decisions and the Final Takeaway explains explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Synthesis</li><li class="fragment fade-up" data-fragment-index="3">Harness thickness</li><li class="fragment fade-up" data-fragment-index="4">explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Harness Impact</h3>
+      <p>explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Affects runtime reliability</li><li class="fragment fade-up" data-fragment-index="13">Changes long-task behavior</li><li class="fragment fade-up" data-fragment-index="14">Shapes production outcomes</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next harness pressure point is explicit harness-definition choices around agent count, execution style, context strategy, verification, safety, tool scope, and thickness.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Seven Architectural Decisions and the Final Takeaway by starting from the production problem, then walking the mechanism, then naming the design trade-off.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that This matters because weak handling here degrades production reliability, observability, or safety.</p>
+        </aside>
+      </div>
+    </section>
+  
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    function animateOverflowViewport() {
+      return;
+    }
+
+    const reveal = new Reveal({
+      hash: true,
+      fragmentInURL: false,
+      transition: 'slide',
+      backgroundTransition: 'fade',
+      fragments: true,
+      controls: true,
+      progress: true,
+      center: false,
+      mouseWheel: true,
+      width: 1600,
+      height: 900,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 1.5,
+      plugins: [RevealNotes]
+    });
+
+    function animateSlide(slideEl) {
+      if (!slideEl || typeof gsap === 'undefined') return;
+      const blocks = Array.from(slideEl.querySelectorAll('.deck-block'));
+      if (!blocks.length) return;
+      gsap.killTweensOf(blocks);
+      gsap.fromTo(
+        blocks,
+        { opacity: 0, y: 12 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.35,
+          ease: 'power2.out',
+          stagger: 0.06,
+          overwrite: 'auto'
+        }
+      );
+    }
+
+    reveal.initialize().then(() => {
+      animateOverflowViewport();
+      animateSlide(reveal.getCurrentSlide());
+    });
+
+    reveal.on('slidechanged', (event) => {
+      animateSlide(event.currentSlide);
+    });
+  </script>
+</body>
+</html>

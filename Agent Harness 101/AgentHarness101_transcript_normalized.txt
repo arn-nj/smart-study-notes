@@ -1,0 +1,47 @@
+=== Section ===
+Origins
+
+--- Lesson ---
+From Prompt Engineering to Context Engineering
+
+Harness engineering existed before the term was coined. Early agents worked with tiny context windows, so prompt-only execution was not enough. Teams started asking how to recycle small memory space to do more with less, which pushed the industry from prompt engineering toward context engineering.
+
+=== Section ===
+Context Techniques
+
+--- Lesson ---
+Tool Calling, MCP, and RAG as Context Controls
+
+Tool calling, MCP, and RAG were used to manage the context window more efficiently. Tool calling explored only the relevant files, MCP added vendor features, and RAG connected external databases for on-demand data.
+
+=== Section ===
+Failure Mode
+
+--- Lesson ---
+The Summarization Trap in Long-Running Tasks
+
+As long tasks ran, agents would summarize context to shrink it and continue. The task then became bound by the agent’s own ability to summarize prior work, which is why tasks were often half completed or incorrectly assumed finished.
+
+=== Section ===
+Harness Loop
+
+--- Lesson ---
+Harness Engineering as a Controlled Iteration Loop
+
+Harness engineering stepped one layer above context engineering by looping the agent in a strict rule set. Each iteration got a fresh prompt and fresh context, then implemented, tested, and documented one task until the whole plan was finished.
+
+=== Section ===
+Layer Model
+
+--- Lesson ---
+How Prompt, Context, and Harness Layers Fit Together
+
+Harness engineering does not deprecate context engineering or prompt engineering. It leverages both. Prompt shapes the coding agent persona, context loads the relevant information, and harnessing orchestrates them through a stepwise environment.
+
+=== Section ===
+Production Use
+
+--- Lesson ---
+From Cloud Agents to Autonomous Production Cycles
+
+The video shows local agents, cloud agents, Slack-triggered requests, and daily automated checks that keep a site updated. This demonstrates harnessing as a production cycle, not just a chat-session trick.

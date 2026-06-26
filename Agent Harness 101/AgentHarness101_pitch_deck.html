@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Harness 101</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg0: #020617;
+      --bg1: #0f172a;
+      --bg2: #111827;
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --accent: #22d3ee;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      font-family: Outfit, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      background: linear-gradient(145deg, var(--bg0), var(--bg1) 45%, var(--bg2));
+      color: var(--text-main);
+    }
+    .reveal {
+      font-size: 24px;
+      color: var(--text-main);
+      position: relative;
+      overflow: hidden;
+    }
+    .reveal::after,
+    .industry-bg::after,
+    .video-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+    .reveal .slides {
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+    .reveal .slides section {
+      width: 100% !important;
+      height: 100% !important;
+      box-sizing: border-box;
+      padding: 36px 52px;
+      overflow: hidden;
+    }
+    .slide-shell {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 20px;
+      position: relative;
+    }
+    .slide-head h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.08;
+      font-weight: 900;
+    }
+    .narration-hook {
+      margin: 8px 0 6px;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .pacing {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.75;
+      color: var(--text-muted);
+    }
+    .slide-main {
+      min-height: 0;
+      overflow: hidden;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+    .deck-block {
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: 14px;
+      padding: 14px 16px;
+      overflow: hidden;
+    }
+    .deck-block h3 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .deck-block p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.45;
+      color: #e2e8f0;
+    }
+    .deck-block ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      display: grid;
+      gap: 6px;
+      font-size: 0.98rem;
+      line-height: 1.4;
+    }
+    .visual-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    .visual-card {
+      margin: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(2, 6, 23, 0.5);
+    }
+    .visual-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: contain;
+      display: block;
+      background: rgba(2, 6, 23, 0.5);
+    }
+    .excalidraw-sketch {
+      filter: invert(1) hue-rotate(180deg) brightness(1.5);
+    }
+
+    .layout-split .slide-main {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      align-items: start;
+    }
+    .layout-split .deck-block:nth-child(n+2) {
+      grid-column: 1;
+    }
+    .layout-split .visual-strip {
+      grid-column: 2;
+      align-self: stretch;
+    }
+
+    .layout-hero .slide-main {
+      grid-template-columns: minmax(0, 1fr);
+      place-content: center;
+    }
+    .layout-hero .deck-block {
+      text-align: center;
+      padding: 18px 20px;
+    }
+    .layout-hero .deck-block h3 {
+      font-size: 1.45rem;
+    }
+
+    .layout-pipeline .slide-main {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .layout-pipeline .deck-block {
+      border-left: 4px solid var(--accent);
+    }
+
+    .layout-deep .slide-main {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .note-hook { color: #fef08a; }
+    .note-vo { color: #bfdbfe; }
+    .note-stage { color: #86efac; }
+    .note-delta { color: #f9a8d4; }
+
+    .reveal .fragment.fade-up {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .reveal .fragment.fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 420ms cubic-bezier(.2,.7,.2,1);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <div class="slide-shell">
+          <header class="slide-head">
+            <h1 class="fragment fade-up" data-fragment-index="0" style="margin:0;font-size:clamp(2.6rem,5vw,4.5rem);font-weight:900;line-height:1.02;">Agent Harness 101</h1>
+            <p class="fragment fade-up" data-fragment-index="1" style="font-size:1.2rem;color:var(--text-muted);margin-top:12px;">AI-Narrative Deck</p>
+          </header>
+        </div>
+      </section>
+      
+    <section data-slide-index="0" data-slide-id="lesson-01-prompt-to-context" class="layout-split grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next system pressure point is capability expansion by moving from one-shot prompts to controlled context loading.</p>
+            <p class="pacing">Pacing: 40s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Why agents needed to move beyond one-shot prompting before larger tasks became reliable.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">One-shot prompt -&gt; shallow answer</li><li class="fragment fade-up" data-fragment-index="3">Scoped context -&gt; stronger execution</li><li class="fragment fade-up" data-fragment-index="4">Small memory forced selective loading</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Execution Shape</h3>
+      <p>capability expansion by moving from one-shot prompts to controlled context loading</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Start with the broad request.</li><li class="fragment fade-up" data-fragment-index="13">Observe where the one-shot response loses detail.</li><li class="fragment fade-up" data-fragment-index="14">Introduce selective file and knowledge loading.</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next system pressure point is capability expansion by moving from one-shot prompts to controlled context loading.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains From Prompt Engineering to Context Engineering by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the reliability or trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that why agents needed to move beyond one-shot prompting before larger tasks became reliable.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="1" data-slide-id="lesson-02-tools-mcp-rag" class="layout-deep grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next system pressure point is external capability routing so the agent reads only relevant repo state, vendor features, and retrieved knowledge.</p>
+            <p class="pacing">Pacing: 50s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>How external capability routing made context engineering practical for real coding agents.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Tool calling -&gt; relevant files/actions</li><li class="fragment fade-up" data-fragment-index="3">MCP -&gt; platform extensions</li><li class="fragment fade-up" data-fragment-index="4">RAG -&gt; on-demand knowledge</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Execution Shape</h3>
+      <p>external capability routing so the agent reads only relevant repo state, vendor features, and retrieved knowledge</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Identify the source needed for the current step.</li><li class="fragment fade-up" data-fragment-index="13">Route to the right external capability.</li><li class="fragment fade-up" data-fragment-index="14">Return only the relevant subset.</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next system pressure point is external capability routing so the agent reads only relevant repo state, vendor features, and retrieved knowledge.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Tool Calling, MCP, and RAG as Context Controls by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the reliability or trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that how external capability routing made context engineering practical for real coding agents.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="2" data-slide-id="lesson-03-summarization-trap" class="layout-pipeline grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next system pressure point is lossy context compression causing the agent to forget unfinished work and misreport completion.</p>
+            <p class="pacing">Pacing: 50s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Why long autonomous runs can drift into false completion when summaries replace detailed state.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Long task -&gt; context fills</li><li class="fragment fade-up" data-fragment-index="3">Summary compression -&gt; lost detail</li><li class="fragment fade-up" data-fragment-index="4">Lost detail -&gt; false done state</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Execution Shape</h3>
+      <p>lossy context compression causing the agent to forget unfinished work and misreport completion</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Run a long task until context fills.</li><li class="fragment fade-up" data-fragment-index="13">Compress previous state into a summary.</li><li class="fragment fade-up" data-fragment-index="14">Compare the summary with the original checklist.</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next system pressure point is lossy context compression causing the agent to forget unfinished work and misreport completion.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains The Summarization Trap in Long-Running Tasks by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the reliability or trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that why long autonomous runs can drift into false completion when summaries replace detailed state.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="3" data-slide-id="lesson-04-harness-loop" class="layout-pipeline grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next system pressure point is looping the agent through bounded tasks with fresh context, test gates, and progress documentation.</p>
+            <p class="pacing">Pacing: 50s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>The core harness pattern: plan once, execute iteratively, reset context, and verify continuously.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Requirements doc -&gt; task queue</li><li class="fragment fade-up" data-fragment-index="3">Pick one task -&gt; implement</li><li class="fragment fade-up" data-fragment-index="4">Test + document -&gt; close loop</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Execution Shape</h3>
+      <p>looping the agent through bounded tasks with fresh context, test gates, and progress documentation</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Generate the requirements artifact.</li><li class="fragment fade-up" data-fragment-index="13">Break work into atomic tasks.</li><li class="fragment fade-up" data-fragment-index="14">Run one task inside a bounded loop.</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next system pressure point is looping the agent through bounded tasks with fresh context, test gates, and progress documentation.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains Harness Engineering as a Controlled Iteration Loop by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the reliability or trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that the core harness pattern: plan once, execute iteratively, reset context, and verify continuously.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="4" data-slide-id="lesson-05-layer-model" class="layout-deep grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next system pressure point is stacked control architecture where prompt defines identity, context defines working set, and harness defines lifecycle orchestration.</p>
+            <p class="pacing">Pacing: 40s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>Harnessing does not replace prompting or context engineering; it composes them into a higher-level control stack.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Prompt -&gt; identity/rules</li><li class="fragment fade-up" data-fragment-index="3">Context -&gt; working set/tools</li><li class="fragment fade-up" data-fragment-index="4">Harness -&gt; loop + lifecycle</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Execution Shape</h3>
+      <p>stacked control architecture where prompt defines identity, context defines working set, and harness defines lifecycle orchestration</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Define the agent persona and rules.</li><li class="fragment fade-up" data-fragment-index="13">Load the minimal working context.</li><li class="fragment fade-up" data-fragment-index="14">Wrap both inside a bounded execution loop.</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next system pressure point is stacked control architecture where prompt defines identity, context defines working set, and harness defines lifecycle orchestration.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains How Prompt, Context, and Harness Layers Fit Together by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the reliability or trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that harnessing does not replace prompting or context engineering; it composes them into a higher-level control stack.</p>
+        </aside>
+      </div>
+    </section>
+  
+
+    <section data-slide-index="5" data-slide-id="lesson-06-production-cycle" class="layout-pipeline grid grid-cols-12 gap-4">
+      <div class="slide-shell">
+        <header class="slide-head">
+          <h2 class="fragment fade-up" data-fragment-index="0">Core Concept</h2>
+          <p class="narration-hook fragment fade-up" data-fragment-index="1">The next system pressure point is background automation that chains agent runs, cloud execution, notifications, and recurring checks into a repeatable production loop.</p>
+            <p class="pacing">Pacing: 50s</p>
+        </header>
+        <main class="slide-main">
+          
+    <article class="deck-block fragment fade-up" data-fragment-index="1">
+      <h3>Core Concept</h3>
+      <p>How harnessing turns agent demos into production-oriented loops with triggers, cloud runs, and recurring maintenance.</p>
+      <ul><li class="fragment fade-up" data-fragment-index="2">Request trigger -&gt; cloud run</li><li class="fragment fade-up" data-fragment-index="3">Looped execution -&gt; PR output</li><li class="fragment fade-up" data-fragment-index="4">Slack/status signal -&gt; human review</li></ul>
+    </article>
+  
+
+    <article class="deck-block fragment fade-up" data-fragment-index="11">
+      <h3>Execution Shape</h3>
+      <p>background automation that chains agent runs, cloud execution, notifications, and recurring checks into a repeatable production loop</p>
+      <ul><li class="fragment fade-up" data-fragment-index="12">Accept a request from a user, integration, or schedule.</li><li class="fragment fade-up" data-fragment-index="13">Run the bounded harness loop in the cloud.</li><li class="fragment fade-up" data-fragment-index="14">Emit a concrete artifact such as a PR or status update.</li></ul>
+    </article>
+  
+          
+        </main>
+        <aside class="notes">
+          <p class="note-hook"><strong>Hook:</strong> The next system pressure point is background automation that chains agent runs, cloud execution, notifications, and recurring checks into a repeatable production loop.</p>
+          <p class="note-vo"><strong>Teleprompter VO:</strong> This slide explains From Cloud Agents to Autonomous Production Cycles by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.</p>
+          <p class="note-stage"><strong>Stage Directions:</strong> Advance after the mechanism explanation, then reveal the reliability or trade-off cue.</p>
+          <p class="note-delta"><strong>The Delta:</strong> The hidden architectural why is that how harnessing turns agent demos into production-oriented loops with triggers, cloud runs, and recurring maintenance.</p>
+        </aside>
+      </div>
+    </section>
+  
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    function animateOverflowViewport() {
+      return;
+    }
+
+    const reveal = new Reveal({
+      hash: true,
+      fragmentInURL: false,
+      transition: 'slide',
+      backgroundTransition: 'fade',
+      fragments: true,
+      controls: true,
+      progress: true,
+      center: false,
+      mouseWheel: true,
+      width: 1600,
+      height: 900,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 1.5,
+      plugins: [RevealNotes]
+    });
+
+    function animateSlide(slideEl) {
+      if (!slideEl || typeof gsap === 'undefined') return;
+      const blocks = Array.from(slideEl.querySelectorAll('.deck-block'));
+      if (!blocks.length) return;
+      gsap.killTweensOf(blocks);
+      gsap.fromTo(
+        blocks,
+        { opacity: 0, y: 12 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.35,
+          ease: 'power2.out',
+          stagger: 0.06,
+          overwrite: 'auto'
+        }
+      );
+    }
+
+    reveal.initialize().then(() => {
+      animateOverflowViewport();
+      animateSlide(reveal.getCurrentSlide());
+    });
+
+    reveal.on('slidechanged', (event) => {
+      animateSlide(event.currentSlide);
+    });
+  </script>
+</body>
+</html>

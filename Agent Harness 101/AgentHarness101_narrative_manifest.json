@@ -1,0 +1,210 @@
+{
+  "deckTitle": "Agent Harness 101",
+  "deckSubtitle": "AI-Narrative Deck",
+  "slides": [
+    {
+      "slideId": "lesson-01-prompt-to-context",
+      "visualArchetype": "split-screen-analogy",
+      "pacingSeconds": 40,
+      "speakerProtocol": {
+        "hook": "The next system pressure point is capability expansion by moving from one-shot prompts to controlled context loading.",
+        "teleprompterVO": "This slide explains From Prompt Engineering to Context Engineering by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.",
+        "stageDirections": "Advance after the mechanism explanation, then reveal the reliability or trade-off cue.",
+        "theDelta": "The hidden architectural why is that why agents needed to move beyond one-shot prompting before larger tasks became reliable."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Why agents needed to move beyond one-shot prompting before larger tasks became reliable.",
+          "items": [
+            "One-shot prompt -> shallow answer",
+            "Scoped context -> stronger execution",
+            "Small memory forced selective loading"
+          ]
+        },
+        {
+          "title": "Execution Shape",
+          "bodyText": "capability expansion by moving from one-shot prompts to controlled context loading",
+          "items": [
+            "Start with the broad request.",
+            "Observe where the one-shot response loses detail.",
+            "Introduce selective file and knowledge loading."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/AgentHarness101_lesson01_prompt-to-context.png"
+      ]
+    },
+    {
+      "slideId": "lesson-02-tools-mcp-rag",
+      "visualArchetype": "technical-deep-dive",
+      "pacingSeconds": 50,
+      "speakerProtocol": {
+        "hook": "The next system pressure point is external capability routing so the agent reads only relevant repo state, vendor features, and retrieved knowledge.",
+        "teleprompterVO": "This slide explains Tool Calling, MCP, and RAG as Context Controls by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.",
+        "stageDirections": "Advance after the mechanism explanation, then reveal the reliability or trade-off cue.",
+        "theDelta": "The hidden architectural why is that how external capability routing made context engineering practical for real coding agents."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "How external capability routing made context engineering practical for real coding agents.",
+          "items": [
+            "Tool calling -> relevant files/actions",
+            "MCP -> platform extensions",
+            "RAG -> on-demand knowledge"
+          ]
+        },
+        {
+          "title": "Execution Shape",
+          "bodyText": "external capability routing so the agent reads only relevant repo state, vendor features, and retrieved knowledge",
+          "items": [
+            "Identify the source needed for the current step.",
+            "Route to the right external capability.",
+            "Return only the relevant subset."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/AgentHarness101_lesson02_tools-mcp-rag.png"
+      ]
+    },
+    {
+      "slideId": "lesson-03-summarization-trap",
+      "visualArchetype": "execution-pipeline",
+      "pacingSeconds": 50,
+      "speakerProtocol": {
+        "hook": "The next system pressure point is lossy context compression causing the agent to forget unfinished work and misreport completion.",
+        "teleprompterVO": "This slide explains The Summarization Trap in Long-Running Tasks by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.",
+        "stageDirections": "Advance after the mechanism explanation, then reveal the reliability or trade-off cue.",
+        "theDelta": "The hidden architectural why is that why long autonomous runs can drift into false completion when summaries replace detailed state."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Why long autonomous runs can drift into false completion when summaries replace detailed state.",
+          "items": [
+            "Long task -> context fills",
+            "Summary compression -> lost detail",
+            "Lost detail -> false done state"
+          ]
+        },
+        {
+          "title": "Execution Shape",
+          "bodyText": "lossy context compression causing the agent to forget unfinished work and misreport completion",
+          "items": [
+            "Run a long task until context fills.",
+            "Compress previous state into a summary.",
+            "Compare the summary with the original checklist."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/AgentHarness101_lesson03_summarization-trap.png"
+      ]
+    },
+    {
+      "slideId": "lesson-04-harness-loop",
+      "visualArchetype": "execution-pipeline",
+      "pacingSeconds": 50,
+      "speakerProtocol": {
+        "hook": "The next system pressure point is looping the agent through bounded tasks with fresh context, test gates, and progress documentation.",
+        "teleprompterVO": "This slide explains Harness Engineering as a Controlled Iteration Loop by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.",
+        "stageDirections": "Advance after the mechanism explanation, then reveal the reliability or trade-off cue.",
+        "theDelta": "The hidden architectural why is that the core harness pattern: plan once, execute iteratively, reset context, and verify continuously."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "The core harness pattern: plan once, execute iteratively, reset context, and verify continuously.",
+          "items": [
+            "Requirements doc -> task queue",
+            "Pick one task -> implement",
+            "Test + document -> close loop"
+          ]
+        },
+        {
+          "title": "Execution Shape",
+          "bodyText": "looping the agent through bounded tasks with fresh context, test gates, and progress documentation",
+          "items": [
+            "Generate the requirements artifact.",
+            "Break work into atomic tasks.",
+            "Run one task inside a bounded loop."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/AgentHarness101_lesson04_harness-loop.png"
+      ]
+    },
+    {
+      "slideId": "lesson-05-layer-model",
+      "visualArchetype": "technical-deep-dive",
+      "pacingSeconds": 40,
+      "speakerProtocol": {
+        "hook": "The next system pressure point is stacked control architecture where prompt defines identity, context defines working set, and harness defines lifecycle orchestration.",
+        "teleprompterVO": "This slide explains How Prompt, Context, and Harness Layers Fit Together by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.",
+        "stageDirections": "Advance after the mechanism explanation, then reveal the reliability or trade-off cue.",
+        "theDelta": "The hidden architectural why is that harnessing does not replace prompting or context engineering; it composes them into a higher-level control stack."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "Harnessing does not replace prompting or context engineering; it composes them into a higher-level control stack.",
+          "items": [
+            "Prompt -> identity/rules",
+            "Context -> working set/tools",
+            "Harness -> loop + lifecycle"
+          ]
+        },
+        {
+          "title": "Execution Shape",
+          "bodyText": "stacked control architecture where prompt defines identity, context defines working set, and harness defines lifecycle orchestration",
+          "items": [
+            "Define the agent persona and rules.",
+            "Load the minimal working context.",
+            "Wrap both inside a bounded execution loop."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/AgentHarness101_lesson05_layer-model.png"
+      ]
+    },
+    {
+      "slideId": "lesson-06-production-cycle",
+      "visualArchetype": "execution-pipeline",
+      "pacingSeconds": 50,
+      "speakerProtocol": {
+        "hook": "The next system pressure point is background automation that chains agent runs, cloud execution, notifications, and recurring checks into a repeatable production loop.",
+        "teleprompterVO": "This slide explains From Cloud Agents to Autonomous Production Cycles by starting with the failure mode or workload, then walking the bounded mechanism, then naming the practical payoff for autonomous agents.",
+        "stageDirections": "Advance after the mechanism explanation, then reveal the reliability or trade-off cue.",
+        "theDelta": "The hidden architectural why is that how harnessing turns agent demos into production-oriented loops with triggers, cloud runs, and recurring maintenance."
+      },
+      "blocks": [
+        {
+          "title": "Core Concept",
+          "bodyText": "How harnessing turns agent demos into production-oriented loops with triggers, cloud runs, and recurring maintenance.",
+          "items": [
+            "Request trigger -> cloud run",
+            "Looped execution -> PR output",
+            "Slack/status signal -> human review"
+          ]
+        },
+        {
+          "title": "Execution Shape",
+          "bodyText": "background automation that chains agent runs, cloud execution, notifications, and recurring checks into a repeatable production loop",
+          "items": [
+            "Accept a request from a user, integration, or schedule.",
+            "Run the bounded harness loop in the cloud.",
+            "Emit a concrete artifact such as a PR or status update."
+          ]
+        }
+      ],
+      "visuals": [
+        "./assets/AgentHarness101_lesson06_production-cycle.png"
+      ]
+    }
+  ]
+}

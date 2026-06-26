@@ -1,0 +1,26 @@
+Full-set arrow audit validation report
+
+✓ AnatomyOfAgentHarness_chapter01_foundation-models-changed-build-sequence.png valid (210741 bytes)
+✓ AnatomyOfAgentHarness_chapter02_canvas-planning-demo-production-gap.png valid (393410 bytes)
+✓ AnatomyOfAgentHarness_chapter03_what-the-agent-harness-actually-is.png valid (256211 bytes)
+✓ AnatomyOfAgentHarness_chapter04_prompt-context-harness-engineering.png valid (245635 bytes)
+✓ AnatomyOfAgentHarness_chapter05_orchestration-loop.png valid (176615 bytes)
+✓ AnatomyOfAgentHarness_chapter06_tools.png valid (189889 bytes)
+✓ AnatomyOfAgentHarness_chapter07_memory.png valid (152051 bytes)
+✓ AnatomyOfAgentHarness_chapter08_context-management.png valid (203911 bytes)
+✓ AnatomyOfAgentHarness_chapter09_prompt-construction.png valid (186989 bytes)
+✓ AnatomyOfAgentHarness_chapter10_output-parsing.png valid (166141 bytes)
+✓ AnatomyOfAgentHarness_chapter11_state-management.png valid (175688 bytes)
+✓ AnatomyOfAgentHarness_chapter12_error-handling.png valid (157557 bytes)
+✓ AnatomyOfAgentHarness_chapter13_guardrails-and-safety.png valid (194379 bytes)
+✓ AnatomyOfAgentHarness_chapter14_verification-loops.png valid (185846 bytes)
+✓ AnatomyOfAgentHarness_chapter15_subagent-orchestration.png valid (201584 bytes)
+✓ AnatomyOfAgentHarness_chapter16_walkthrough-and-ralph-loop.png valid (196964 bytes)
+✓ AnatomyOfAgentHarness_chapter17_how-frameworks-implement-the-pattern.png valid (378593 bytes)
+✓ AnatomyOfAgentHarness_chapter18_scaffolding-coevolution-future-proofing.png valid (171385 bytes)
+✓ AnatomyOfAgentHarness_chapter19_seven-architectural-decisions-and-final-takeaway.png valid (191223 bytes)
+
+Total PNGs: 19
+Premium 6 preserved + remaining 13 arrow-audited
+Fallback renderer: disabled
+Overall: PASS
