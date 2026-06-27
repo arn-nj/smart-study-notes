@@ -1,0 +1,1931 @@
+
+
+=== Welcome ===
+
+
+--- Course Introduction ---
+
+大家好, 欢迎来到软件架构案例研究课程, 在这些学校将讨论各种与软件,
+架构和设计相关的案例研究在一起, 为他们的架构｡
+但首先, 让我们问问自己, 为什么我们需要案例研究？
+有什么意义呢？
+毕竟, 您可能在软件架构方面有一些经验, 甚至可能在这个主题上进行了一两次巡航｡
+那为什么还要再来一个？
+答案很简单｡
+案例研究的目标仅仅是成为一个更好的软件架构师｡
+一个真正优秀的软件架构师知道如何处理各种类型的系统, 她应该知道如何设计一个经典的Web应用程序｡
+她应该能处理大量遥测系统｡
+她必须能够设计一个具有绝对可靠性要求的系统等等｡
+通过这些案例研究, 我们将这样做｡
+我们将介绍四种类型的系统, 并一起介绍体系结构｡
+使用这些案例研究, 您将在实践知识中设计软件体系结构｡
+这不是理论上的交叉｡
+我们将讨论基于我与各种客户一起工作的实际系统的真实世界架构,
+我坚信案例研究是最好的学习方式｡
+没有什么可以取代实际的实际工作, 我相信你在本课程中获得的知识将帮助你为你正在工作的系统设计更好的体系结构｡
+现在, 这个过程, 谁将在这门课程中使用, 以及我们将讨论的一些模式和实践,
+都是基于我的《成为软件架构师的完整指南》｡
+您不必为了成功完成学业而参加它, 但强烈建议您至少熟悉软件架构概念,
+如非功能性需求, 消息传递API等｡
+我叫Mimi Lavae, 是一名高级软件架构师和顾问, 拥有超过18年的架构师经验｡
+这里是我的客户和我的多样化技术的一个非常部分的列表｡
+STUC｡
+我是一名经过认证的敏捷解决方案架构师, 也是一名狂热的演讲者｡
+太好了, 我们走吧｡
+
+--- Join The Software Architects and Developers Community ---
+
+[No transcript available for this lecture]
+
+
+=== The Architecture Process ===
+
+
+--- Who Is This Course For? ---
+
+So who is this course for?
+Well, in order to benefit the most from this course, you should have some background in software architecture.
+This includes architect or anyone with some development background, be it developer, team leader,
+development manager.
+ET cetera.
+Also, it's better if you have some development experience so that the terminology we will use in this
+course won't be foreign to you.
+Although it's important to note that there will be no actual coding in the course.
+And lastly, it's better if your experience is backend oriented, since most of the architectures we
+will discuss are for the back end.
+So with that out of the way, let's move on.
+
+
+=== Case Study #1 ===
+
+
+--- What We Will Talk About In This Course ---
+
+So what is the agenda for us in this course?
+First, the obligatory welcome section, which we are in right now.
+Next, we are going to have a quick reminder about the architecture process.
+This is the process we will strictly follow when designing the architecture.
+And it's here for a reason.
+We need to make sure the architecture we will end with will actually provide the best possible solution
+for the challenge in hand.
+And in order to do that, we have to make sure we are fully aware of all the requirements and constraints
+this system and development team face.
+After the architecture process section, we are going to deep dive into the case studies and we have
+four of them.
+For each case study, we will present the company, the system we want to develop, talk about the requirements,
+and then start designing the architecture.
+At the end of each case study, we are going to have not one, not two, but three architecture diagrams
+which you are free to use as boilerplate templates for your own systems.
+And after going through the case studies, we will conclude the course and talk about what's next.
+Okay, great.
+So now let's move on.
+
+
+=== Case Study #2 ===
+
+
+--- An Update for Udemy Students ---
+
+[No transcript available for this lecture]
+
+
+=== Case Study #3 ===
+
+
+--- Skip This Section If... ---
+
+[No transcript available for this lecture]
+
+
+=== Case Study #4 ===
+
+
+--- Introduction ---
+
+Welcome to the Architectural Process section.
+In this section, we will discuss the process of the architect's work in order to make the architecture
+as useful as possible and to provide the maximum value to the client.
+The architect should follow a well defined roadmap that at the end will lead to a practical and well
+thought of architecture which will ensure the system is fast, secure, reliable and easy to maintain.
+In this section we will talk about this process.
+I will give a brief overview of each step in the process and describe its importance.
+In later sections.
+We will deep dive into each step and talk about what exactly should be done.
+So here are the steps in the architectural process.
+Understand the system's requirements.
+Understand the non-functional requirements.
+Map the components.
+Select the technology stack.
+Design the architecture.
+Write the architecture document.
+Support the development team.
+Let's talk about these steps.
+
+
+=== Conclusion ===
+
+
+--- Understand the Non-Functional Requirements ---
+
+The next step in the architectural process is to understand the non-functional requirements of the system.
+Non-functional requirements are a special kind of requirements that define some technical and service
+level attributes of the system.
+For example, the most common non-functional requirements are about concurrent number of users, heavy
+loads, volumes of data and performance.
+As we will see in a later section, the client and the system analyst are usually not aware of the non-functional
+requirements and it's the architect's job to help them formulate those requirements.
+For us, the architects, the non-functional requirements are much more important than the regular requirements.
+I never begin to work on a system before knowing exactly what its non-functional requirements are because
+so many architectural elements can be affected by those requirements.
+
+--- Select Technology Stack ---
+
+This is one of the most important steps in this process.
+In this step, you are going to decide together with the development team, what will be the platform
+on which the system will be based.
+Usually there will be more than one technology to be used in most systems.
+You will have to select the back end platform, the front end platform and the data store platform.
+In addition, in some systems such as ones that are based on microservices architecture, you will often
+select multiple back end platforms and perhaps also multiple data stores.
+As we will see in the relevant section.
+There are a lot of factors you have to consider when selecting the technology stack, and the selection
+must be very rational.
+A wrong technology stack can lead to failure of the whole system.
+
+--- Design the Architecture ---
+
+这是你走路的核心｡
+您已经有了需求､ 非功能性需求､ 技术堆栈中的组件｡
+剩下的就是设计将所有这些粘合在一起的体系结构, 并将导致一个首先安全,
+可靠和易于维护的系统｡
+我们将了解一个设计良好的系统的质量, 如松散耦合的statelet,
+伸缩, 缓存, 消息传递等等, 并了解如何将这些质量用作架构的构建块｡
+当您完成时, 您将有一个完整的体系结构, 但它还没有正式化｡
+这就引出了下一步｡
+
+--- Write the Architecture Document ---
+
+这就是你一直在等的｡
+这是你在这个系统中付出的所有努力的顶点, 这是你最伟大的创造｡
+体系结构文档描述了您所经历的整个过程, 并为开发人员和管理人员提供了将要构建的系统的全貌｡
+一个好的架构文档与组织中的所有级别相关, 包括CEO､ CIO､ 项目经理,
+当然还有开发人员｡
+他们都会从中发现巨大的价值｡
+我们将谈论很多关于文档的结构和内容相关的部分, 并解释如何最大限度地发挥其价值｡
+
+--- Support the Team ---
+
+A lot of architects believe their job is done once the document is delivered.
+This is a big mistake.
+Huge software architecture is a living, breathing creature and it changes all the time.
+You have to be there for the developers to help them to make sure they are developing according to the
+architecture and to be part of the dilemmas that are going to be raised and are going to be a lot of
+dilemmas, arguments and talks, and the architecture will be changed and not only once.
+So you have to support the team.
+If you don't want the documents to become a glorified paperweight and remember, you are not done until
+the system is in production and even then you probably will have a lot to do.
+
+--- Architecture Process - Conclusion ---
+
+So this is the architectural process I use with almost all of my clients and I recommend you to do the
+same.
+Be aware that there almost always be some variations on the process.
+For example, one subject you should be aware of is who else participates in every step of the process.
+Let's look at the non-functional requirements step.
+Obviously you, the architect, cannot decide what are the non-functional requirements without talking
+to the client and the system analyst and the architectural design phase.
+Are you supposed to do it all by yourself or should you involve the developers?
+The answer is, as always, it depends.
+If the developers are available for taking part in the architecture, then by all means work with them.
+It's extremely important to let them be part of the process because you will earn two benefits.
+First, if there are some scenarios you are not aware of but the developers know about, it will be
+better to talk about them as early as possible and not when the architecture is done.
+Second, since the architecture was built together with the development team, you neutralize any future
+disagreement.
+Moreover, this way the developers become ambassadors of you and the architecture, and they will convince
+the other project members that the architecture is a good one and should be used.
+This will make your job much easier and will free your time to work on the really important things instead
+of organizational politics.
+In the next sections, we will deep dive into each of the steps we have talked about and we'll understand
+the ins and outs of the tasks you, the architect, has to execute in order to design a good and practical
+architecture.
+Let's go.
+
+--- What We Will Cover In This Course ---
+
+So this section served as a quick reminder of the architectural process we should follow as an architect.
+And again, this is a process that we should implement on every system we are going to design.
+However, in this course, we are not going to follow all the steps in this process since they are out
+of scope for the architectural design.
+So what we are not going to do in this course is to deal with the architectural document and of course
+to support the team since we don't have a team yet.
+We are only designing the architecture.
+So the process in this course, in our case studies will look like this, which means that for each
+and every case study we are going to first understand the systems requirements and non-functional requirements.
+Then we are going to map the various components of the architecture.
+And then for each component we are going to select the technology stack and design the architecture.
+If there is anything special to say about the architecture of the service.
+Okay, so now we know what we are going to do for each case studies.
+So let's go and begin with the first one.
+
+--- Application Introduction ---
+
+So for the first case study, I'm proud to introduce you to Daniel.
+As you can guess from the tagline, Daniel deals with everything paper.
+So Daniel is sales paper supplies such as printer paper envelopes, wrapping paper and so on and so
+forth.
+And Daniel desperately needs a new air system.
+This system will be used to manage employees salaries, vacations, payments and anything else that
+might be relevant to the human resources activities.
+So this is a broad description of the system we are going to design.
+And now let's start from the first step in the architectural process, which is the requirements.
+
+--- View Service ---
+
+So we talked about the logging service.
+And now let's talk about the next service, which is the View Service.
+So what does the View Service actually do?
+So as you can see, the View Service is quite a basic and small service and that is reflected in its
+architecture.
+So what the View Service does is to get requests from the end user's browsers and it then returns static
+files, which will be HTML, CSS or JavaScript files.
+Basically that's the service that serves the static content for the browser, which after that will
+access the other services like the employees and salary service to get data and update data.
+Our next step is to figure out what is the application type of the view service.
+And in this case it is very, very simple.
+Of course, the application type of the View service is web app.
+It's obviously not a mobile app, it's definitely not a console or a service since it does have a user
+interface and it responds to requests.
+And of course it's not a desktop app, it's a web app.
+Okay, So we've got that covered.
+Next, we need to select the technology stack of the View service.
+Now, if you remember, we already selected a technology stack for the logging service and we selected
+Dotnet Core and SQL Server.
+Now, as you will see in a minute, there isn't any data store in the view service.
+It's pure code.
+So we need to ask ourselves, is there any good reason to change our selection and pick something different
+than what we chose for the logging service?
+And in this case, the answer is no, because Dotnet core has a great support for web apps.
+It's one of the leading platforms worldwide for web apps, and there isn't really a good reason to pick
+anything else.
+So the technology stack for the View Service is going to be dotnet core.
+Okay, so let's move on to the architecture.
+So as usual, we are going to begin from the classic three layered architecture, which is composed
+of the user interface layer, the business logic, the data access layer and the data store.
+And what we need to ask ourselves is what is relevant for the view service from all those layers?
+And the answer is quite simple we only need the user interface.
+There isn't any business logic, there isn't any data access and of course there isn't any data store.
+This is a fully static service which only serves static files as a response for request.
+The service will not perform any logic whatsoever.
+The user asks for a specific file and the service simply returns it.
+So our architecture is quite thin and is composed only from a user interface layer.
+So what about redundancy in this case?
+Also, the redundancy story is much simpler than the logging services.
+One.
+If you remember in the logging service we went for an ease alive solution because both the instances
+were continuously running.
+In our case, in the View service case, this is not the case.
+The View Service is simply waiting for requests to arrive so he can respond with a response.
+So redundancy between services that are request response oriented is achieved using a load balancer.
+So we simply put load balancer in front of the instances of the view service and the load balancer will
+route the requests to the relevant instance using any algorithm it chooses to implement, such as round
+robin or sampling or anything else.
+So in this case there isn't any code change we need to do in the view service In order to support the
+redundancy, we simply use load balancer as a mediator between the user browsers and the services instances.
+Okay, great.
+So it looks like we have the view service covered and we know what is the technology stack, what is
+the application type, what is architecture and how are we going to achieve redundancy?
+And now we can move on to the next service.
+
+--- Employees Service ---
+
+Okay, so let's move on to the next service.
+And the next service is the employees service.
+So what does the employees service actually do?
+So first, it allows the end users to query employees data and of course, allows performing actions
+on the data, which is the Crud in the Crud code, as in create, update and delete.
+What it doesn't do is displaying the data.
+The service only provides access to the data, but it does not contain any visual elements.
+As you probably remember, the visualization is a responsibility of the view service.
+Okay, great.
+So let's start with the application type.
+So what is the application type of the employees service?
+Well, of course the answer here is quite simple.
+The employees service is of course, a Web API.
+It's not a mobile app, it's definitely not a console or a service because again, it expects a request
+and returns a response.
+And of course, it's not a desktop app.
+Okay, So we've got this covered.
+Next is the technology stack.
+And here, as with a previous service, we don't have a really good reason to veer off the selection
+we have already made for the development platform.
+So here in the employee service we will also go with Dotnet core.
+And now let's talk about the database.
+And here things begin to be a little bit interesting because if you remember when talking about employees
+data, we are actually talking about two kinds of data.
+We have the employee data itself, which is relational data, and we have the documents that are attached
+to every employee.
+There is a contract and employee review and so on and so forth.
+So the relational data is the easy one.
+Of course we are going to go here with the SQL Server because we have already agreed it's a good fit
+for our application, but what are we going to do with the Documentdb?
+So usually when discussing document storage document as in blob and blob is binary large object, then
+we have usually four alternatives.
+We can store the blob in relational database, in file system, in object store or in a cloud storage.
+So let's analyze the various alternatives and make a decision according to what we will see.
+So first, relational database such as SQL Server.
+So how do we store blob objects in relational database?
+Well, most of relational databases provides mechanisms for storing blob objects.
+SQL Server, for example, provides a thing called file stream, which allows storing blob objects.
+Oracle also has a thing called blob type, which, as you might expect, stores blob objects.
+Now, there are pros and cons for every approach.
+The pros of the relational database approach is quite important.
+One.
+First, the object.
+The document that we store in the relational database is part of the application transaction.
+Meaning if we want to store in the record some relational data, such as the employee name or birth
+date or address or anything else.
+And in addition we want to store a document, then both the document and the data are stored in the
+same transaction.
+So if there is any problem while saving the data, then the rollback will affect the data and the document,
+which is exactly what we want because the document and the data belong to the same employee using the
+same transaction in addition, when storing the document in relational database, they become part of
+the database backup, restore and D.R. processes.
+So if we need to restore data that was backed up before by the database agent, then the data will include
+also the document, which is great for us.
+So these are the pros.
+What are the cons?
+Well, the syntax is quite let's call it clunky.
+It's not straightforward.
+We sometimes need to use a specialized methods in the database and it's not very easy to learn how exactly
+to use them.
+In addition, objects in relational database usually have a size limit.
+We can't store any object that we want.
+There is some kind of limit on the size of the objects that we can put in a relational database.
+So this is definitely something we need to consider next, after discussing the relational database
+is the file system.
+Using the file system actually meaning to store the document in a file and hold a pointer to it in the
+database.
+So our relational database will have a column, let's call it a pointer or a document URL, which will
+hold the pointer or the address of the document in the file system, something like the slash documents,
+slash employees slash reviews or something similar.
+Storing in a file system is very easy and it's definitely supported in every platform.
+But again, also here there are pros and cons, so the pros are quite clear.
+First, we don't have any size limit.
+We can basically store anything we want in a file system.
+And in addition, it's very, very easy to execute.
+There is no problem whatsoever to store a file in a file system.
+But what are the problems with this approach?
+First, the file system is not part of transaction.
+Meaning if we want to store data and a document and something goes wrong while saving the data, then
+we might end up with an orphan document, a document in the file system that there is no record anywhere
+in the database that points to it and nobody knows what is the role of the document and what exactly
+to do with it.
+In addition, files in general are unmanageable.
+They lie somewhere in the file system.
+Not always.
+There is someone in the company that knows exactly what is the role of each folder and what is the role
+of each file.
+And I've heard of some cases that a sysadmin found a folder full of documents.
+He had no idea why they were there and he simply deleted them without knowing that the documents are
+vital to the company.
+So that's a problem with the file system.
+The files are simply unmanageable.
+Okay, next.
+So our next alternative is object store.
+So what exactly is object store?
+Object Store are specialized types of software that was designed and built specifically to store blobs.
+One of the most popular one called Ceph c p.
+And you can find it in large organizations storing a large amount of documents.
+So the pros of object store is its scale.
+It can hold a huge amount of documents and it does so quite well.
+In addition, usually there isn't any size limit on the objects stored in an object store.
+However, to set up an object store is quite a complex task.
+You should have someone in the organization which is dedicated to this task and has a dedicated knowledge.
+And in addition, an object store presents a new product in the mix.
+So if we now have a relational database and a development platform and a file system, we now have another
+type of database, which is the object store, which makes our application more diverse and perhaps
+even too much.
+The last alternative for storing documents or blob objects is cloud storage.
+Now, using cloud storage, we store the documents in one of the public cloud storage mechanisms, such
+as Azure Storage Account or AWS S3.
+Now the storage mechanisms are very, very popular.
+They are doing great job in storing documents and are generally highly recommended.
+In addition, they are very, very easy to work on.
+However, there are two factors that we need to consider when talking about the cloud storage.
+First, using cloud storage requires a constant internet connection because the files, the objects
+are actually not on our servers, but in the cloud, in the public cloud, somewhere in a remote data
+center, perhaps even in a separate continent.
+So this is something we need to consider.
+In addition, there is a cost factor when using a cloud storage because storing something in the cloud
+costs money.
+Not a lot.
+That's right.
+But it's still something we need to take into account.
+Okay.
+So we have covered the four alternatives for storing documents or blob objects.
+So what are we going to take?
+Which alternative is the best for us?
+Well, in this case, my recommendation would be to go with SQL Server.
+As you remember, the first alternative we talked about was using relational database for storing blobs.
+And in this specific case, why would we recommend that?
+Well, for the following reasons.
+First, the documents we are dealing with here are quite small.
+We said that the average size of a document is one megabyte, which is really, really small and does
+not present any problem for relational database.
+In addition, we already have SQL Server, so using it also for storing the documents will not add other
+technologies to our mix.
+And of course using SQL Server for storing the documents will make the document storage part of the
+application and part of the transaction, and we explained why it's a good thing.
+Okay.
+So that's about the technology stack.
+Let's move on to the architecture.
+Now the architecture here is quite traditional.
+We can definitely use the classic three layered architecture with a service interface, the business
+logic and the data access.
+And there is no reason whatsoever to change it to anything else.
+Which brings us to the next topic we need to discuss about the employees service.
+And this is the API for every service that exposes an API.
+Our architecture must describe this API, what it does, how it looks like, what it returns.
+Anything that will help the developer to design and build the API.
+So let's begin with discussing what exactly the API should do.
+So our API first should return the full employee details by the employees ID and of course return a
+list of employees by parameters.
+We also need to be able to add employee and update the employee details.
+And of course, unfortunately we need to be able also to remove employee.
+Although it's important to note that we are not talking here about physical delete, so we never remove
+the actual employee record.
+We only mark it as an employee that was removed.
+What's next?
+So we talked about the employee data.
+But remember, we are also talking here about the documents that are attached to the employee data.
+So we need an API to add document to remove document to get a document and to retrieve documents by
+parameters.
+For example, return all the documents for a specific employee or return all the documents that were
+created between a specific date range.
+Now, when talking about the documents, there is a question we need to consider Do we need a separate
+document handler service?
+Remember that we are talking here about an employee service, but it looks like there are a lot of actions
+that are document related.
+So do we need a separate service just for the document handling?
+Well, this is actually a very good question.
+Now, in this specific case, since only the employee entity requires documents, then the answer will
+be no, we won't create a separate service for handling the document.
+However, if we will see in the future that a lot of other services, such as the salary or the vacation,
+also need some kind of document handling, then it might be a good idea to then split this service into
+two separate services.
+One is handling the employee data and the other is handling all the document activities with regard
+to the various entities that require the document.
+But again, we are now talking about a single service which covers the employee and the document.
+Okay.
+So we described what are the actions that we want the API to provide?
+And now let's take a look at how the API is actually look like.
+So as you can see, the first API is the ones that get employees details by ID looks like this.
+Get api v1 employee and the id of the employee.
+I guess it is quite clear why we are using a get verb here.
+Because we return data and for returning data we always use get and then the API world to make sure
+the developer knows this URL is for an API.
+V1 marks the version of the employee which will always begin as a V1 and then the entity and the parameter
+we are dealing with.
+So we want an employee and of course we will provide the ID of the employee.
+Now this API can return two kinds of response code.
+There is a 200 which marks okay.
+And there is a 404 which marks a not found result.
+If the employee with a given ID is not found in our database, then the result will be a 404.
+Next is a list employees by parameters.
+And you see here that the URL contains parameters.
+After the employees there is an employees question mark and then a parameter.
+In this case, the parameter we are looking at are name and birthdate.
+Note that in the return codes there is also a 400 bad request.
+When we will get a bad request, we will get a bad request when the query can't be validated.
+For example, if the birth date we provided is not valid date, then the result will be a bad request
+so the client will know there was a problem with the parameter we provided and it will have a chance
+to fix it.
+Next is the Add employee using the post verb which is used for new note.
+Again that the return code here are 201 which marks created and the 400 which is bad request in case
+there is a problem with the employee data provided.
+The update employee details will be implemented using the put verb for a specific ID and the remove
+employee will use the delete verb.
+Now note that even though we are using a delete verb, there is no an actual physical delete in this
+action.
+As we said before, we never physically delete an employee details.
+The delete is only a logical one and we will mark the record in the database as cancelled or removed,
+but the data itself will always stay in our database.
+The next APIs are the one relevant for the documents, so we have an API for adding document.
+Again using the post verb.
+And note here that all the APIs first specify the employee.
+So we have in the first example we have a post API of one employee, the ID of the employee, and then
+the document because a document, as we said before, is always relevant to a specific employee.
+So we always first specify what is the employee the document is relevant for and then get or store the
+document itself.
+If the employee specified is not found, then the API will return 404 not found.
+So let's move on.
+To remove document, we will use the delete verb and note that we also specify the document id we want
+to delete to get a specific document.
+Again, we specify the employee ID and the document ID and to return all the documents for a specific
+employee.
+We access the employees slash ID slash documents API that returns all the documents for the specified
+employee.
+Okay, great.
+So this is the API that is going to be exposed by the employees service.
+And before we finish this lecture, we just need to talk about the redundancy of the employee service.
+Now the redundancy here is quite simple.
+As with previous service and because the employee service is a web API, then we simply need to use
+load balancer in front of both the instances of the service to gain load balancing and redundancy.
+And again, no change in the code should be performed to support the redundancy in this case.
+Okay, great.
+So that's it with the employee service.
+And now let's move on to the next one.
+
+--- Salary Service ---
+
+So we have already covered three services in our architecture and our next one is a salary service.
+So what does a salary service do?
+So what it does is it allows managers to ask for an employee's salary change, hopefully a raise, and
+allow the HR representative to approve or reject the request.
+So it's a quite simple service.
+And what about its application type?
+Again, quite simple.
+Here we are definitely looking at a web API.
+It's a service that expects requests and returns a response technology stack.
+Again, no surprises here whatsoever.
+Dotnet core served us well in previous services.
+No reason at all to change it.
+Now, regarding the architecture, again, nothing special.
+It's a traditional service with a service interface, business logic, data access and a data store,
+which again brings us to its API.
+So what are the actions we need the salary service to expose?
+First, of course we need to add salary request.
+So this is the action or the API that the manager will use to ask for a salary change for an employee.
+Next, we want to remove a salary request.
+Maybe the manager had second thoughts and he wants to cancel the request he already submitted.
+Next, we need the ability to get the salary requests so the HR representative will be able to view
+the requests that should be handled.
+And of course, we need the ability to approve or reject the salary request.
+So we have five actions that should be exposed by the salary service.
+And now let's take a look at how will those five actions will look like in our API.
+So this is how the API looks like.
+And note that to add a salary request, we use the post verb with a salary request to remove.
+We use the delete post with a specific ID of the salary request to retrieve the salary request.
+We get the salary request and to approve and reject.
+Note that we in both cases use the post verb and note what exactly we are posting here to approve a
+salary request, we post an approval and to reject the salary request we post a rejection.
+Now, this might look a little bit strange because why don't we simply use the verb approve or reject?
+Why do we use nouns such as approval or rejection?
+Well, the reason here is quite philosophical.
+We are using here a rest API.
+Rest API always deals only with entities.
+A deep discussion about the rest philosophy is quite out of scope for this course, but suffice to say
+that rest only deals with entities and never with verbs.
+Rest was created and designed to transform and view entities across the web.
+So URLs that are part of rest API cannot contain verbs.
+This is a very important and very foundational concept of the rest API, and we always try our best
+to keep this concept.
+So instead of posting, approve or reject, we always posting nouns.
+So by posting approval we actually say to the application we now add an approval for a specific salary
+request, or we now add rejection to a specific salary request, and by that we actually modify the
+status of this request.
+So again, never use verbs in rest API.
+Always go for nouns.
+Okay, so this is the API about redundancy.
+Again, nothing special to see here.
+This is a classic web API, which in this case also will use a load balancer to achieve load balancing
+and redundancy.
+Great.
+So that's all about the salary service and let's move on to the next service.
+
+--- Vacation Service ---
+
+So the next service we will talk about is the Vocation Service, which is the fifth service we will
+talk about.
+So what it does, it allows employees to manage their vacation days and allows the HR to set available
+vacation days for employees.
+Quite a traditional vacation service.
+So as usual, we will start with the application type.
+And as usual, we are talking here about a traditional web API technology stack.
+Quite the same.
+We are going to go here with Dotnet core.
+No reason whatsoever to pick a different technology stack.
+The architecture again is a classic three layered architecture best fit for web API services, which
+again brings us to the API and the actions we need from the API are this We need to be able to set the
+available vacation days.
+This is an action performed by the HR is a set the initial available vacation days for each employee.
+We need for the employees to be able to get the available vacation days and we need also to be able
+to reduce the vacation days.
+When an employee goes to a vacation, we need her to be able to access the system.
+And Mark, let's say three days off from the vacation.
+So these are the actions the vacation service needed to expose.
+How will the API will look like in real life?
+Well, something like this.
+So to set available vacation days, note that we are using the put verb.
+The put is used to modify an existing entity and here we are actually modifying the vacation days of
+an existing employee.
+So we are not adding anything, we are not deleting anything.
+We are updating the vacation days.
+Note also that the API might return 404 not found if the ID specified is not found and there is no employee
+with a given ID.
+We of course can retrieve the available vacation days using the get verb, and in order to reduce the
+vacation days we will use the post and again note the noun At the end of the URL.
+We are posting a reduction.
+We are not using the verb, the verb reduce, but we are posting a reduction to the employees vacation
+days.
+Again because the same reason we discussed before.
+With rest API, we are dealing only with entities, never with verbs.
+So this is the API.
+Quite a simple one I would say.
+Which brings us to the redundancy.
+And again, that's the easy part.
+We are going to use load balancer in front of the two instances of the vacation service to achieve load
+balancing and redundancy.
+So that's all about the vacation service.
+And let's move on to the next component in our architecture.
+
+--- Payment Interface ---
+
+Okay, so we've covered five services in the Dandeli HR application and now it's time to move to the
+last one, the payment interface.
+So what is exactly the payment interface?
+So the payment interface queries the database once a month for a salary data and then passes the data
+to the external payment system.
+In other words, the payment interface is the component responsible for making sure payments are actually
+made, which, as I've heard, is very good for the employees motivation.
+So without the payment interface in place, there will be no payments at all from the company to its
+employees.
+Okay, so the application type.
+So what is exactly the application type of the payment interface?
+Well, in this case, the answer is service.
+The payment interface is not a web app or a web API.
+It does not expect any incoming requests and does not return any response.
+It is a continuously running component using an internal timer to query the database and send the data.
+And we would like the operating system to control it and to be able to start, stop and monitor it,
+which makes it a great candidate for a service.
+What about the technology stack?
+Well, again, we don't see any reason to change our previous selection, so we will go here also for
+Dotnet core.
+And what about the architecture?
+Well, the architecture here is similar to the classic three layered architecture with one important
+distinction.
+Take a look at the top layer, the one that usually says service interface.
+In its place.
+We see here a timer.
+And why is that again?
+Because the payment interface does not expect any API calls.
+It does not expect requests and does not return responses.
+There is a timer which orchestrates its activity and triggers it once a month to query the database
+and send the data to the external payment system.
+But again, as you can see, the basic building blocks are still here and we still have the business
+logic, the data access and of course the data store containing the payment data.
+Next, let's talk about redundancy.
+So with previous services, we simply used load balancer to gain redundancy and of course load balancing
+between various instances of the service.
+In this case, this is not possible.
+And why is that?
+Again, because there are no incoming requests to the payment interface, so there is no load to distribute
+between the instances.
+What we have here is, again, the is a live algorithm.
+If you remember, we implemented the is live algorithm with the logging service.
+And the basic premise here is that there are two instances of the payment interface.
+Only one of them is active and the other one simply queries the first one to check that it is alive
+and running and functioning well.
+And if there is a problem with the first instance, then the second one will immediately take its place
+and begin working with the database and with the external payment system.
+So we are going to implement the is alive mechanism for the payment interface redundancy.
+So that covers the payment interface.
+And now let's move on to our next topic in the architecture.
+
+--- Technology Stack - Queue ---
+
+So we've covered all the services in our architecture.
+But before concluding, there is another topic I would like to discuss, and it's a very important one.
+Take a look at the queue that transport the log records from the various services to the logging mechanism.
+I want to discuss this queue a little bit and we need to decide how exactly to implement this queue.
+So generally speaking, when talking about queue, we have usually three alternatives of implementation
+of queue.
+So of course we can develop our own queue, which is always a bad idea and we have two very popular
+queue mechanisms or queue engines which are Rabbitmq and Kafka.
+So first let's rule out the self-developed.
+We are not going to develop our own queue.
+There are really great queue mechanisms out there and there is no reason whatsoever to develop our own.
+So now we need to choose between Rabbitmq and Kafka.
+So let's compare.
+So what is exactly Rabbitmq?
+So Rabbitmq is a general purpose message broker engine.
+So the general purpose in its description hints that it is being used in a variety of systems small
+and large, heavy loaded and light loaded with large messages and small messages.
+Almost every system can benefit from rabbitmq and that's one of the reasons why it's so popular.
+In addition, Rabbitmq is very easy to set up and extremely easy to use, and its API is really, really
+simple.
+So that's Rabbitmq Apache Kafka is more of a stream processing platform, which means it is perfect
+for data intensive scenarios.
+So if we have a system with a very high load of data, for example, telemetry coming from Iot devices
+around the world, then Kafka is a perfect candidate because Kafka can store the stream, can process
+it and can distribute it to various receivers.
+So these are the two tools we are looking at the Rabbitmq and the Kafka.
+And now it's time to make a decision.
+So which one are we going to pick?
+Well, in our case we are going to go for Rabbitmq.
+And for these reasons, first, we have no data stream involved in our application.
+So the main advantage of Kafka is irrelevant for us.
+And in addition, the ease of use of Rabbitmq is quite convincing for us.
+So we are going to use Rabbitmq as our queue mechanism for the logging service.
+
+--- Telemetry Gateway ---
+
+Okay.
+So let's talk about the first component, which is the telemetry gateway.
+So what does the telemetry gateway actually do?
+So the gateway, as we discussed, receives the telemetry data from cars using the TCP protocol and
+then pushes the telemetry data to the pipeline component, which we will discuss later.
+So quite a simple component, but a very important one.
+What is the application type of the gateway component?
+Well, in this case it's quite simple.
+We are looking here at a console or a service.
+This is definitely not a web app or a web API since it exposes TCP communication, which is not what
+a web app or a web API do.
+It does not expect a request and does not return responses, so it does not fit into the paradigm of
+a web app or web API.
+Of course, it's not a mobile app, of course it's not a desktop app.
+So again, it's a console or a service, whichever one you prefer.
+And now let's talk about the technology stack of the gateway component.
+So before selecting the technology stack for the component, we need to discuss the considerations for
+picking the right technology stack for this component.
+So what do we need to consider when selecting the technology stack?
+First, of course, the load that is going to be applied to this component.
+Remember, we are expecting about 7000 messages per second for this component, which means it should
+be able to handle a huge load.
+Of course, the performance is extremely important here.
+When dealing with such a load, we must have a very performant component so that we won't have any bottlenecks
+in the future.
+Another consideration is the team's current knowledge and skill set.
+We will always prefer to utilize existing knowledge and skill set, so if the team is already familiar
+with a technology that will fit our other requirements, we will prefer using it.
+And of course, let's not forget the environment factor.
+The company already has its own servers and operating system and the development platform will choose
+must support this environment.
+So let's go and ask the customer what do they have today?
+So we asked and this is the answer.
+Our developers are familiar with Python and are experts in JavaScript.
+In addition, we use only Linux servers so we already know what is the current knowledge and skill set
+and also what is the current operating system and environment.
+Now as you can see, the main expertise on the server side is Python and that's a problem.
+Python simply can't be used for the gateway, for the very simple reason that it is too slow.
+We are expecting a huge load and we must provide great performance and Python is not a very performant
+language.
+It is interpreted language as opposed to compiled.
+It does not have any performance optimizations as we have in other advanced platforms and it's not a
+good fit for this component.
+So basically what we're looking for is this We look for a language with great performance which runs
+on Linux and leverages the current team skills which are Python and JavaScript.
+So which language are we going to pick?
+Well, it looks like the best candidate for this component is Node.js.
+NodeJS is basically JavaScript on the server and it looks like it's the best fit for this component
+for the following reasons.
+It has great performance.
+It's usually ranked between the first and the second place in performance benchmarks.
+It runs on Linux and it leverages the JavaScript skills the team already has.
+As you can see in the Node.js name, the JS in Node JS stands for JavaScript.
+So again, it's basically JavaScript on the server.
+So anyone who has great knowledge in JavaScript will be able to easily and quickly learn how to use
+and develop in Node.js.
+So that's the technology stack.
+And now let's talk about the architecture.
+So as you probably remember, the traditional component architecture usually looks like this with three
+layers the user interface or service interface, the business logic, the data access and the data store.
+But this architecture is not compatible with what we need.
+We don't have any data access because we don't have data store, we don't have business logic.
+There is no logic in our component.
+All it needs to do is to get the message and push it as quickly as possible to the pipeline.
+So in fact, our architecture looks like this.
+We have a service interface which grabs the messages and.
+Quickly pushes them to the pipeline.
+So this is architecture.
+It's a very simple and minimal one, which is exactly what we need for a component that must deal with
+such a high load.
+And what about redundancy?
+Well, the redundancy implementation here is quite simple, and we have already discussed such an implementation.
+We simply put load balancer in front of the various instances of the telemetry gateway.
+One thing to note here is that in our architecture you can see there are three instances of the telemetry
+gateway.
+Now, you might remember that in our previous case study, the Dandeli Paper Company, we had two instances
+of components when discussing the redundancy.
+So why do we use three instances in this case?
+Well, the reason is quite simple.
+With the Dandeli application, there was no expected load whatsoever on the application.
+So the only purpose of the load balancer is redundancy.
+So if one instance goes down, the other can still function properly.
+In our case, redundancy is not enough.
+We also must be able to handle the load and we want to make sure that load is distributed equally among
+all instances.
+And since the load is expected to be extremely high, we want at least three instances.
+In fact, perhaps in the future we will even scale this out and use more than three instances, but
+we will definitely not going to begin with less than three.
+Okay, great.
+So this is the architecture of the telemetry gateway component.
+And now let's move on to the next one.
+
+--- Telemetry Pipeline ---
+
+So our next component we are going to talk about is the telemetry pipeline.
+And what this component does is gets the telemetry messages from the gateway and queues, the telemetry
+for further processing.
+In fact, the telemetry pipeline is a queue for streaming high volume data.
+Now the word queue here hints that we might be able to use some third party mechanisms.
+So let's find out whether we can do it.
+So we need to ask ourselves two questions.
+First, is there an existing queue mechanism in the company, if there is one?
+Of course we will prefer using it.
+And the second question, if the answer for the first one is no, should we develop our own queue mechanism
+or use a third party engine?
+So we went and asked the customer and the answer to the first question is no, there isn't any queue
+mechanism in the company right now.
+They are not using any queue for any purpose.
+Which leaves us with the second question Should we develop our own or use a third party engine?
+Now, when talking about queue engine, we basically never want to develop our own.
+There are a lot of great queue mechanisms out there and we always prefer to use one of them.
+So let's look around and see if we can find any engine that can function as a telemetry pipeline.
+And the best candidate we find is this the Apache Kafka, which is, as you can see in its tagline,
+a distributed streaming platform.
+So let's talk a little about the Apache Kafka.
+It has its pros and cons, and let's begin with the pros.
+So Kafka is very, very popular.
+It is used by thousands of organizations as a streaming and queuing engine and proved itself to be a
+great engine for streaming data.
+In addition, it can handle massive amounts of data, and we are going to deal here with a massive amount
+of data, which is a great fit for us.
+And last but not least, it has a built in high availability support, which is great.
+We don't want to provide our own high availability support using complex engines and switches and VMs
+and things like that.
+If it has a built in support for that, that's a big plus.
+Now, what are the cons of Kafka?
+Well, it is quite a complex beast.
+It is complex to set up and also complex to configure.
+If you ever had the chance to take a look at the configuration file of Kafka, you know what I'm talking
+about.
+It's a huge file with a lot of options, and it's really easy to get lost in this file.
+Okay, so time for decision.
+What are we going to do?
+Well, in this case, I would highly recommend to go with Kafka.
+It gives us all that we need.
+It provides built in high availability.
+It can handle massive amounts of data.
+And yes, it's set up and configuration is quite complex.
+But once we are done with the setup and configuration, we basically shouldn't mess with it.
+And since the pipeline component is one of the most critical components in the system, we want to make
+sure it is implemented using the best tools available for this task.
+And the Kafka is definitely the best tool available.
+So this is a telemetry pipeline.
+And now let's move on to the next component.
+
+--- Telemetry Processor ---
+
+And the next component we are going to talk about is the telemetry processor with its two databases.
+The operational database and the archive database.
+So the telemetry processor basically receives the messages from the pipeline and then processes the
+messages, which is mainly validation, but other functionality can be added in the future.
+And then stores the messages in a data store looks quite simple.
+What is the application type of the processor?
+Well, here also we are talking about console or a service.
+Why isn't it a web app or a web API?
+Simply because the component is going to communicate with Kafka and to communicate with Kafka, we need
+a continuously running service that can pull Kafka and get the latest messages.
+So it is not an Http protocol.
+There is no request and response, and therefore it's not a web app or a web API.
+Of course, also it's not a mobile app or a desktop app.
+Now what about technology stack?
+So first let's see what do we need technology stack for?
+So we need a technology stack for the processor, the development platform of the processor, and we
+also need to select the data store.
+So let's begin with the processor.
+Well, if you remember, for the Gateway component, we picked NodeJS as the development platform.
+And in fact, there is no any good reason to change this selection.
+So we are going to go here also with NodeJS, again, because it is already used in the system.
+It is fast and and that's a great bonus.
+It has great Kafka support.
+Again, our component should communicate with Kafka and pull messages from it.
+And Node has great libraries just for this.
+So that's the technology stack of the processor itself.
+Now let's talk about the data store and what we are looking for in the data store is a support for schemaless
+messages because as you remember, the messages we are going to get from the cars are seamless.
+We don't know in advance what is the exact format of the message, and our data store must support Schemaless
+data.
+Second, we need the data store to have quick retrieval capabilities.
+We don't want the end user to sit in front of their browsers staring at a spinner that spins endlessly
+and waiting for the data to be retrieved.
+We want the retrieval to be very, very quick.
+Also, and this is important to note, it looks like we won't need any complex queries.
+Basically, we are going to ask the data store, bring us the latest data for a specific car or for
+a bunch of cars, but there aren't any joins or complex queries or complex filtering.
+Now all those capabilities point to a very popular database that you've probably heard of, which is
+MongoDB.
+And let's see how MongoDB gives us all we need for this component.
+So regarding the Schemaless method, support definitely supported in MongoDB.
+Actually the main selling point for MongoDB is its support for Schemaless data.
+MongoDB performance are great.
+It is known as a very fast database that can retrieve the data really, really quick.
+In addition, since we don't need any complex queries, then MongoDB is also a great fit for that.
+With Mongo, there might be problems with some very complex queries, but again, since we don't need
+these queries then it's not a problem.
+Okay, so it looks like we have our data store.
+But wait before wrapping up, let's remember something.
+As you probably remember in our component, there are actually two databases.
+There is the operational database which we just discussed, and then there is the archive database.
+And so far we discussed only the operational database.
+But now let's talk about the archive database.
+So what we are looking for when talking about archive database, we need a support for a huge amount
+of data.
+Remember that we are talking here about more than 200TB per year.
+Also, the archive database is not going to be accessed frequently.
+Again, it's an archive.
+We will need it only for special cases.
+When we want to look at a historical data, we don't need fast retrieval.
+When we will need to retrieve data from the archive, we will go to the database, grab the data, load
+it to the operational database and then query it.
+We don't need great performance from this database.
+And last but not least, we do want to save costs.
+We know we are going to store a huge amount of data in this database and we want it to be as cheap as
+possible.
+Now, when looking at all these requirements, it looks like the best candidate may be found here.
+And what.
+We are looking at is cloud.
+This may be the first time in this course we are going to discuss using the cloud.
+So when talking about cloud, we actually talking about a mechanism called cloud storage, which is
+a storage service hosted in the public cloud.
+All the major public clouds offer this service and let's see if our requirements are met by the cloud
+storage.
+So we need a huge amount of data.
+Again, we are talking here about more than 200TB a year.
+Well, that's not a problem.
+All the cloud storage engines can deal with this amount of data quite easily.
+The data is not going to be accessed frequently.
+Also not a problem.
+All the storage mechanisms can be accessed as much as we want.
+It can be quite frequent, it can be quite rare, but again, not a problem.
+What about the retrieval performance?
+Again, not a problem here.
+The cloud storage mechanisms offer various tiers of performance as we will see later, and one of them
+will give us exactly what we want regarding performance and of course regarding the cost.
+When talking about big amount of data, cloud storage offers the best ROI.
+So which cloud storage are we going to use?
+Well, my personal favorite and the one I use in almost all of my projects is Microsoft Azure.
+The storage account or storage engine of Microsoft Azure is very reliable, very fast and has a great
+ROI, which is return of investment.
+Let's take a look at the exact offering.
+So what you see now is the four tiers of the storage account of Microsoft Azure.
+There are premium which offers extremely high performance.
+We don't need that.
+There is hot, there is cool, and there is the archive tier, which is exactly what we are looking
+for.
+The archive tier offers great pricing and a bit slower performance, which is fine with us.
+So let's focus on the pricing of the archive tier.
+As you can see, the price, regardless of the exact amount of data, is $0.0018 per gigabyte, which
+is practically nothing.
+If you will multiply this with the expected amount of data we are going to have, we see that for 221TB
+that we expect to have after one year, we are going to pay less than $400, which is again, practically
+nothing, especially compared with on prem storage mechanisms.
+Okay.
+So our archive database is going to be implemented using Microsoft Azure Storage Account.
+Now let's go back to the component itself and let's discuss its architecture.
+Well, the process of architecture actually can be based on the traditional three layer architecture
+composed of service interface, which is responsible for getting the messages from Kafka business logic,
+which is where the validation and processing will take place, and the data access that will store the
+processed messages in the data store, which is MongoDB in our case.
+So the architecture looks fine.
+What about redundancy?
+Again, nothing new here.
+We have three instances of the telemetry processor, a load balancer in front of these instances which
+distributes the load and also provides us the redundancy capability.
+So if one instance goes down, the other can keep functioning properly.
+Okay, great.
+So we have the telemetry processor.
+We discussed the technology stack, the architecture, the data store, the archive, and we have everything
+in place.
+And now we can move on to the next component.
+
+--- Telemetry Viewer ---
+
+Okay.
+So we already talked about three components the telemetry gateway, the telemetry pipeline, and the
+telemetry processor with its two databases, the operational database and the archive database.
+Our next component is the telemetry viewer.
+So the telemetry viewer allows end users to query telemetry data, and it displays the real time data.
+So the user is actually sitting in front of a web browser and sends queries to the telemetry viewer,
+which sends back the real time data.
+What this component doesn't do is analyzing the data.
+So if we want to see forecast or trends or make some insights about some aspects of our test drives,
+this is not a component we are going to use for this.
+We have the bi component or the BI application that's going to do just that.
+What about the application type?
+Well, as you can probably guess, the viewer component is a web app.
+This is a classic web app with web server and web API and web browser that is waiting for requests and
+returns a response containing the data the user asked for.
+Now let's discuss the technology stack of this component.
+So with a viewer component, we need to choose two types of technology stack.
+We need to select the back end, and also we need to select the front end.
+So with the back end, we are going to continue using NodeJS.
+NodeJS is a great platform for developing web apps and since we are already using it in other components,
+there is no reason whatsoever to pick other platform.
+But what are we going to do with the front end?
+So that's actually the first time we are going to discuss front end in this case study because all the
+other components didn't have any visual layer.
+They all did only background processing with queues and database and TCP servers.
+ET cetera.
+So this is the first component that has some kind of visualization that end users are going to use.
+So for this component, we are going to go with React.js.
+React is one of the top three most popular JavaScript framework together with Angular and Vue.
+And this is my personal favorite because it is both powerful and quite easy to learn.
+So that is the technology stack.
+What about the architecture?
+Well, for this component we can use the classic three layered architecture.
+We have a service interface exposing API that we will discuss in a minute.
+We have a business logic, we have the data access that is going to access the data store, which in
+our case is MongoDB and retrieves the data.
+So we can definitely use the classic three layered architecture for this component.
+Now, since we have an API for this component, we need to design it.
+Remember that part of our role as architects is to design the API.
+The component should expose and the first step in designing the API is to decide what exactly the API
+is going to do.
+So the API should be able to get the latest errors for all cars because end users usually will want
+to know what are the errors and malfunctions and breakdowns that the cars are having right now.
+That's a very important information and the company should be able to respond in a timely manner when
+there are any breakdowns.
+So that's the first API.
+The second API is to get the latest telemetry for a specific car.
+That's very important information.
+When we have a car that is conducting a test drive and we want to be able to follow everything that's
+going on with it.
+So by watching a live telemetry for this specific car, we can get the full picture of what is going
+on with it.
+In addition to that, we want the option to have the latest errors for a specific car.
+If we don't want to stare at a whole bunch of boring telemetry and focus only on the errors of this
+specific car we are following, then this API will definitely come handy.
+So this is what we need from the API.
+And now let's design it.
+And this is the API we came up with.
+So the first functionality of getting the latest errors for all cars, the API will look like this.
+We are going to use the get verb and then API slash v1 slash telemetry slash errors and we expect this
+API to always return the 200.
+Okay.
+Response code with the list of the errors from all the cars.
+Of course this list can also be empty.
+Hopefully it will always be empty.
+Our next API is getting the latest telemetry for specific car and here we will also use the get verb
+and then api v1 telemetry and the car id.
+Note that for this API we can expect another response code which is a 404 not found when they specify
+the car ID is not found in our database.
+Perhaps as a result of a typing mistake by the user and for the last API of getting the latest errors
+for specific car, the API will again use the get verb and then API v1 telemetry errors and the car
+ID and the result also can include the 404 not found.
+Again if the given car id is not found in our database.
+So this is our API.
+And note that all the APIs are using the get verb.
+We don't have any API for updating the data using the post or put or even delete data.
+And that makes sense since the data is received from the cars and there isn't any point in updating
+it.
+This is the data and we only want to analyze it.
+What about redundancy?
+So here again we are going to use the classic approach and put a load balancer in front of three.
+Instances of the telemetry viewer component and as in previous components, the load balancer will distribute
+the load and also provide us with redundancy.
+Okay, so that was the telemetry viewer.
+And now let's move on to our next component.
+
+--- BI Application ---
+
+So the last component of the mascara system is the by application and the data warehouse.
+Now, by just to make sure we are all on the same page stands for Business Intelligence.
+And what it does is it analyzes the telemetry data and displays custom reports about the data trends
+forecasts.
+ET cetera.
+For example, using the BI application, we can answer questions such as how many cars did break during
+the last month.
+That's quite an important information.
+And also, what is the total distance the cars drove?
+And of course a lot more questions can be answered using this data.
+Now the BI data is extremely important for companies such as Moscow Auto because we must be able to
+analyze the data and to gain insights into our cars performance, we must know whether the cars and
+our hardware are ready for production and can go on sale.
+And in order to know that, we must have a comprehensive BI solution that can give us answers for these
+questions.
+So what is the application type of the BI application?
+Well, actually it doesn't really matter.
+Why?
+Because BI application is always based on an existing tool.
+We are never going to develop our own application the same way.
+We are never going to develop our own operating system or web servers.
+There are great BI applications out there and we just need to pick the one that suits us best.
+For example, here are some bi tools that are very popular and very good.
+We have Power BI by Microsoft, we have Tableau, we have the click view and we have seasons and we
+have really, really lots more.
+So the question of course, is how do we pick the right BI tool for us?
+One approach is to look around and read some market reports, and one of the most popular market reports
+is the one generated by Gartner.
+And what you see right now is a report generated by Gartner at February 2019 called the Magic Quadrant
+for analytics and business intelligence platforms.
+And as you can see, Microsoft Tools are ranked first here.
+As you can see, Microsoft is positioned at the top right of the magic quadrant, which means she is
+the clear leader in the world of BI tools.
+So this is definitely one approach to select the BI tool for us.
+But there is an important lesson for us.
+Designing BI solution is actually not part of the architect's job.
+We as an architect can do a lot of things.
+We can design the application, we can design the component, we definitely can select the technology
+stack, but we are not doing bi and we should always use BI expert for this task.
+So what we should do as trusted architects is go to the customer and tell him, Listen, if you want
+to get the best BI tool for your system, then bring your own BI expert and we will work on this together.
+We as an architect will contribute to the high level design of the system.
+But the specifics of the BI application must be designed together with the bi expert.
+If the customer does not have bi expert on hand, then we will gladly help him find one.
+But designing a BI solution is again not in the scope of our work as architects.
+Okay, so this was the BI application.
+And now let's conclude this case study.
+
+--- Lists Receiver ---
+
+So let's talk about the first component in our architecture, and this component is the list receiver.
+So what does the List receiver do?
+It receives shopping lists to be handled from the queue.
+As you probably remember, we said there is already a queue containing the shopping list to be collected
+and we just need to communicate with it and pull the list.
+And after receiving the list the component should store the list in the data store.
+All in all, quite a simple component.
+What is its application type?
+So as you can probably guess, it is either a console or a service.
+In both cases, we are talking here about a component that is continuously running and it does not expect
+any Http request and definitely does not return any Http response.
+So it's not a web app, it's definitely not a mobile app or a desktop app.
+So console or a service, whichever you prefer.
+And now let's talk about its technology stack.
+So our considerations for the technology stack of the list receiver are first, the technology we will
+select should be able to connect to the queue and actually not much else.
+Again, it is quite a simple component and since it's so simple, let's go ask the customer.
+What is the current knowledge and skill set they currently have in the company?
+And this is what the customer told us.
+We are basically a Java shop and our database of choice is MySQL.
+So let's see how those two platforms, Java and MySQL, fit our needs.
+So first, Java is a perfect fit for this task, so we will go with it.
+Java is a comprehensive platform well suited for working with queues and can definitely do the task.
+So this is a development platform.
+But what about the database?
+So let's see.
+Our data is relational and MySQL is a relational database.
+The shopping list we are going to handle have a well defined data model and it's definitely a good fit
+for a relational database.
+There is no need in our case for a Schemaless database.
+So in this aspect MySQL is good.
+Now the expected volume, as we said in the non-functional requirements lecture is going to be two terabytes
+a year, which is a lot.
+But on the other side we can utilize partitioning.
+Now if you are not familiar with the partitioning concept, basically what it means is that it allows
+us to separate chunks of data based on a column or a group of columns.
+So in our case, for example, we can partition the data based on month.
+So we will have partition for January, partition for February and so on.
+Now when utilizing partitioning, we allows the database to handle a big amount of data, but not on
+a single very large table, but with separate, much smaller partitions.
+Now, since MySQL fully supports the concept of partitioning, then we can definitely go with it and
+our technology stack is going to look like this.
+So the development platform is going to be Java and the database is going to be MySQL.
+Great.
+So this is the technology stack.
+What about the architecture?
+Well, the architecture we are going to use is very similar to the classic three layered architecture,
+but with a twist.
+As you can see, the top layer is not service interface or user interface, since we have neither of
+them in our component, but it's a queue receiver.
+This is the layer that will constantly work with the queue and get the list to be handled after the
+queue receiver.
+We have the business logic that will probably do some minor validation and then the data access layer
+that will store the list to be handled in the data store.
+So this is the architecture.
+And now let's talk about redundancy and with redundancy, we are going to use a concept we didn't discuss
+in previous case studies, which is consumer group.
+Now consumer group is a concept found in some queue mechanisms such as Kafka that basically defines
+a group of receivers and when the queue knows it works with a group, then it always sends the message
+only to a single receiver.
+So as you can see in our case, we have three instances of list receiver components, so the queue will
+always pick one of the receivers and send the message to it and on the subsequent message it will send
+it to another receiver.
+And if a specific receiver stopped working then the queue will simply won't send messages to it.
+So basically what we have here is a load.
+Until that is implemented by the mechanism itself.
+So this is the redundancy method we are going to use for this component.
+And this is the list receiver.
+So we discussed the technology stack, we discussed the architecture, we discussed the redundancy and
+it looks like a walk on the list.
+Receiver is done.
+And now let's move on to the next component.
+
+--- Lists Service ---
+
+So we talked about the list receiver.
+And now let's talk about the next service, which is the lists service.
+So what does it do?
+The List service allows employees to query the lists and marks items in the list as collected or unavailable.
+And finally, it exports the payment data to the external payment system.
+So basically, this is the service the employees will work against.
+What about its application type?
+Well, this is quite simple.
+Of course, we are talking here about a web API.
+This is a service that is going to be used by a front end and it will get requests and return response
+regarding the technology stack.
+Well, there is no any reason whatsoever to pick a different development platform other than the one
+we picked for the receiver.
+So here also we are going to use Java.
+What about the architecture?
+So here we can definitely use the classic three layered architecture with the service interface, which
+will expose the API, the front end will work with, and then we have the business logic and the data
+access that will access the data store, which is MySQL in our case.
+Now as with any service that exposes API, we need to design this API.
+And first let's define what the API should do.
+So we need an API to get the next list to be processed by location so that if an employee is working
+in a grocery store somewhere in Manhattan, then he will be able to get the next list for the specific
+location he is in.
+After getting the list, the employee should be able to mark the item as collected or unavailable.
+And the last API we need is to export the lists payment data.
+So basically we are talking here about three APIs.
+So let's see how these APIs are going to look like.
+So for the first one, the API will be API v one lists because we are retrieving the list here.
+Next.
+And the next word is important because it signals that we want to retrieve the next list to be processed
+for the specified location.
+Note the location parameter that indicates what is the exact location for which we should get the list.
+The potential return codes for the API are 200.
+Okay.
+And 400 bad request.
+When are we going to get the bad request?
+When the location parameter is invalid.
+For example, if we specified a location that does not exist in the database, the next API is the one
+that allows us to mark item as collected or unavailable.
+So first we are going to use here the put verb because we update a specific item.
+We are not adding anything and we are also not getting anything.
+We are updating the item and the API is API v one list, then the list add because we are updating item
+in a specific list, then item and the item ID which is the item we want to update.
+Note that this API can return 404 not found.
+This will be the case when the list specified or the item specified are not found in our database.
+And last, the API that exports the list payment data is post API v one list list id to specify what
+is the list we want to export and export.
+Now note here the use of the post verb.
+Generally we use post for adding entity and this is exactly what we are doing here because basically
+we are adding exported content to the system, hence the use of post here.
+Also as a potential return code is 404 not found again in the case of specifying list that does not
+exist in the database.
+So that is the API.
+And now let's move on to the redundancy.
+So the redundancy here will be implemented using the classic method of load balancer, we are going
+to have three instances of the list service behind a load balancer which will distribute the load and
+also provide us with redundancy.
+Okay, great.
+So that was the list service.
+And now let's move on to the next service.
+
+--- Front End ---
+
+So these are the services we talked about until now.
+And now let's talk about the front end.
+So we need the front end to display the shopping list and to mark the items as unavailable or collected
+and to send the list to the payment system.
+Now, you might be thinking this list of requirements are basically identical to the requirements from
+the list service.
+And you would be right.
+But the main difference is that these requirements are exposed as API in the list service.
+And here in the front end we are going to execute these requirements with UI elements such as buttons,
+lists, text box, etcetera, which will communicate with the API.
+So the fact that the main functionality of the front end and the API are basically the same indicates
+that our design is sound and that the API is well thought of.
+One more requirement from the front end, which we have already discussed is it should support offline
+mode.
+Now this last requirement will have a great effect on the application type.
+We are going to pick for the front end.
+So as you can see, the candidates for the application type here are quite surprising.
+First, we are not talking here about web app or web API.
+And the reason is because classic web app and web API simply do not support offline mode.
+If you will use classic web app with HTML pages, then the moment the tablet will go offline, the system
+will not function anymore.
+So we'll have to revert to other application types.
+And in this case we will need to choose between mobile app or desktop app.
+So to make an informed decision, let's compare between the two options and this comparison will be
+part of the technology stack selection.
+So we need to decide between desktop app, which will basically be Windows based and developed using
+WPF, which is a de facto standard for developing desktop apps nowadays and a web based alternative
+using Electron or React Native, which enable us to develop stand alone with offline support applications
+using web standards.
+So let's compare the two.
+So what we need to know about the desktop alternative First, using WPF, we can access all the operating
+system functionalities.
+We can use the registry, we can utilize the network card, we can do basically whatever we want.
+This is not always a good thing, but it definitely is something we need to consider.
+In addition, we can utilize other apps on the machine.
+For example, if we have a database installed on the tablet, then we can use it when developing with
+WPF.
+But WPF requires setup and requires Windows.
+It will work only on Windows based machines.
+Okay, so what about the web based alternative?
+So first we are going to look at limited functionality.
+Not everything we can do with WPF.
+We will be able to do with Electron or React Native.
+The application will basically run in a sandbox with limited access to the computer resource.
+Now, in our case, it looks like this is not a real limitation because basically we just need a nice
+user interface with the ability to communicate with the API of the list service and we are not going
+to access some advanced feature of the operating system.
+But still it's good to know.
+In addition, we cannot use other apps.
+As we just said, we are going to run inside a sandbox.
+We can't access other applications that are installed on the machine.
+On the other hand, web based applications are fully compatible with other form factors, so we can
+run them on the tablet or on phones, Android or iPhones and on kiosks and on many other form factors.
+In addition, we don't need any setup to start using the web based.
+It's usually just a matter of a single click and we have the application up and running.
+And last, in order to use those web based application, we can use cheaper hardware.
+For example, we can use more cost effective Android tablets instead of the more expensive Windows tablets.
+So after considering all the pros and cons of both the alternative, we are going to go with the web
+based alternative.
+And now we need to choose the development platform we are going to use.
+And my personal favorite here is React Native.
+I like React Native because it's very easy to learn and it's quite similar to the React library used
+by many JavaScript developers as a user interface framework.
+React Native gives us all we need in this application.
+It supports offline mode, it has all the advanced capabilities of React and it's quite easy to use.
+So we are going to go with it.
+Now what about redundancy?
+Well, of course when talking about frontend, we don't.
+Really need a redundancy.
+There isn't any loads that is going to be applied by a lot of users on a single tablet.
+So when talking about front end, we don't need to discuss redundancy at all.
+Okay.
+So that was the front end.
+And now let's move on to the next component.
+
+--- Export Lists Data ---
+
+Okay.
+So we've talked about the first three components of the architecture, the list receiver, the list
+service and the front end.
+And now let's discuss the last component in the architecture, the list data.
+So the list data basically is used to send shopping list data to the payment system.
+In fact, this component is basically a queue.
+It should be a queue mechanism that stores the payment data for the external payment system so that
+it can handle all the payment data waiting for it.
+Now, since we are talking about a queue, then we should ask ourselves two questions.
+First, is there an existing queue mechanism in the company?
+And if the answer is no, then should we develop our own queue or use an existing third party queue?
+So the answer for the first question is well, yes.
+And why yes.
+Well, let's take a look again at the architecture.
+Do you see the leftmost component, the one that is grayed out here?
+This one.
+This is a queue and this is the queue that the list receiver will pull the list from and store them
+in the database.
+So in fact, it looks like we already have a queue in our system.
+So there isn't any reason whatsoever not to reuse this queue for our needs.
+So the list data is going to be data queue implemented by the same queue that is used to bring the lists
+into our system.
+So that concludes the architecture of the data queue.
+And actually it concludes the architecture of the whole system.
+And now let's take a look at the architecture diagrams.
+
+--- Case Study Introduction ---
+
+Welcome to the fourth case study in our course.
+And for this case study, I want to introduce you to a very special, though, fictitious company named
+Payroll.
+So what exactly is payroll?
+Basically, payroll designs and builds payment processing system.
+And what the system does is it receives files from various sources, mainly companies that want to pay
+their employees.
+The payroll system validates and processes the files and then sends instruction files to the banks in
+order to execute the actual payment.
+Now, one very important aspect of the payroll system is that it must be fully automatic.
+There shouldn't be any user interface in this system because there shouldn't be any human interaction
+while processing the file.
+The whole process from receiving the file to sending the actual files to the banks should be fully automatic
+and therefore very reliable and very quick.
+So that's the payroll system.
+And now let's talk about the actual requirements from the system.
+
+--- Understand the System Requirements ---
+
+So as usual, we have the two types of requirements.
+We have the functional requirements and the non functional requirements.
+So here are the functional requirements.
+So as we said before, the system should receive file to be processed and then validate and process
+the file.
+Now it's important to note that the system should be able to work with various file formats because
+we don't always have control on the system that generates the payment file.
+And we know there are various payment file formats in the market and we need to be able to work with
+every one of them.
+So after receiving and validating the file, we need sometimes to perform various calculations on the
+file, for example, to summarize the sums to be paid.
+And then we need to create the bank payment file which should be created using a unified format that
+the bank can work with.
+And then we should put the payment file in a designated folder that the bank system will monitor and
+pull in order to execute the actual payment.
+Now, since banking is a very serious business and there are a lot of regulations around it, then we
+must be able to keep a log of all the activities in the system for seven years.
+This is a mandatory requirement and there aren't going to be any compromises around it.
+So these are the functional requirements.
+And now let's talk about the non-functional requirements.
+So as usual, the first thing we need to do with non-functional requirements is to define what exactly
+we should ask.
+So the first very interesting question is how many files are we going to get each day?
+This number will determine the load that is going to be applied on our system.
+Second question How long should the process take?
+Either any limitation on the latency of the process?
+Should it be done in one second or one minute or even more?
+Next is what is the average size of a file?
+This is a very important question for calculating the expected data volume.
+In addition, can we tolerate data loss?
+As you probably remember in one of our previous case studies, we found a case when we do tolerate data
+loss, this happens mainly around monitoring.
+But is this the case also for this application?
+So now let's see what will the answers we've got from the customer.
+So how many files per day?
+500, actually, not a lot.
+It looks like a good number to start with.
+And it looks like there aren't going to be a lot of load on the system.
+How long should the process take?
+One minute.
+Again, with this number of one minute, it looks like the latency is not going to be a challenge.
+What is the average size of a file?
+One megabyte.
+So not very small, but also not huge.
+And can we tolerate data loss?
+Well, absolutely not.
+And this is not a surprise.
+Imagine that a company sends payment data to the bank to pay its employees and the instructions get
+lost somewhere in the way and the employees won't get their salary.
+This is definitely something we cannot tolerate.
+Okay, so we've got the answers.
+Now let's start and estimate the data volume.
+And first we are going to calculate the data volume of the files so we know that one file waits one
+megabyte, which means that 500 files a day, which is the expected load, translates to 500MB a day.
+And this means we are going to have 182GB per year or 1.3TB for seven years.
+Remember, we need to keep the full activity files and logs for seven years due to the banking regulation.
+So this is the expected data volume of the files.
+But in addition to files, we also have log.
+The system is going to generate a huge amount of log because again, everything the system does must
+be documented for future inspection and analysis.
+Now we are going to assume that each processing generates 500kB of log data.
+So every single file that is going through the system will leave behind 500kB of log data.
+Now, it's true that a single log record is quite small, but there are going to be a lot of log records
+while processing.
+There is going to be a record for receiving the file, for validating the file, for processing, the
+file for sending the file.
+And actually every step in the way is going to generate at least one log record, probably more.
+So we are going to assume 500kB, which sounds reasonable.
+Now that means that 500 files a day will generate 250MB of log data.
+And that means that for a year we are going to have.
+91GB or for seven years.
+We are talking here about 638GB.
+Okay.
+So we have the data volume of the files and the log.
+And now let's summarize what are the non-functional requirements we require from the system.
+So we are talking here about 500 files a day.
+No data loss is allowed in the system.
+The latency of the processing should be no more than one minute.
+We must keep activity log for seven years, including the files and the log records and the expected
+data.
+Volume after seven years is two terabytes.
+Okay.
+So we have the functional and non-functional requirements and now let's move on and map the components
+of the system.
+
+--- Map the Components ---
+
+So let's map the components of the payroll system.
+But first, let's look again at the functional requirements of the system.
+And these are the requirements the system needs to receive files to be processed, then validate and
+process the file.
+The system should support various file formats and then perform various calculations on the file.
+After that, it should create bank payment file and then put the payment file in a designated folder
+for the bank system to pull it and process it.
+And in addition to all of the above, we also need to keep a log of all the activity in the system for
+seven years.
+So we have the requirements and now let's start mapping the component.
+So first we have the folders in which the files are waiting to be pulled from.
+So this is the source of the files and our components should read the files from these folders and then
+process them.
+So our first component will be the file handler.
+And the file handler is used to get the files from the folders.
+In other words, the file handler will monitor the various folders, and whenever a new file appears
+in these folders, the file handler will pull the file.
+The second component is the files queue.
+This is where the file handler will store the file after pulling it from the folder.
+After the files queue we have the file formatters.
+If you will take a look at the third section of the requirements, we can see that the system should
+work with various file formats and this is exactly what the file formatters do.
+We are going to have a file formatter for each format we need to support.
+And what the Formatters do is they convert the files to unified format that our system should work with.
+So the formatter basically pulls a file from the queue, converts its format from the source format
+to our internal format, and then puts the file in the formatter files queue.
+The next component is the file calculation.
+Now this component is the one that performs various calculations on the file, and note that this component
+pulls the file from the formatted files queue, and at this stage the file is already formatted in our
+unified format.
+So we need to have only a single file calculation.
+We don't need a calculation file for each source format and that can be done because we already had
+the formatters that converted the file from the source format to our internal format.
+So after the calculation, the file is placed in a calculated file queue and from it we have the file
+exporter.
+Now the file exporter exports the file to the bank folder, which is right here.
+So basically we have the exporter that pulls files from the calculated files queue and then saves the
+file in the bank folder.
+And from there the bank will pull the file and process it.
+So this is the basic architecture.
+And as you can see, our components here are quite focused.
+We have a component that just receives the file.
+We have components that converts the file.
+We have a component that calculates the data in the file, and we have a component that exports the
+file.
+We don't have any component here that does multiple tasks, and this is a great sign of a well thought
+of architecture.
+Now, one last component here in our architecture is the logs, remember, and you can see it at the
+last section of the requirements that we need to keep log of all the activity for seven years, which
+means we must have a massive logs database and the logs component is responsible exactly for this.
+Okay.
+So it looks like we have our architecture.
+Now, note that in previous case studies, after mapping the components, we always discussed the messaging
+between them.
+We are not going to do that in this case study.
+And the reason for that is that all the messaging between the components are queue based and we don't
+have any other messaging methods in our architecture.
+So what we should do now, instead of discussing messaging is discuss the queue, what exactly it should
+do and how are we going to implement it.
+So now let's move on and talk about the queue.
+
+--- The Queue ---
+
+So the queue.
+As you can see, we have three queues in our system.
+We have the files queue, we have the formatted files queue and we have the calculated files queue.
+So what is the role of the queues in our system?
+So a queue passes payloads from one logic unit to another and we can see it clearly in our architecture.
+The queue is located between the logic components.
+The queue also balances load.
+So if we receive a bunch of files to be processed, then the queue will store these files until the
+processing components will be available for processing and then they will pull it from the queue.
+In addition, the queue persists the messages, thus providing us durability.
+So if one of the processing components goes down, we don't lose anything.
+The file still waits in the queue and when the component will go up again, it will simply pull again
+the file from the queue and reprocess it.
+In addition, the queue provides us with asynchronous messaging and this is especially good in our case
+because we don't have any user interface in our system.
+And when there is no user interface and also when the components communicating with each other are not
+waiting for a response, which is again our case, we simply want to build a flow between the components
+and the components are not waiting for the other component to respond.
+Then queue is the best approach here.
+So remember it as a great rule of thumb.
+If we have components in our architecture that do not have user interface and are not waiting for a
+response, then we will usually go for a queue.
+Okay, so this is why we need queue.
+But the next question is which queue are we going to use?
+So as discussed in previous case studies, we basically have two main contenders.
+We have the Rabbitmq and we have Kafka and we need to choose which one are we going to use in our architecture.
+So let's compare the two.
+Rabbitmq is great for general purpose systems.
+It is very easy to set up and not suitable for streaming scenarios.
+Rabbitmq is more of a message broker than streaming processing engine.
+And what about Kafka?
+So Kafka is great for streaming scenarios and high load systems, but it is quite complex to set up.
+So which one are we going to use?
+Well, since our system does not include any streaming scenario and we always prefer to utilize easy
+to use mechanisms, then we will go for rabbitmq.
+Okay, so we have the queue, we know what it's used for and we know how to implement it.
+But before wrapping up, there is another little topic I want to cover in architectural documents.
+Queue is usually represented like this, like the symbol you see on the screen right now.
+So I would like to modify our diagram and instead of the queues represented like this, I want it to
+look like this.
+So now the architecture is clearer.
+We see exactly where the queues are positioned and we also can clearly see what are the logic components
+in our architecture.
+Okay, great.
+So we have the components, we have the messaging, and now let's move on and discuss the first component.
+
+--- File Handler ---
+
+So let's talk about the first component in our architecture, which is the file handler.
+So what he does.
+The file handler pulls payment files from folders that it monitors and then puts the files in the queue.
+So basically quite a simple component.
+What about its application type?
+Well, as you can probably guess, this is either a console or a service.
+We are talking here about a continuously running component, so it's definitely not a web app or a web
+API.
+Of course it is not a mobile app or a desktop and we can select whether it will be a console or a service,
+whatever you prefer.
+And now let's talk about the technology stack of the file handler and what do we need to consider when
+selecting the technology stack?
+So the platform we select should be able to pull files from folders and also should be able to connect
+to queue in order to store those files in the queue and actually not much else.
+So not a lot of requirements from the technology stack.
+And now let's go ask the customer what is the current knowledge and skill set of the development team?
+And this is what the customer told us.
+This is a brand new company.
+We don't have existing knowledge.
+What would you recommend?
+Now, this is an answer that every architect will be extremely happy to hear.
+We are talking here about a blank sheet.
+It's a great opportunity for us to make the best decision and to pick the most optimized technology
+stack for this component.
+So this answer makes us very, very happy.
+So let's begin what we are looking for.
+We are looking for a development platform that is performant.
+We need a technology that is very fast.
+We are looking for something that has strong community so we can get support when we will have questions.
+We want something that is cross platform so as to not limit ourselves to a specific operating system.
+Of course we need something that is easy to learn and use.
+We also look for something that is evolving.
+We don't want to pick an outdated technology that no one is maintaining and updating.
+We want something with strong organization behind that keeps it updated.
+And also we want something with great threading support in our application.
+We will probably have scenarios when multiple files should be processed in parallel and we want to make
+sure the platform can handle parallel tasks efficiently.
+So this is what we are looking for.
+And now let's look at our candidates.
+So these are the main candidates we are looking at.
+We have Java, Node.js and Dotnet core.
+All the three are mature, have great performance, have very strong and vocal community, are evolving
+support, parallel execution and all in all, considered the best platform out there.
+So now we need to choose between those three.
+But first there is this node is mainly for web apps and our component is a service.
+So unfortunately we need to say goodbye to Node and we are left with Java and Dotnet core.
+And now let's start comparing the two with regard to the attributes we specified before.
+So first performance.
+So for performance data, I went to Tech Empower, which is famous for conducting performance benchmarks
+and comparing various platforms.
+And as we can see here, Dotnet core is at the top of the list.
+And the Java represented by the spring framework is at the bottom of the list.
+So we see a clear distinction between the two regarding performance.
+What about community?
+So according to the very popular Tiobe index measuring the popularity of development languages, we
+see that Java is ranked first and C-sharp, which is a language of Dotnet, is at the fifth place.
+But we need to consider also that Java is used for developing Android applications, which are of course
+very popular but completely irrelevant for us because we are talking here about backend platforms.
+So we need to take this first place of Java with a grain of salt.
+But in either case, both platforms are very, very popular.
+What about cross platform?
+Well, no problem here.
+Both platforms are fully cross platform regarding the ease of learning and using well, Dotnet core
+is extremely easy to learn and use.
+It's an agile platform, very modular, very lightweight, and also can be developed using various development
+tools.
+Java on the other side is considered more or less.
+See heavy language to learn and use.
+It is considered an over architected language with a lot of constraints that should be put in place.
+So in this regard we have a slight advantage with Dotnet core.
+And what about the evolving factor?
+Are those two platforms still updated and maintained?
+Well, let's see.
+Java has planned roadmap until 2021, which means it's in a good shape.
+What about Dotnet core?
+Well, the roadmap announced recently details plans for Dotnet core until 2023.
+So we are good in this front also.
+What about threading support?
+Well, Java has a very strong threading support and so is Dotnet core.
+Okay, so it's decision time.
+We need to decide which one are we going to go with?
+Will it be Java or Dotnet core?
+So my personal recommendation will be to go with Dotnet core.
+It's more modern, it's lightweight, it's extremely fast, and it's rapidly evolving.
+In addition, it has a very strong and vocal community which provides great help for any question.
+So for this component, we are going to go with Dotnet core, and that is our technology stack.
+Now what about the architecture?
+So this is a traditional three layered architecture with service interface, business logic and data
+access, but it does not fit our needs for our component.
+The architecture is going to look like this.
+We have a file watcher which monitors various folders and waiting for files to be placed there and when
+a file is placed there, the file watcher pulls the file and puts it in a specific topic in the queue.
+The topic is determined by the file's location, so that's the formatter which will pull the file from
+the queue will know what kind of file it should expect.
+So basically quite a simple architecture.
+The component is doing almost nothing, just monitors the folder, pulls the file and puts it in the
+queue.
+And what about redundancy?
+Well, here we are going to use the is alive algorithm where two instances check constantly with each
+other, whether the other one is alive and functioning.
+And when there is a problem with the first instance, then the second instance takes command and start
+monitoring the folders.
+Okay, so it looks like we have everything we need.
+We have the technology stack, we have the application type, we have the architecture and we have the
+redundancy.
+And that concludes the file handler.
+And we can now move on to the next component.
+
+--- File Formatter ---
+
+Our next component is the file formatter.
+Now the file formatter receives files from its specific topic.
+And note that we don't have only a single file formatter, but we have a file formatter for each and
+every format or source that the system pulls using the file handler.
+The file formatter after receiving the file validates the file and then converts its format to the unified
+format that is used by the system.
+After converting the file, the file formatter puts the new file in a queue in which it will wait for
+the next step in the flow.
+Now one important aspect of the file formatter design is that when a new format will need to be included
+in the system, then we will simply develop a new formatter for the specific type and configure it to
+pull files from a specific topic that will contain files from this specific format.
+Thus, we won't need to change any existing code or components for new formats.
+What about the application type?
+Well, as usual, when discussing components that interact with queues, then our component is either
+console or a service.
+It's not a web app or a mobile app or a desktop app.
+The technology stack in this component.
+Well, here we are going to stay with Dotnet core as we selected from the previous component.
+There is no reason to pick any other technology stack for this component.
+And what about the architecture?
+So we have basically two layers in this component.
+We have the queue receiver, which pulls files from the topic in the queue and then the receiver will
+hand the files to the business logic layer, which will perform the validation and processing and converting
+the file to the unified format and then the business logic will store the file in the queue.
+Now what about redundancy?
+So with this component we are going to utilize again the consumer group concept, which basically means
+that the queue itself balances the load between the various instances of the file formatter.
+So we don't need to deal with redundancy regarding this component.
+So this is the file formatter and we have its architecture.
+And let's move on to the next component.
+
+--- File Calculation ---
+
+Okay.
+So we've talked about the file handler and the file formatter components.
+And now let's talk about the file calculation.
+So the file calculation receives files from the queue and then performs some calculations on the data.
+And after performing the calculation, it puts the new file in a queue so that the next component will
+be able to pull it and continue processing.
+Now, as we will see, the file calculation component is quite similar to the file formatter component.
+So the text stack is going to be the same with Dotnet core.
+We are going to use the same two layers architecture with the queue receiver and the business layer
+that will perform the processing and then push the file into another queue.
+And for redundancy we are going to use the same concept of consumer group.
+Now the fact that the file calculation component is so similar to the file formatter component is a
+good sign.
+We always strive to make our architecture as modular and as focused as possible, and when the components
+are similar to each other, it will make the development cycles much shorter and will greatly help us
+maintaining this system.
+So we, the architects, should always try to make our architecture as focused and as modular as possible.
+So this is the file calculation.
+And now let's move on to the next component.
+
+--- File Exporter ---
+
+So the next component is the file exporter.
+And what it does is it receives files from the queue and puts the file in the banks folder from which
+the bank system will pull the file and perform the actual payment.
+Now, note that almost all the components in the system begin with receiving files from the queue.
+Now this is great for us because it makes the various components extremely loosely coupled.
+So if in the future we would like to change the flow and add another step to the flow, let's say between
+the calculation and the exporter, then we won't have any problem implementing that.
+We will simply add another queue and develop the components that will pull from this queue and this
+component will do whatever it needs to do and then push the result into another queue from which the
+exporter will pull.
+So using queues for managing the flow makes our architecture extremely flexible, which is exactly what
+we want.
+Okay, so these are the requirements from the file exporter.
+What about its architecture and technology stack?
+Well, here also it is quite similar to the file calculation service.
+So our tech stack is going to be the same dotnet core, its architecture going to be implemented using
+the same two layers model.
+And for redundancy, again, we will use the consumer group concept.
+So we've covered the file exporter and we saw how similar it is to the file calculation service.
+And now let's move on to the next component.
+
+--- Logging Service ---
+
+Okay, so we've covered all the functional components of the system and now we need to talk about the
+last component of the system, which is the logs component.
+Now let's remember why is the log component so important in our system?
+So as you can see in the functional and non-functional requirements, we need to keep the log of all
+the activity in the system for seven years and we expect the log to be around two terabytes after those
+seven years.
+All this due to the heavy regulation on the banking industry.
+So what do we need from the logs component?
+We need to be able to write a lot of log records and to allow easy visualizations and analytics on these
+records so we can find out what exactly is going on in our system.
+And preferably we would like it to be based on existing platform.
+So let's look around and see what is a preferred platform to work with regarding logs.
+So actually the most popular logging platform out there is the elastic stack.
+Now if you've never heard of it, let's talk about it a little.
+So basically the elastic stack has four tools.
+Elasticsearch is used for search and analytics.
+Kibana is a visualization engine.
+Logstash is a data collection pipeline and Bits is a lightweight log shipper, which is quite similar
+to Logstash, but more lightweight and less complicated.
+And how do we use these tools with logging?
+So Elasticsearch is the place that stores our logs.
+Kibana is displaying the logs.
+Logstash and bits brings the logs to elastic.
+Or in other words, they are the transport mechanism of the log records into elastic.
+And here is a sample screenshot of kibana and some of the data and charts that it can present based
+on the log records.
+So all in all, quite a comprehensive logging platform, widely popular, used by thousands of organizations
+and definitely proved itself as one of the greatest logging platforms out there.
+So okay, we will go with the elastic stack, but how do we ship the logs from Dotnet core to elastic?
+After all, all our functional components are dotnet core based and we need to be able to ship the logs
+generated by these components into elastic.
+So in order to do that we are going to use this library.
+Serilog dot sinks dot Elasticsearch Serilog is quite popular logging library for Dotnet core and the
+Elasticsearch Sync is an extension of this library that allows writing the log records straight to Elastic,
+which is exactly what we are looking for.
+And how about Rabbitmq?
+We also need to ship the logs generated by Rabbitmq into elastic because we want to get a whole view
+of the system so we will know what happens in the functional components as well in the queue itself.
+Well, for this we are going to use the Rabbitmq input plugin of Logstash.
+So Logstash as we just said, is a transport mechanism from the log source to Elastic and it has a built
+in adapter or input plugin that connects to rabbitmq and ships the log generated by it into elastic.
+Okay.
+So now we can see how the logs component integrates into our architecture and this is how it looks like.
+So the logs component is elastic with kibana as the visualization engine and you can see that logs are
+shipped to elastic using either serilog or logstash.
+Depends on the source.
+If it's Dotnet core, then it's Serilog.
+And if it's Rabbitmq then it will be shipped using logstash.
+Okay, so that is the logs component.
+And now let's move on.
+
+--- Architecture Diagrams ---
+
+So we've reached the conclusion of this case study.
+This case study is quite different from the previous ones.
+It has no visualization component besides Kibana, the visualization engine of the logs.
+It is purely queue based.
+There are no other messaging mechanisms in this case study and the components are lightweight, focused
+and quite small.
+So we have the file handler that receives files from various folders.
+We have the file format that converts the files to be of a unified format, the file calculation component
+processes the files and the file exporter exports the resulting file into a folder monitored by the
+bank system and the logs component monitors everything that happens in the system and collects logs
+from the functional components and the queue as well.
+Now the technical diagram shows the technology stack of each component and as we said, the various
+functional components are implemented using Dotnet core, the queue is implemented using rabbitmq and
+our logs component is elastic stack.
+And what about the physical diagram?
+So all the components besides the file handler have their redundancy as a consumer group, which as
+you probably remember, lets the queue manage the load among the various instances the file handler,
+since it's not pulling anything from a queue but is monitoring file folders, is using the is alive
+algorithm for redundancy.
+So that concludes the case study.
+I hope you enjoyed it and that you've learned a lot from it.
+And as usual, you are more than welcome to use the slides and templates in your own projects.
+And also as usual, if you have any question or comment regarding this case study, feel free to contact
+me.
+I promise to answer any question or comment in a timely manner.
+So that was the case study.
+And now let's conclude.
+
+--- Conclusion ---
+
+Whoa.
+We have reached the end of our journey, so let's recap what we've seen in this course.
+So our first system was a classic web app, but with a twist.
+Our beloved paper company, Dundalli, desperately needed a new web app to manage its air operations.
+From the looks of it, a classic simple web app with quite relaxed load and data volume requirements.
+But as with many seemingly simple applications, there are hidden twists.
+And in our case, this twist was the payment interface.
+This interface was not a classic web API or web app, but rather a continuously running component that
+collected payment data and sent it as a file to an external system.
+This component made us think about non-trivial architectures and it was our first introduction to the
+is alive redundancy algorithm.
+Our next system was an Iot telemetry system.
+Moscow Auto, an autonomous vehicles company, builds and sells equipment that can convert existing
+cars to autonomous cars and needs a system that will receive the telemetry sent by the cars, store
+it, process it and make it available for real time viewer and by application.
+This was our first foray into the world of some very well interesting, non-functional requirements
+as the system had to deal with 7000 messages per second and data volume of around four terabytes.
+In addition, the system is mission critical, so redundancy is a key.
+We've got acquainted to some interesting concepts and products such as Kafka, seamless messages, cloud
+storage, tolerance for message loss and more.
+This was a complicated and challenging system, and designing its architecture was definitely quite
+fun.
+The next system was a data collection app running on a tablet.
+One of the unique capabilities of the Gross Call app used for processing shopping lists is that it should
+be fully functional even when offline, which made us go to the nontrivial path of standalone web apps
+implemented using React Native.
+This system was also the first one where we encountered the concept of consumer group.
+The next and last system was an async file processing system.
+The payroll system processes files containing payment information from various sources and converts
+them to a file the bank can understand and execute.
+The system is naturally extremely mission critical and no data loss is tolerated in this system.
+We gave special emphasis to the logging since because of the heavy regulation on the finance industry,
+we have to keep logs of all activities in the system for seven years and also to the messaging mechanisms
+implemented entirely by queues.
+So as you can see, we discussed quite diverse portfolio.
+And the good thing about that is that your own system is probably similar to at least one of them,
+or perhaps it consists of a combination of two or more systems.
+Either way, the patterns and methodologies discussed here will surely help you in your own work.
+We have also dealt with an extremely diverse technology stack.
+We've had net core SQL Server, Kafka, NodeJS, MongoDB, Java, MySQL and more.
+This diversity is extremely important and it shows that architects must be well versed in the technology
+field and must be able to make an educated choice of technologies to use.
+Now, do you have a scenario in mind that's not covered in this course?
+No problem.
+You can always contact me either using the Q&amp;A here or even better in the Facebook group.
+I've opened dedicated to software architecture discussions.
+You can find the link to the group in the resources for this lecture.
+Join it and ask away.
+And with that, we've come to the end of this course.
+I hope you enjoyed it, at least as much as I've enjoyed creating it, and I hope it helped you become
+an even better architect.
+So thank you.
+And I hope to see you in my other courses.
+
+--- Bonus: Next Steps ---
+
+[No transcript available for this lecture]
